@@ -9,12 +9,12 @@ import godot.api.Label
 @RegisterClass
 class PrintText : Label() {
 
-    @Export
-    @RegisterProperty
-    var test: Int = 0
+	@Export
+	@RegisterProperty
+	var test: Int = 0
 
-    @RegisterFunction
-    override fun _ready() {
-        text = "Hi! I'm a script written in Kotlin!"
-    }
+	@RegisterFunction
+	override fun _ready() {
+		text = "Hi! I'm a script written in Kotlin!"
+	}
 }
