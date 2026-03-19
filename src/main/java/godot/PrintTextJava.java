@@ -15,6 +15,6 @@ public class PrintTextJava extends Label {
 	@RegisterFunction
 	@Override
 	public void _ready() {
-		setText("Nolan Moy");
+		setText("updat");
 	}
 }
