@@ -17,6 +17,7 @@ public class cardmanager extends Node2D {
 	@Override
 	public void _process(double delta) {
 		GD.INSTANCE.print("Nolan Moy");
+		GDinstance.print(event);
 
 	}
 }
