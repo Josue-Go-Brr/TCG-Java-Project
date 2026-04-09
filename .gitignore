@@ -1,14 +1,52 @@
-# Godot 4+ specific ignores
+# =========================
+# Godot 4+
+# =========================
 .godot/
+.export/
 
-# Gradle specific ignores
+# =========================
+# Gradle / Kotlin / Java
+# =========================
 .gradle/
 build/
+*.kotlin_module
 
-# Godot Kotlin/JVM specific ignores
-.idea/
+# =========================
+# JVM spécifiques (Godot Kotlin)
+# =========================
 jre-arm64/
 jre-amd64/
 graal/
+
+# =========================
+# IDE
+# =========================
+.idea/
+.vscode/
+*.iml
+
+# =========================
+# Logs & temporaires
+# =========================
 *.log
-src/main/resources/META-INF/services/
+*.tmp
+
+# =========================
+# Android
+# =========================
+*.keystore
+*.jks
+local.properties
+*.apk
+*.aab
+
+# =========================
+# Système
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Optionnel (attention usage)
+# =========================
+# src/main/resources/META-INF/services/
