@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dfkd35ltv4pqr"]
+
+[ext_resource type="PackedScene" uid="uid://dycoucv5h78hw" path="res://scene/card.tscn" id="1_itxqv"]
+[ext_resource type="Script" uid="uid://b1siym26nruhn" path="res://src/main/java/godot/cardmanager.java" id="1_v0l8b"]
+
+[node name="main" type="Node2D"]
+
+[node name="Cardmanager" type="Node2D" parent="."]
+script = ExtResource("1_v0l8b")
+
+[node name="card" parent="Cardmanager" instance=ExtResource("1_itxqv")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.5, 0.5)
