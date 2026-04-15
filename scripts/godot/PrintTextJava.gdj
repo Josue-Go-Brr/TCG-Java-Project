@@ -6,7 +6,7 @@ fqName = godot.PrintTextJava
 relativeSourcePath = src/main/java/godot/PrintTextJava.java
 baseType = Label
 supertypes = [
-    godot.api.Label,
+	godot.api.Label,
 	godot.api.Control,
 	godot.api.CanvasItem,
 	godot.api.Node,
@@ -17,11 +17,11 @@ supertypes = [
 	kotlin.Any
 ]
 signals = [
-    
+	
 ]
 properties = [
-    test
+	test
 ]
 functions = [
-    _ready
+	_ready
 ]
