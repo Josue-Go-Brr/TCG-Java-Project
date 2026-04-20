@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwkvyynka6pdv"
-path="res://.godot/imported/10000020.jpg-bf49b2349a7acc25a1d1a70b09b87a3a.ctex"
+uid="uid://63l5ohyp62vk"
+path="res://.godot/imported/DarkMagicianOfChaos.png-73307ad7c8622b24715f9b80a77fcb1f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Autres/Cartes Pas Definivites/10000020.jpg"
-dest_files=["res://.godot/imported/10000020.jpg-bf49b2349a7acc25a1d1a70b09b87a3a.ctex"]
+source_file="res://assets/sprites/CartesMonstre/DarkMagicianOfChaos.png"
+dest_files=["res://.godot/imported/DarkMagicianOfChaos.png-73307ad7c8622b24715f9b80a77fcb1f.ctex"]
 
 [params]
 

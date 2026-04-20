@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwkvyynka6pdv"
-path="res://.godot/imported/10000020.jpg-bf49b2349a7acc25a1d1a70b09b87a3a.ctex"
+uid="uid://dd1duvxtpbn7s"
+path="res://.godot/imported/Dark Magician Girl.png-7f18f5173ff3841904082e67efa1f8c7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Autres/Cartes Pas Definivites/10000020.jpg"
-dest_files=["res://.godot/imported/10000020.jpg-bf49b2349a7acc25a1d1a70b09b87a3a.ctex"]
+source_file="res://assets/sprites/CartesMonstre/Dark Magician Girl.png"
+dest_files=["res://.godot/imported/Dark Magician Girl.png-7f18f5173ff3841904082e67efa1f8c7.ctex"]
 
 [params]
 

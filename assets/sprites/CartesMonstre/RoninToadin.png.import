@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwkvyynka6pdv"
-path="res://.godot/imported/10000020.jpg-bf49b2349a7acc25a1d1a70b09b87a3a.ctex"
+uid="uid://o6m6j7eou282"
+path="res://.godot/imported/RoninToadin.png-9b9da7601b6662625569a7a450520d45.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Autres/Cartes Pas Definivites/10000020.jpg"
-dest_files=["res://.godot/imported/10000020.jpg-bf49b2349a7acc25a1d1a70b09b87a3a.ctex"]
+source_file="res://assets/sprites/CartesMonstre/RoninToadin.png"
+dest_files=["res://.godot/imported/RoninToadin.png-9b9da7601b6662625569a7a450520d45.ctex"]
 
 [params]
 

@@ -6,7 +6,7 @@ fqName = godot.cardmanager
 relativeSourcePath = src/main/java/godot/cardmanager.java
 baseType = Node2D
 supertypes = [
-    godot.api.Node2D,
+	godot.api.Node2D,
 	godot.api.CanvasItem,
 	godot.api.Node,
 	godot.api.Object,
@@ -16,11 +16,13 @@ supertypes = [
 	kotlin.Any
 ]
 signals = [
-    
+	
 ]
 properties = [
-    test
+	card_dragged
 ]
 functions = [
-    _process
+	_process,
+	_input,
+	_raycast_check_for_card
 ]

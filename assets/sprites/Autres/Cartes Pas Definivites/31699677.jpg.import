@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://gkwhw60smg82"
-path="res://.godot/imported/31699677.jpg-1923926e7a8d5f4e85fae441af6fe049.ctex"
+path="res://.godot/imported/31699677.jpg-48b6de00fa56dd6a8fc40ba69ccb3daf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/CartesMonstre/31699677.jpg"
-dest_files=["res://.godot/imported/31699677.jpg-1923926e7a8d5f4e85fae441af6fe049.ctex"]
+source_file="res://assets/sprites/Autres/Cartes Pas Definivites/31699677.jpg"
+dest_files=["res://.godot/imported/31699677.jpg-48b6de00fa56dd6a8fc40ba69ccb3daf.ctex"]
 
 [params]
 

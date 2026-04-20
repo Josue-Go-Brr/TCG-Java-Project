@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwkvyynka6pdv"
-path="res://.godot/imported/10000020.jpg-bf49b2349a7acc25a1d1a70b09b87a3a.ctex"
+uid="uid://1lr4nsbrho14"
+path="res://.godot/imported/WingedDragonOfRA.png-e6d5efe88e3d2f664d2bb43c6e9583d3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Autres/Cartes Pas Definivites/10000020.jpg"
-dest_files=["res://.godot/imported/10000020.jpg-bf49b2349a7acc25a1d1a70b09b87a3a.ctex"]
+source_file="res://assets/sprites/CartesMonstre/WingedDragonOfRA.png"
+dest_files=["res://.godot/imported/WingedDragonOfRA.png-e6d5efe88e3d2f664d2bb43c6e9583d3.ctex"]
 
 [params]
 

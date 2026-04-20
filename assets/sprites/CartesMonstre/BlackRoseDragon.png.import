@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwkvyynka6pdv"
-path="res://.godot/imported/10000020.jpg-bf49b2349a7acc25a1d1a70b09b87a3a.ctex"
+uid="uid://x70qg7dis60h"
+path="res://.godot/imported/BlackRoseDragon.png-1de5274b6df80223830b9f4ebe8fcf80.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Autres/Cartes Pas Definivites/10000020.jpg"
-dest_files=["res://.godot/imported/10000020.jpg-bf49b2349a7acc25a1d1a70b09b87a3a.ctex"]
+source_file="res://assets/sprites/CartesMonstre/BlackRoseDragon.png"
+dest_files=["res://.godot/imported/BlackRoseDragon.png-1de5274b6df80223830b9f4ebe8fcf80.ctex"]
 
 [params]
 

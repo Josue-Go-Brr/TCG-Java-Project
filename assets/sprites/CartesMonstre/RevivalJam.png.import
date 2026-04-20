@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwkvyynka6pdv"
-path="res://.godot/imported/10000020.jpg-bf49b2349a7acc25a1d1a70b09b87a3a.ctex"
+uid="uid://b3yjls1mq5lu2"
+path="res://.godot/imported/RevivalJam.png-a009203940d9fc8277cbdd358066c8cd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Autres/Cartes Pas Definivites/10000020.jpg"
-dest_files=["res://.godot/imported/10000020.jpg-bf49b2349a7acc25a1d1a70b09b87a3a.ctex"]
+source_file="res://assets/sprites/CartesMonstre/RevivalJam.png"
+dest_files=["res://.godot/imported/RevivalJam.png-a009203940d9fc8277cbdd358066c8cd.ctex"]
 
 [params]
 

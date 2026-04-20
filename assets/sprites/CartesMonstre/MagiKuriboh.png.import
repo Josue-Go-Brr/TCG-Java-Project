@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwkvyynka6pdv"
-path="res://.godot/imported/10000020.jpg-bf49b2349a7acc25a1d1a70b09b87a3a.ctex"
+uid="uid://d0kbophnkurdy"
+path="res://.godot/imported/MagiKuriboh.png-b40df28de0cee3f39b25e175a47bcebd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Autres/Cartes Pas Definivites/10000020.jpg"
-dest_files=["res://.godot/imported/10000020.jpg-bf49b2349a7acc25a1d1a70b09b87a3a.ctex"]
+source_file="res://assets/sprites/CartesMonstre/MagiKuriboh.png"
+dest_files=["res://.godot/imported/MagiKuriboh.png-b40df28de0cee3f39b25e175a47bcebd.ctex"]
 
 [params]
 
