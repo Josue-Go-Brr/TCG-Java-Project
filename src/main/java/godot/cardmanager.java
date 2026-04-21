@@ -5,30 +5,51 @@ import godot.annotation.RegisterClass;
 import godot.annotation.RegisterFunction;
 import godot.annotation.RegisterProperty;
 import godot.api.*;
-import godot.core.Dictionary;
-import godot.core.MouseButton;
-import godot.core.VariantArray;
-import godot.core.Vector2;
+import godot.core.*;
 import godot.global.GD;
 
 import java.lang.Object;
 
 @RegisterClass
-public class cardmanager extends Node2D {
+public class CardManager extends Node2D {
 	@Export
 	@RegisterProperty
 	public Node2D cardDragged;
+	public Vector2 screen_Size;
+	public Camera2D cam;
 
+
+	@RegisterFunction
+	@Override
+	public void _ready(){
+		cam = getViewport().getCamera2d();
+	}
 
 	// Fonction process, s'execute à toutes les frames du code
 	@RegisterFunction
 	@Override
 	public void _process(double delta) {
+
+		if (cam == null) return;
+
+		Vector2 camPos = cam.getGlobalPosition();
+		screen_Size = getViewport().getVisibleRect().getSize();
+		Vector2 zoom = cam.getZoom();
+
+		float halfW = (float) (screen_Size.getX() / zoom.getX()) /2;
+		float halfH = (float) (screen_Size.getY() / zoom.getY()) /2;
+
 		if (cardDragged != null){
 			Vector2 mouse_Position = getGlobalMousePosition();
-			cardDragged.setPosition(mouse_Position);
+
+			cardDragged.setGlobalPosition(new Vector2(
+					clamp((float) mouse_Position.getX(), (float) (camPos.getX() - halfW), (float) (camPos.getX() + halfW)),
+					clamp((float) mouse_Position.getY(), (float) (camPos.getY() - halfH), (float) (camPos.getY() + halfH))
+			));
 		}
 	}
+
+
 
 	// Fonction verification des différents inputs
 	@RegisterFunction
@@ -78,17 +99,42 @@ public class cardmanager extends Node2D {
 			if (collider instanceof Node node) {
 				Node parent = node.getParent();
 				if (parent instanceof Node2D nodeCarte){
-					GD.INSTANCE.print("Node name: " + node.getParent());
+					// GD.INSTANCE.print("Node name: " + node.getParent());
 					return nodeCarte;
 				}
 
 			}
 		}
 		else {
-			GD.INSTANCE.print("No Collision");
+			// GD.INSTANCE.print("No Collision");
 		}
 
 		return null;
 	}
+
+	@RegisterFunction
+	public float clamp(float value, float min, float max) {
+		return Math.max(min, Math.min(value, max));
+	}
+
+	@RegisterFunction
+	public Callable on_hovered_over_card(Card carte){
+		GD.INSTANCE.print("Hovered");
+		return null;
+	}
+
+	@RegisterFunction
+	public Callable on_hovered_off_card(Card carte){
+		GD.INSTANCE.print("Hovered off");
+		return null;
+	}
+
+	@RegisterFunction
+	public void connect_card_signals(Card carte){
+		carte.connect("hovered", on_hovered_over_card(carte));
+		carte.connect("hovered_off", on_hovered_off_card(carte));
+	}
+
+
 
 }
