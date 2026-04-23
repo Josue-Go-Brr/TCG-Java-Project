@@ -27,7 +27,6 @@ functions = [
 	_input,
 	_raycast_check_for_card,
 	clamp,
-	on_hovered_over_card,
-	on_hovered_off_card,
-	connect_card_signals
+	start_drag,
+	stop_drag
 ]

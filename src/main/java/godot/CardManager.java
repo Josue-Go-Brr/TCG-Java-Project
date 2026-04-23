@@ -60,12 +60,14 @@ public class CardManager extends Node2D {
 				//GD.INSTANCE.print("Left Click");
 				Node2D card = _raycast_check_for_card();
 				if (card != null){
-					cardDragged = card;
+					start_drag(card);
 				}
 			}
 			else {
 				//GD.INSTANCE.print("Left Click Released");
-				cardDragged = null;
+				if (cardDragged != null) {
+					stop_drag();
+				}
 			}
 		}
 
@@ -118,23 +120,17 @@ public class CardManager extends Node2D {
 	}
 
 	@RegisterFunction
-	public Callable on_hovered_over_card(Card carte){
-		GD.INSTANCE.print("Hovered");
-		return null;
+	public void start_drag(Node2D card){
+		cardDragged = card;
+		card.setScale(new Vector2(1, 1));
 	}
 
 	@RegisterFunction
-	public Callable on_hovered_off_card(Card carte){
-		GD.INSTANCE.print("Hovered off");
-		return null;
-	}
+	public void stop_drag(){
+		cardDragged.setScale(new Vector2(1, 1));
+		cardDragged = null;
 
-	@RegisterFunction
-	public void connect_card_signals(Card carte){
-		carte.connect("hovered", on_hovered_over_card(carte));
-		carte.connect("hovered_off", on_hovered_off_card(carte));
 	}
-
 
 
 }

@@ -8,6 +8,7 @@ import godot.api.*;
 import godot.core.Dictionary;
 import godot.core.Signal;
 import godot.core.VariantArray;
+import godot.core.Vector2;
 import godot.global.GD;
 
 import java.lang.Object;
@@ -23,22 +24,19 @@ public class Card extends Node2D {
 	@RegisterFunction
 	@Override
 	public void _ready(){
-		// Toutes les cartes doivent être enfant de cardManager ou ça va crash
 
-		Card carte = this;
-		//getParent().connect_card_signals(carte);
 	}
 
 	@RegisterFunction
 	public void _on_area_2d_mouse_entered() {
-		GD.INSTANCE.print("Hover ON");
-		emitSignal("hovered", this);
+		setScale(new Vector2(1.05, 1.05));
+		this.setZIndex(2);
 	}
 
 	@RegisterFunction
 	public void _on_area_2d_mouse_exited() {
-		GD.INSTANCE.print("Hover OFF");
-		emitSignal("hovered_off", this);
+		setScale(new Vector2(1, 1));
+		this.setZIndex(1);
 	}
 
 }
