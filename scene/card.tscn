@@ -1,16 +1,23 @@
-[gd_scene load_steps=2 format=3 uid="uid://dycoucv5h78hw"]
+[gd_scene load_steps=4 format=3 uid="uid://dycoucv5h78hw"]
+
+[ext_resource type="Texture2D" uid="uid://1ndyboo1sk47" path="res://assets/sprites/CartesMonstre/DarkMagician.png" id="1_7p64d"]
+[ext_resource type="Script" uid="uid://cps13nbmhe0do" path="res://src/main/java/godot/Card.java" id="1_gw1lc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gw1lc"]
-size = Vector2(800, 1185)
+size = Vector2(1015, 1480)
 
 [node name="card" type="Node2D"]
+script = ExtResource("1_gw1lc")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_7p64d")
 
 [node name="Area2D" type="Area2D" parent="."]
 scale = Vector2(0.2, 0.2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(3.05176e-05, -2.50008)
+position = Vector2(-2.50005, 4.99994)
 shape = SubResource("RectangleShape2D_gw1lc")
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
