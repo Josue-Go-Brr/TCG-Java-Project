@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("1_otnf5")
+id = "Stardust_Dragon"
 name = "Stardust Dragon"
 alphabetical_id = 15
 atk = 2500

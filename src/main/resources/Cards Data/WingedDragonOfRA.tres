@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("2_eai10")
+id = "Winged_Dragon_Of_RA"
 name = "Winged Dragon of RA"
 alphabetical_id = 17
 atk = 3700

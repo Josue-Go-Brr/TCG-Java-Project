@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("1_o6isf")
+id = "Dark_Magician_Girl"
 name = "Dark Magician Girl"
 alphabetical_id = 6
 atk = 2000

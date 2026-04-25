@@ -1,13 +1,12 @@
 // THIS FILE IS GENERATED! DO NOT EDIT OR DELETE IT. EDIT OR DELETE THE ASSOCIATED SOURCE CODE FILE INSTEAD
 // Note: You can however freely move this file inside your godot project if you want. Keep in mind however, that if you rename the originating source code file, this file will be deleted and regenerated as a new file instead of being updated! Other modifications to the source file however, will result in this file being updated.
 
-registeredName = CardData
-fqName = godot.CardData
-relativeSourcePath = src/main/java/godot/CardData.java
-baseType = Resource
+registeredName = CardDB
+fqName = godot.CardDB
+relativeSourcePath = src/main/java/godot/CardDB.java
+baseType = Node
 supertypes = [
-    godot.api.Resource,
-	godot.api.RefCounted,
+	godot.api.Node,
 	godot.api.Object,
 	godot.core.KtObject,
 	godot.common.interop.NativeWrapper,
@@ -15,17 +14,11 @@ supertypes = [
 	kotlin.Any
 ]
 signals = [
-    
+	
 ]
 properties = [
-    id,
-	name,
-	alphabetical_id,
-	atk,
-	defense,
-	description,
-	image
+	
 ]
 functions = [
-    
+	_ready
 ]

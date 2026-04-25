@@ -17,7 +17,7 @@ import java.lang.Object;
 public class Card extends Node2D {
 
 
-	@RegisterProperty @Export public String cardID;
+	@RegisterProperty @Export public String cardID = " ";
 	@RegisterProperty public int atk;
 	@RegisterProperty public int defense;
 

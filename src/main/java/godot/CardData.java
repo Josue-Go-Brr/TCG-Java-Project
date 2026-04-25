@@ -8,7 +8,11 @@ import godot.api.Texture2D;
 
 @RegisterClass
 public class CardData extends Resource{
-	
+
+	@Export
+	@RegisterProperty
+	public String id;
+
 	@Export
 	@RegisterProperty
 	public String name;

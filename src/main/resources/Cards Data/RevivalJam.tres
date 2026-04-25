@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("1_o2upp")
+id = "Revival_Jam"
 name = "Revival Jam"
 alphabetical_id = 12
 atk = 1500

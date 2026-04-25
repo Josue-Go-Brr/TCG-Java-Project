@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("1_lkupm")
+id = "Blue_Eyes_White_Dragon"
 name = "Blue-Eyes White Dragon"
 alphabetical_id = 3
 atk = 3000

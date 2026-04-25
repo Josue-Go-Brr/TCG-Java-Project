@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("1_txkda")
+id = "Black_Rose_Dragon"
 name = "Black Rose Dragon"
 alphabetical_id = 2
 atk = 2400

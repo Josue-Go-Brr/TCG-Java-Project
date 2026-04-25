@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("1_ce0bm")
+id = "Trade_Toad"
 name = "Trade Toad"
 alphabetical_id = 16
 atk = 100

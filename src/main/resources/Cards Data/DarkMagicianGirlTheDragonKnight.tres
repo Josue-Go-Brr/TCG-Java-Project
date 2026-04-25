@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("2_jjcpg")
+id = "dark_Magician_Girl_The_Dragon_Knight"
 name = "Dark Magician Girl the Dragon Knight"
 alphabetical_id = 7
 atk = 2600

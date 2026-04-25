@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("1_ybtyg")
+id = "Dark_Magician_Of_Chaos"
 name = "Dark Magician of Chaos"
 alphabetical_id = 8
 atk = 2800

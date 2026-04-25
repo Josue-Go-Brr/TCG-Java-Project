@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("1_aaq2q")
+id = "MagiKuriboh"
 name = "MagiKuriboh"
 alphabetical_id = 10
 atk = 300

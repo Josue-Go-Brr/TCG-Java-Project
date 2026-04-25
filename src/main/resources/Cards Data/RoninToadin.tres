@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("2_p3084")
+id = "RoninToadin"
 name = "RoninToadin"
 alphabetical_id = 13
 atk = 100

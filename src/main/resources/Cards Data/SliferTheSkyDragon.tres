@@ -5,7 +5,8 @@
 
 [resource]
 script = ExtResource("1_l3vyq")
-name = "Slyfer the Sky Dragon"
+id = "Slifer_The_Sky_Dragon"
+name = "Slifer the Sky Dragon"
 alphabetical_id = 14
 atk = 0
 defense = 0

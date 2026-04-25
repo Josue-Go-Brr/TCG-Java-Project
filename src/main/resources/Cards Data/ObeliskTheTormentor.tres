@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("1_t1pmq")
+id = "Obelisk_The_Tormentor"
 name = "Obelisk the Tormentor"
 alphabetical_id = 11
 atk = 4000

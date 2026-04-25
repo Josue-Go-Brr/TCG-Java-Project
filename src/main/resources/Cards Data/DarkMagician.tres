@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("1_etp7h")
+id = "Dark_Magician"
 name = "Dark Magician"
 alphabetical_id = 5
 atk = 2500

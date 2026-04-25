@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("1_ud8hr")
+id = "Blackland_fire_dragon"
 name = "Blackland Fire Dragon"
 alphabetical_id = 1
 atk = 1500
