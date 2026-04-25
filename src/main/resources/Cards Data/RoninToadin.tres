@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3 uid="uid://cr37lhlmhst7s"]
+
+[ext_resource type="Texture2D" uid="uid://o6m6j7eou282" path="res://assets/sprites/CartesMonstre/RoninToadin.png" id="1_stdxr"]
+[ext_resource type="Script" uid="uid://cjyi6kw1mh1pk" path="res://scripts/godot/CardData.gdj" id="2_p3084"]
+
+[resource]
+script = ExtResource("2_p3084")
+name = "RoninToadin"
+alphabetical_id = 13
+atk = 100
+defense = 2000
+description = "A Samurai Toad. There is nothing more to say about it."
+image = ExtResource("1_stdxr")
+metadata/_custom_type_script = "uid://cjyi6kw1mh1pk"

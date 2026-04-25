@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://vn3hxqv5p40w"
-path="res://.godot/imported/BlackRabbit.png-f3c885d69fbe08fc85afcf7d8939e6da.ctex"
+path="res://.godot/imported/DarkRabbit.png-a6feeb945df643ef8c649828051c0bb6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/CartesMonstre/BlackRabbit.png"
-dest_files=["res://.godot/imported/BlackRabbit.png-f3c885d69fbe08fc85afcf7d8939e6da.ctex"]
+source_file="res://assets/sprites/CartesMonstre/DarkRabbit.png"
+dest_files=["res://.godot/imported/DarkRabbit.png-a6feeb945df643ef8c649828051c0bb6.ctex"]
 
 [params]
 

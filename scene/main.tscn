@@ -9,10 +9,11 @@
 script = ExtResource("1_v0l8b")
 
 [node name="MagicienSombre" parent="Cardmanager" instance=ExtResource("1_itxqv")]
-position = Vector2(197, 86)
+position = Vector2(210, 0)
+card_i_d = "MagicienSombre"
 
 [node name="card" parent="Cardmanager" instance=ExtResource("1_itxqv")]
-position = Vector2(-268, 117)
+position = Vector2(-232, -1)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.5, 0.5)

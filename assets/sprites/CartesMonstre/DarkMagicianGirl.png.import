@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c4g0r857bac2e"
-path="res://.godot/imported/DarkMagicianDragonKnight.png-7253892ce688cd08ef260dffe99459b9.ctex"
+uid="uid://dd1duvxtpbn7s"
+path="res://.godot/imported/DarkMagicianGirl.png-2973fc7442826cd460cc12452e7d082e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/CartesMonstre/DarkMagicianDragonKnight.png"
-dest_files=["res://.godot/imported/DarkMagicianDragonKnight.png-7253892ce688cd08ef260dffe99459b9.ctex"]
+source_file="res://assets/sprites/CartesMonstre/DarkMagicianGirl.png"
+dest_files=["res://.godot/imported/DarkMagicianGirl.png-2973fc7442826cd460cc12452e7d082e.ctex"]
 
 [params]
 

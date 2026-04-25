@@ -16,15 +16,23 @@ import java.lang.Object;
 @RegisterClass
 public class Card extends Node2D {
 
-	@Export
-	@RegisterProperty
-	public Signal hovered;
-	public Signal hovered_off;
+
+	@RegisterProperty @Export public String cardID;
+	@RegisterProperty public int atk;
+	@RegisterProperty public int defense;
+
 
 	@RegisterFunction
 	@Override
 	public void _ready(){
+		// Récuperer l'atk et la defense depuis la BDD
+		atk = 0;
+		defense = 0;
+	}
 
+	@RegisterFunction
+	public String getCardID(){
+		return cardID;
 	}
 
 	@RegisterFunction
