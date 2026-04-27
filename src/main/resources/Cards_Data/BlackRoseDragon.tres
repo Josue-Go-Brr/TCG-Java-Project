@@ -5,11 +5,11 @@
 
 [resource]
 script = ExtResource("1_txkda")
-id = "Black_Rose_Dragon"
-name = "Black Rose Dragon"
+id = "\"Black_Rose_Dragon\""
+name = "\"Black Rose Dragon\""
 alphabetical_id = 2
 atk = 2400
 defense = 1800
-description = "Black Rose Dragon is a black-skinned wyvern with magenta claws and plate edges. Its tail and neck are covered in overlapping plates of petal-shaped armor."
+description = "\"Black Rose Dragon is a black-skinned wyvern with magenta claws and plate edges. Its tail and neck are covered in overlapping plates of petal-shaped armor.\""
 image = ExtResource("1_adlgf")
 metadata/_custom_type_script = "uid://cjyi6kw1mh1pk"

@@ -1,19 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://dfkd35ltv4pqr"]
+[gd_scene load_steps=4 format=3 uid="uid://dfkd35ltv4pqr"]
 
 [ext_resource type="PackedScene" uid="uid://dycoucv5h78hw" path="res://scene/card.tscn" id="1_itxqv"]
 [ext_resource type="Script" uid="uid://dw53lqsy3v72f" path="res://src/main/java/godot/CardManager.java" id="1_v0l8b"]
+[ext_resource type="Script" uid="uid://d0nns3oyt506m" path="res://src/main/java/godot/CardDB.java" id="3_wp4xf"]
 
 [node name="main" type="Node2D"]
+
+[node name="CardDB" type="Node" parent="."]
+script = ExtResource("3_wp4xf")
+metadata/_custom_type_script = "uid://dpo5f3h5gvl1m"
 
 [node name="Cardmanager" type="Node2D" parent="."]
 script = ExtResource("1_v0l8b")
 
-[node name="MagicienSombre" parent="Cardmanager" instance=ExtResource("1_itxqv")]
+[node name="Dark_Magician" parent="Cardmanager" instance=ExtResource("1_itxqv")]
 position = Vector2(210, 0)
-card_i_d = "MagicienSombre"
+card_i_d = "\"Dark_Magician\""
 
 [node name="card" parent="Cardmanager" instance=ExtResource("1_itxqv")]
 position = Vector2(-232, -1)
+card_i_d = "\"test\""
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.5, 0.5)

@@ -5,11 +5,11 @@
 
 [resource]
 script = ExtResource("1_otnf5")
-id = "Stardust_Dragon"
-name = "Stardust Dragon"
+id = "\"Stardust_Dragon\""
+name = "\"Stardust Dragon\""
 alphabetical_id = 15
 atk = 2500
 defense = 2000
-description = " The most beautiful Dragon of them all, fallen from the sky, he can attack twice by consuming Crystals."
+description = "\" The most beautiful Dragon of them all, fallen from the sky, he can attack twice by consuming Crystals.\""
 image = ExtResource("1_3vwgf")
 metadata/_custom_type_script = "uid://cjyi6kw1mh1pk"

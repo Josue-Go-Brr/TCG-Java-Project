@@ -5,11 +5,11 @@
 
 [resource]
 script = ExtResource("1_o6isf")
-id = "Dark_Magician_Girl"
-name = "Dark Magician Girl"
+id = "\"Dark_Magician_Girl\""
+name = "\"Dark Magician Girl\""
 alphabetical_id = 6
 atk = 2000
 defense = 700
-description = "A young female magician who learned magic from the powerful Dark Magician."
+description = "\"A young female magician who learned magic from the powerful Dark Magician.\""
 image = ExtResource("1_btw7l")
 metadata/_custom_type_script = "uid://cjyi6kw1mh1pk"
