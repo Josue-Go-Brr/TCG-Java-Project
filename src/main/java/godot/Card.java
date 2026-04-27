@@ -17,22 +17,55 @@ import java.lang.Object;
 public class Card extends Node2D {
 
 
-	@RegisterProperty @Export public String cardID = " ";
-	@RegisterProperty public int atk;
-	@RegisterProperty public int defense;
-
+	@RegisterProperty @Export public String cardID = "";
+	@RegisterProperty @Export public int atk;
+	@RegisterProperty @Export public int defense;
+	public CardDB db;
+	public CardData data;
 
 	@RegisterFunction
 	@Override
 	public void _ready(){
-		// Récuperer l'atk et la defense depuis la BDD
-		atk = 0;
-		defense = 0;
+
+		db = (CardDB) getNode("/root/main/CardDB");
+
+		if (db == null){
+			GD.INSTANCE.print("Database not found !");
+			return;
+		}
+
+		data = db.getCard(cardID);
+
+		if (data != null){
+
+			atk = data.atk;
+			defense = data.defense;
+
+			GD.INSTANCE.print("ATK and DEF LOADED : " + atk + " " + defense);
+
+			updateLabel();
+		}
+		else {
+			GD.INSTANCE.print("Card not found for id :" + cardID);
+		}
+
 	}
 
 	@RegisterFunction
 	public String getCardID(){
 		return cardID;
+	}
+
+	@RegisterFunction
+	public void updateLabel(){
+		CardLabel label = (CardLabel) getNode("CardLabel");
+
+		if (label != null){
+			label.updateFromCard(this);
+		}
+		else {
+			GD.INSTANCE.print("Label not found");
+		}
 	}
 
 	@RegisterFunction

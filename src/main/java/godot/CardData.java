@@ -2,6 +2,7 @@ package godot;
 
 import godot.annotation.Export;
 import godot.annotation.RegisterClass;
+import godot.annotation.RegisterFunction;
 import godot.annotation.RegisterProperty;
 import godot.api.Resource;
 import godot.api.Texture2D;
@@ -11,11 +12,11 @@ public class CardData extends Resource{
 
 	@Export
 	@RegisterProperty
-	public String id;
+	public String id = "";
 
 	@Export
 	@RegisterProperty
-	public String name;
+	public String name = "";
 
 	@Export
 	@RegisterProperty
@@ -31,7 +32,7 @@ public class CardData extends Resource{
 
 	@Export
 	@RegisterProperty
-	public String description;
+	public String description = "";
 
 	@Export
 	@RegisterProperty
