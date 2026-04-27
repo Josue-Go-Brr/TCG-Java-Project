@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/main/java/godot/library/CardDetailsPanelController.java" id="1_details_script"]
+
+[node name="CardDetailsPanel" type="PanelContainer"]
+custom_minimum_size = Vector2(250, 600)
+size_flags_horizontal = 1
+script = ExtResource("1_details_script")
+
+[node name="Margin" type="MarginContainer" parent="."]
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="Content" type="VBoxContainer" parent="Margin"]
+theme_override_constants/separation = 10
+
+[node name="CardImage" type="TextureRect" parent="Margin/Content"]
+custom_minimum_size = Vector2(280, 360)
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CardName" type="Label" parent="Margin/Content"]
+text = "Select a card"
+theme_override_font_sizes/font_size = 24
+
+[node name="CardType" type="Label" parent="Margin/Content"]
+text = "Type: -"
+
+[node name="CardCost" type="Label" parent="Margin/Content"]
+text = "Cost: -"
+
+[node name="CardDescription" type="RichTextLabel" parent="Margin/Content"]
+custom_minimum_size = Vector2(0, 140)
+size_flags_vertical = 3
+bbcode_enabled = false
+scroll_active = true
+text = "Description"
