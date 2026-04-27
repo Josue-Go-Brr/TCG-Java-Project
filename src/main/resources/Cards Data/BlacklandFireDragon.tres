@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3 uid="uid://bgduaw6w4tki6"]
+
+[ext_resource type="Texture2D" uid="uid://co3wfjv2t0377" path="res://assets/sprites/CartesMonstre/BlacklandFireDragon.png" id="1_33bj7"]
+[ext_resource type="Script" uid="uid://cjyi6kw1mh1pk" path="res://scripts/godot/CardData.gdj" id="1_ud8hr"]
+
+[resource]
+script = ExtResource("1_ud8hr")
+id = "Blackland_fire_dragon"
+name = "Blackland Fire Dragon"
+alphabetical_id = 1
+atk = 1500
+defense = 800
+description = " A dragon that dwells in the depths of darkness, its vulnerability lies in its poor eyesight."
+image = ExtResource("1_33bj7")
+metadata/_custom_type_script = "uid://cjyi6kw1mh1pk"

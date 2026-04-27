@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3 uid="uid://bg53lq7getxsh"]
+
+[ext_resource type="Texture2D" uid="uid://c4g0r857bac2e" path="res://assets/sprites/CartesMonstre/DarkMagicianGirltheDragonKnight.png" id="1_uycfl"]
+[ext_resource type="Script" uid="uid://cjyi6kw1mh1pk" path="res://scripts/godot/CardData.gdj" id="2_jjcpg"]
+
+[resource]
+script = ExtResource("2_jjcpg")
+id = "dark_Magician_Girl_The_Dragon_Knight"
+name = "Dark Magician Girl the Dragon Knight"
+alphabetical_id = 7
+atk = 2600
+defense = 1700
+description = "The evolution of the Dark Magician Girl, who not only learned to wield a sword, but also to ride dragons."
+image = ExtResource("1_uycfl")
+metadata/_custom_type_script = "uid://cjyi6kw1mh1pk"
