@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3 uid="uid://bg02ql5j40ws6"]
+
+[ext_resource type="Texture2D" uid="uid://c437knx1xcidj" path="res://assets/sprites/CartesMonstre/ObeliskTheTormentor.png" id="1_jn1eu"]
+[ext_resource type="Script" uid="uid://cjyi6kw1mh1pk" path="res://scripts/godot/CardData.gdj" id="1_t1pmq"]
+
+[resource]
+script = ExtResource("1_t1pmq")
+id = "\"Obelisk_The_Tormentor\""
+name = "\"Obelisk the Tormentor\""
+alphabetical_id = 11
+atk = 4000
+defense = 4000
+description = "\"One of the Three Egyptian Gods, Obelisk is the strongest in terms of pure strength.\""
+image = ExtResource("1_jn1eu")
+metadata/_custom_type_script = "uid://cjyi6kw1mh1pk"

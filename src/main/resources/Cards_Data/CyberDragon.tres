@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3 uid="uid://c5c1slsa1kl3q"]
+
+[ext_resource type="Script" uid="uid://cjyi6kw1mh1pk" path="res://scripts/godot/CardData.gdj" id="1_467qe"]
+[ext_resource type="Texture2D" uid="uid://7r2t0xpsdepb" path="res://assets/sprites/CartesMonstre/CyberDragon.png" id="1_bn2lw"]
+
+[resource]
+script = ExtResource("1_467qe")
+id = "\"Cyber_Dragon\""
+name = "\"Cyber Dragon\""
+alphabetical_id = 4
+atk = 2100
+defense = 1600
+description = "\"A metal dragon created by humans, with the power to destroy them if they don't take precautions.\""
+image = ExtResource("1_bn2lw")
+metadata/_custom_type_script = "uid://cjyi6kw1mh1pk"
