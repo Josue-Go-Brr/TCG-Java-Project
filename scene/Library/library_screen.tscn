@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://s2dxk5l3h6n4" path="res://src/main/java/godot/library/LibraryScreenController.java" id="1_library_script"]
 [ext_resource type="Texture2D" uid="uid://ndrhcoipsn7l" path="res://assets/sprites/backgrounds/librarybackground.png" id="2_library_bg"]
-[ext_resource type="PackedScene" path="res://scene/Library/card_details_panel.tscn" id="3_details_scene"]
-[ext_resource type="PackedScene" path="res://scene/Library/card_tile.tscn" id="4_tile_scene"]
+[ext_resource type="PackedScene" uid="uid://mdiunpl3erlw" path="res://scene/Library/card_details_panel.tscn" id="3_details_scene"]
+[ext_resource type="PackedScene" uid="uid://dx3xso4bloex4" path="res://scene/Library/card_tile.tscn" id="4_tile_scene"]
 
 [node name="LibraryScreen" type="Control"]
 layout_mode = 3
@@ -72,7 +72,6 @@ vertical_alignment = 1
 [node name="SearchInput" type="LineEdit" parent="RootMargin/MainColumns/LeftSide/TopBar"]
 custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
-size_flags_horizontal = 1
 placeholder_text = "Search card..."
 
 [node name="TypeLabel" type="Label" parent="RootMargin/MainColumns/LeftSide/TopBar"]

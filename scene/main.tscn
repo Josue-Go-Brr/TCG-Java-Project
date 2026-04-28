@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://dw53lqsy3v72f" path="res://src/main/java/godot/CardManager.java" id="1_v0l8b"]
 [ext_resource type="Script" uid="uid://d0nns3oyt506m" path="res://src/main/java/godot/CardDB.java" id="3_wp4xf"]
 
-[node name="main" type="Node2D" unique_id=1600653542]
+[node name="main" type="Node2D"]
 
 [node name="CardDB" type="Node" parent="."]
 script = ExtResource("3_wp4xf")
@@ -21,7 +21,7 @@ card_i_d = "\"Dark_Magician\""
 position = Vector2(-232, -1)
 card_i_d = "\"test\""
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1646894082]
+[node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.5, 0.5)
 
-[node name="board" type="Node2D" parent="." unique_id=1859477428]
+[node name="board" type="Node2D" parent="."]
