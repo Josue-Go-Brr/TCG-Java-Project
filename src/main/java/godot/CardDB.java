@@ -31,8 +31,9 @@ public class CardDB extends Node {
 
 			String file = dir.getNext();
 
-			while(!file.isEmpty()){
+			while(!file.isEmpty()){			// Boucle qui remplit la DB automatiquement à partir des fichiers Ressources de Cards_Data
 				if (file.endsWith(".tres")){
+
 					CardData card = (CardData) ResourceLoader.load("res://src/main/resources/Cards_Data/" + file);
 
 					if (card != null && card.id != null){
@@ -60,10 +61,13 @@ public class CardDB extends Node {
 	public CardData getCard(String cardId){
 		CardData c = cards.get(cardId);
 
-		GD.INSTANCE.print("Requested card : " + cardId);
+		GD.INSTANCE.print("Requested card : " + cardId);		// Affiche la carte demandée
 
 		return c;
 	}
 
-
+	@RegisterFunction
+	public HashMap<String, CardData> getCards() {
+		return cards;
+	}
 }

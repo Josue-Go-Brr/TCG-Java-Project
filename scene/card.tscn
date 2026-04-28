@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dycoucv5h78hw"]
+[gd_scene load_steps=6 format=3 uid="uid://dycoucv5h78hw"]
 
 [ext_resource type="Script" uid="uid://cps13nbmhe0do" path="res://src/main/java/godot/Card.java" id="1_gw1lc"]
-[ext_resource type="Texture2D" uid="uid://1ndyboo1sk47" path="res://assets/sprites/CartesMonstre/DarkMagician.png" id="2_lu544"]
+[ext_resource type="FontFile" uid="uid://xc5qs11fov6e" path="res://assets/fonts/TCG fonts/Stone Serif Semibold.ttf" id="2_md2gi"]
 [ext_resource type="Script" uid="uid://c7ljm7hhfomeq" path="res://src/main/java/godot/CardLabel.java" id="3_lu544"]
+[ext_resource type="Script" uid="uid://cedmmmmtc4god" path="res://src/main/java/godot/CardSprite.java" id="4_md2gi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gw1lc"]
 size = Vector2(1015, 1480)
@@ -11,15 +12,18 @@ size = Vector2(1015, 1480)
 script = ExtResource("1_gw1lc")
 
 [node name="CardLabel" type="Label" parent="."]
+z_index = 2
 offset_left = -83.0
 offset_top = 76.0
 offset_right = 86.0
 offset_bottom = 130.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_md2gi")
+theme_override_font_sizes/font_size = 17
 script = ExtResource("3_lu544")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_lu544")
+[node name="CardSprite" type="Sprite2D" parent="."]
+script = ExtResource("4_md2gi")
 
 [node name="Area2D" type="Area2D" parent="."]
 scale = Vector2(0.2, 0.2)

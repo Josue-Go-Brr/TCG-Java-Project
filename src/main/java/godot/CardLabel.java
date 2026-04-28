@@ -17,14 +17,12 @@ public class CardLabel extends Label {
 
 	}
 
+	@RegisterFunction
 	public void updateFromCard(Card thisCard){
 
-		thisCard = (Card) this.getParent();
-
-		// Adapter pour aller chercher ATk/DEF dans le dictionnaire/BDD ou toutes les cartes sont présentes.
 		if (thisCard != null){
 
-			setText("ATK : " + thisCard.atk + " DEF : " + thisCard.defense);
+			setText("ATK : " + thisCard.atk + "\nDEF : " + thisCard.defense);
 
 			GD.INSTANCE.print("ATK AND DEF LOADED IN LABEL : " + thisCard.atk  + " " + thisCard.defense + " FROM : " + thisCard.cardID);
 

@@ -20,30 +20,33 @@ public class Card extends Node2D {
 	@RegisterProperty @Export public String cardID = "";
 	@RegisterProperty @Export public int atk;
 	@RegisterProperty @Export public int defense;
-	public CardDB db;
-	public CardData data;
+	public Texture2D cardSprite;
+	public CardDB db;		// Attribut DATABASE
+	public CardData data;		// Attribut de Données d'une carte
 
 	@RegisterFunction
 	@Override
 	public void _ready(){
 
-		db = (CardDB) getNode("/root/main/CardDB");
+		db = (CardDB) getNode("/root/main/CardDB");		// Récupération de la DATABASE
 
-		if (db == null){
-			GD.INSTANCE.print("Database not found !");
-			return;
-		}
+//		if (db == null){		// Affiche si la BDD n'est pas trouvée
+//			GD.INSTANCE.print("Database not found !");
+//			return;
+//		}
 
-		data = db.getCard(cardID);
+		data = db.getCard(cardID);		// Récupére les données de la carte à partir de son ID (définir l'ID dans le Node à la main)
 
 		if (data != null){
 
-			atk = data.atk;
+			atk = data.atk;		// Récupère les infos de la carte avec data.attribut
 			defense = data.defense;
+			cardSprite = data.image;
 
 			GD.INSTANCE.print("ATK and DEF LOADED : " + atk + " " + defense);
 
 			updateLabel();
+			updateSprite();
 		}
 		else {
 			GD.INSTANCE.print("Card not found for id :" + cardID);
@@ -66,6 +69,19 @@ public class Card extends Node2D {
 		else {
 			GD.INSTANCE.print("Label not found");
 		}
+	}
+
+	@RegisterFunction
+	public void updateSprite(){
+		CardSprite sprite = (CardSprite) getNode("CardSprite");
+
+		if (sprite != null){
+			sprite.updateFromCard(this);
+		}
+		else {
+			GD.INSTANCE.print("Sprite not found");
+		}
+
 	}
 
 	@RegisterFunction
