@@ -13,6 +13,8 @@ import godot.global.GD;
 
 import java.lang.Object;
 
+//added signals for later
+
 @RegisterClass
 public class Card extends Node2D {
 
@@ -21,20 +23,22 @@ public class Card extends Node2D {
 	public Signal hovered;
 	public Signal hovered_off;
 
+
 	@RegisterFunction
 	@Override
 	public void _ready(){
-
 	}
 
 	@RegisterFunction
 	public void _on_area_2d_mouse_entered() {
+		emitSignal("hovered", "self");
 		setScale(new Vector2(1.05, 1.05));
 		this.setZIndex(2);
 	}
 
 	@RegisterFunction
 	public void _on_area_2d_mouse_exited() {
+		emitSignal("hovered_off", "self");
 		setScale(new Vector2(1, 1));
 		this.setZIndex(1);
 	}

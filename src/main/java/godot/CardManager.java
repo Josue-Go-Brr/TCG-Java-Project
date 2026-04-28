@@ -1,5 +1,4 @@
 package godot;
-
 import godot.annotation.Export;
 import godot.annotation.RegisterClass;
 import godot.annotation.RegisterFunction;
@@ -14,6 +13,7 @@ import java.lang.Object;
 public class CardManager extends Node2D {
 	@Export
 	@RegisterProperty
+	public int COLLISION_MASK_CARD_SLOT = 2;
 	public Node2D cardDragged;
 	public Vector2 screen_Size;
 	public Camera2D cam;
@@ -101,16 +101,40 @@ public class CardManager extends Node2D {
 			if (collider instanceof Node node) {
 				Node parent = node.getParent();
 				if (parent instanceof Node2D nodeCarte){
-					// GD.INSTANCE.print("Node name: " + node.getParent());
+					GD.INSTANCE.print("Node name: " + node.getParent());
 					return nodeCarte;
 				}
 
 			}
 		}
-		else {
-			// GD.INSTANCE.print("No Collision");
-		}
+		return null;
+	}
 
+
+	//Same function but returns everything on COLLISION_MASK_CARD_SLOT
+	@RegisterFunction
+	public Node2D _raycast_check_for_card_slot(){
+		PhysicsDirectSpaceState2D space_state = getWorld2d().getDirectSpaceState();
+		PhysicsPointQueryParameters2D parameters = new PhysicsPointQueryParameters2D();
+		parameters.setPosition(getGlobalMousePosition());
+		parameters.setCollideWithAreas(true);
+		parameters.setCollisionMask(COLLISION_MASK_CARD_SLOT);
+
+		VariantArray<Dictionary<Object, Object>> result = space_state.intersectPoint(parameters);
+		// If there is any collision Point, return.
+		if (!result.isEmpty()){
+			Dictionary<Object, Object> hit = result.get(0);
+			Object collider = hit.get("collider");
+
+			if (collider instanceof Node node) {
+				Node parent = node.getParent();
+				if (parent instanceof Node2D nodeCardSlot){
+					GD.INSTANCE.print("Node name: " + node.getParent());
+					return nodeCardSlot;
+				}
+
+			}
+		}
 		return null;
 	}
 
@@ -128,8 +152,25 @@ public class CardManager extends Node2D {
 	@RegisterFunction
 	public void stop_drag(){
 		cardDragged.setScale(new Vector2(1, 1));
-		cardDragged = null;
+		Node2D card_slot_found = _raycast_check_for_card_slot();
 
+		//since card_slot_found.get returns an object the .equals method is used instead
+		if (card_slot_found != null && card_slot_found.get("card_in_slot").equals(false)) {
+
+			cardDragged.setPosition(card_slot_found.getPosition());
+
+			//Basic solution is to disable the collision of the card, but I prefered to set a different collision layer and mask instead
+			//cardDragged.getNode("Area2D/CollisionShape2D").set("Disabled", false);
+			cardDragged.getNode("Area2D").set("collision_mask", 2);
+			cardDragged.getNode("Area2D").set("collision_layer", 2);
+
+
+			// I made a variable in each CardSlots, when true the slot is occupied
+			GD.INSTANCE.print(card_slot_found.get("card_in_slot"));
+			GD.INSTANCE.print(cardDragged.getNode("Area2D").get("collision_mask"));
+			card_slot_found.set("card_in_slot", true);
+		}
+		cardDragged = null;
 	}
 
 

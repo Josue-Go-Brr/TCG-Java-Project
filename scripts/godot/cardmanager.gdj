@@ -19,13 +19,14 @@ signals = [
     
 ]
 properties = [
-    card_dragged
+    c_o_l_l_i_s_i_o_n__m_a_s_k__c_a_r_d__s_l_o_t
 ]
 functions = [
     _process,
 	_ready,
 	_input,
 	_raycast_check_for_card,
+	_raycast_check_for_card_slot,
 	clamp,
 	start_drag,
 	stop_drag
