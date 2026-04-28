@@ -1,5 +1,8 @@
 package godot.library;
 
+import godot.CardDB;
+
+
 import godot.annotation.RegisterClass;
 import godot.annotation.RegisterFunction;
 import godot.api.Control;
@@ -30,7 +33,14 @@ public class LibraryScreenController extends Control {
 	private Label emptyStateNode;
 	private PanelContainer detailsPanelNode;
 
-	private final LibraryQueryService queryService = new LibraryQueryService();
+	private LibraryQueryService queryService;
+
+	//CardDB cardDB=getNodeOrNull("/root/main/CardDB");
+	//if (cardDB == null) {
+	//	GD.INSTANCE.printErr("CardDB not found. Library will be empty.");
+	//}
+	//queryService = new LibraryQueryService(cardDB);
+
 	private final List<CardTileController> tileControllers = new ArrayList<>();
 	private PackedScene cardTileScene;
 	private BaseCarte selectedCard;
@@ -46,6 +56,14 @@ public class LibraryScreenController extends Control {
 		emptyStateNode = getNodeOrNull("RootMargin/MainColumns/LeftSide/EmptyState");
 		detailsPanelNode = getNodeOrNull("RootMargin/MainColumns/RightSideDetails");
 
+		// Always prepare dropdown UI first.
+		setupFilterOptions();
+
+		CardDB cardDB = resolveCardDB();
+		if (cardDB == null) {
+			GD.INSTANCE.printErr("CardDB not found. Library will be empty.");
+		}
+		queryService = new LibraryQueryService(cardDB);
 		cardTileScene = ResourceLoader.load(CARD_TILE_SCENE_PATH, "PackedScene", ResourceLoader.CacheMode.REUSE);
 		GD.INSTANCE.print("[Library] nodes -> search:" + (searchInputNode != null)
 				+ " type:" + (typeFilterNode != null)
@@ -53,7 +71,6 @@ public class LibraryScreenController extends Control {
 				+ " grid:" + (cardGridNode != null)
 				+ " detailsNode:" + (detailsPanelNode != null)
 				+ " tileScene:" + (cardTileScene != null));
-		setupFilterOptions();
 		refreshGrid();
 	}
 
@@ -81,7 +98,8 @@ public class LibraryScreenController extends Control {
 	}
 
 	private void setupFilterOptions() {
-		if (typeFilterNode != null && typeFilterNode.getItemCount() == 0) {
+		if (typeFilterNode != null) {
+			typeFilterNode.clear();
 			typeFilterNode.addItem(LibraryQueryService.TYPE_ALL);
 			typeFilterNode.addItem(LibraryQueryService.TYPE_MONSTER);
 			typeFilterNode.addItem(LibraryQueryService.TYPE_MAGIE);
@@ -89,7 +107,8 @@ public class LibraryScreenController extends Control {
 			typeFilterNode.select(0);
 		}
 
-		if (sortFilterNode != null && sortFilterNode.getItemCount() == 0) {
+		if (sortFilterNode != null) {
+			sortFilterNode.clear();
 			sortFilterNode.addItem(LibraryQueryService.SORT_NAME);
 			sortFilterNode.addItem(LibraryQueryService.SORT_COST);
 			sortFilterNode.addItem(LibraryQueryService.SORT_ATK);
@@ -102,7 +121,11 @@ public class LibraryScreenController extends Control {
 			GD.INSTANCE.pushWarning("[Library] CardGrid node not found, cannot render tiles.");
 			return;
 		}
-
+		if (queryService == null){
+			GD.INSTANCE.pushWarning("[Library] Query service not initialized");
+			return;
+		}
+		
 		List<BaseCarte> cards = queryService.queryCards(getSearchText(), getSelectedTypeFilter(), getSelectedSortFilter());
 		GD.INSTANCE.print("[Library] refreshGrid cards count = " + cards.size());
 		rebuildGrid(cards);
@@ -201,5 +224,19 @@ public class LibraryScreenController extends Control {
 			return detailsPanelController;
 		}
 		return null;
+	}
+
+	private CardDB resolveCardDB() {
+		CardDB local = getNodeOrNull("CardDB");
+		if (local != null) {
+			return local;
+		}
+
+		CardDB mainPath = getNodeOrNull("/root/main/CardDB");
+		if (mainPath != null) {
+			return mainPath;
+		}
+
+		return getNodeOrNull("/root/CardDB");
 	}
 }

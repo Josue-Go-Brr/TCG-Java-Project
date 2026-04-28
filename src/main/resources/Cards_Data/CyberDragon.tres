@@ -5,11 +5,15 @@
 
 [resource]
 script = ExtResource("1_467qe")
-id = "\"Cyber_Dragon\""
-name = "\"Cyber Dragon\""
+id = "Cyber_Dragon"
+name = "Cyber Dragon"
 alphabetical_id = 4
+type="MONSTER"
+cost=5
 atk = 2100
 defense = 1600
+effect="none"
 description = "\"A metal dragon created by humans, with the power to destroy them if they don't take precautions.\""
 image = ExtResource("1_bn2lw")
+image_path="res://assets/sprites/CartesMonstre/CyberDragon.png"
 metadata/_custom_type_script = "uid://cjyi6kw1mh1pk"

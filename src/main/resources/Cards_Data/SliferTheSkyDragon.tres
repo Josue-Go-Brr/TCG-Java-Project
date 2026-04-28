@@ -5,11 +5,15 @@
 
 [resource]
 script = ExtResource("1_l3vyq")
-id = "\"Slifer_The_Sky_Dragon\""
-name = "\"Slifer the Sky Dragon\""
+id = "Slifer_The_Sky_Dragon"
+name = "Slifer the Sky Dragon"
 alphabetical_id = 14
+type="MONSTER"
+cost=5
 atk = 0
 defense = 0
+effect="none"
 description = "\"One of the Three Egyptian Gods, Slifer The Sky Dragon attackdepends on the number of cards in the owner's hand.\""
 image = ExtResource("1_laphe")
+image_path="res://assets/sprites/CartesMonstre/SliferTheSkyDragon.png"
 metadata/_custom_type_script = "uid://cjyi6kw1mh1pk"

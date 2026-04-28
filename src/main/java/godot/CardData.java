@@ -22,6 +22,12 @@ public class CardData extends Resource{
 	@RegisterProperty
 	public int alphabeticalId;
 
+	@Export @RegisterProperty
+	public String type = "MONSTER";// MONSTER, MAGIE, TRAP
+
+	@Export @RegisterProperty
+	public int cost = 0;
+
 	@Export
 	@RegisterProperty
 	public int atk;
@@ -37,5 +43,8 @@ public class CardData extends Resource{
 	@Export
 	@RegisterProperty
 	public Texture2D image;
+
+	@Export @RegisterProperty
+	public String imagePath = ""; 
 
 }

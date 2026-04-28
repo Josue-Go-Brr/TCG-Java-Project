@@ -5,11 +5,15 @@
 
 [resource]
 script = ExtResource("1_t1pmq")
-id = "\"Obelisk_The_Tormentor\""
-name = "\"Obelisk the Tormentor\""
+id = "Obelisk_The_Tormentor"
+name = "Obelisk the Tormentor"
 alphabetical_id = 11
+type="MONSTER"
+cost=5
 atk = 4000
 defense = 4000
+effect="none"
 description = "\"One of the Three Egyptian Gods, Obelisk is the strongest in terms of pure strength.\""
 image = ExtResource("1_jn1eu")
+image_path="res://assets/sprites/CartesMonstre/ObeliskTheTormentor.png"
 metadata/_custom_type_script = "uid://cjyi6kw1mh1pk"

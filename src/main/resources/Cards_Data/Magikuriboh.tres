@@ -5,11 +5,15 @@
 
 [resource]
 script = ExtResource("1_aaq2q")
-id = "\"MagiKuriboh\""
-name = "\"MagiKuriboh\""
+id = "MagiKuriboh"
+name = "MagiKuriboh"
 alphabetical_id = 10
+type="MONSTER"
+cost=4
 atk = 300
 defense = 200
+effect="none"
 description = "\"A Kuriboh who learned magic from the Dark Magician, dressed as him, he's not as powerful unfortunately.\""
 image = ExtResource("1_fe4u4")
+image_path="res://assets/sprites/CartesMonstre/MagiKuriboh.png"
 metadata/_custom_type_script = "uid://cjyi6kw1mh1pk"
