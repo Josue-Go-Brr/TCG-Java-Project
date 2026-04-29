@@ -2,6 +2,8 @@ package godot.cards;
 
 import godot.CardData;
 import godot.CardDB;
+import godot.api.ResourceLoader;
+import godot.api.Texture2D;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
@@ -9,58 +11,63 @@ import java.util.List;
 import java.util.Map;
 
 public class CardLibrary {
-	private Map<Integer, BaseCarte> database =new LinkedHashMap<>();
+	private final Map<Integer, BaseCarte> database = new LinkedHashMap<>();
 
 	public CardLibrary(CardDB cardDB) {
 		loadCardsFromDB(cardDB);
 	}
 
 	private void loadCardsFromDB(CardDB cardDB) {
-		if (cardDB == null){
+		if (cardDB == null) {
 			return;
 		}
 
-		List<CardData> resources=cardDB.getAllCards();
+		List<CardData> resources = cardDB.getAllCards();
 		resources.sort(Comparator.comparing(c -> c.alphabeticalId));
 
-		int fallbackId=1;
+		int fallbackId = 1;
 
-		for(CardData  resource : resources) {
-			BaseCarte carte= tobaseCarte(fallbackId++, resource);
-			if (carte != null){
-							  database.put(carte.getId(),carte);
+		for (CardData resource : resources) {
+			BaseCarte carte = toBaseCarte(fallbackId++, resource);
+			if (carte != null) {
+				database.put(carte.getId(), carte);
 			}
 		}
 	}
-	private BaseCarte tobaseCarte(int id , CardData resource){
-		if (resource==null){
+
+	private BaseCarte toBaseCarte(int id, CardData resource) {
+		if (resource == null) {
 			return null;
 		}
 
-		String name=safe(resource.name);
-		String description=safe(resource.description);
-		String imagePath=!safe(resource.imagePath).isBlank()? resource.imagePath : "";
-		int cost=resource.cost;
-		String type=safe(resource.type).toUpperCase();
+		String name = safe(resource.name);
+		String description = safe(resource.description);
+		String imagePath = !safe(resource.imagePath).isBlank() ? resource.imagePath : "";
+		Texture2D image = resource.image;
+		if (image == null && !imagePath.isBlank()) {
+			image = (Texture2D) ResourceLoader.load(imagePath, "Texture2D", ResourceLoader.CacheMode.REUSE);
+		}
+		int cost = resource.cost;
+		String type = safe(resource.type).toUpperCase();
 		return switch (type) {
 			case "MAGIE" -> new CarteMagie(
-				id, name, cost, description, imagePath, "none"
+				id, name, cost, description, image, imagePath, "none"
 			);
 			case "TRAP" -> new Cartepiege(
-				id, name, cost, description, imagePath, "none"
+				id, name, cost, description, image, imagePath, "none"
 			);
 			default -> new CarteMonster(
-				id, name, cost, description, imagePath,resource.atk, resource.defense, "none"
+				id, name, cost, description, image, imagePath, resource.atk, resource.defense, "none"
 			);
 		};
 	}
+
 	private String safe(String value) {
 		if (value == null) {
-				return "";
+			return "";
 		}
 		return value;
-
-}
+	}
 
 	public List<BaseCarte> getAllCards() {
 		return new ArrayList<>(database.values());
@@ -71,7 +78,7 @@ public class CardLibrary {
 		List<BaseCarte> filteredList = new ArrayList<>();
 
 		for (BaseCarte card : database.values()) {
-			if (card.getType().equals(type)) {
+			if (card.getType().equalsIgnoreCase(type)) {
 				filteredList.add(card);
 			}
 		}
@@ -80,7 +87,7 @@ public class CardLibrary {
 	}
 
 	// Recherche par nom
-   public List<BaseCarte> searchCardsByName(String query) {
+	public List<BaseCarte> searchCardsByName(String query) {
 		List<BaseCarte> searchResults = new ArrayList<>();
 
 		String lowerCaseQuery = query == null ? "" : query.toLowerCase();

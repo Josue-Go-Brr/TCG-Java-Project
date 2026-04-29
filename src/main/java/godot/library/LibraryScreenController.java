@@ -1,77 +1,85 @@
 package godot.library;
 
 import godot.CardDB;
-
-
 import godot.annotation.RegisterClass;
 import godot.annotation.RegisterFunction;
 import godot.api.Control;
 import godot.api.GridContainer;
+import godot.api.InputEvent;
+import godot.api.InputEventMouseButton;
 import godot.api.Label;
 import godot.api.LineEdit;
-import godot.api.Node;
 import godot.api.OptionButton;
 import godot.api.PanelContainer;
 import godot.api.PackedScene;
-import godot.api.Texture2D;
-import godot.api.TextureRect;
+import godot.api.ResourceLoader;
+import godot.api.ScrollContainer;
 import godot.cards.BaseCarte;
+import godot.core.Callable;
+import godot.core.Error;
+import godot.core.MouseButton;
+import godot.core.StringNames;
 import godot.global.GD;
-import godot.global.ResourceLoader;
-
-import java.util.ArrayList;
 import java.util.List;
+import godot.library.ui.LibraryGridRenderer;
+import godot.library.ui.LibrarySelectionCoordinator;
+import godot.library.ui.LibraryUiBinder;
 
 @RegisterClass
 public class LibraryScreenController extends Control {
 	private static final String CARD_TILE_SCENE_PATH = "res://scene/Library/card_tile.tscn";
+	private static final int MANUAL_SCROLL_STEP = 25;
 
 	private LineEdit searchInputNode;
 	private OptionButton typeFilterNode;
 	private OptionButton sortFilterNode;
 	private GridContainer cardGridNode;
+	private ScrollContainer cardGridScrollNode;
 	private Label emptyStateNode;
 	private PanelContainer detailsPanelNode;
+	private PackedScene cardTileScene;
 
 	private LibraryQueryService queryService;
-
-	//CardDB cardDB=getNodeOrNull("/root/main/CardDB");
-	//if (cardDB == null) {
-	//	GD.INSTANCE.printErr("CardDB not found. Library will be empty.");
-	//}
-	//queryService = new LibraryQueryService(cardDB);
-
-	private final List<CardTileController> tileControllers = new ArrayList<>();
-	private PackedScene cardTileScene;
-	private BaseCarte selectedCard;
+	private LibraryUiBinder uiBinder;
+	private LibraryGridRenderer gridRenderer;
+	private LibrarySelectionCoordinator selectionCoordinator;
 
 	@RegisterFunction
 	@Override
 	public void _ready() {
 		GD.INSTANCE.print("[Library] _ready entered");
-		searchInputNode = getNodeOrNull("RootMargin/MainColumns/LeftSide/TopBar/SearchInput");
-		typeFilterNode = getNodeOrNull("RootMargin/MainColumns/LeftSide/TopBar/TypeFilter");
-		sortFilterNode = getNodeOrNull("RootMargin/MainColumns/LeftSide/TopBar/SortFilter");
-		cardGridNode = getNodeOrNull("RootMargin/MainColumns/LeftSide/CardGridScroll/CardArea/CardGrid");
-		emptyStateNode = getNodeOrNull("RootMargin/MainColumns/LeftSide/EmptyState");
-		detailsPanelNode = getNodeOrNull("RootMargin/MainColumns/RightSideDetails");
 
-		// Always prepare dropdown UI first.
-		setupFilterOptions();
+		searchInputNode = (LineEdit) getNodeOrNull("RootMargin/MainColumns/LeftSide/TopBar/SearchInput");
+		typeFilterNode = (OptionButton) getNodeOrNull("RootMargin/MainColumns/LeftSide/TopBar/TypeFilter");
+		sortFilterNode = (OptionButton) getNodeOrNull("RootMargin/MainColumns/LeftSide/TopBar/SortFilter");
+		cardGridScrollNode = (ScrollContainer) getNodeOrNull("RootMargin/MainColumns/LeftSide/CardGridScroll");
+		cardGridNode = (GridContainer) getNodeOrNull("RootMargin/MainColumns/LeftSide/CardGridScroll/CardArea/CardGrid");
+		emptyStateNode = (Label) getNodeOrNull("RootMargin/MainColumns/LeftSide/EmptyState");
+		detailsPanelNode = (PanelContainer) getNodeOrNull("RootMargin/MainColumns/RightSideDetails");
+		cardTileScene = (PackedScene) ResourceLoader.load(
+				CARD_TILE_SCENE_PATH,
+				"PackedScene",
+				ResourceLoader.CacheMode.REUSE
+		);
 
 		CardDB cardDB = resolveCardDB();
 		if (cardDB == null) {
-			GD.INSTANCE.printErr("CardDB not found. Library will be empty.");
+			GD.INSTANCE.printErr("[Library] CardDB not found. Library will stay empty.");
 		}
 		queryService = new LibraryQueryService(cardDB);
-		cardTileScene = ResourceLoader.load(CARD_TILE_SCENE_PATH, "PackedScene", ResourceLoader.CacheMode.REUSE);
-		GD.INSTANCE.print("[Library] nodes -> search:" + (searchInputNode != null)
-				+ " type:" + (typeFilterNode != null)
-				+ " sort:" + (sortFilterNode != null)
-				+ " grid:" + (cardGridNode != null)
-				+ " detailsNode:" + (detailsPanelNode != null)
-				+ " tileScene:" + (cardTileScene != null));
+
+		uiBinder = new LibraryUiBinder(searchInputNode, typeFilterNode, sortFilterNode);
+		uiBinder.setupDefaultOptions();
+		uiBinder.connect(this);
+		connectManualScrollFallback();
+		logScrollState("ready-before-render");
+
+		CardDetailsPanelController detailsController = getDetailsController();
+		selectionCoordinator = new LibrarySelectionCoordinator(detailsController);
+		gridRenderer = new LibraryGridRenderer(cardGridNode, cardTileScene, this);
+
 		refreshGrid();
+		callDeferred(StringNames.toGodotName("debugDeferredScrollProbe"));
 	}
 
 	@RegisterFunction
@@ -80,163 +88,129 @@ public class LibraryScreenController extends Control {
 	}
 
 	@RegisterFunction
-	public void _on_type_filter_item_selected(int index) {
+	public void _on_type_filter_item_selected(long index) {
 		refreshGrid();
 	}
 
 	@RegisterFunction
-	public void _on_sort_filter_item_selected(int index) {
+	public void _on_sort_filter_item_selected(long index) {
 		refreshGrid();
 	}
 
-	public void onCardTileClicked(BaseCarte card) {
-		selectedCard = card;
-		CardDetailsPanelController detailsPanelController = getDetailsController();
-		if (detailsPanelController != null) {
-			detailsPanelController.showCard(card);
+	@RegisterFunction
+	public void _unhandled_input(InputEvent event) {
+		handleManualWheelScroll(event);
+	}
+
+	@RegisterFunction
+	public void _on_card_grid_scroll_gui_input(InputEvent event) {
+		handleManualWheelScroll(event);
+	}
+
+	private void handleManualWheelScroll(InputEvent event) {
+		if (cardGridScrollNode == null) {
+			return;
+		}
+		if (!(event instanceof InputEventMouseButton mouseEvent)) {
+			return;
+		}
+		if (!mouseEvent.isPressed()) {
+			return;
+		}
+
+		if (mouseEvent.getButtonIndex() == MouseButton.WHEEL_UP) {
+			int before = cardGridScrollNode.getVScroll();
+			cardGridScrollNode.setVScroll(Math.max(0, cardGridScrollNode.getVScroll() - MANUAL_SCROLL_STEP));
+			GD.INSTANCE.print("[Library][WheelUp] vScroll " + before + " -> " + cardGridScrollNode.getVScroll());
+			logScrollState("wheel-up");
+		} else if (mouseEvent.getButtonIndex() == MouseButton.WHEEL_DOWN) {
+			int before = cardGridScrollNode.getVScroll();
+			cardGridScrollNode.setVScroll(cardGridScrollNode.getVScroll() + MANUAL_SCROLL_STEP);
+			GD.INSTANCE.print("[Library][WheelDown] vScroll " + before + " -> " + cardGridScrollNode.getVScroll());
+			logScrollState("wheel-down");
 		}
 	}
 
-	private void setupFilterOptions() {
-		if (typeFilterNode != null) {
-			typeFilterNode.clear();
-			typeFilterNode.addItem(LibraryQueryService.TYPE_ALL);
-			typeFilterNode.addItem(LibraryQueryService.TYPE_MONSTER);
-			typeFilterNode.addItem(LibraryQueryService.TYPE_MAGIE);
-			typeFilterNode.addItem(LibraryQueryService.TYPE_TRAP);
-			typeFilterNode.select(0);
+	private void connectManualScrollFallback() {
+		if (cardGridScrollNode == null) {
+			return;
 		}
+		Error err = cardGridScrollNode.connect(
+				"gui_input",
+				Callable.create(this, StringNames.toGodotName("_on_card_grid_scroll_gui_input")),
+				0
+		);
+		if (err != Error.OK) {
+			GD.INSTANCE.printErr("[Library] Failed to connect CardGridScroll gui_input: " + err);
+		}
+	}
 
-		if (sortFilterNode != null) {
-			sortFilterNode.clear();
-			sortFilterNode.addItem(LibraryQueryService.SORT_NAME);
-			sortFilterNode.addItem(LibraryQueryService.SORT_COST);
-			sortFilterNode.addItem(LibraryQueryService.SORT_ATK);
-			sortFilterNode.select(0);
+	public void onCardTileClicked(BaseCarte card) {
+		if (selectionCoordinator != null) {
+			selectionCoordinator.select(card);
 		}
 	}
 
 	private void refreshGrid() {
-		if (cardGridNode == null) {
-			GD.INSTANCE.pushWarning("[Library] CardGrid node not found, cannot render tiles.");
-			return;
-		}
-		if (queryService == null){
-			GD.INSTANCE.pushWarning("[Library] Query service not initialized");
-			return;
-		}
-		
-		List<BaseCarte> cards = queryService.queryCards(getSearchText(), getSelectedTypeFilter(), getSelectedSortFilter());
-		GD.INSTANCE.print("[Library] refreshGrid cards count = " + cards.size());
-		rebuildGrid(cards);
-		updateEmptyState(cards.isEmpty());
-
-		if (cards.isEmpty()) {
-			selectedCard = null;
-			CardDetailsPanelController detailsPanelController = getDetailsController();
-			if (detailsPanelController != null) {
-				detailsPanelController.clearSelection();
-			}
+		if (queryService == null || uiBinder == null || gridRenderer == null) {
 			return;
 		}
 
-		if (selectedCard == null || cards.stream().noneMatch(card -> card.getId() == selectedCard.getId())) {
-			selectedCard = cards.get(0);
-		}
-		CardDetailsPanelController detailsPanelController = getDetailsController();
-		if (detailsPanelController != null) {
-			detailsPanelController.showCard(selectedCard);
-		}
-	}
-
-	private void rebuildGrid(List<BaseCarte> cards) {
-		for (CardTileController tileController : tileControllers) {
-			if (tileController != null) {
-				tileController.queueFree();
-			}
-		}
-		tileControllers.clear();
-
-		if (cardTileScene == null) {
-			GD.INSTANCE.pushWarning("[Library] card_tile.tscn failed to load.");
-			return;
-		}
-
-		for (BaseCarte card : cards) {
-			Node nodeInstance = cardTileScene.instantiate();
-			if (nodeInstance == null) {
-				continue;
-			}
-			cardGridNode.addChild(nodeInstance);
-
-			if (nodeInstance instanceof CardTileController tileController) {
-				tileController.setCardData(card);
-				tileController.setLibraryScreenController(this);
-				tileControllers.add(tileController);
-			} else {
-				// Fallback in case Godot instantiates as base node type.
-				Label nameNode = nodeInstance.getNodeOrNull("Margin/Content/CardName");
-				TextureRect imageNode = nodeInstance.getNodeOrNull("Margin/Content/CardImage");
-				if (nameNode != null) {
-					nameNode.setText(card.getName());
-				}
-				if (imageNode != null) {
-					imageNode.setTexture(loadTexture(card.getImagePath()));
-				}
-				GD.INSTANCE.pushWarning("[Library] Tile instance is not CardTileController for card: " + card.getName());
-			}
-		}
-	}
-
-	private void updateEmptyState(boolean isEmpty) {
+		List<BaseCarte> cards = queryService.queryCards(
+				uiBinder.getSearchText(),
+				uiBinder.getSelectedType(),
+				uiBinder.getSelectedSort()
+		);
+		GD.INSTANCE.print("[Library] refreshGrid -> cards: " + cards.size());
+		gridRenderer.render(cards);
+		logScrollState("after-render");
 		if (emptyStateNode != null) {
-			emptyStateNode.setVisible(isEmpty);
+			emptyStateNode.setVisible(cards.isEmpty());
 		}
-	}
-
-	private String getSearchText() {
-		return searchInputNode == null ? "" : searchInputNode.getText();
-	}
-
-	private String getSelectedTypeFilter() {
-		if (typeFilterNode == null || typeFilterNode.getItemCount() == 0) {
-			return LibraryQueryService.TYPE_ALL;
+		if (selectionCoordinator != null) {
+			selectionCoordinator.sync(cards);
 		}
-		return typeFilterNode.getItemText(typeFilterNode.getSelected());
-	}
-
-	private String getSelectedSortFilter() {
-		if (sortFilterNode == null || sortFilterNode.getItemCount() == 0) {
-			return LibraryQueryService.SORT_NAME;
-		}
-		return sortFilterNode.getItemText(sortFilterNode.getSelected());
-	}
-
-	private Texture2D loadTexture(String path) {
-		if (path == null || path.isBlank()) {
-			return null;
-		}
-		return ResourceLoader.load(path, "Texture2D", ResourceLoader.CacheMode.REUSE);
 	}
 
 	private CardDetailsPanelController getDetailsController() {
-		if (detailsPanelNode instanceof CardDetailsPanelController detailsPanelController) {
-			return detailsPanelController;
+		if (detailsPanelNode instanceof CardDetailsPanelController detailsController) {
+			return detailsController;
 		}
 		return null;
 	}
 
 	private CardDB resolveCardDB() {
-		CardDB local = getNodeOrNull("CardDB");
+		CardDB local = (CardDB) getNodeOrNull("CardDB");
 		if (local != null) {
 			return local;
 		}
-
-		CardDB mainPath = getNodeOrNull("/root/main/CardDB");
-		if (mainPath != null) {
-			return mainPath;
+		CardDB fromMain = (CardDB) getNodeOrNull("/root/main/CardDB");
+		if (fromMain != null) {
+			return fromMain;
 		}
+		return (CardDB) getNodeOrNull("/root/CardDB");
+	}
 
-		return getNodeOrNull("/root/CardDB");
+	@RegisterFunction
+	public void debugDeferredScrollProbe() {
+		if (cardGridScrollNode == null) {
+			GD.INSTANCE.printErr("[Library][Debug] cardGridScrollNode is null in deferred probe.");
+			return;
+		}
+		int before = cardGridScrollNode.getVScroll();
+		cardGridScrollNode.setVScroll(before + 200);
+		int after = cardGridScrollNode.getVScroll();
+		GD.INSTANCE.print("[Library][DeferredProbe] vScroll " + before + " -> " + after);
+		logScrollState("deferred-probe");
+	}
+
+	private void logScrollState(String context) {
+		if (cardGridScrollNode == null) {
+			GD.INSTANCE.printErr("[Library][ScrollState][" + context + "] Scroll node is null.");
+			return;
+		}
+		GD.INSTANCE.print(
+				"[Library][ScrollState][" + context + "] vScroll=" + cardGridScrollNode.getVScroll()
+		);
 	}
 }

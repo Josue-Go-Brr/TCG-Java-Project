@@ -5,12 +5,13 @@ import godot.annotation.RegisterFunction;
 import godot.api.InputEvent;
 import godot.api.InputEventMouseButton;
 import godot.api.Label;
-import godot.api.MouseButton;
+import godot.api.Control;
 import godot.api.PanelContainer;
+import godot.api.ResourceLoader;
 import godot.api.Texture2D;
 import godot.api.TextureRect;
 import godot.cards.BaseCarte;
-import godot.global.ResourceLoader;
+import godot.core.MouseButton;
 
 @RegisterClass
 public class CardTileController extends PanelContainer {
@@ -22,8 +23,17 @@ public class CardTileController extends PanelContainer {
 	@RegisterFunction
 	@Override
 	public void _ready() {
-		cardImageNode = getNodeOrNull("Margin/Content/CardImage");
-		cardNameNode = getNodeOrNull("Margin/Content/CardName");
+		cardImageNode = (TextureRect) getNodeOrNull("Margin/Content/CardImage");
+		cardNameNode = (Label) getNodeOrNull("Margin/Content/CardName");
+
+		// Let mouse wheel events bubble up to the ScrollContainer.
+		setMouseFilter(Control.MouseFilter.PASS);
+		if (cardImageNode != null) {
+			cardImageNode.setMouseFilter(Control.MouseFilter.IGNORE);
+		}
+		if (cardNameNode != null) {
+			cardNameNode.setMouseFilter(Control.MouseFilter.IGNORE);
+		}
 	}
 
 	public void setCardData(BaseCarte card) {
@@ -32,7 +42,7 @@ public class CardTileController extends PanelContainer {
 			cardNameNode.setText(card.getName());
 		}
 		if (cardImageNode != null) {
-			cardImageNode.setTexture(loadTexture(card.getImagePath()));
+			cardImageNode.setTexture(resolveTexture(card));
 		}
 		setTooltipText(card.getName());
 	}
@@ -62,6 +72,16 @@ public class CardTileController extends PanelContainer {
 		if (path == null || path.isBlank()) {
 			return null;
 		}
-		return ResourceLoader.load(path, "Texture2D", ResourceLoader.CacheMode.REUSE);
+		return (Texture2D) ResourceLoader.load(path, "Texture2D", ResourceLoader.CacheMode.REUSE);
+	}
+
+	private Texture2D resolveTexture(BaseCarte card) {
+		if (card == null) {
+			return null;
+		}
+		if (card.getImage() != null) {
+			return card.getImage();
+		}
+		return loadTexture(card.getImagePath());
 	}
 }

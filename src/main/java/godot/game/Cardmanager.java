@@ -1,22 +1,16 @@
 package godot.game;
 
-import godot.annotation.Export;
-import godot.annotation.RegisterClass;
-import godot.annotation.RegisterFunction;
-import godot.annotation.RegisterProperty;
 import godot.api.Node2D;
 import godot.global.GD;
 
-@RegisterClass
+/**
+ * Not registered as a Godot script: avoids KSP registrar name clash with {@link godot.CardManager}
+ * on case-insensitive filesystems. Attach {@code CardManager.java} on scenes instead.
+ */
 public class Cardmanager extends Node2D {
-    @Export
-    @RegisterProperty
-    public int test = 0;
 
-    @RegisterFunction
     @Override
     public void _process(double delta) {
         GD.INSTANCE.print("Nolan Moy");
-
     }
 }

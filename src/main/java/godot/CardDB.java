@@ -8,11 +8,9 @@ import godot.api.DirAccess;
 import godot.api.Node;
 import godot.api.ResourceLoader;
 import godot.global.GD;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 @RegisterClass
 public class CardDB extends Node {
@@ -25,34 +23,36 @@ public class CardDB extends Node {
 
 		GD.INSTANCE.print("------LOADING CARD IN DB------");
 		DirAccess dir = DirAccess.open("res://src/main/resources/Cards_Data");
-
-		if (dir != null){
-			dir.listDirBegin();
-
-			String file = dir.getNext();
-
-			while(!file.isEmpty()){
-				if (file.endsWith(".tres")){
-					CardData card = (CardData) ResourceLoader.load("res://src/main/resources/Cards_Data/" + file);
-
-					if (card != null && card.id != null){
-						GD.INSTANCE.print(
-								"LOADED : " + card.id +
-								" ATK : " + card.atk +
-								" DEF : " + card.defense
-						);
-						cards.put(card.id, card);
-					}
-					else {
-						GD.INSTANCE.print("NULL CARD DETECTED");
-					}
-				}
-				file = dir.getNext();
-			}
-			dir.listDirEnd();
-
-			GD.INSTANCE.print("TOTAL CARDS LOADED : " + cards.size());
+		if (dir == null) {
+			GD.INSTANCE.print("Cards_Data directory not found.");
+			return;
 		}
+
+		dir.listDirBegin();
+
+		String file = dir.getNext();
+
+		while(!file.isEmpty()){
+			if (file.endsWith(".tres")){
+				CardData card = (CardData) ResourceLoader.load("res://src/main/resources/Cards_Data/" + file);
+
+				if (card != null && card.id != null && !card.id.isBlank()){
+					GD.INSTANCE.print(
+							"LOADED : " + card.id +
+							" ATK : " + card.atk +
+							" DEF : " + card.defense
+					);
+					cards.put(card.id, card);
+				}
+				else {
+					GD.INSTANCE.print("NULL CARD DETECTED"+ file);
+				}
+			}
+			file = dir.getNext();
+		}
+		dir.listDirEnd();
+
+		GD.INSTANCE.print("TOTAL CARDS LOADED : " + cards.size());
 	}
 
 
@@ -64,6 +64,10 @@ public class CardDB extends Node {
 
 		return c;
 	}
-
+	
+	@RegisterFunction
+	public List<CardData> getAllCards() {
+		return new ArrayList<>(cards.values());
+	}
 
 }

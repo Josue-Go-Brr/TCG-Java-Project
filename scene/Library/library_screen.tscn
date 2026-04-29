@@ -14,6 +14,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_library_script")
+metadata/_edit_vertical_guides_ = [-572.0]
 
 [node name="CardDB" type="Node" parent="."]
 script = ExtResource("2_card_db_script")
@@ -116,36 +117,29 @@ popup/item_2/id = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
 
 [node name="CardArea" type="Control" parent="RootMargin/MainColumns/LeftSide/CardGridScroll"]
 custom_minimum_size = Vector2(0, 500)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
 
 [node name="CardGrid" type="GridContainer" parent="RootMargin/MainColumns/LeftSide/CardGridScroll/CardArea"]
-layout_mode = 0
-offset_right = 1020.0
-offset_bottom = 500.0
+layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
 theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
-columns = 4
+columns = 3
 
 [node name="CardTileTemplate" parent="RootMargin/MainColumns/LeftSide/CardGridScroll/CardArea/CardGrid" instance=ExtResource("4_tile_scene")]
 visible = false
 layout_mode = 2
 
 [node name="EmptyState" type="Label" parent="RootMargin/MainColumns/LeftSide"]
-visible = false
 layout_mode = 2
 text = "No card found."
 horizontal_alignment = 1
 
 [node name="RightSideDetails" parent="RootMargin/MainColumns" instance=ExtResource("3_details_scene")]
 layout_mode = 2
-
-[connection signal="text_changed" from="RootMargin/MainColumns/LeftSide/TopBar/SearchInput" to="." method="_on_search_input_text_changed"]
-[connection signal="item_selected" from="RootMargin/MainColumns/LeftSide/TopBar/TypeFilter" to="." method="_on_type_filter_item_selected"]
-[connection signal="item_selected" from="RootMargin/MainColumns/LeftSide/TopBar/SortFilter" to="." method="_on_sort_filter_item_selected"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bm3yummmknpov"]
 
-[ext_resource type="Script" uid="uid://ynv51fdwhec5" path="res://scene/menu/start_menu.gd" id="1_l740r"]
+[ext_resource type="Script" uid="uid://c1mvbci60wfaf" path="res://src/main/java/godot/menu/StartMenuController.java" id="1_l740r"]
 [ext_resource type="Texture2D" uid="uid://cng8b1b1jigmv" path="res://assets/sprites/backgrounds/menubackground.png" id="2_bg"]
 [ext_resource type="Texture2D" uid="uid://cuvngdy82q8cc" path="res://assets/sprites/backgrounds/menu_buttons/play_button.png" id="2_ojgrk"]
 [ext_resource type="Texture2D" uid="uid://b7cdjsscn4bx1" path="res://assets/sprites/backgrounds/menu_buttons/card_libray.png" id="3_ny0ne"]

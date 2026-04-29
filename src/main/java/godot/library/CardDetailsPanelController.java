@@ -4,12 +4,12 @@ import godot.annotation.RegisterClass;
 import godot.annotation.RegisterFunction;
 import godot.api.Label;
 import godot.api.PanelContainer;
+import godot.api.ResourceLoader;
 import godot.api.RichTextLabel;
 import godot.api.Texture2D;
 import godot.api.TextureRect;
 import godot.cards.BaseCarte;
 import godot.cards.CarteMonster;
-import godot.global.ResourceLoader;
 
 @RegisterClass
 public class CardDetailsPanelController extends PanelContainer {
@@ -22,11 +22,11 @@ public class CardDetailsPanelController extends PanelContainer {
 	@RegisterFunction
 	@Override
 	public void _ready() {
-		cardImageNode = getNodeOrNull("Margin/Content/CardImage");
-		cardNameNode = getNodeOrNull("Margin/Content/CardName");
-		cardTypeNode = getNodeOrNull("Margin/Content/CardType");
-		cardCostNode = getNodeOrNull("Margin/Content/CardCost");
-		cardDescriptionNode = getNodeOrNull("Margin/Content/CardDescription");
+		cardImageNode = (TextureRect) getNodeOrNull("Margin/Content/CardImage");
+		cardNameNode = (Label) getNodeOrNull("Margin/Content/CardName");
+		cardTypeNode = (Label) getNodeOrNull("Margin/Content/CardType");
+		cardCostNode = (Label) getNodeOrNull("Margin/Content/CardCost");
+		cardDescriptionNode = (RichTextLabel) getNodeOrNull("Margin/Content/CardDescription");
 		clearSelection();
 	}
 
@@ -37,7 +37,7 @@ public class CardDetailsPanelController extends PanelContainer {
 		}
 
 		if (cardImageNode != null) {
-			cardImageNode.setTexture(loadTexture(card.getImagePath()));
+			cardImageNode.setTexture(resolveTexture(card));
 		}
 		if (cardNameNode != null) {
 			cardNameNode.setText(card.getName());
@@ -84,6 +84,16 @@ public class CardDetailsPanelController extends PanelContainer {
 		if (path == null || path.isBlank()) {
 			return null;
 		}
-		return ResourceLoader.load(path, "Texture2D", ResourceLoader.CacheMode.REUSE);
+		return (Texture2D) ResourceLoader.load(path, "Texture2D", ResourceLoader.CacheMode.REUSE);
+	}
+
+	private Texture2D resolveTexture(BaseCarte card) {
+		if (card == null) {
+			return null;
+		}
+		if (card.getImage() != null) {
+			return card.getImage();
+		}
+		return loadTexture(card.getImagePath());
 	}
 }

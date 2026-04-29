@@ -15,7 +15,11 @@ public class CardSprite extends Sprite2D {
 
 	@RegisterFunction
 	public void updateFromCard(Card thisCard){
-		setTexture(thisCard.cardSprite);
+		if (thisCard != null && thisCard.data != null) {
+			setTexture(thisCard.data.image);
+		} else {
+			setTexture(null);
+		}
 	}
 
 }

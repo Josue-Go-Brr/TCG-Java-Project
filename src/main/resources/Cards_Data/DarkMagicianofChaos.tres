@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="CardData" load_steps=3 format=3 uid="uid://6kaw3x1upwvy"]
 
 [ext_resource type="Texture2D" uid="uid://63l5ohyp62vk" path="res://assets/sprites/CartesMonstre/DarkMagicianOfChaos.png" id="1_xldbc"]
-[ext_resource type="Script" uid="uid://cjyi6kw1mh1pk" path="res://scripts/godot/CardData.gdj" id="1_ybtyg"]
+[ext_resource type="Script" uid="uid://cjyi6kw1mh1pk" path="res://src/main/java/godot/CardData.java" id="1_ybtyg"]
 
 [resource]
 script = ExtResource("1_ybtyg")
@@ -13,7 +13,7 @@ cost=5
 atk = 2800
 defense = 2600
 effect="none"
-description = "\"A Dark Magician with even greater power, drawing his strength from chaos.\""
+description ="A Dark Magician with even greater power, drawing his strength from chaos"
 image = ExtResource("1_xldbc")
 image_path="res://assets/sprites/CartesMonstre/DarkMagicianOfChaos.png"
 metadata/_custom_type_script = "uid://cjyi6kw1mh1pk"
