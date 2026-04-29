@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b3x4ls8t45xg5" path="res://src/main/java/godot/library/CardDetailsPanelController.java" id="1_details_script"]
 
 [node name="CardDetailsPanel" type="PanelContainer"]
-custom_minimum_size = Vector2(250, 600)
+custom_minimum_size = Vector2(210, 520)
 script = ExtResource("1_details_script")
 
 [node name="Margin" type="MarginContainer" parent="."]
@@ -18,14 +18,14 @@ layout_mode = 2
 theme_override_constants/separation = 10
 
 [node name="CardImage" type="TextureRect" parent="Margin/Content"]
-custom_minimum_size = Vector2(280, 360)
+custom_minimum_size = Vector2(220, 300)
 layout_mode = 2
 expand_mode = 1
 stretch_mode = 5
 
 [node name="CardName" type="Label" parent="Margin/Content"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 20
 text = "Select a card"
 
 [node name="CardType" type="Label" parent="Margin/Content"]

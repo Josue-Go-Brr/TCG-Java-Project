@@ -62,12 +62,7 @@ theme_override_constants/separation = 12
 
 [node name="TopBar" type="HBoxContainer" parent="RootMargin/MainColumns/LeftSide"]
 layout_mode = 2
-theme_override_constants/separation = 6
-
-[node name="Title" type="Label" parent="RootMargin/MainColumns/LeftSide/TopBar"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 28
-text = "Library"
+theme_override_constants/separation = 8
 
 [node name="SearchLabel" type="Label" parent="RootMargin/MainColumns/LeftSide/TopBar"]
 layout_mode = 2
@@ -113,6 +108,12 @@ popup/item_1/id = 1
 popup/item_2/text = "ATK"
 popup/item_2/id = 2
 
+[node name="BackButton" type="Button" parent="RootMargin/MainColumns/LeftSide/TopBar"]
+custom_minimum_size = Vector2(63, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Menu"
+
 [node name="CardGridScroll" type="ScrollContainer" parent="RootMargin/MainColumns/LeftSide"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -130,7 +131,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
-columns = 3
+columns = 4
 
 [node name="CardTileTemplate" parent="RootMargin/MainColumns/LeftSide/CardGridScroll/CardArea/CardGrid" instance=ExtResource("4_tile_scene")]
 visible = false

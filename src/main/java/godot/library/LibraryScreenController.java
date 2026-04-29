@@ -3,6 +3,7 @@ package godot.library;
 import godot.CardDB;
 import godot.annotation.RegisterClass;
 import godot.annotation.RegisterFunction;
+import godot.api.Button;
 import godot.api.Control;
 import godot.api.GridContainer;
 import godot.api.InputEvent;
@@ -28,11 +29,13 @@ import godot.library.ui.LibraryUiBinder;
 @RegisterClass
 public class LibraryScreenController extends Control {
 	private static final String CARD_TILE_SCENE_PATH = "res://scene/Library/card_tile.tscn";
+	private static final String START_MENU_SCENE_PATH = "res://scene/menu/start_menu.tscn";
 	private static final int MANUAL_SCROLL_STEP = 25;
 
 	private LineEdit searchInputNode;
 	private OptionButton typeFilterNode;
 	private OptionButton sortFilterNode;
+	private Button backButtonNode;
 	private GridContainer cardGridNode;
 	private ScrollContainer cardGridScrollNode;
 	private Label emptyStateNode;
@@ -52,6 +55,7 @@ public class LibraryScreenController extends Control {
 		searchInputNode = (LineEdit) getNodeOrNull("RootMargin/MainColumns/LeftSide/TopBar/SearchInput");
 		typeFilterNode = (OptionButton) getNodeOrNull("RootMargin/MainColumns/LeftSide/TopBar/TypeFilter");
 		sortFilterNode = (OptionButton) getNodeOrNull("RootMargin/MainColumns/LeftSide/TopBar/SortFilter");
+		backButtonNode = (Button) getNodeOrNull("RootMargin/MainColumns/LeftSide/TopBar/BackButton");
 		cardGridScrollNode = (ScrollContainer) getNodeOrNull("RootMargin/MainColumns/LeftSide/CardGridScroll");
 		cardGridNode = (GridContainer) getNodeOrNull("RootMargin/MainColumns/LeftSide/CardGridScroll/CardArea/CardGrid");
 		emptyStateNode = (Label) getNodeOrNull("RootMargin/MainColumns/LeftSide/EmptyState");
@@ -71,6 +75,7 @@ public class LibraryScreenController extends Control {
 		uiBinder = new LibraryUiBinder(searchInputNode, typeFilterNode, sortFilterNode);
 		uiBinder.setupDefaultOptions();
 		uiBinder.connect(this);
+		connectBackButton();
 		connectManualScrollFallback();
 		logScrollState("ready-before-render");
 
@@ -145,6 +150,22 @@ public class LibraryScreenController extends Control {
 		}
 	}
 
+	private void connectBackButton() {
+		if (backButtonNode == null) {
+			GD.INSTANCE.printErr("[Library] BackButton not found.");
+			return;
+		}
+
+		Error err = backButtonNode.connect(
+				"pressed",
+				Callable.create(this, StringNames.toGodotName("_on_back_button_pressed")),
+				0
+		);
+		if (err != Error.OK) {
+			GD.INSTANCE.printErr("[Library] Failed to connect BackButton pressed: " + err);
+		}
+	}
+
 	public void onCardTileClicked(BaseCarte card) {
 		if (selectionCoordinator != null) {
 			selectionCoordinator.select(card);
@@ -189,6 +210,12 @@ public class LibraryScreenController extends Control {
 			return fromMain;
 		}
 		return (CardDB) getNodeOrNull("/root/CardDB");
+	}
+
+	@RegisterFunction
+	public void _on_back_button_pressed() {
+		Error err = getTree().changeSceneToFile(START_MENU_SCENE_PATH);
+		GD.INSTANCE.print("[Library] Back pressed -> " + START_MENU_SCENE_PATH + " | result: " + err);
 	}
 
 	@RegisterFunction
