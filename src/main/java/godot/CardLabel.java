@@ -23,8 +23,8 @@ public class CardLabel extends Label {
 		if (thisCard != null){
 
 			setText("ATK : " + thisCard.atk + "\nDEF : " + thisCard.defense);
-
-			GD.INSTANCE.print("ATK AND DEF LOADED IN LABEL : " + thisCard.atk  + " " + thisCard.defense + " FROM : " + thisCard.cardID);
+			//setZIndex(thisCard.getZIndex());
+			// GD.INSTANCE.print("ATK AND DEF LOADED IN LABEL : " + thisCard.atk  + " " + thisCard.defense + " FROM : " + thisCard.cardID);
 
 		}
 		else {
