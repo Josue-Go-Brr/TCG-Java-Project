@@ -9,11 +9,11 @@
 size = Vector2(1015, 1480)
 
 [node name="card" type="Node2D"]
+top_level = true
 script = ExtResource("1_gw1lc")
 
 [node name="CardLabel" type="Label" parent="."]
-z_index = 2
-z_as_relative = false
+z_index = 1
 offset_left = -83.0
 offset_top = 76.0
 offset_right = 86.0

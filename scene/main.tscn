@@ -58,13 +58,13 @@ card_i_d = "\"Blue_Eyes_White_Dragon\""
 [node name="Black_Rose_Dragon" parent="Cardmanager" instance=ExtResource("1_itxqv")]
 card_i_d = "\"Black_Rose_Dragon\""
 
-[node name="Dark_Magician" parent="Cardmanager" instance=ExtResource("1_itxqv")]
-position = Vector2(210, 0)
-card_i_d = "\"Dark_Magician\""
-
 [node name="Blackland_fire_dragon" parent="Cardmanager" instance=ExtResource("1_itxqv")]
 position = Vector2(-232, -1)
 card_i_d = "\"Blackland_fire_dragon\""
+
+[node name="Dark_Magician" parent="Cardmanager" instance=ExtResource("1_itxqv")]
+position = Vector2(210, 0)
+card_i_d = "\"Dark_Magician\""
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.5, 0.5)
