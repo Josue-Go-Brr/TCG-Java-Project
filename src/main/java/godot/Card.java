@@ -45,7 +45,7 @@ public class Card extends Node2D {
 
 			GD.INSTANCE.print("ATK and DEF LOADED : " + atk + " " + defense);
 
-			updateLabel();		// Update Label et Sprite pour qu'ils s'affichent après l'exécution du script de la carte
+			updateLabel();
 			updateSprite();
 		}
 		else {
@@ -88,14 +88,12 @@ public class Card extends Node2D {
 	public void _on_area_2d_mouse_entered() {
 		setScale(new Vector2(1.05, 1.05));
 		this.setZIndex(2);
-		updateLabel();
 	}
 
 	@RegisterFunction
 	public void _on_area_2d_mouse_exited() {
 		setScale(new Vector2(1, 1));
 		this.setZIndex(1);
-		updateLabel();
 	}
 
 }
