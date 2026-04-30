@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://drf55h0ej82gq"
-path="res://.godot/imported/LeftArmoftheForbiddenOne.jpg-411994efecce8573b0ef9c064e8755d8.ctex"
+uid="uid://c56j08awwkisv"
+path="res://.godot/imported/Res-EyesBlackDragon.png-74358d15c5939ceaf8e7242234c028f9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/CartesMonstre/LeftArmoftheForbiddenOne.jpg"
-dest_files=["res://.godot/imported/LeftArmoftheForbiddenOne.jpg-411994efecce8573b0ef9c064e8755d8.ctex"]
+source_file="res://assets/sprites/CartesMonstre/Res-EyesBlackDragon.png"
+dest_files=["res://.godot/imported/Res-EyesBlackDragon.png-74358d15c5939ceaf8e7242234c028f9.ctex"]
 
 [params]
 

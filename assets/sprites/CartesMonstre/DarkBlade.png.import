@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b4xn5c6u4ig55"
-path="res://.godot/imported/ExodiatheForbiddenOne.jpg-be045c4a0db3a81c54f30979901e54b7.ctex"
+uid="uid://daayvl8pjxf87"
+path="res://.godot/imported/DarkBlade.png-7525ce57c1ba0cd4c8314727e74a0e18.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/CartesMonstre/ExodiatheForbiddenOne.jpg"
-dest_files=["res://.godot/imported/ExodiatheForbiddenOne.jpg-be045c4a0db3a81c54f30979901e54b7.ctex"]
+source_file="res://assets/sprites/CartesMonstre/DarkBlade.png"
+dest_files=["res://.godot/imported/DarkBlade.png-7525ce57c1ba0cd4c8314727e74a0e18.ctex"]
 
 [params]
 

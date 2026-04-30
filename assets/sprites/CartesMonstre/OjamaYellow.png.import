@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7q8i3n2es77s"
-path="res://.godot/imported/OjamaGreen.jpg-2caf23c2783021216597b904a6c16ddb.ctex"
+uid="uid://bwoym157u12l2"
+path="res://.godot/imported/OjamaYellow.png-450511684d3352664e05f644ecad6723.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/CartesMonstre/OjamaGreen.jpg"
-dest_files=["res://.godot/imported/OjamaGreen.jpg-2caf23c2783021216597b904a6c16ddb.ctex"]
+source_file="res://assets/sprites/CartesMonstre/OjamaYellow.png"
+dest_files=["res://.godot/imported/OjamaYellow.png-450511684d3352664e05f644ecad6723.ctex"]
 
 [params]
 

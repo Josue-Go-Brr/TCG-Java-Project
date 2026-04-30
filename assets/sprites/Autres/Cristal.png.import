@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cw78j0o5bv4ho"
-path="res://.godot/imported/DarkBlade.jpg-2479f7e0e312c7b7ab5bc483f1281b85.ctex"
+uid="uid://bxvx0it22bk75"
+path="res://.godot/imported/Cristal.png-ad055ecd54ac8460b6b1a1b8dd8684ec.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/CartesMonstre/DarkBlade.jpg"
-dest_files=["res://.godot/imported/DarkBlade.jpg-2479f7e0e312c7b7ab5bc483f1281b85.ctex"]
+source_file="res://assets/sprites/Autres/Cristal.png"
+dest_files=["res://.godot/imported/Cristal.png-ad055ecd54ac8460b6b1a1b8dd8684ec.ctex"]
 
 [params]
 

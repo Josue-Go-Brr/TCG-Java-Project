@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cpmjvxwnbaouw"
-path="res://.godot/imported/LeftLegoftheForbiddenOne.jpg-47d42ba68195a8dbdeea8c08099ddece.ctex"
+uid="uid://dacxntw02paom"
+path="res://.godot/imported/RightLegoftheForbiddenOne.png-8164dc24d92255736d1d8cd72b23845c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/CartesMonstre/LeftLegoftheForbiddenOne.jpg"
-dest_files=["res://.godot/imported/LeftLegoftheForbiddenOne.jpg-47d42ba68195a8dbdeea8c08099ddece.ctex"]
+source_file="res://assets/sprites/CartesMonstre/RightLegoftheForbiddenOne.png"
+dest_files=["res://.godot/imported/RightLegoftheForbiddenOne.png-8164dc24d92255736d1d8cd72b23845c.ctex"]
 
 [params]
 

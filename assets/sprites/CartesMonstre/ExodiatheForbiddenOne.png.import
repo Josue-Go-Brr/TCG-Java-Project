@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bmcjpubuorpqa"
-path="res://.godot/imported/OjamaKing.jpg-b9861225ec2f23b1f780f9d2d1b94407.ctex"
+uid="uid://d20kn1pjdccml"
+path="res://.godot/imported/ExodiatheForbiddenOne.png-ddafabfc02ceab651030e5b02d0db1ae.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/CartesMonstre/OjamaKing.jpg"
-dest_files=["res://.godot/imported/OjamaKing.jpg-b9861225ec2f23b1f780f9d2d1b94407.ctex"]
+source_file="res://assets/sprites/CartesMonstre/ExodiatheForbiddenOne.png"
+dest_files=["res://.godot/imported/ExodiatheForbiddenOne.png-ddafabfc02ceab651030e5b02d0db1ae.ctex"]
 
 [params]
 

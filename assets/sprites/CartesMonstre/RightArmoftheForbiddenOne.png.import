@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ix5phyyjfa8u"
-path="res://.godot/imported/RightArmoftheForbiddenOne.jpg-3a05c84893d73f676bd49262849d8a9b.ctex"
+uid="uid://euooohmc8a8a"
+path="res://.godot/imported/RightArmoftheForbiddenOne.png-314d81b6f3177417fc82a18cf8f2ce46.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/CartesMonstre/RightArmoftheForbiddenOne.jpg"
-dest_files=["res://.godot/imported/RightArmoftheForbiddenOne.jpg-3a05c84893d73f676bd49262849d8a9b.ctex"]
+source_file="res://assets/sprites/CartesMonstre/RightArmoftheForbiddenOne.png"
+dest_files=["res://.godot/imported/RightArmoftheForbiddenOne.png-314d81b6f3177417fc82a18cf8f2ce46.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dgkayg2s388lk"
-path="res://.godot/imported/OjamaBlack.jpg-cda0a29c119f95d976499b8a48f358dc.ctex"
+uid="uid://byq55r2y8ua8q"
+path="res://.godot/imported/SummonedSkull.png-9be0264d79abc88ec34dc5ef65ea903c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/CartesMonstre/OjamaBlack.jpg"
-dest_files=["res://.godot/imported/OjamaBlack.jpg-cda0a29c119f95d976499b8a48f358dc.ctex"]
+source_file="res://assets/sprites/CartesMonstre/SummonedSkull.png"
+dest_files=["res://.godot/imported/SummonedSkull.png-9be0264d79abc88ec34dc5ef65ea903c.ctex"]
 
 [params]
 
