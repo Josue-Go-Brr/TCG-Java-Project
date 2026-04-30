@@ -5,11 +5,14 @@
 
 [resource]
 script = ExtResource("2_p3084")
-id = "\"RoninToadin\""
-name = "\"RoninToadin\""
-alphabetical_id = 13
+id = "RoninToadin"
+name = "RoninToadin"
+alphabetical_id = 25
+type = "MONSTER"
+cost = 3
 atk = 100
 defense = 2000
-description = "\"A Samurai Toad. There is nothing more to say about it.\""
+description = "A Samurai Toad. There is nothing more to say about it"
 image = ExtResource("1_stdxr")
+image_path = "res://assets/sprites/CartesMonstre/RoninToadin.png"
 metadata/_custom_type_script = "uid://cjyi6kw1mh1pk"

@@ -5,11 +5,14 @@
 
 [resource]
 script = ExtResource("1_etp7h")
-id = "\"Dark_Magician\""
-name = "\"Dark Magician\""
-alphabetical_id = 5
+id = "Dark_Magician"
+name = "Dark Magician"
+alphabetical_id = 6
+type = "MONSTER"
+cost = 6
 atk = 2500
 defense = 2100
-description = "\"The ultimate wizard in terms of attack and defense.\""
+description = "The ultimate wizard in terms of attack and defense"
 image = ExtResource("1_0yoyq")
+image_path = "res://assets/sprites/CartesMonstre/DarkMagician.png"
 metadata/_custom_type_script = "uid://cjyi6kw1mh1pk"

@@ -5,11 +5,14 @@
 
 [resource]
 script = ExtResource("2_jjcpg")
-id = "\"Dark_Magician_Girl_The_Dragon_Knight\""
-name = "\"Dark Magician Girl the Dragon Knight\""
-alphabetical_id = 7
+id = "Dark_Magician_Girl_The_Dragon_Knight"
+name = "Magician Girl Dragon Knight"
+alphabetical_id = 8
+type = "MONSTER"
+cost = 6
 atk = 2600
 defense = 1700
-description = "\"The evolution of the Dark Magician Girl, who not only learned to wield a sword, but also to ride dragons.\""
+description = "The evolution of the Dark Magician Girl, who not only learned to wield a sword, but also to ride dragons"
 image = ExtResource("1_uycfl")
+image_path = "res://assets/sprites/CartesMonstre/DarkMagicianGirltheDragonKnight.png"
 metadata/_custom_type_script = "uid://cjyi6kw1mh1pk"

@@ -5,11 +5,14 @@
 
 [resource]
 script = ExtResource("1_o2upp")
-id = "\"Revival_Jam\""
-name = "\"Revival Jam\""
-alphabetical_id = 12
+id = "Revival_Jam"
+name = "Revival Jam"
+alphabetical_id = 22
+type = "MONSTER"
+cost = 4
 atk = 1500
 defense = 500
-description = "\"A sort of slime who doesn't really die, he always comes back…\""
+description = "A sort of slime who doesn't really die, he always comes back…"
 image = ExtResource("1_xri2p")
+image_path = "res://assets/sprites/CartesMonstre/RevivalJam.png"
 metadata/_custom_type_script = "uid://cjyi6kw1mh1pk"

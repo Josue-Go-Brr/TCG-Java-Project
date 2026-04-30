@@ -5,11 +5,14 @@
 
 [resource]
 script = ExtResource("1_ybtyg")
-id = "\"Dark_Magician_Of_Chaos\""
-name = "\"Dark Magician of Chaos\""
-alphabetical_id = 8
+id = "Dark_Magician_Of_Chaos"
+name = "Dark Magician of Chaos"
+alphabetical_id = 9
+type = "MONSTER"
+cost = 6
 atk = 2800
 defense = 2600
-description = "\"A Dark Magician with even greater power, drawing his strength from chaos.\""
+description = "A Dark Magician with even greater power, drawing his strength from chaos"
 image = ExtResource("1_xldbc")
+image_path = "res://assets/sprites/CartesMonstre/DarkMagicianOfChaos.png"
 metadata/_custom_type_script = "uid://cjyi6kw1mh1pk"

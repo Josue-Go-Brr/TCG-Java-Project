@@ -21,10 +21,13 @@ properties = [
     id,
 	name,
 	alphabetical_id,
+	type,
+	cost,
 	atk,
 	defense,
 	description,
-	image
+	image,
+	image_path
 ]
 functions = [
     

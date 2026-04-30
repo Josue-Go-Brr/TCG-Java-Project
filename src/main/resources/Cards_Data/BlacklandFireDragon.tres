@@ -5,11 +5,14 @@
 
 [resource]
 script = ExtResource("1_ud8hr")
-id = "\"Blackland_fire_dragon\""
-name = "\"Blackland Fire Dragon\""
+id = "Blackland_fire_dragon"
+name = "Blackland Fire Dragon"
 alphabetical_id = 1
+type = "MONSTER"
+cost = 4
 atk = 1500
 defense = 800
-description = " \"A dragon that dwells in the depths of darkness, its vulnerability lies in its poor eyesight.\""
+description = " A dragon that dwells in the depths of darkness, its vulnerability lies in its poor eyesight."
 image = ExtResource("1_33bj7")
+image_path = "res://assets/sprites/CartesMonstre/BlacklandFireDragon.png"
 metadata/_custom_type_script = "uid://cjyi6kw1mh1pk"
