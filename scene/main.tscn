@@ -14,57 +14,57 @@ metadata/_custom_type_script = "uid://dpo5f3h5gvl1m"
 script = ExtResource("1_v0l8b")
 
 [node name="Winged_Dragon_Of_RA" parent="Cardmanager" instance=ExtResource("1_itxqv")]
-card_i_d = "\"Winged_Dragon_Of_RA\""
+card_i_d = "Winged_Dragon_Of_RA"
 
 [node name="Trade_Toad" parent="Cardmanager" instance=ExtResource("1_itxqv")]
-card_i_d = "\"Trade_Toad\""
+card_i_d = "Trade_Toad"
 
 [node name="Stardust_Dragon" parent="Cardmanager" instance=ExtResource("1_itxqv")]
-card_i_d = "\"Stardust_Dragon\""
+card_i_d = "Stardust_Dragon"
 
 [node name="Slifer_The_Sky_Dragon" parent="Cardmanager" instance=ExtResource("1_itxqv")]
-card_i_d = "\"Slifer_The_Sky_Dragon\""
+card_i_d = "Slifer_The_Sky_Dragon"
 
 [node name="RoninToadin" parent="Cardmanager" instance=ExtResource("1_itxqv")]
-card_i_d = "\"RoninToadin\""
+card_i_d = "RoninToadin"
 
 [node name="Revival_Jam" parent="Cardmanager" instance=ExtResource("1_itxqv")]
-card_i_d = "\"Revival_Jam\""
+card_i_d = "Revival_Jam"
 
 [node name="Obelisk_The_Tormentor" parent="Cardmanager" instance=ExtResource("1_itxqv")]
-card_i_d = "\"Obelisk_The_Tormentor\""
+card_i_d = "Obelisk_The_Tormentor"
 
 [node name="MagiKuriboh" parent="Cardmanager" instance=ExtResource("1_itxqv")]
-card_i_d = "\"MagiKuriboh\""
+card_i_d = "MagiKuriboh"
 
 [node name="Dark_Rabbit" parent="Cardmanager" instance=ExtResource("1_itxqv")]
-card_i_d = "\"Dark_Rabbit\""
+card_i_d = "Dark_Rabbit"
 
 [node name="Dark_Magician_Of_Chaos" parent="Cardmanager" instance=ExtResource("1_itxqv")]
-card_i_d = "\"Dark_Magician_Of_Chaos\""
+card_i_d = "Dark_Magician_Of_Chaos"
 
 [node name="Dark_Magician_Girl_The_Dragon_Knight" parent="Cardmanager" instance=ExtResource("1_itxqv")]
-card_i_d = "\"Dark_Magician_Girl_The_Dragon_Knight\""
+card_i_d = "Dark_Magician_Girl_The_Dragon_Knight"
 
 [node name="Dark_Magician_Girl" parent="Cardmanager" instance=ExtResource("1_itxqv")]
-card_i_d = "\"Dark_Magician_Girl\""
+card_i_d = "Dark_Magician_Girl"
 
 [node name="Cyber_Dragon" parent="Cardmanager" instance=ExtResource("1_itxqv")]
-card_i_d = "\"Cyber_Dragon\""
+card_i_d = "Cyber_Dragon"
 
 [node name="Blue_Eyes_White_Dragon" parent="Cardmanager" instance=ExtResource("1_itxqv")]
-card_i_d = "\"Blue_Eyes_White_Dragon\""
+card_i_d = "Blue_Eyes_White_Dragon"
 
 [node name="Black_Rose_Dragon" parent="Cardmanager" instance=ExtResource("1_itxqv")]
-card_i_d = "\"Black_Rose_Dragon\""
+card_i_d = "Black_Rose_Dragon"
 
 [node name="Blackland_fire_dragon" parent="Cardmanager" instance=ExtResource("1_itxqv")]
 position = Vector2(-232, -1)
-card_i_d = "\"Blackland_fire_dragon\""
+card_i_d = "Blackland_fire_dragon"
 
 [node name="Dark_Magician" parent="Cardmanager" instance=ExtResource("1_itxqv")]
 position = Vector2(210, 0)
-card_i_d = "\"Dark_Magician\""
+card_i_d = "Dark_Magician"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.5, 0.5)
