@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b3fqwy415pfn"
-path="res://.godot/imported/1357146.jpg-8d21ab9305387e26838e06ef047e122e.ctex"
+uid="uid://bn13smdpg3pgv"
+path="res://.godot/imported/70781052.jpg-8227f96f1b976eb269d5212e8d68ca34.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Autres/Cartes Pas Definivites/1357146.jpg"
-dest_files=["res://.godot/imported/1357146.jpg-8d21ab9305387e26838e06ef047e122e.ctex"]
+source_file="res://assets/sprites/Autres/Cartes Pas Definivites/70781052.jpg"
+dest_files=["res://.godot/imported/70781052.jpg-8227f96f1b976eb269d5212e8d68ca34.ctex"]
 
 [params]
 
