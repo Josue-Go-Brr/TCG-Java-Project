@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3 uid="uid://bbqovo2wg4sjo"]
+
+[ext_resource type="Script" uid="uid://cjyi6kw1mh1pk" path="res://scripts/godot/CardData.gdj" id="1_tmh42"]
+[ext_resource type="Texture2D" uid="uid://gkkx3ovh8a2c" path="res://assets/sprites/CartesMonstre/Red-EyesBlackDragon.jpg" id="1_vlnt8"]
+
+[resource]
+script = ExtResource("1_tmh42")
+id = "Red-Eyes_Black_Dragon"
+name = "Red-Eyes Black Dragon"
+alphabetical_id = 21
+type = "MONSTER"
+cost = 6
+atk = 2400
+defense = 1800
+description = "A ferocious dragon with a deadly attack."
+image = ExtResource("1_vlnt8")
+image_path = "res://assets/sprites/CartesMonstre/Red-EyesBlackDragon.jpg"
+metadata/_custom_type_script = "uid://cjyi6kw1mh1pk"
