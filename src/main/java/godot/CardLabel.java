@@ -11,6 +11,10 @@ import godot.global.GD;
 @RegisterClass
 public class CardLabel extends Label {
 
+	@Export
+	@RegisterProperty
+	public String labelID = "";
+
 	@RegisterFunction
 	@Override
 	public void _ready() {
@@ -21,8 +25,15 @@ public class CardLabel extends Label {
 	public void updateFromCard(Card thisCard){
 
 		if (thisCard != null){
-
-			setText("ATK : " + thisCard.atk + "\nDEF : " + thisCard.defense);
+			if (this.labelID.equals("CardLabelAtkDef")){
+				setText("ATK : " + thisCard.atk + "\nDEF : " + thisCard.defense);
+			}
+			if (this.labelID.equals("CardLabelCost")){
+				setText(String.valueOf(thisCard.cost));
+			}
+			else {
+				GD.INSTANCE.print(this.labelID + " is undefined or incorrect");
+			}
 			// GD.INSTANCE.print("ATK AND DEF LOADED IN LABEL : " + thisCard.atk  + " " + thisCard.defense + " FROM : " + thisCard.cardID);
 
 		}

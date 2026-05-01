@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="CardData" load_steps=3 format=3 uid="uid://brgs25r6e48h7"]
 
 [ext_resource type="Script" uid="uid://cjyi6kw1mh1pk" path="res://scripts/godot/CardData.gdj" id="1_3ysnx"]
-[ext_resource type="Texture2D" uid="uid://2chsqa3c0iw7" path="res://assets/sprites/CartesMonstre/SummonedSkull.jpg" id="1_mihdj"]
+[ext_resource type="Texture2D" uid="uid://byq55r2y8ua8q" path="res://assets/sprites/CartesMonstre/SummonedSkull.png" id="1_mihdj"]
 
 [resource]
 script = ExtResource("1_3ysnx")
@@ -14,5 +14,5 @@ atk = 2500
 defense = 1200
 description = "A fiend with dark powers for confusing the enemy. Among the Fiend-Type monsters, this monster boasts considerable force."
 image = ExtResource("1_mihdj")
-image_path = "res://assets/sprites/CartesMonstre/SummonedSkull.jpg"
+image_path = "res://assets/sprites/CartesMonstre/SummonedSkull.png"
 metadata/_custom_type_script = "uid://cjyi6kw1mh1pk"

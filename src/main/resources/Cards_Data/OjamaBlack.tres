@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CardData" load_steps=3 format=3 uid="uid://bdyhgkb1qi8pc"]
 
-[ext_resource type="Texture2D" uid="uid://dgkayg2s388lk" path="res://assets/sprites/CartesMonstre/OjamaBlack.jpg" id="1_4kph4"]
+[ext_resource type="Texture2D" uid="uid://ba6yhb5ohmv5g" path="res://assets/sprites/CartesMonstre/OjamaBlack.png" id="1_4kph4"]
 [ext_resource type="Script" uid="uid://cjyi6kw1mh1pk" path="res://scripts/godot/CardData.gdj" id="2_mm86n"]
 
 [resource]
@@ -14,5 +14,5 @@ atk = 0
 defense = 1000
 description = "He's one of the Ojama Trio. It's said that he butts in by any means necessary. It's also said that when the three are together, something happens."
 image = ExtResource("1_4kph4")
-image_path = "res://assets/sprites/CartesMonstre/OjamaBlack.jpg"
+image_path = "res://assets/sprites/CartesMonstre/OjamaBlack.png"
 metadata/_custom_type_script = "uid://cjyi6kw1mh1pk"

@@ -20,6 +20,7 @@ public class Card extends Node2D {
 	@RegisterProperty @Export public String cardID = "";
 	@RegisterProperty @Export public int atk;
 	@RegisterProperty @Export public int defense;
+	@RegisterProperty @Export public int cost;
 	public Texture2D cardSprite;
 	public CardDB db;		// Attribut DATABASE
 	public CardData data;		// Attribut de Données d'une carte
@@ -41,6 +42,7 @@ public class Card extends Node2D {
 
 			atk = data.atk;		// Récupère les infos de la carte avec data.attribut
 			defense = data.defense;
+			cost = data.cost;
 			cardSprite = data.image;
 
 			GD.INSTANCE.print("ATK and DEF LOADED : " + atk + " " + defense);
@@ -61,13 +63,19 @@ public class Card extends Node2D {
 
 	@RegisterFunction
 	public void updateLabel(){
-		CardLabel label = (CardLabel) getNode("CardLabel");
-
+		CardLabel label = (CardLabel) getNode("CardLabelAtkDef");
+		CardLabel label2 = (CardLabel) getNode("CardLabelCost");
 		if (label != null){
 			label.updateFromCard(this);
 		}
 		else {
 			GD.INSTANCE.print("Label not found");
+		}
+		if (label2 != null){
+			label2.updateFromCard(this);
+		}
+		else {
+			GD.INSTANCE.print("Label 2 not found");
 		}
 	}
 

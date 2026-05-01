@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CardData" load_steps=3 format=3 uid="uid://dpiyniuex5fx1"]
 
-[ext_resource type="Texture2D" uid="uid://cpmjvxwnbaouw" path="res://assets/sprites/CartesMonstre/LeftLegoftheForbiddenOne.jpg" id="1_o0qho"]
+[ext_resource type="Texture2D" uid="uid://tvme74lsnixf" path="res://assets/sprites/CartesMonstre/LeftLegoftheForbiddenOne.png" id="1_o0qho"]
 [ext_resource type="Script" uid="uid://cjyi6kw1mh1pk" path="res://scripts/godot/CardData.gdj" id="1_p4tko"]
 
 [resource]
@@ -14,5 +14,5 @@ atk = 200
 defense = 300
 description = "A forbidden left leg sealed by magic. Whosoever breaks this seal will know infinite power."
 image = ExtResource("1_o0qho")
-image_path = "res://assets/sprites/CartesMonstre/LeftLegoftheForbiddenOne.jpg"
+image_path = "res://assets/sprites/CartesMonstre/LeftLegoftheForbiddenOne.png"
 metadata/_custom_type_script = "uid://cjyi6kw1mh1pk"

@@ -21,7 +21,8 @@ signals = [
 properties = [
     card_i_d,
 	atk,
-	defense
+	defense,
+	cost
 ]
 functions = [
     _ready,

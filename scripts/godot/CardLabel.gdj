@@ -20,7 +20,7 @@ signals = [
     
 ]
 properties = [
-    
+    label_i_d
 ]
 functions = [
     _ready,

@@ -6,6 +6,7 @@ import godot.annotation.RegisterFunction;
 import godot.annotation.RegisterProperty;
 import godot.api.Resource;
 import godot.api.Texture2D;
+import godot.api.TextureRect;
 
 @RegisterClass
 public class CardData extends Resource{
