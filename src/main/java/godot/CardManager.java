@@ -122,12 +122,14 @@ public class CardManager extends Node2D {
 	@RegisterFunction
 	public void start_drag(Node2D card){
 		cardDragged = card;
-		card.setScale(new Vector2(1, 1));
+		cardDragged.setScale(new Vector2(1, 1));
+		cardDragged.setZIndex(3);
 	}
 
 	@RegisterFunction
 	public void stop_drag(){
 		cardDragged.setScale(new Vector2(1, 1));
+		cardDragged.setZIndex(0);
 		cardDragged = null;
 
 	}

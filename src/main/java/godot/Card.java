@@ -18,6 +18,7 @@ public class Card extends Node2D {
 
 
 	@RegisterProperty @Export public String cardID = "";
+	@RegisterProperty @Export public String name = "";
 	@RegisterProperty @Export public int atk;
 	@RegisterProperty @Export public int defense;
 	@RegisterProperty @Export public int cost;
@@ -44,6 +45,7 @@ public class Card extends Node2D {
 			defense = data.defense;
 			cost = data.cost;
 			cardSprite = data.image;
+			name = data.name;
 
 			GD.INSTANCE.print("ATK and DEF LOADED : " + atk + " " + defense);
 
@@ -65,6 +67,7 @@ public class Card extends Node2D {
 	public void updateLabel(){
 		CardLabel label = (CardLabel) getNode("CardLabelAtkDef");
 		CardLabel label2 = (CardLabel) getNode("CardLabelCost");
+		CardLabel label3 = (CardLabel) getNode("CardLabelName");
 		if (label != null){
 			label.updateFromCard(this);
 		}
@@ -76,6 +79,12 @@ public class Card extends Node2D {
 		}
 		else {
 			GD.INSTANCE.print("Label 2 not found");
+		}
+		if (label3 != null){
+			label3.updateFromCard(this);
+		}
+		else {
+			GD.INSTANCE.print("Label 3 not found");
 		}
 	}
 

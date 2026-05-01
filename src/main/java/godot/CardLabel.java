@@ -4,8 +4,10 @@ import godot.annotation.Export;
 import godot.annotation.RegisterClass;
 import godot.annotation.RegisterFunction;
 import godot.annotation.RegisterProperty;
+import godot.api.FontFile;
 import godot.api.Label;
 import godot.core.Color;
+import godot.core.HorizontalAlignment;
 import godot.global.GD;
 
 @RegisterClass
@@ -28,8 +30,11 @@ public class CardLabel extends Label {
 			if (this.labelID.equals("CardLabelAtkDef")){
 				setText("ATK : " + thisCard.atk + "\nDEF : " + thisCard.defense);
 			}
-			if (this.labelID.equals("CardLabelCost")){
+			else if (this.labelID.equals("CardLabelCost")){
 				setText(String.valueOf(thisCard.cost));
+			}
+			else if (this.labelID.equals("CardLabelName")){
+				setText(thisCard.name);
 			}
 			else {
 				GD.INSTANCE.print(this.labelID + " is undefined or incorrect");
@@ -41,5 +46,6 @@ public class CardLabel extends Label {
 			GD.INSTANCE.print("thisCard is null");
 		}
 	}
+
 
 } 
