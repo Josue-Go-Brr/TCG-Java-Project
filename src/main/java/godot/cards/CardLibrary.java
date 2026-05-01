@@ -73,6 +73,11 @@ public class CardLibrary {
 		return new ArrayList<>(database.values());
 	}
 
+	/** Numeric id assigned when the library was built from {@link CardDB}. */
+	public BaseCarte getCardById(int id) {
+		return database.get(id);
+	}
+
 	// Filtre par type.
 	public List<BaseCarte> getCardsByType(String type) {
 		List<BaseCarte> filteredList = new ArrayList<>();

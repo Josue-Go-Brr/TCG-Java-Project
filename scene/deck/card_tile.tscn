@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://bykbe4i084rke"]
+
+[ext_resource type="Script" uid="uid://dst1gfvejgob4" path="res://src/main/java/godot/deck/DeckCardTileController.java" id="1_deck_tile_script"]
+
+[node name="CardTile" type="PanelContainer"]
+custom_minimum_size = Vector2(200, 280)
+size_flags_horizontal = 3
+script = ExtResource("1_deck_tile_script")
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Content" type="VBoxContainer" parent="Margin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="CardImage" type="TextureRect" parent="Margin/Content"]
+custom_minimum_size = Vector2(180, 220)
+layout_mode = 2
+size_flags_vertical = 3
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CardName" type="Label" parent="Margin/Content"]
+layout_mode = 2
+text = "Card Name"
+horizontal_alignment = 1
+autowrap_mode = 3

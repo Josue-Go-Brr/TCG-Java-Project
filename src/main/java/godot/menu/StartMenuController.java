@@ -17,6 +17,8 @@ public class StartMenuController extends Control {
 			new NodePath("CenterContainer/ButtonStack/PlayButton");
 	private static final NodePath LIBRARY_BUTTON_PATH =
 			new NodePath("CenterContainer/ButtonStack/LibraryButton");
+	private static final NodePath DECK_BUTTON_PATH =
+			new NodePath("CenterContainer/ButtonStack/DeckButton");
 	private static final NodePath TUT_BUTTON_PATH =
 			new NodePath("CenterContainer/ButtonStack/TUTButton");
 	private static final NodePath QUIT_BUTTON_PATH =
@@ -24,6 +26,7 @@ public class StartMenuController extends Control {
 
 	private static final String PLAY_SCENE_PATH = "res://scene/main.tscn";
 	private static final String LIBRARY_SCENE_PATH = "res://scene/Library/library_screen.tscn";
+	private static final String DECK_SCENE_PATH = "res://scene/deck/deck_screen.tscn";
 
 	@RegisterFunction
 	@Override
@@ -32,6 +35,7 @@ public class StartMenuController extends Control {
 
 		TextureButton playButton = (TextureButton) getNodeOrNull(PLAY_BUTTON_PATH);
 		TextureButton libraryButton = (TextureButton) getNodeOrNull(LIBRARY_BUTTON_PATH);
+		TextureButton deckButton = (TextureButton) getNodeOrNull(DECK_BUTTON_PATH);
 		TextureButton tutButton = (TextureButton) getNodeOrNull(TUT_BUTTON_PATH);
 		TextureButton quitButton = (TextureButton) getNodeOrNull(QUIT_BUTTON_PATH);
 
@@ -52,6 +56,15 @@ public class StartMenuController extends Control {
 			);
 		} else {
 			GD.INSTANCE.printErr("[StartMenu] LibraryButton not found");
+		}
+		if (deckButton != null) {
+			deckButton.connect(
+					"pressed",
+					Callable.create(this, StringNames.toGodotName("onDeckPressed")),
+					0
+			);
+		} else {
+			GD.INSTANCE.printErr("[StartMenu] DeckButton not found");
 		}
 		if (tutButton != null) {
 			tutButton.connect(
@@ -83,6 +96,12 @@ public class StartMenuController extends Control {
 	public void onLibraryPressed() {
 		Error err = getTree().changeSceneToFile(LIBRARY_SCENE_PATH);
 		GD.INSTANCE.print("[StartMenu] Library pressed -> " + LIBRARY_SCENE_PATH + " | result: " + err);
+	}
+
+	@RegisterFunction
+	public void onDeckPressed() {
+		Error err = getTree().changeSceneToFile(DECK_SCENE_PATH);
+		GD.INSTANCE.print("[StartMenu] Deck pressed -> " + DECK_SCENE_PATH + " | result: " + err);
 	}
 
 	@RegisterFunction
