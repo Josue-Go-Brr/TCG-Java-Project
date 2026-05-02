@@ -42,11 +42,11 @@ alignment = 2
 [node name="ButtonStack" type="VBoxContainer" parent="CenterContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_constants/separation = -75
+theme_override_constants/separation = -40
 alignment = 1
 
 [node name="PlayButton" type="TextureButton" parent="CenterContainer/ButtonStack"]
-custom_minimum_size = Vector2(150, 150)
+custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 keep_pressed_outside = true
 texture_normal = ExtResource("2_ojgrk")
@@ -56,7 +56,7 @@ ignore_texture_size = true
 stretch_mode = 0
 
 [node name="LibraryButton" type="TextureButton" parent="CenterContainer/ButtonStack"]
-custom_minimum_size = Vector2(150, 150)
+custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 texture_normal = ExtResource("4_otkda")
 texture_pressed = ExtResource("4_otkda")
@@ -65,7 +65,7 @@ ignore_texture_size = true
 stretch_mode = 0
 
 [node name="DeckButton" type="TextureButton" parent="CenterContainer/ButtonStack"]
-custom_minimum_size = Vector2(150, 150)
+custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 texture_normal = ExtResource("5_ee38e")
 texture_pressed = ExtResource("5_ee38e")
@@ -74,7 +74,7 @@ ignore_texture_size = true
 stretch_mode = 0
 
 [node name="TUTButton" type="TextureButton" parent="CenterContainer/ButtonStack"]
-custom_minimum_size = Vector2(150, 150)
+custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 texture_normal = ExtResource("6_070gm")
 texture_pressed = ExtResource("6_070gm")
@@ -83,7 +83,7 @@ ignore_texture_size = true
 stretch_mode = 0
 
 [node name="QuitButton" type="TextureButton" parent="CenterContainer/ButtonStack"]
-custom_minimum_size = Vector2(150, 150)
+custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 texture_normal = ExtResource("8_c4bk1")
 texture_pressed = ExtResource("8_c4bk1")

@@ -127,7 +127,7 @@ layout_mode = 2
 
 [node name="EmptyState" type="Label" parent="RootMargin/MainColumns/LeftSide"]
 layout_mode = 2
-text = "No cards loaded."
+text = "No cards loaded"
 horizontal_alignment = 1
 
 [node name="InvalidDeckDialog" type="AcceptDialog" parent="."]

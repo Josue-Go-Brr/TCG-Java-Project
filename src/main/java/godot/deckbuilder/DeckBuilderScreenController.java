@@ -219,11 +219,9 @@ public class DeckBuilderScreenController extends Control {
 				uiBinder.getSelectedType(),
 				uiBinder.getSelectedSort()
 		));
-		if (DeckState.isDeckFull()) {
-			cards.clear();
-		}
-		cards.removeIf(c -> DeckState.isAtOrOverMax(c.getId()));
-		GD.INSTANCE.print("[DeckBuilder] refreshGrid -> cards (max copies hidden): " + cards.size());
+		// Always show the full catalog; do not hide cards at 3 copies (at 40/40 that hid almost everything).
+		// "Add card" in the details panel stays disabled at max copies / full deck.
+		GD.INSTANCE.print("[DeckBuilder] refreshGrid -> cards: " + cards.size());
 		gridRenderer.render(cards);
 		logScrollState("after-render");
 		if (emptyStateNode != null) {
