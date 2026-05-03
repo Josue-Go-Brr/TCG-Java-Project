@@ -8,10 +8,10 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Session deck: up to three copies per catalog card id (same ids as {@link CardLibrary}).
- * Shared by Deck Builder (add / hide at max) and the Deck screen (display + counts).
- */
+
+
+
+
 public final class DeckState {
 	public static final int MIN_DECK_SIZE = 20;
 	public static final int MAX_DECK_SIZE = 40;
@@ -42,7 +42,7 @@ public final class DeckState {
 		return copiesByCardId.getOrDefault(cardId, 0);
 	}
 
-	/** Total cards in deck (sum of all copy counts). */
+	
 	public static int getTotalCardCount() {
 		int sum = 0;
 		for (int n : copiesByCardId.values()) {
@@ -70,11 +70,11 @@ public final class DeckState {
 		return getCopies(cardId) >= MAX_COPIES_PER_CARD;
 	}
 
-	/**
-	 * Adds one copy if below the cap.
-	 *
-	 * @return true if a copy was added
-	 */
+	
+
+
+
+
 	public static boolean tryAddOneCopy(int cardId) {
 		if (isDeckFull()) {
 			return false;
@@ -87,7 +87,7 @@ public final class DeckState {
 		return true;
 	}
 
-	/** One row per distinct card: {@code id\tcopies}. */
+	
 	public static List<String> serializeLines() {
 		List<String> lines = new ArrayList<>();
 		for (Map.Entry<Integer, Integer> e : copiesByCardId.entrySet()) {

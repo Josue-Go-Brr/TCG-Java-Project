@@ -26,7 +26,7 @@ public class CardTileController extends PanelContainer {
 		cardImageNode = (TextureRect) getNodeOrNull("Margin/Content/CardImage");
 		cardNameNode = (Label) getNodeOrNull("Margin/Content/CardName");
 
-		// Let mouse wheel events bubble up to the ScrollContainer.
+		
 		setMouseFilter(Control.MouseFilter.PASS);
 		if (cardImageNode != null) {
 			cardImageNode.setMouseFilter(Control.MouseFilter.IGNORE);

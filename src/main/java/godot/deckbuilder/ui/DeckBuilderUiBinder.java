@@ -3,15 +3,11 @@ package godot.deckbuilder.ui;
 import godot.api.LineEdit;
 import godot.api.OptionButton;
 import godot.core.Callable;
-import godot.core.Error;
 import godot.core.StringNames;
-import godot.global.GD;
 import godot.deckbuilder.DeckBuilderQueryService;
 import godot.deckbuilder.DeckBuilderScreenController;
 
-/**
- * Wires deck builder filter controls to {@link DeckBuilderScreenController} callbacks.
- */
+
 public class DeckBuilderUiBinder {
 	private final LineEdit searchInput;
 	private final OptionButton typeFilter;
@@ -44,33 +40,24 @@ public class DeckBuilderUiBinder {
 
 	public void connect(DeckBuilderScreenController controller) {
 		if (searchInput != null) {
-			Error err = searchInput.getTextChanged().connect(
+			searchInput.getTextChanged().connect(
 					Callable.create(controller, StringNames.toGodotName("_on_search_input_text_changed")),
 					0
 			);
-			if (err != Error.OK) {
-				GD.INSTANCE.printErr("[DeckBuilder] Failed to connect search signal: " + err);
-			}
 		}
 
 		if (typeFilter != null) {
-			Error err = typeFilter.getItemSelected().connect(
+			typeFilter.getItemSelected().connect(
 					Callable.create(controller, StringNames.toGodotName("_on_type_filter_item_selected")),
 					0
 			);
-			if (err != Error.OK) {
-				GD.INSTANCE.printErr("[DeckBuilder] Failed to connect type signal: " + err);
-			}
 		}
 
 		if (sortFilter != null) {
-			Error err = sortFilter.getItemSelected().connect(
+			sortFilter.getItemSelected().connect(
 					Callable.create(controller, StringNames.toGodotName("_on_sort_filter_item_selected")),
 					0
 			);
-			if (err != Error.OK) {
-				GD.INSTANCE.printErr("[DeckBuilder] Failed to connect sort signal: " + err);
-			}
 		}
 	}
 

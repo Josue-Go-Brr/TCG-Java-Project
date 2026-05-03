@@ -17,7 +17,6 @@ import godot.api.ResourceLoader;
 import godot.api.ScrollContainer;
 import godot.cards.BaseCarte;
 import godot.core.Callable;
-import godot.core.Error;
 import godot.core.MouseButton;
 import godot.core.StringNames;
 import godot.global.GD;
@@ -66,9 +65,6 @@ public class DeckBuilderScreenController extends Control {
 		cardGridNode = (GridContainer) getNodeOrNull("RootMargin/MainColumns/LeftSide/CardGridScroll/CardArea/CardGrid");
 		emptyStateNode = (Label) getNodeOrNull("RootMargin/MainColumns/LeftSide/EmptyState");
 		deckCardCountLabelNode = (Label) getNodeOrNull("RootMargin/MainColumns/LeftSide/DeckInfoBar/DeckCardCountLabel");
-		if (deckCardCountLabelNode == null) {
-			GD.INSTANCE.printErr("[DeckBuilder] DeckCardCountLabel not found at DeckInfoBar/DeckCardCountLabel.");
-		}
 		detailsPanelNode = (PanelContainer) getNodeOrNull("RootMargin/MainColumns/RightSideDetails");
 		cardTileScene = (PackedScene) ResourceLoader.load(
 				CARD_TILE_SCENE_PATH,
@@ -77,18 +73,14 @@ public class DeckBuilderScreenController extends Control {
 		);
 
 		CardDB cardDB = resolveCardDB();
-		if (cardDB == null) {
-			GD.INSTANCE.printErr("[DeckBuilder] CardDB not found. Deck builder catalog will stay empty.");
-		}
 		queryService = new DeckBuilderQueryService(cardDB);
 
 		uiBinder = new DeckBuilderUiBinder(searchInputNode, typeFilterNode, sortFilterNode);
 		uiBinder.setupDefaultOptions();
 		uiBinder.connect(this);
 		connectBackButton();
-		// Back to Deck: signal connected in deck_builder_screen.tscn (reliable with JVM + Callable quirks).
+		
 		connectManualScrollFallback();
-		logScrollState("ready-before-render");
 
 		DeckBuilderCardDetailsPanelController detailsController = getDetailsController();
 		if (detailsController != null) {
@@ -99,7 +91,6 @@ public class DeckBuilderScreenController extends Control {
 
 		refreshGrid();
 		callDeferred(StringNames.toGodotName("_deferred_refresh_deck_count_label"));
-		callDeferred(StringNames.toGodotName("debugDeferredScrollProbe"));
 	}
 
 	@RegisterFunction
@@ -139,15 +130,9 @@ public class DeckBuilderScreenController extends Control {
 		}
 
 		if (mouseEvent.getButtonIndex() == MouseButton.WHEEL_UP) {
-			int before = cardGridScrollNode.getVScroll();
 			cardGridScrollNode.setVScroll(Math.max(0, cardGridScrollNode.getVScroll() - MANUAL_SCROLL_STEP));
-			GD.INSTANCE.print("[DeckBuilder][WheelUp] vScroll " + before + " -> " + cardGridScrollNode.getVScroll());
-			logScrollState("wheel-up");
 		} else if (mouseEvent.getButtonIndex() == MouseButton.WHEEL_DOWN) {
-			int before = cardGridScrollNode.getVScroll();
 			cardGridScrollNode.setVScroll(cardGridScrollNode.getVScroll() + MANUAL_SCROLL_STEP);
-			GD.INSTANCE.print("[DeckBuilder][WheelDown] vScroll " + before + " -> " + cardGridScrollNode.getVScroll());
-			logScrollState("wheel-down");
 		}
 	}
 
@@ -155,30 +140,23 @@ public class DeckBuilderScreenController extends Control {
 		if (cardGridScrollNode == null) {
 			return;
 		}
-		Error err = cardGridScrollNode.connect(
+		cardGridScrollNode.connect(
 				"gui_input",
 				Callable.create(this, StringNames.toGodotName("_on_card_grid_scroll_gui_input")),
 				0
 		);
-		if (err != Error.OK) {
-			GD.INSTANCE.printErr("[DeckBuilder] Failed to connect CardGridScroll gui_input: " + err);
-		}
 	}
 
 	private void connectBackButton() {
 		if (backButtonNode == null) {
-			GD.INSTANCE.printErr("[DeckBuilder] BackButton not found.");
 			return;
 		}
 
-		Error err = backButtonNode.connect(
+		backButtonNode.connect(
 				"pressed",
 				Callable.create(this, StringNames.toGodotName("_on_back_button_pressed")),
 				0
 		);
-		if (err != Error.OK) {
-			GD.INSTANCE.printErr("[DeckBuilder] Failed to connect BackButton pressed: " + err);
-		}
 	}
 
 	public void onCardTileClicked(BaseCarte card) {
@@ -187,7 +165,7 @@ public class DeckBuilderScreenController extends Control {
 		}
 	}
 
-	/** Called after a card is added from the details panel: refreshes grid (hides cards at max copies) and details. */
+	
 	public void refreshAfterDeckChange() {
 		refreshGrid();
 		callDeferred(StringNames.toGodotName("_deferred_refresh_deck_count_label"));
@@ -219,11 +197,8 @@ public class DeckBuilderScreenController extends Control {
 				uiBinder.getSelectedType(),
 				uiBinder.getSelectedSort()
 		));
-		// Always show the full catalog; do not hide cards at 3 copies (at 40/40 that hid almost everything).
-		// "Add card" in the details panel stays disabled at max copies / full deck.
-		GD.INSTANCE.print("[DeckBuilder] refreshGrid -> cards: " + cards.size());
+
 		gridRenderer.render(cards);
-		logScrollState("after-render");
 		if (emptyStateNode != null) {
 			emptyStateNode.setVisible(cards.isEmpty());
 		}
@@ -253,42 +228,17 @@ public class DeckBuilderScreenController extends Control {
 
 	@RegisterFunction
 	public void _on_back_button_pressed() {
-		Error err = getTree().changeSceneToFile(START_MENU_SCENE_PATH);
-		GD.INSTANCE.print("[DeckBuilder] Back pressed -> " + START_MENU_SCENE_PATH + " | result: " + err);
+		getTree().changeSceneToFile(START_MENU_SCENE_PATH);
 	}
 
 	@RegisterFunction
 	public void _on_back_to_deck_button_pressed() {
-		GD.INSTANCE.print("[DeckBuilder] Back to Deck pressed -> defer scene change");
 		callDeferred(StringNames.toGodotName("_deferred_change_scene_to_deck"));
 	}
 
 	@RegisterFunction
 	public void _deferred_change_scene_to_deck() {
-		Error err = getTree().changeSceneToFile(DECK_SCENE_PATH);
-		GD.INSTANCE.print("[DeckBuilder] Back to Deck -> " + DECK_SCENE_PATH + " | result: " + err);
+		getTree().changeSceneToFile(DECK_SCENE_PATH);
 	}
 
-	@RegisterFunction
-	public void debugDeferredScrollProbe() {
-		if (cardGridScrollNode == null) {
-			GD.INSTANCE.printErr("[DeckBuilder][Debug] cardGridScrollNode is null in deferred probe.");
-			return;
-		}
-		int before = cardGridScrollNode.getVScroll();
-		cardGridScrollNode.setVScroll(before + 200);
-		int after = cardGridScrollNode.getVScroll();
-		GD.INSTANCE.print("[DeckBuilder][DeferredProbe] vScroll " + before + " -> " + after);
-		logScrollState("deferred-probe");
-	}
-
-	private void logScrollState(String context) {
-		if (cardGridScrollNode == null) {
-			GD.INSTANCE.printErr("[DeckBuilder][ScrollState][" + context + "] Scroll node is null.");
-			return;
-		}
-		GD.INSTANCE.print(
-				"[DeckBuilder][ScrollState][" + context + "] vScroll=" + cardGridScrollNode.getVScroll()
-		);
-	}
 }

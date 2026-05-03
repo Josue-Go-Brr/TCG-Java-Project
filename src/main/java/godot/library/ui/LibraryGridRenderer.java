@@ -6,7 +6,6 @@ import godot.api.Node;
 import godot.api.PackedScene;
 import godot.cards.BaseCarte;
 import godot.core.Vector2;
-import godot.global.GD;
 import godot.library.CardTileController;
 import godot.library.LibraryScreenController;
 
@@ -33,7 +32,6 @@ public class LibraryGridRenderer {
 		clear();
 
 		if (cardGrid == null || cardTileScene == null) {
-			GD.INSTANCE.pushWarning("[Library] Missing grid or tile scene.");
 			return;
 		}
 
@@ -43,7 +41,6 @@ public class LibraryGridRenderer {
 				if (instance != null) {
 					instance.queueFree();
 				}
-				GD.INSTANCE.pushWarning("[Library] card_tile instance is not CardTileController.");
 				continue;
 			}
 
@@ -75,19 +72,12 @@ public class LibraryGridRenderer {
 		float rowsHeight = rows * ESTIMATED_TILE_HEIGHT;
 		float separatorsHeight = Math.max(0, rows - 1) * ESTIMATED_VERTICAL_SEPARATION;
 		float finalHeight = Math.max(BASE_MIN_HEIGHT, rowsHeight + separatorsHeight);
-		GD.INSTANCE.print(
-				"[Library][GridHeight] cards=" + cardCount
-						+ ", columns=" + columns
-						+ ", rows=" + rows
-						+ ", finalHeight=" + finalHeight
-		);
 
 		cardGrid.setCustomMinimumSize(new Vector2(0, finalHeight));
 
 		Node parent = cardGrid.getParent();
 		if (parent instanceof Control parentControl) {
 			parentControl.setCustomMinimumSize(new Vector2(0, finalHeight));
-			GD.INSTANCE.print("[Library][GridHeight] parent min size set to " + finalHeight);
 		}
 	}
 }

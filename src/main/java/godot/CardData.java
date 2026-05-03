@@ -23,7 +23,7 @@ public class CardData extends Resource{
 	public int alphabeticalId;
 
 	@Export @RegisterProperty
-	public String type = "MONSTER";// MONSTER, MAGIE, TRAP
+	public String type = "MONSTER";
 
 	@Export @RegisterProperty
 	public int cost = 0;

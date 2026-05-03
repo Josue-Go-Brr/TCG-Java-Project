@@ -12,10 +12,8 @@ import godot.api.TextureRect;
 import godot.cards.BaseCarte;
 import godot.cards.CarteMonster;
 import godot.core.Callable;
-import godot.core.Error;
 import godot.core.StringNames;
 import godot.deck.DeckState;
-import godot.global.GD;
 
 @RegisterClass
 public class DeckBuilderCardDetailsPanelController extends PanelContainer {
@@ -42,14 +40,11 @@ public class DeckBuilderCardDetailsPanelController extends PanelContainer {
 		addCardButtonNode = (Button) getNodeOrNull("Margin/Content/AddCardButton");
 
 		if (addCardButtonNode != null) {
-			Error err = addCardButtonNode.connect(
+			addCardButtonNode.connect(
 					"pressed",
 					Callable.create(this, StringNames.toGodotName("_on_add_card_button_pressed")),
 					0
 			);
-			if (err != Error.OK) {
-				GD.INSTANCE.printErr("[DeckBuilder][Details] Failed to connect Add card: " + err);
-			}
 		}
 
 		clearSelection();
@@ -123,14 +118,8 @@ public class DeckBuilderCardDetailsPanelController extends PanelContainer {
 			return;
 		}
 		if (!DeckState.tryAddOneCopy(currentDetailCard.getId())) {
-			if (DeckState.isDeckFull()) {
-				GD.INSTANCE.print("[DeckBuilder][Details] Deck already at max size (" + DeckState.getMaxDeckSize() + ").");
-			} else {
-				GD.INSTANCE.print("[DeckBuilder][Details] Already at max copies for this card.");
-			}
 			return;
 		}
-		GD.INSTANCE.print("[DeckBuilder][Details] Added copy; id=" + currentDetailCard.getId());
 		if (deckBuilderScreen != null) {
 			deckBuilderScreen.refreshAfterDeckChange();
 		} else {

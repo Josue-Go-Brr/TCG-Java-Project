@@ -13,9 +13,9 @@ import godot.api.TextureRect;
 import godot.cards.BaseCarte;
 import godot.core.MouseButton;
 
-/**
- * Card tile for the deck scene (no details panel: clicks are ignored for now).
- */
+
+
+
 @RegisterClass
 public class DeckCardTileController extends PanelContainer {
 	private TextureRect cardImageNode;

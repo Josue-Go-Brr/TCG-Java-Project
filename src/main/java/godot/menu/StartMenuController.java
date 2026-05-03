@@ -5,7 +5,6 @@ import godot.annotation.RegisterFunction;
 import godot.api.Control;
 import godot.api.TextureButton;
 import godot.core.Callable;
-import godot.core.Error;
 import godot.core.NodePath;
 import godot.core.StringNames;
 import godot.global.GD;
@@ -31,8 +30,6 @@ public class StartMenuController extends Control {
 	@RegisterFunction
 	@Override
 	public void _ready() {
-		GD.INSTANCE.print("[StartMenu] _ready");
-
 		TextureButton playButton = (TextureButton) getNodeOrNull(PLAY_BUTTON_PATH);
 		TextureButton libraryButton = (TextureButton) getNodeOrNull(LIBRARY_BUTTON_PATH);
 		TextureButton deckButton = (TextureButton) getNodeOrNull(DECK_BUTTON_PATH);
@@ -88,25 +85,21 @@ public class StartMenuController extends Control {
 
 	@RegisterFunction
 	public void onPlayPressed() {
-		Error err = getTree().changeSceneToFile(PLAY_SCENE_PATH);
-		GD.INSTANCE.print("[StartMenu] Play pressed -> " + PLAY_SCENE_PATH + " | result: " + err);
+		getTree().changeSceneToFile(PLAY_SCENE_PATH);
 	}
 
 	@RegisterFunction
 	public void onLibraryPressed() {
-		Error err = getTree().changeSceneToFile(LIBRARY_SCENE_PATH);
-		GD.INSTANCE.print("[StartMenu] Library pressed -> " + LIBRARY_SCENE_PATH + " | result: " + err);
+		getTree().changeSceneToFile(LIBRARY_SCENE_PATH);
 	}
 
 	@RegisterFunction
 	public void onDeckPressed() {
-		Error err = getTree().changeSceneToFile(DECK_SCENE_PATH);
-		GD.INSTANCE.print("[StartMenu] Deck pressed -> " + DECK_SCENE_PATH + " | result: " + err);
+		getTree().changeSceneToFile(DECK_SCENE_PATH);
 	}
 
 	@RegisterFunction
 	public void onTutPressed() {
-		GD.INSTANCE.print("Tutorial button: no scene connected yet.");
 	}
 
 	@RegisterFunction

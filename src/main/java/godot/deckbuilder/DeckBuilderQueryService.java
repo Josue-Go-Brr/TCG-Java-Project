@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-/**
- * Filters and sorts the full card catalog for the deck builder grid (same rules as the library browser).
- */
+
+
+
 public class DeckBuilderQueryService {
 	public static final String TYPE_ALL = "ALL";
 	public static final String TYPE_MONSTER = "MONSTER";

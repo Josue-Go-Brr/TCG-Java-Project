@@ -13,9 +13,9 @@ import godot.api.TextureRect;
 import godot.cards.BaseCarte;
 import godot.core.MouseButton;
 
-/**
- * One selectable card tile in the deck builder catalog grid.
- */
+
+
+
 @RegisterClass
 public class DeckBuilderCardTileController extends PanelContainer {
 	private TextureRect cardImageNode;
@@ -29,7 +29,7 @@ public class DeckBuilderCardTileController extends PanelContainer {
 		cardImageNode = (TextureRect) getNodeOrNull("Margin/Content/CardImage");
 		cardNameNode = (Label) getNodeOrNull("Margin/Content/CardName");
 
-		// Let mouse wheel events bubble up to the ScrollContainer.
+		
 		setMouseFilter(Control.MouseFilter.PASS);
 		if (cardImageNode != null) {
 			cardImageNode.setMouseFilter(Control.MouseFilter.IGNORE);

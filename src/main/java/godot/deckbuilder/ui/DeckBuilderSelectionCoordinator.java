@@ -5,9 +5,9 @@ import godot.deckbuilder.DeckBuilderCardDetailsPanelController;
 
 import java.util.List;
 
-/**
- * Keeps the deck builder details panel in sync with the current filtered list and tile clicks.
- */
+
+
+
 public class DeckBuilderSelectionCoordinator {
 	private final DeckBuilderCardDetailsPanelController detailsController;
 	private BaseCarte selectedCard;

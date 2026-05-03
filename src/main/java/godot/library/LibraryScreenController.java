@@ -17,7 +17,6 @@ import godot.api.ResourceLoader;
 import godot.api.ScrollContainer;
 import godot.cards.BaseCarte;
 import godot.core.Callable;
-import godot.core.Error;
 import godot.core.MouseButton;
 import godot.core.StringNames;
 import godot.global.GD;
@@ -67,9 +66,6 @@ public class LibraryScreenController extends Control {
 		);
 
 		CardDB cardDB = resolveCardDB();
-		if (cardDB == null) {
-			GD.INSTANCE.printErr("[Library] CardDB not found. Library will stay empty.");
-		}
 		queryService = new LibraryQueryService(cardDB);
 
 		uiBinder = new LibraryUiBinder(searchInputNode, typeFilterNode, sortFilterNode);
@@ -77,14 +73,12 @@ public class LibraryScreenController extends Control {
 		uiBinder.connect(this);
 		connectBackButton();
 		connectManualScrollFallback();
-		logScrollState("ready-before-render");
 
 		CardDetailsPanelController detailsController = getDetailsController();
 		selectionCoordinator = new LibrarySelectionCoordinator(detailsController);
 		gridRenderer = new LibraryGridRenderer(cardGridNode, cardTileScene, this);
 
 		refreshGrid();
-		callDeferred(StringNames.toGodotName("debugDeferredScrollProbe"));
 	}
 
 	@RegisterFunction
@@ -124,15 +118,9 @@ public class LibraryScreenController extends Control {
 		}
 
 		if (mouseEvent.getButtonIndex() == MouseButton.WHEEL_UP) {
-			int before = cardGridScrollNode.getVScroll();
 			cardGridScrollNode.setVScroll(Math.max(0, cardGridScrollNode.getVScroll() - MANUAL_SCROLL_STEP));
-			GD.INSTANCE.print("[Library][WheelUp] vScroll " + before + " -> " + cardGridScrollNode.getVScroll());
-			logScrollState("wheel-up");
 		} else if (mouseEvent.getButtonIndex() == MouseButton.WHEEL_DOWN) {
-			int before = cardGridScrollNode.getVScroll();
 			cardGridScrollNode.setVScroll(cardGridScrollNode.getVScroll() + MANUAL_SCROLL_STEP);
-			GD.INSTANCE.print("[Library][WheelDown] vScroll " + before + " -> " + cardGridScrollNode.getVScroll());
-			logScrollState("wheel-down");
 		}
 	}
 
@@ -140,30 +128,23 @@ public class LibraryScreenController extends Control {
 		if (cardGridScrollNode == null) {
 			return;
 		}
-		Error err = cardGridScrollNode.connect(
+		cardGridScrollNode.connect(
 				"gui_input",
 				Callable.create(this, StringNames.toGodotName("_on_card_grid_scroll_gui_input")),
 				0
 		);
-		if (err != Error.OK) {
-			GD.INSTANCE.printErr("[Library] Failed to connect CardGridScroll gui_input: " + err);
-		}
 	}
 
 	private void connectBackButton() {
 		if (backButtonNode == null) {
-			GD.INSTANCE.printErr("[Library] BackButton not found.");
 			return;
 		}
 
-		Error err = backButtonNode.connect(
+		backButtonNode.connect(
 				"pressed",
 				Callable.create(this, StringNames.toGodotName("_on_back_button_pressed")),
 				0
 		);
-		if (err != Error.OK) {
-			GD.INSTANCE.printErr("[Library] Failed to connect BackButton pressed: " + err);
-		}
 	}
 
 	public void onCardTileClicked(BaseCarte card) {
@@ -182,9 +163,7 @@ public class LibraryScreenController extends Control {
 				uiBinder.getSelectedType(),
 				uiBinder.getSelectedSort()
 		);
-		GD.INSTANCE.print("[Library] refreshGrid -> cards: " + cards.size());
 		gridRenderer.render(cards);
-		logScrollState("after-render");
 		if (emptyStateNode != null) {
 			emptyStateNode.setVisible(cards.isEmpty());
 		}
@@ -214,30 +193,7 @@ public class LibraryScreenController extends Control {
 
 	@RegisterFunction
 	public void _on_back_button_pressed() {
-		Error err = getTree().changeSceneToFile(START_MENU_SCENE_PATH);
-		GD.INSTANCE.print("[Library] Back pressed -> " + START_MENU_SCENE_PATH + " | result: " + err);
+		getTree().changeSceneToFile(START_MENU_SCENE_PATH);
 	}
 
-	@RegisterFunction
-	public void debugDeferredScrollProbe() {
-		if (cardGridScrollNode == null) {
-			GD.INSTANCE.printErr("[Library][Debug] cardGridScrollNode is null in deferred probe.");
-			return;
-		}
-		int before = cardGridScrollNode.getVScroll();
-		cardGridScrollNode.setVScroll(before + 200);
-		int after = cardGridScrollNode.getVScroll();
-		GD.INSTANCE.print("[Library][DeferredProbe] vScroll " + before + " -> " + after);
-		logScrollState("deferred-probe");
-	}
-
-	private void logScrollState(String context) {
-		if (cardGridScrollNode == null) {
-			GD.INSTANCE.printErr("[Library][ScrollState][" + context + "] Scroll node is null.");
-			return;
-		}
-		GD.INSTANCE.print(
-				"[Library][ScrollState][" + context + "] vScroll=" + cardGridScrollNode.getVScroll()
-		);
-	}
 }

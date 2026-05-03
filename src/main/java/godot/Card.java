@@ -9,8 +9,6 @@ import godot.core.Dictionary;
 import godot.core.Signal;
 import godot.core.VariantArray;
 import godot.core.Vector2;
-import godot.global.GD;
-
 import java.lang.Object;
 
 @RegisterClass
@@ -30,7 +28,6 @@ public class Card extends Node2D {
 		db = (CardDB) getNode("/root/main/CardDB");
 
 		if (db == null){
-			GD.INSTANCE.print("Database not found !");
 			return;
 		}
 
@@ -41,12 +38,7 @@ public class Card extends Node2D {
 			atk = data.atk;
 			defense = data.defense;
 
-			GD.INSTANCE.print("ATK and DEF LOADED : " + atk + " " + defense);
-
 			updateLabel();
-		}
-		else {
-			GD.INSTANCE.print("Card not found for id :" + cardID);
 		}
 
 	}
@@ -62,9 +54,6 @@ public class Card extends Node2D {
 
 		if (label != null){
 			label.updateFromCard(this);
-		}
-		else {
-			GD.INSTANCE.print("Label not found");
 		}
 	}
 
