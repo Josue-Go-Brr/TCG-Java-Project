@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3 uid="uid://bnydp0li3ci1s"]
+
+[ext_resource type="Texture2D" uid="uid://d20kn1pjdccml" path="res://assets/sprites/CartesMonstre/ExodiatheForbiddenOne.png" id="1_83cfb"]
+[ext_resource type="Script" uid="uid://cjyi6kw1mh1pk" path="res://scripts/godot/CardData.gdj" id="1_ht8gw"]
+
+[resource]
+script = ExtResource("1_ht8gw")
+id = "Exodia_the_Forbidden_One"
+name = "Exodia the Forbidden One"
+alphabetical_id = 12
+type = "MONSTER"
+cost = 4
+atk = 1000
+defense = 1000
+description = "If you have \"Right Leg of the Forbidden One\", \"Left Leg of the Forbidden One\", \"Right Arm of the Forbidden One\" and \"Left Arm of the Forbidden One\" in addition to this card in your hand, you win the Duel."
+image = ExtResource("1_83cfb")
+image_path = "res://assets/sprites/CartesMonstre/ExodiatheForbiddenOne.png"
+metadata/_custom_type_script = "uid://cjyi6kw1mh1pk"

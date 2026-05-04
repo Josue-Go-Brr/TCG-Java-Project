@@ -20,8 +20,9 @@ signals = [
     
 ]
 properties = [
-    
+    label_i_d
 ]
 functions = [
-    _ready
+    _ready,
+	update_from_card
 ]

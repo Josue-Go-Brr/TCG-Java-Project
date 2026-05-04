@@ -7,9 +7,9 @@
 script = ExtResource("1_t1pmq")
 id = "Obelisk_The_Tormentor"
 name = "Obelisk the Tormentor"
-alphabetical_id = 11
+alphabetical_id = 16
 type = "MONSTER"
-cost = 5
+cost = 9
 atk = 4000
 defense = 4000
 description = "One of the Three Egyptian Gods, Obelisk is the strongest in terms of pure strength"

@@ -3,6 +3,7 @@ package godot;
 import godot.annotation.RegisterClass;
 import godot.annotation.RegisterFunction;
 import godot.api.Sprite2D;
+import godot.api.TextureRect;
 
 @RegisterClass
 public class CardSprite extends Sprite2D {
@@ -15,11 +16,7 @@ public class CardSprite extends Sprite2D {
 
 	@RegisterFunction
 	public void updateFromCard(Card thisCard){
-		if (thisCard != null && thisCard.data != null) {
-			setTexture(thisCard.data.image);
-		} else {
-			setTexture(null);
-		}
+		setTexture(thisCard.cardSprite);
 	}
 
 }

@@ -1,19 +1,18 @@
 [gd_resource type="Resource" script_class="CardData" load_steps=3 format=3 uid="uid://bowjrh8gmnsv5"]
 
-[ext_resource type="Script" uid="uid://cjyi6kw1mh1pk" path="res://src/main/java/godot/CardData.java" id="1_aaq2q"]
+[ext_resource type="Script" uid="uid://cjyi6kw1mh1pk" path="res://scripts/godot/CardData.gdj" id="1_aaq2q"]
 [ext_resource type="Texture2D" uid="uid://d0kbophnkurdy" path="res://assets/sprites/CartesMonstre/MagiKuriboh.png" id="1_fe4u4"]
 
 [resource]
 script = ExtResource("1_aaq2q")
 id = "MagiKuriboh"
 name = "MagiKuriboh"
-alphabetical_id = 10
-type="MONSTER"
-cost=4
+alphabetical_id = 15
+type = "MONSTER"
+cost = 2
 atk = 300
 defense = 200
-effect="none"
-description ="A Kuriboh who learned magic from the Dark Magician, dressed as him, he's not as powerful unfortunately"
+description = "A Kuriboh who learned magic from the Dark Magician, dressed as him, he's not as powerful unfortunately"
 image = ExtResource("1_fe4u4")
-image_path="res://assets/sprites/CartesMonstre/MagiKuriboh.png"
+image_path = "res://assets/sprites/CartesMonstre/MagiKuriboh.png"
 metadata/_custom_type_script = "uid://cjyi6kw1mh1pk"

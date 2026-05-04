@@ -20,13 +20,16 @@ signals = [
 ]
 properties = [
     card_i_d,
+	name,
 	atk,
-	defense
+	defense,
+	cost
 ]
 functions = [
     _ready,
 	get_card_i_d,
 	update_label,
+	update_sprite,
 	_on_area_2d_mouse_entered,
 	_on_area_2d_mouse_exited
 ]

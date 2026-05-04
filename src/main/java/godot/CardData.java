@@ -6,6 +6,7 @@ import godot.annotation.RegisterFunction;
 import godot.annotation.RegisterProperty;
 import godot.api.Resource;
 import godot.api.Texture2D;
+import godot.api.TextureRect;
 
 @RegisterClass
 public class CardData extends Resource{
@@ -22,10 +23,12 @@ public class CardData extends Resource{
 	@RegisterProperty
 	public int alphabeticalId;
 
-	@Export @RegisterProperty
-	public String type = "MONSTER";
+	@Export
+	@RegisterProperty
+	public String type = "MONSTER";// MONSTER, EFFECT MONSTER MAGIE, TRAP
 
-	@Export @RegisterProperty
+	@Export
+	@RegisterProperty
 	public int cost = 0;
 
 	@Export
@@ -44,7 +47,8 @@ public class CardData extends Resource{
 	@RegisterProperty
 	public Texture2D image;
 
-	@Export @RegisterProperty
-	public String imagePath = ""; 
+	@Export
+	@RegisterProperty
+	public String imagePath = "";
 
 }
