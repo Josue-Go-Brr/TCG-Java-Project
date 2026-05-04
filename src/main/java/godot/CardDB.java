@@ -10,9 +10,9 @@ import godot.api.ResourceLoader;
 import godot.global.GD;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 @RegisterClass
 public class CardDB extends Node {
@@ -69,5 +69,10 @@ public class CardDB extends Node {
 	@RegisterFunction
 	public HashMap<String, CardData> getCards() {
 		return cards;
+	}
+
+	@RegisterFunction
+	public List<CardData> getAllCards() {
+		return new ArrayList<>(cards.values());
 	}
 }
