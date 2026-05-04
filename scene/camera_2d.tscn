@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://clnj5krpsdevk"]
+
+[node name="Camera2D" type="Camera2D"]
+visible = false
+zoom = Vector2(0.8, 0.8)
+limit_left = -10000001

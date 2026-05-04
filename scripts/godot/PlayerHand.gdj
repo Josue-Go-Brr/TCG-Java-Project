@@ -22,5 +22,12 @@ properties = [
     h_a_n_d__c_o_u_n_t
 ]
 functions = [
-    _ready
+    _ready,
+	_input,
+	add_card_to_hand,
+	update_hand_position,
+	calculate_card_position,
+	animate_card_to_position,
+	remove_card_from_hand,
+	quoi
 ]

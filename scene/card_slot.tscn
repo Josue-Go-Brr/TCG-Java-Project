@@ -1,18 +1,19 @@
 [gd_scene load_steps=4 format=3 uid="uid://cumnyia0a7g5u"]
 
-[ext_resource type="Texture2D" uid="uid://cny0tbeoqivb0" path="res://assets/sprites/Autres/CardSlot.png" id="1_bvyet"]
 [ext_resource type="Script" uid="uid://b8jto1kh2xja5" path="res://src/main/java/godot/CardSlot.java" id="1_vugus"]
+[ext_resource type="Texture2D" uid="uid://bjwajby5jffb8" path="res://assets/sprites/Autres/monstercard.webp" id="2_vugus"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vugus"]
 size = Vector2(182, 266)
 
 [node name="CardSlot" type="Node2D"]
 position = Vector2(-34, 158)
-scale = Vector2(1.1, 1.1)
 script = ExtResource("1_vugus")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_bvyet")
+position = Vector2(-2.38419e-07, -7.39098e-06)
+scale = Vector2(0.308998, 0.309662)
+texture = ExtResource("2_vugus")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2

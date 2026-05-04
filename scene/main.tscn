@@ -1,6 +1,5 @@
-[gd_scene load_steps=5 format=3 uid="uid://dfkd35ltv4pqr"]
+[gd_scene load_steps=4 format=3 uid="uid://dfkd35ltv4pqr"]
 
-[ext_resource type="PackedScene" uid="uid://dycoucv5h78hw" path="res://scene/card.tscn" id="1_itxqv"]
 [ext_resource type="Script" uid="uid://dw53lqsy3v72f" path="res://src/main/java/godot/CardManager.java" id="1_v0l8b"]
 [ext_resource type="PackedScene" uid="uid://cumnyia0a7g5u" path="res://scene/card_slot.tscn" id="3_wp4xf"]
 [ext_resource type="Script" uid="uid://rsyefomuqj0a" path="res://src/main/java/godot/PlayerHand.java" id="4_brvut"]
@@ -10,17 +9,27 @@
 [node name="Cardmanager" type="Node2D" parent="."]
 script = ExtResource("1_v0l8b")
 
-[node name="MagicienSombre" parent="Cardmanager" instance=ExtResource("1_itxqv")]
-position = Vector2(172, -195)
-
-[node name="card" parent="Cardmanager" instance=ExtResource("1_itxqv")]
-position = Vector2(219, 185)
-
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.5, 0.5)
-
-[node name="CardSlot" parent="." instance=ExtResource("3_wp4xf")]
-position = Vector2(-284, -176)
-
 [node name="PlayerHand" type="Node2D" parent="."]
 script = ExtResource("4_brvut")
+
+[node name="Slots" type="Node2D" parent="."]
+
+[node name="CardSlot5" parent="Slots" instance=ExtResource("3_wp4xf")]
+position = Vector2(1099, 615)
+scale = Vector2(0.65, 0.65)
+
+[node name="CardSlot2" parent="Slots" instance=ExtResource("3_wp4xf")]
+position = Vector2(1239, 615)
+scale = Vector2(0.65, 0.65)
+
+[node name="CardSlot3" parent="Slots" instance=ExtResource("3_wp4xf")]
+position = Vector2(819, 615)
+scale = Vector2(0.65, 0.65)
+
+[node name="CardSlot4" parent="Slots" instance=ExtResource("3_wp4xf")]
+position = Vector2(679, 615)
+scale = Vector2(0.65, 0.65)
+
+[node name="CardSlot" parent="Slots" instance=ExtResource("3_wp4xf")]
+position = Vector2(959, 615)
+scale = Vector2(0.65, 0.65)

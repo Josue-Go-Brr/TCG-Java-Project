@@ -20,27 +20,27 @@ public class Card extends Node2D {
 
 	@Export
 	@RegisterProperty
-	public Signal hovered;
-	public Signal hovered_off;
+	public boolean in_slot = false;
+	public Vector2 starting_pos = new Vector2();
+	public Vector2 hovered_off = new Vector2(0.6, 0.6);
+	public Vector2 hovered_on = new Vector2(0.7, 0.7);
 
 
 	@RegisterFunction
 	@Override
 	public void _ready(){
+		//GD.INSTANCE.print(starting_pos);
 	}
 
 	@RegisterFunction
 	public void _on_area_2d_mouse_entered() {
-		emitSignal("hovered", "self");
-		setScale(new Vector2(1.05, 1.05));
-		this.setZIndex(2);
+		setScale(hovered_on);
+		this.setZIndex(3);
 	}
 
 	@RegisterFunction
 	public void _on_area_2d_mouse_exited() {
-		emitSignal("hovered_off", "self");
-		setScale(new Vector2(1, 1));
+		setScale(hovered_off);
 		this.setZIndex(1);
 	}
-
 }

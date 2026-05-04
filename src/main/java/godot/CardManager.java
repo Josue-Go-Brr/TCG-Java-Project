@@ -3,10 +3,10 @@ import godot.annotation.Export;
 import godot.annotation.RegisterClass;
 import godot.annotation.RegisterFunction;
 import godot.annotation.RegisterProperty;
+
 import godot.api.*;
 import godot.core.*;
 import godot.global.GD;
-
 import java.lang.Object;
 
 @RegisterClass
@@ -15,37 +15,33 @@ public class CardManager extends Node2D {
 	@RegisterProperty
 	public int COLLISION_MASK_CARD_SLOT = 2;
 	public Node2D cardDragged;
-	public Vector2 screen_Size;
-	public Camera2D cam;
+	public Rect2 screen_Size;
+	public Node player_hand_ref;
+
 
 
 	@RegisterFunction
 	@Override
 	public void _ready(){
-		cam = getViewport().getCamera2d();
+		screen_Size = getViewportRect();
+		player_hand_ref = getNode("../PlayerHand");
 	}
+
+
+
 
 	// Fonction process, s'execute à toutes les frames du code
 	@RegisterFunction
 	@Override
 	public void _process(double delta) {
 
-		if (cam == null) return;
-
-		Vector2 camPos = cam.getGlobalPosition();
-		screen_Size = getViewport().getVisibleRect().getSize();
-		Vector2 zoom = cam.getZoom();
-
-		float halfW = (float) (screen_Size.getX() / zoom.getX()) /2;
-		float halfH = (float) (screen_Size.getY() / zoom.getY()) /2;
-
 		if (cardDragged != null){
-			Vector2 mouse_Position = getGlobalMousePosition();
 
-			cardDragged.setGlobalPosition(new Vector2(
-					clamp((float) mouse_Position.getX(), (float) (camPos.getX() - halfW), (float) (camPos.getX() + halfW)),
-					clamp((float) mouse_Position.getY(), (float) (camPos.getY() - halfH), (float) (camPos.getY() + halfH))
-			));
+			Vector2 mouse_Position = getGlobalMousePosition();
+			//We made a custom clamp func to achieve this, the cards are know confined in the viewport
+			Vector2 drag = new Vector2(clamp(mouse_Position.getX(), 0, screen_Size.getEnd().getX()),
+					clamp(mouse_Position.getY(), 0, screen_Size.getEnd().getY()));
+			cardDragged.set("position", drag);
 		}
 	}
 
@@ -57,27 +53,16 @@ public class CardManager extends Node2D {
 		if (event instanceof InputEventMouseButton mouseEvent && mouseEvent.getButtonIndex() == MouseButton.LEFT){
 			// Listener du Clique gauche
 			if (mouseEvent.isPressed()){
-				//GD.INSTANCE.print("Left Click");
 				Node2D card = _raycast_check_for_card();
 				if (card != null){
 					start_drag(card);
 				}
 			}
 			else {
-				//GD.INSTANCE.print("Left Click Released");
 				if (cardDragged != null) {
 					stop_drag();
 				}
-			}
-		}
 
-		if (event instanceof InputEventMouseButton mouseEvent && mouseEvent.getButtonIndex() == MouseButton.RIGHT){
-			// Listener du Clique droit
-			if (mouseEvent.isPressed()){
-				//GD.INSTANCE.print("Right Click");
-			}
-			else {
-				//GD.INSTANCE.print("Right Click Released");
 			}
 		}
 	}
@@ -95,7 +80,6 @@ public class CardManager extends Node2D {
 		VariantArray<Dictionary<Object, Object>> result = space_state.intersectPoint(parameters);
 		if (!result.isEmpty()){
 			Dictionary<Object, Object> hit = result.get(0);
-
 			Object collider = hit.get("collider");
 
 			if (collider instanceof Node node) {
@@ -139,19 +123,17 @@ public class CardManager extends Node2D {
 	}
 
 	@RegisterFunction
-	public float clamp(float value, float min, float max) {
+	public double clamp(double value, double min, double max) {
 		return Math.max(min, Math.min(value, max));
 	}
 
 	@RegisterFunction
 	public void start_drag(Node2D card){
 		cardDragged = card;
-		card.setScale(new Vector2(1, 1));
 	}
 
 	@RegisterFunction
 	public void stop_drag(){
-		cardDragged.setScale(new Vector2(1, 1));
 		Node2D card_slot_found = _raycast_check_for_card_slot();
 
 		//since card_slot_found.get returns an object the .equals method is used instead
@@ -159,17 +141,28 @@ public class CardManager extends Node2D {
 
 			cardDragged.setPosition(card_slot_found.getPosition());
 
-			//Basic solution is to disable the collision of the card, but I prefered to set a different collision layer and mask instead
-			//cardDragged.getNode("Area2D/CollisionShape2D").set("Disabled", false);
-			cardDragged.getNode("Area2D").set("collision_mask", 2);
-			cardDragged.getNode("Area2D").set("collision_layer", 2);
+			//Basic solution is to disable the collision of the card
+			//Never trust shown name, right click > copy property path is safer
+			cardDragged.getNode("Area2D/CollisionShape2D").set("disabled", true);
+			cardDragged.set("flag", true);
+			//if you want to make things with those cards later on use those instead:
+			//cardDragged.getNode("Area2D").set("collision_mask", 2);
+			//cardDragged.getNode("Area2D").set("collision_layer", 2);
 
 
 			// I made a variable in each CardSlots, when true the slot is occupied
-			GD.INSTANCE.print(card_slot_found.get("card_in_slot"));
-			GD.INSTANCE.print(cardDragged.getNode("Area2D").get("collision_mask"));
 			card_slot_found.set("card_in_slot", true);
+			cardDragged.set("in_slot", true);
 		}
+		else {
+
+
+			// heures perdues ici : 6
+			// ça c'est la pire méthode du monde, essaie de mettre le moindre argument ça explose
+			player_hand_ref.call("quoi");
+		}
+
+		player_hand_ref.call("quoi");
 		cardDragged = null;
 	}
 

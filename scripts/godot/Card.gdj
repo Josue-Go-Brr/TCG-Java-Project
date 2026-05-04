@@ -19,7 +19,7 @@ signals = [
     
 ]
 properties = [
-    hovered
+    in_slot
 ]
 functions = [
     _ready,
