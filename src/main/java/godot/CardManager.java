@@ -155,8 +155,6 @@ public class CardManager extends Node2D {
 			cardDragged.set("in_slot", true);
 		}
 		else {
-
-
 			// heures perdues ici : 6
 			// ça c'est la pire méthode du monde, essaie de mettre le moindre argument ça explose
 			player_hand_ref.call("quoi");
@@ -165,6 +163,5 @@ public class CardManager extends Node2D {
 		player_hand_ref.call("quoi");
 		cardDragged = null;
 	}
-
 
 }

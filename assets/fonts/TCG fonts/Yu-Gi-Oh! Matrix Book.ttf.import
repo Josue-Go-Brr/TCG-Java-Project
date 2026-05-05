@@ -1,0 +1,35 @@
+[remap]
+
+importer="font_data_dynamic"
+type="FontFile"
+uid="uid://b3j372h0k60y5"
+path="res://.godot/imported/Yu-Gi-Oh! Matrix Book.ttf-3245b62b081e3872f84292a0e316eceb.fontdata"
+
+[deps]
+
+source_file="res://assets/fonts/TCG fonts/Yu-Gi-Oh! Matrix Book.ttf"
+dest_files=["res://.godot/imported/Yu-Gi-Oh! Matrix Book.ttf-3245b62b081e3872f84292a0e316eceb.fontdata"]
+
+[params]
+
+Rendering=null
+antialiasing=1
+generate_mipmaps=false
+disable_embedded_bitmaps=true
+multichannel_signed_distance_field=false
+msdf_pixel_range=8
+msdf_size=48
+allow_system_fallback=true
+force_autohinter=false
+hinting=1
+subpixel_positioning=4
+keep_rounding_remainders=true
+oversampling=0.0
+Fallbacks=null
+fallbacks=[]
+Compress=null
+compress=true
+preload=[]
+language_support={}
+script_support={}
+opentype_features={}

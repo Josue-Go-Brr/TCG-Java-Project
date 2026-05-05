@@ -14,8 +14,8 @@ godot {
     // the script registration which you'll attach to nodes are generated into this directory
     registrationFileBaseDir.set(projectDir.resolve("scripts"))
 
-    // Create .gdj files from all JVM scripts
-    isRegistrationFileGenerationEnabled.set(true)
+    // .gdj generation off: scenes and resources use .java paths directly.
+    isRegistrationFileGenerationEnabled.set(false)
 
     // defines whether the script registration files should be generated hierarchically according to the classes package path or flattened into `registrationFileBaseDir`
     //isRegistrationFileHierarchyEnabled.set(true)

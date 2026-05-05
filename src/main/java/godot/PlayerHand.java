@@ -94,7 +94,7 @@ public class PlayerHand extends Node2D {
 		else {
 			//In the card script you have a starting position that you should update, I ignored it
 			//GD.INSTANCE.print(card.get("starting_pos"));
-			animate_card_to_position(card, new Vector2(0,0));
+			animate_card_to_position(card, (Vector2) card.get("starting_pos"));
 		}
 
 	}
@@ -107,7 +107,6 @@ public class PlayerHand extends Node2D {
 
 			//this is used to snap the card back into the hand when dropped
 			card.set("starting_pos", new_position);
-			//GD.INSTANCE.print(card.get("starting_pos"));
 
 			//same thing but when created
 			animate_card_to_position(card, new_position);
@@ -140,13 +139,13 @@ public class PlayerHand extends Node2D {
 			}
 
 	}
-
+	
+	
+	//cette fonction ne sert qu'a être appelée grâce .call pour exécuter d'autres trucs 
 	@RegisterFunction
 	public void quoi() {
 		//CardManagerRef.get("cardDragged");
-		GD.INSTANCE.print("feur");
+		//GD.INSTANCE.print("feur");
 		remove_card_from_hand();
-		update_hand_position();
-
 	}
 }

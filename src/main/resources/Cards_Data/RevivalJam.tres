@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3 uid="uid://d0plg2r6xkcco"]
+
+[ext_resource type="Script" uid="uid://cjyi6kw1mh1pk" path="res://scripts/godot/CardData.gdj" id="1_o2upp"]
+[ext_resource type="Texture2D" uid="uid://b3yjls1mq5lu2" path="res://assets/sprites/CartesMonstre/RevivalJam.png" id="1_xri2p"]
+
+[resource]
+script = ExtResource("1_o2upp")
+id = "Revival_Jam"
+name = "Revival Jam"
+alphabetical_id = 22
+type = "MONSTER"
+cost = 4
+atk = 1500
+defense = 500
+description = "A sort of slime who doesn't really die, he always comes back…"
+image = ExtResource("1_xri2p")
+image_path = "res://assets/sprites/CartesMonstre/RevivalJam.png"
+metadata/_custom_type_script = "uid://cjyi6kw1mh1pk"

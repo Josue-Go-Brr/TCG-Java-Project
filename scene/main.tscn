@@ -1,8 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://dfkd35ltv4pqr"]
+[gd_scene load_steps=6 format=3 uid="uid://dfkd35ltv4pqr"]
 
 [ext_resource type="Script" uid="uid://dw53lqsy3v72f" path="res://src/main/java/godot/CardManager.java" id="1_v0l8b"]
-[ext_resource type="PackedScene" uid="uid://cumnyia0a7g5u" path="res://scene/card_slot.tscn" id="3_wp4xf"]
-[ext_resource type="Script" uid="uid://rsyefomuqj0a" path="res://src/main/java/godot/PlayerHand.java" id="4_brvut"]
+[ext_resource type="Script" uid="uid://rsyefomuqj0a" path="res://src/main/java/godot/PlayerHand.java" id="2_brvut"]
+[ext_resource type="PackedScene" uid="uid://cumnyia0a7g5u" path="res://scene/card_slot.tscn" id="3_0ha60"]
+[ext_resource type="Texture2D" uid="uid://bdb6xwpugieec" path="res://assets/sprites/Autres/deck.png" id="4_4j5ol"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4j5ol"]
+size = Vector2(128.889, 190)
 
 [node name="main" type="Node2D"]
 
@@ -10,26 +14,40 @@
 script = ExtResource("1_v0l8b")
 
 [node name="PlayerHand" type="Node2D" parent="."]
-script = ExtResource("4_brvut")
+script = ExtResource("2_brvut")
 
 [node name="Slots" type="Node2D" parent="."]
 
-[node name="CardSlot5" parent="Slots" instance=ExtResource("3_wp4xf")]
-position = Vector2(1099, 615)
-scale = Vector2(0.65, 0.65)
-
-[node name="CardSlot2" parent="Slots" instance=ExtResource("3_wp4xf")]
-position = Vector2(1239, 615)
-scale = Vector2(0.65, 0.65)
-
-[node name="CardSlot3" parent="Slots" instance=ExtResource("3_wp4xf")]
-position = Vector2(819, 615)
-scale = Vector2(0.65, 0.65)
-
-[node name="CardSlot4" parent="Slots" instance=ExtResource("3_wp4xf")]
+[node name="CardSlot1" parent="Slots" instance=ExtResource("3_0ha60")]
 position = Vector2(679, 615)
 scale = Vector2(0.65, 0.65)
 
-[node name="CardSlot" parent="Slots" instance=ExtResource("3_wp4xf")]
+[node name="CardSlot2" parent="Slots" instance=ExtResource("3_0ha60")]
+position = Vector2(819, 615)
+scale = Vector2(0.65, 0.65)
+
+[node name="CardSlot3" parent="Slots" instance=ExtResource("3_0ha60")]
 position = Vector2(959, 615)
 scale = Vector2(0.65, 0.65)
+
+[node name="CardSlot4" parent="Slots" instance=ExtResource("3_0ha60")]
+position = Vector2(1099, 615)
+scale = Vector2(0.65, 0.65)
+
+[node name="CardSlot5" parent="Slots" instance=ExtResource("3_0ha60")]
+position = Vector2(1239, 615)
+scale = Vector2(0.65, 0.65)
+
+[node name="Deck" type="Node2D" parent="."]
+position = Vector2(511, 615)
+scale = Vector2(0.9, 0.9)
+
+[node name="Sprite2D" type="Sprite2D" parent="Deck"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_4j5ol")
+
+[node name="Area2D" type="Area2D" parent="Deck"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Deck/Area2D"]
+position = Vector2(0.000244141, 0)
+shape = SubResource("RectangleShape2D_4j5ol")
