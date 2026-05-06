@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://do7i8mdcl3inq"]
+
+[ext_resource type="Script" uid="uid://d0nns3oyt506m" path="res://src/main/java/godot/CardDB.java" id="1_3pfyp"]
+
+[node name="CardDB" type="Node"]
+script = ExtResource("1_3pfyp")
+metadata/_custom_type_script = "uid://dpo5f3h5gvl1m"

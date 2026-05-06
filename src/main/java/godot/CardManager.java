@@ -16,7 +16,12 @@ public class CardManager extends Node2D {
 	public int COLLISION_MASK_CARD_SLOT = 2;
 	public Node2D cardDragged;
 	public Rect2 screen_Size;
+
 	public Node player_hand_ref;
+	public Node game_deck_ref;
+
+	public int COLLISION_MASK_DECK = 4;
+	public int COLLISION_MASK_CARD = 1;
 
 
 
@@ -25,6 +30,7 @@ public class CardManager extends Node2D {
 	public void _ready(){
 		screen_Size = getViewportRect();
 		player_hand_ref = getNode("../PlayerHand");
+		game_deck_ref = getNode("../Deck");
 	}
 
 
@@ -53,7 +59,15 @@ public class CardManager extends Node2D {
 		if (event instanceof InputEventMouseButton mouseEvent && mouseEvent.getButtonIndex() == MouseButton.LEFT){
 			// Listener du Clique gauche
 			if (mouseEvent.isPressed()){
+				Node2D cardDeck = _raycast_check_for_deck();
 				Node2D card = _raycast_check_for_card();
+
+
+				if (cardDeck != null) {
+					//met une carte en main
+					game_deck_ref.call("draw_card");
+				}
+
 				if (card != null){
 					start_drag(card);
 				}
@@ -75,7 +89,7 @@ public class CardManager extends Node2D {
 
 		parameters.setPosition(getGlobalMousePosition());
 		parameters.setCollideWithAreas(true);
-		parameters.setCollisionMask(1);
+		parameters.setCollisionMask(COLLISION_MASK_CARD);
 
 		VariantArray<Dictionary<Object, Object>> result = space_state.intersectPoint(parameters);
 		if (!result.isEmpty()){
@@ -110,6 +124,7 @@ public class CardManager extends Node2D {
 			Dictionary<Object, Object> hit = result.get(0);
 			Object collider = hit.get("collider");
 
+
 			if (collider instanceof Node node) {
 				Node parent = node.getParent();
 				if (parent instanceof Node2D nodeCardSlot){
@@ -121,6 +136,36 @@ public class CardManager extends Node2D {
 		}
 		return null;
 	}
+
+
+	//Same function but returns everything on COLLISION_MASK_CARD_SLOT
+	@RegisterFunction
+	public Node2D _raycast_check_for_deck(){
+		PhysicsDirectSpaceState2D space_state = getWorld2d().getDirectSpaceState();
+		PhysicsPointQueryParameters2D parameters = new PhysicsPointQueryParameters2D();
+		parameters.setPosition(getGlobalMousePosition());
+		parameters.setCollideWithAreas(true);
+		parameters.setCollisionMask(COLLISION_MASK_DECK);
+
+		VariantArray<Dictionary<Object, Object>> result = space_state.intersectPoint(parameters);
+		// If there is any collision Point, return.
+		if (!result.isEmpty()){
+			Dictionary<Object, Object> hit = result.get(0);
+			Object collider = hit.get("collider");
+
+
+			if (collider instanceof Node node) {
+				Node parent = node.getParent();
+				if (parent instanceof Node2D nodeGameDeck){
+					GD.INSTANCE.print(nodeGameDeck.get("collision_mask"));
+					return nodeGameDeck;
+				}
+
+			}
+		}
+		return null;
+	}
+
 
 	@RegisterFunction
 	public double clamp(double value, double min, double max) {
@@ -144,24 +189,22 @@ public class CardManager extends Node2D {
 			//Basic solution is to disable the collision of the card
 			//Never trust shown name, right click > copy property path is safer
 			cardDragged.getNode("Area2D/CollisionShape2D").set("disabled", true);
-			cardDragged.set("flag", true);
 			//if you want to make things with those cards later on use those instead:
 			//cardDragged.getNode("Area2D").set("collision_mask", 2);
 			//cardDragged.getNode("Area2D").set("collision_layer", 2);
 
 
 			// I made a variable in each CardSlots, when true the slot is occupied
+
 			card_slot_found.set("card_in_slot", true);
 			cardDragged.set("in_slot", true);
 		}
 		else {
 			// heures perdues ici : 6
 			// ça c'est la pire méthode du monde, essaie de mettre le moindre argument ça explose
-			player_hand_ref.call("quoi");
 		}
-
-		player_hand_ref.call("quoi");
 		cardDragged = null;
+		player_hand_ref.call("quoi");
 	}
 
 }
