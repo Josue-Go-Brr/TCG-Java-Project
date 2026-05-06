@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3 uid="uid://dl8k3rtdju1gg"]
+
+[ext_resource type="Texture2D" uid="uid://vn3hxqv5p40w" path="res://assets/sprites/CartesMonstre/DarkRabbit.png" id="1_auuq7"]
+[ext_resource type="Script" uid="uid://cjyi6kw1mh1pk" path="res://scripts/godot/CardData.gdj" id="1_njuhp"]
+
+[resource]
+script = ExtResource("1_njuhp")
+id = "Dark_Rabbit"
+name = "Dark Rabbit"
+alphabetical_id = 10
+type = "MONSTER"
+cost = 3
+atk = 1100
+defense = 1500
+description = "He leaps up, down, and all around ! Nobody can lay a hand on this funny bunny"
+image = ExtResource("1_auuq7")
+image_path = "res://assets/sprites/CartesMonstre/DarkRabbit.png"
+metadata/_custom_type_script = "uid://cjyi6kw1mh1pk"

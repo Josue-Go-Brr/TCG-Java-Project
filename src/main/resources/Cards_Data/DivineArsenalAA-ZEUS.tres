@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3 uid="uid://pnf6tr8pkkar"]
+
+[ext_resource type="Script" uid="uid://cjyi6kw1mh1pk" path="res://scripts/godot/CardData.gdj" id="1_bgaso"]
+[ext_resource type="Texture2D" uid="uid://cfw4a5ck1l4rs" path="res://assets/sprites/CartesMonstre/DivineArsenalAA-ZEUS.png" id="1_x6pyc"]
+
+[resource]
+script = ExtResource("1_bgaso")
+id = "Divine_Arsenal_AA-ZEUS"
+name = "Divine Arsenal AA-ZEUS"
+alphabetical_id = 11
+type = "MONSTER"
+cost = 7
+atk = 3000
+defense = 3000
+description = "The ultimate Mecha Weapon of humanity. Inspired by Zeus, the Thunder’s God, Divine Arsenal Zeus is extremely powerful."
+image = ExtResource("1_x6pyc")
+image_path = "res://assets/sprites/CartesMonstre/DivineArsenalAA-ZEUS.png"
+metadata/_custom_type_script = "uid://cjyi6kw1mh1pk"

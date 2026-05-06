@@ -1,0 +1,135 @@
+[gd_scene load_steps=5 format=3 uid="uid://dahes3hclev1i"]
+
+[ext_resource type="Script" uid="uid://o405t6r7kyod" path="res://src/main/java/godot/deck/DeckScreenController.java" id="1_deck_screen_script"]
+[ext_resource type="Script" uid="uid://d0nns3oyt506m" path="res://src/main/java/godot/CardDB.java" id="2_card_db_script"]
+[ext_resource type="Texture2D" uid="uid://ndrhcoipsn7l" path="res://assets/sprites/backgrounds/librarybackground.png" id="3_deck_bg"]
+[ext_resource type="PackedScene" uid="uid://bykbe4i084rke" path="res://scene/deck/card_tile.tscn" id="4_tile_scene"]
+
+[node name="DeckScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_deck_screen_script")
+
+[node name="CardDB" type="Node" parent="."]
+script = ExtResource("2_card_db_script")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_deck_bg")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Overlay" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.35)
+
+[node name="RootMargin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="MainColumns" type="HBoxContainer" parent="RootMargin"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="LeftSide" type="VBoxContainer" parent="RootMargin/MainColumns"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="TopBar" type="HBoxContainer" parent="RootMargin/MainColumns/LeftSide"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="DeckCountLabel" type="Label" parent="RootMargin/MainColumns/LeftSide/TopBar"]
+modulate = Color(0.75, 0.75, 0.75, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Deck: 0/40 — Invalid"
+vertical_alignment = 1
+
+[node name="SaveDeckButton" type="Button" parent="RootMargin/MainColumns/LeftSide/TopBar"]
+modulate = Color(0.7, 0.7, 0.7, 1)
+custom_minimum_size = Vector2(140, 42)
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Save deck"
+
+[node name="ClearDeckButton" type="Button" parent="RootMargin/MainColumns/LeftSide/TopBar"]
+modulate = Color(0.7, 0.7, 0.7, 1)
+custom_minimum_size = Vector2(140, 42)
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Clear deck"
+
+[node name="MenuSpacer" type="Control" parent="RootMargin/MainColumns/LeftSide/TopBar"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="RootMargin/MainColumns/LeftSide/TopBar"]
+modulate = Color(0.7, 0.7, 0.7, 1)
+custom_minimum_size = Vector2(100, 42)
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Menu"
+
+[node name="DeckBuilderButton" type="Button" parent="RootMargin/MainColumns/LeftSide/TopBar"]
+modulate = Color(0.7, 0.7, 0.7, 1)
+custom_minimum_size = Vector2(170, 42)
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Deck Builder"
+
+[node name="CardGridScroll" type="ScrollContainer" parent="RootMargin/MainColumns/LeftSide"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="CardArea" type="Control" parent="RootMargin/MainColumns/LeftSide/CardGridScroll"]
+custom_minimum_size = Vector2(0, 500)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CardGrid" type="GridContainer" parent="RootMargin/MainColumns/LeftSide/CardGridScroll/CardArea"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 5
+
+[node name="CardTileTemplate" parent="RootMargin/MainColumns/LeftSide/CardGridScroll/CardArea/CardGrid" instance=ExtResource("4_tile_scene")]
+visible = false
+layout_mode = 2
+
+[node name="EmptyState" type="Label" parent="RootMargin/MainColumns/LeftSide"]
+layout_mode = 2
+text = "No cards loaded"
+horizontal_alignment = 1
+
+[node name="InvalidDeckDialog" type="AcceptDialog" parent="."]
+title = "Invalid Deck"
+dialog_text = "the deck is not valid"

@@ -1,0 +1,71 @@
+[gd_scene load_steps=4 format=3 uid="uid://duvtm3yfupu8b"]
+
+[ext_resource type="Script" uid="uid://d0nns3oyt506m" path="res://src/main/java/godot/CardDB.java" id="1_vg1e8"]
+[ext_resource type="Script" uid="uid://dw53lqsy3v72f" path="res://src/main/java/godot/CardManager.java" id="2_b1pvg"]
+[ext_resource type="PackedScene" uid="uid://dycoucv5h78hw" path="res://scene/card.tscn" id="3_djss7"]
+
+[node name="main" type="Node2D"]
+
+[node name="CardDB" type="Node" parent="."]
+script = ExtResource("1_vg1e8")
+metadata/_custom_type_script = "uid://dpo5f3h5gvl1m"
+
+[node name="Cardmanager" type="Node2D" parent="."]
+script = ExtResource("2_b1pvg")
+
+[node name="Winged_Dragon_Of_RA" parent="Cardmanager" instance=ExtResource("3_djss7")]
+position = Vector2(258, -94)
+
+[node name="Trade_Toad" parent="Cardmanager" instance=ExtResource("3_djss7")]
+position = Vector2(534, -104)
+
+[node name="Stardust_Dragon" parent="Cardmanager" instance=ExtResource("3_djss7")]
+position = Vector2(-28, -107)
+
+[node name="Slifer_The_Sky_Dragon" parent="Cardmanager" instance=ExtResource("3_djss7")]
+position = Vector2(-496, -107)
+
+[node name="RoninToadin" parent="Cardmanager" instance=ExtResource("3_djss7")]
+position = Vector2(-763, -119)
+
+[node name="Revival_Jam" parent="Cardmanager" instance=ExtResource("3_djss7")]
+position = Vector2(-1026, -100)
+
+[node name="Obelisk_The_Tormentor" parent="Cardmanager" instance=ExtResource("3_djss7")]
+position = Vector2(992, -421)
+
+[node name="MagiKuriboh" parent="Cardmanager" instance=ExtResource("3_djss7")]
+position = Vector2(738, -436)
+
+[node name="Dark_Rabbit" parent="Cardmanager" instance=ExtResource("3_djss7")]
+position = Vector2(502, -452)
+
+[node name="Dark_Magician_Of_Chaos" parent="Cardmanager" instance=ExtResource("3_djss7")]
+position = Vector2(248, -452)
+
+[node name="Dark_Magician_Girl_The_Dragon_Knight" parent="Cardmanager" instance=ExtResource("3_djss7")]
+position = Vector2(-16, -436)
+
+[node name="Dark_Magician_Girl" parent="Cardmanager" instance=ExtResource("3_djss7")]
+position = Vector2(-264, -455)
+
+[node name="Cyber_Dragon" parent="Cardmanager" instance=ExtResource("3_djss7")]
+position = Vector2(-521, -452)
+
+[node name="Black_Rose_Dragon" parent="Cardmanager" instance=ExtResource("3_djss7")]
+position = Vector2(-769, -452)
+
+[node name="Dark_Magician" parent="Cardmanager" instance=ExtResource("3_djss7")]
+position = Vector2(793, -94)
+
+[node name="Blackland_fire_dragon" parent="Cardmanager" instance=ExtResource("3_djss7")]
+position = Vector2(-254, -101)
+
+[node name="Blue_Eyes_White_Dragon" parent="Cardmanager" instance=ExtResource("3_djss7")]
+position = Vector2(-1020, -455)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+visible = false
+zoom = Vector2(0.5, 0.5)
+
+[node name="board" type="Node2D" parent="."]

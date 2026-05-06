@@ -1,16 +1,78 @@
-[gd_scene load_steps=2 format=3 uid="uid://dycoucv5h78hw"]
+[gd_scene load_steps=9 format=3 uid="uid://dycoucv5h78hw"]
+
+[ext_resource type="Script" uid="uid://cps13nbmhe0do" path="res://src/main/java/godot/Card.java" id="1_gw1lc"]
+[ext_resource type="FontFile" uid="uid://xc5qs11fov6e" path="res://assets/fonts/TCG fonts/Stone Serif Semibold.ttf" id="2_md2gi"]
+[ext_resource type="Script" uid="uid://c7ljm7hhfomeq" path="res://src/main/java/godot/CardLabel.java" id="3_lu544"]
+[ext_resource type="FontFile" uid="uid://4bfo6wrbxuil" path="res://assets/fonts/TCG fonts/Yu-Gi-Oh! ITC Stone Serif Small Caps Bold.ttf" id="4_g4cc7"]
+[ext_resource type="Texture2D" uid="uid://co3wfjv2t0377" path="res://assets/sprites/CartesMonstre/BlacklandFireDragon.png" id="4_irop6"]
+[ext_resource type="Script" uid="uid://cedmmmmtc4god" path="res://src/main/java/godot/CardSprite.java" id="4_md2gi"]
+
+[sub_resource type="Theme" id="Theme_g4cc7"]
+default_base_scale = 1.0
+default_font = ExtResource("2_md2gi")
+default_font_size = 15
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gw1lc"]
-size = Vector2(800, 1185)
+size = Vector2(1015, 1480)
 
 [node name="card" type="Node2D"]
+top_level = true
+script = ExtResource("1_gw1lc")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.2, 0.2)
+[node name="CardSprite" type="Sprite2D" parent="."]
+texture = ExtResource("4_irop6")
+script = ExtResource("4_md2gi")
+
+[node name="CardLabelAtkDef" type="Label" parent="."]
+offset_left = -83.0
+offset_top = 76.0
+offset_right = 86.0
+offset_bottom = 130.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_md2gi")
+theme_override_font_sizes/font_size = 17
+script = ExtResource("3_lu544")
+label_i_d = "CardLabelAtkDef"
+
+[node name="CardLabelCost" type="Label" parent="."]
+offset_left = 42.0
+offset_top = 78.0
+offset_right = 91.0
+offset_bottom = 125.0
+theme_override_colors/font_color = Color(0.618854, 0.748261, 0.952736, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("4_g4cc7")
+theme_override_font_sizes/font_size = 25
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_lu544")
+label_i_d = "CardLabelCost"
+
+[node name="CardLabelName" type="Label" parent="."]
+offset_left = -87.0
+offset_top = -138.0
+offset_right = 93.0
+offset_bottom = -114.0
+theme = SubResource("Theme_g4cc7")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
+text = "Dark Magician"
+vertical_alignment = 1
+autowrap_mode = 3
+ellipsis_char = ""
+script = ExtResource("3_lu544")
+label_i_d = "CardLabelName"
 
 [node name="Area2D" type="Area2D" parent="."]
 scale = Vector2(0.2, 0.2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(3.05176e-05, -2.50008)
+position = Vector2(-1.42109e-14, 2.84217e-14)
 shape = SubResource("RectangleShape2D_gw1lc")
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
