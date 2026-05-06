@@ -6,7 +6,7 @@ fqName = godot.CardData
 relativeSourcePath = src/main/java/godot/CardData.java
 baseType = Resource
 supertypes = [
-    godot.api.Resource,
+	godot.api.Resource,
 	godot.api.RefCounted,
 	godot.api.Object,
 	godot.core.KtObject,
@@ -15,10 +15,10 @@ supertypes = [
 	kotlin.Any
 ]
 signals = [
-    
+	
 ]
 properties = [
-    id,
+	id,
 	name,
 	alphabetical_id,
 	type,
@@ -30,5 +30,5 @@ properties = [
 	image_path
 ]
 functions = [
-    
+	
 ]

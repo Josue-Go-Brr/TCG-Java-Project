@@ -19,6 +19,11 @@ public class PlayerHand extends Node2D {
 
 	@Export
 	@RegisterProperty
+
+	public int cardcompteur;
+	public Node game_deck_ref;
+	public Node cardManager;
+
 	public int HAND_COUNT = 5;
 	List<Node> player_hand = new ArrayList<>();
 
@@ -27,10 +32,13 @@ public class PlayerHand extends Node2D {
 	public double center_screen_x;
 	public double center_screen_y;
 
+	public Node drawingcard;
+
 	@RegisterFunction
 	@Override
 	public void _ready(){
-
+		cardManager = getNode("../Cardmanager");
+		game_deck_ref = getNode("../Deck");
 
 		// Sah quel enfer, getViewport.get("size") return un objet non convertible, obligé de bidouller avec un rect
 		//Getting the center screen coordinates for later
@@ -40,22 +48,23 @@ public class PlayerHand extends Node2D {
 		//I'm loading the black magician
 		PackedScene instance = GD.load("res://scene/card.tscn");
 
-		for (int i = 0; i < HAND_COUNT; i++) {
+//		for (int i = 0; i < HAND_COUNT; i++) {
 
 
-			//Getting the right Node to make it work with my card functions
-			Node CardManagerPath = getNode("../Cardmanager");
+//			//Getting the right Node to make it work with my card functions
+//			Node CardManagerPath = getNode("../Cardmanager");
+//
+//			// And then make a card instance
+//			Node MagicCard = instance.instantiate();
+//			CardManagerPath.addChild(MagicCard);
+//
+//			MagicCard.setName("card");
+//			drawing_card = MagicCard;
+//			add_card_to_hand(MagicCard);
+//
 
-			// And then make a card instance
-			Node MagicCard = instance.instantiate();
-			CardManagerPath.addChild(MagicCard);
 
-			MagicCard.setName("card");
-			add_card_to_hand(MagicCard);
-
-
-
-		}
+//		}
 
 	}
 
@@ -69,22 +78,25 @@ public class PlayerHand extends Node2D {
 //		}
 //	}
 
-	@RegisterFunction
-	@Override
-	public void _input(InputEvent event) {
+//	@RegisterFunction
+//	@Override
+//	public void _input(InputEvent event) {
+//
+//		if (event instanceof InputEventMouseButton mouseEvent && mouseEvent.getButtonIndex() == MouseButton.RIGHT) {
+//			// Listener du Clique Droit
+//			if (mouseEvent.isPressed()) {
+//				update_hand_position();
+//			}
+//		}
+//	}
 
-		if (event instanceof InputEventMouseButton mouseEvent && mouseEvent.getButtonIndex() == MouseButton.RIGHT) {
-			// Listener du Clique Droit
-			if (mouseEvent.isPressed()) {
-				update_hand_position();
-			}
-		}
-	}
 
 
 
 	@RegisterFunction
 	public void add_card_to_hand(Node card) {
+		GD.INSTANCE.print("niquel");
+		player_hand.add(0, card);
 		if (!player_hand.contains(card)) {
 			player_hand.add(0, card);
 			GD.INSTANCE.print("added!");
@@ -94,7 +106,7 @@ public class PlayerHand extends Node2D {
 		else {
 			//In the card script you have a starting position that you should update, I ignored it
 			//GD.INSTANCE.print(card.get("starting_pos"));
-			animate_card_to_position(card, (Vector2) card.get("starting_pos"));
+			//animate_card_to_position(card, (Vector2) card.get("starting_pos"));
 		}
 
 	}
@@ -132,10 +144,9 @@ public class PlayerHand extends Node2D {
 	public void remove_card_from_hand() {
 		for (int i = 0; i < player_hand.size(); i++) {
 			if (player_hand.get(i).get("in_slot").equals(true)) {
+				//GD.INSTANCE.print(player_hand.get(i).get("Starting_pos"));
 				player_hand.remove(i);
 			}
-
-				update_hand_position();
 			}
 
 	}
@@ -144,8 +155,18 @@ public class PlayerHand extends Node2D {
 	//cette fonction ne sert qu'a être appelée grâce .call pour exécuter d'autres trucs 
 	@RegisterFunction
 	public void quoi() {
-		//CardManagerRef.get("cardDragged");
 		//GD.INSTANCE.print("feur");
 		remove_card_from_hand();
+		//keep this here and not inside removecard func if you don't want it to explode
+		update_hand_position();
+	}
+
+	@RegisterFunction
+	public void drawing() {
+
+		//I just get the last card instanciated in card manager
+		drawingcard = cardManager.getChild(-1);
+		add_card_to_hand(drawingcard);
+		update_hand_position();
 	}
 }
