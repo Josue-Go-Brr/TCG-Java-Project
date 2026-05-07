@@ -37,6 +37,6 @@ position = Vector2(1279, 615)
 scale = Vector2(0.65, 0.65)
 
 [node name="Deck" parent="." instance=ExtResource("4_brvut")]
-position = Vector2(350, 890)
+position = Vector2(350, 700)
 
 [node name="CardDB" parent="." instance=ExtResource("5_0ha60")]

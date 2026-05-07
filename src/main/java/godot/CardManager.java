@@ -42,7 +42,6 @@ public class CardManager extends Node2D {
 	public void _process(double delta) {
 
 		if (cardDragged != null){
-
 			Vector2 mouse_Position = getGlobalMousePosition();
 			//We made a custom clamp func to achieve this, the cards are know confined in the viewport
 			Vector2 drag = new Vector2(clamp(mouse_Position.getX(), 0, screen_Size.getEnd().getX()),
@@ -86,7 +85,6 @@ public class CardManager extends Node2D {
 	public Node2D _raycast_check_for_card(){
 		PhysicsDirectSpaceState2D space_state = getWorld2d().getDirectSpaceState();
 		PhysicsPointQueryParameters2D parameters = new PhysicsPointQueryParameters2D();
-
 		parameters.setPosition(getGlobalMousePosition());
 		parameters.setCollideWithAreas(true);
 		parameters.setCollisionMask(COLLISION_MASK_CARD);
@@ -184,14 +182,17 @@ public class CardManager extends Node2D {
 		//since card_slot_found.get returns an object the .equals method is used instead
 		if (card_slot_found != null && card_slot_found.get("card_in_slot").equals(false)) {
 
-			cardDragged.setPosition(card_slot_found.getPosition());
 
+
+			cardDragged.setPosition(card_slot_found.getPosition());
 			//Basic solution is to disable the collision of the card
 			//Never trust shown name, right click > copy property path is safer
-			cardDragged.getNode("Area2D/CollisionShape2D").set("disabled", true);
 			//if you want to make things with those cards later on use those instead:
-			//cardDragged.getNode("Area2D").set("collision_mask", 2);
+			//cardDragged.getNode("Area2D").get("collision_mask");
 			//cardDragged.getNode("Area2D").set("collision_layer", 2);
+			cardDragged.getNode("Area2D/CollisionShape2D").set("disabled", true);
+
+
 
 
 			// I made a variable in each CardSlots, when true the slot is occupied

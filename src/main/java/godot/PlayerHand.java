@@ -24,7 +24,7 @@ public class PlayerHand extends Node2D {
 	public Node game_deck_ref;
 	public Node cardManager;
 
-	public int HAND_COUNT = 5;
+	public int HAND_SIZE;
 	List<Node> player_hand = new ArrayList<>();
 
 	int CARD_WIDTH = 130;
@@ -95,10 +95,9 @@ public class PlayerHand extends Node2D {
 
 	@RegisterFunction
 	public void add_card_to_hand(Node card) {
-		GD.INSTANCE.print("niquel");
-		player_hand.add(0, card);
 		if (!player_hand.contains(card)) {
 			player_hand.add(0, card);
+			HAND_SIZE = player_hand.size();
 			GD.INSTANCE.print("added!");
 			update_hand_position();
 		}
@@ -143,10 +142,12 @@ public class PlayerHand extends Node2D {
 	@RegisterFunction
 	public void remove_card_from_hand() {
 		for (int i = 0; i < player_hand.size(); i++) {
+
 			if (player_hand.get(i).get("in_slot").equals(true)) {
 				//GD.INSTANCE.print(player_hand.get(i).get("Starting_pos"));
 				player_hand.remove(i);
 			}
+				GD.INSTANCE.print(player_hand);
 			}
 
 	}
@@ -163,10 +164,10 @@ public class PlayerHand extends Node2D {
 
 	@RegisterFunction
 	public void drawing() {
+		drawingcard = cardManager.getChild(-1);
 
 		//I just get the last card instanciated in card manager
-		drawingcard = cardManager.getChild(-1);
 		add_card_to_hand(drawingcard);
-		update_hand_position();
+
+		}
 	}
-}

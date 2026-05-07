@@ -1,14 +1,10 @@
 package godot;
-
 import godot.annotation.Export;
 import godot.annotation.RegisterClass;
 import godot.annotation.RegisterFunction;
 import godot.annotation.RegisterProperty;
 import godot.api.*;
-import godot.core.Dictionary;
-import godot.core.Signal;
-import godot.core.VariantArray;
-import godot.core.Vector2;
+import godot.core.*;
 import godot.global.GD;
 
 import java.lang.Object;
@@ -17,12 +13,14 @@ import java.lang.Object;
 public class Card extends Node2D {
 
 	@RegisterProperty @Export
+
 	public boolean in_slot = false;
+
 	public Vector2 starting_pos = new Vector2();
 	public Vector2 hovered_off = new Vector2(0.6, 0.6);
 	public Vector2 hovered_on = new Vector2(0.7, 0.7);
 	
-	public String cardID = "";
+	public StringName cardID;
 	public String name = "";
 	public int atk;
 	public int defense;
@@ -32,18 +30,35 @@ public class Card extends Node2D {
 	public CardDB db;		// Attribut DATABASE
 	public CardData data;		// Attribut de Données d'une carte
 
+	//this is used to get the last card instaciated
+	public Node cardManager;
+	public Node player_hand_ref;
+	public Node card;
+
 	@RegisterFunction
 	@Override
 	public void _ready(){
+		player_hand_ref = getNode("../../PlayerHand");
+		cardManager = getNode("../Cardmanager");
+		db = (CardDB) getNode("/root/main/CardDB");	// Récupération de la DATABASE
+	}
 
-		db = (CardDB) getNode("/root/main/CardDB");		// Récupération de la DATABASE
 
-//		if (db == null){		// Affiche si la BDD n'est pas trouvée
-//			GD.INSTANCE.print("Database not found !");
-//			return;
-//		}
+	// This fonction is used to update the card date with the help of her cardID
+	@RegisterFunction
+	public void updatecard() {
 
-		data = db.getCard(cardID);		// Récupére les données de la carte à partir de son ID (définir l'ID dans le Node à la main)
+		//setting the card ID to instanciate the card and then modify the name to avoid conflicts
+		cardID = getName();
+		setName(cardID + (String.valueOf(player_hand_ref.get("cardcompteur"))));
+
+
+		if (db == null){		// Affiche si la BDD n'est pas trouvée
+			GD.INSTANCE.print("Database not found !");
+			return;
+		}
+
+		data = db.getCard(String.valueOf(cardID));		// Récupére les données de la carte à partir de son ID (définir l'ID dans le Node à la main)
 
 		if (data != null){
 
@@ -53,24 +68,26 @@ public class Card extends Node2D {
 			cardSprite = data.image;
 			name = data.name;
 
-			GD.INSTANCE.print("ATK and DEF LOADED : " + atk + " " + defense);
-
 			updateLabel();		// Update Label et Sprite pour qu'ils s'affichent après l'exécution du script de la carte
 			updateSprite();
 		}
 		else {
-			GD.INSTANCE.print("Card not found for id :" + cardID);
+			//GD.INSTANCE.print("Card not found for id :" + cardID);
 		}
 
 	}
 
+
+
 	@RegisterFunction
-	public String getCardID(){
+	public StringName getCardID(){
 		return cardID;
 	}
 
 	@RegisterFunction
 	public void updateLabel(){
+		GD.INSTANCE.print("card Label updated!");
+
 		CardLabel label = (CardLabel) getNode("CardLabelAtkDef");
 		CardLabel label2 = (CardLabel) getNode("CardLabelCost");
 		CardLabel label3 = (CardLabel) getNode("CardLabelName");
@@ -96,15 +113,15 @@ public class Card extends Node2D {
 
 	@RegisterFunction
 	public void updateSprite(){
-		CardSprite sprite = (CardSprite) getNode("CardSprite");
 
-		if (sprite != null){
-			sprite.updateFromCard(this);
-		}
-		else {
-			GD.INSTANCE.print("Sprite not found");
-		}
+		//GD.INSTANCE.print("card sprite updated!");
 
+		//checking if CardSprite exists
+		//GD.INSTANCE.print(getNode("CardSprite").isInsideTree(), " Cardsprite");
+		// GD.INSTANCE.print(getNode("CardSprite").getPropertyList(), " Cardsprite");
+
+		// WHEN YOU WANT TO KNOW A PROPERTY HOVER AND GET Property: THISTHING: NOT THIS
+		getNode("CardSprite").set("texture", cardSprite);
 	}
 
 	@RegisterFunction
