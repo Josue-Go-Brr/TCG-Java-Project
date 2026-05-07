@@ -53,35 +53,42 @@ theme_override_constants/margin_bottom = 16
 
 [node name="MainColumns" type="HBoxContainer" parent="RootMargin"]
 layout_mode = 2
-theme_override_constants/separation = 16
+theme_override_constants/separation = 20
 
 [node name="LeftSide" type="VBoxContainer" parent="RootMargin/MainColumns"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 12
+theme_override_constants/separation = 14
 
 [node name="TopBar" type="HBoxContainer" parent="RootMargin/MainColumns/LeftSide"]
 layout_mode = 2
-theme_override_constants/separation = 8
+theme_override_constants/separation = 22
+alignment = 1
 
 [node name="SearchLabel" type="Label" parent="RootMargin/MainColumns/LeftSide/TopBar"]
+custom_minimum_size = Vector2(100, 54)
 layout_mode = 2
+theme_override_font_sizes/font_size = 17
 text = "Search:"
 vertical_alignment = 1
 
 [node name="SearchInput" type="LineEdit" parent="RootMargin/MainColumns/LeftSide/TopBar"]
-custom_minimum_size = Vector2(220, 0)
+custom_minimum_size = Vector2(340, 52)
 layout_mode = 2
+theme_override_font_sizes/font_size = 16
 placeholder_text = "Search card..."
 
 [node name="TypeLabel" type="Label" parent="RootMargin/MainColumns/LeftSide/TopBar"]
+custom_minimum_size = Vector2(52, 54)
 layout_mode = 2
+theme_override_font_sizes/font_size = 17
 text = "Type:"
 vertical_alignment = 1
 
 [node name="TypeFilter" type="OptionButton" parent="RootMargin/MainColumns/LeftSide/TopBar"]
-custom_minimum_size = Vector2(130, 0)
+custom_minimum_size = Vector2(220, 52)
 layout_mode = 2
+theme_override_font_sizes/font_size = 16
 item_count = 4
 popup/item_0/text = "ALL"
 popup/item_0/id = 0
@@ -93,13 +100,16 @@ popup/item_3/text = "TRAP"
 popup/item_3/id = 3
 
 [node name="SortLabel" type="Label" parent="RootMargin/MainColumns/LeftSide/TopBar"]
+custom_minimum_size = Vector2(72, 54)
 layout_mode = 2
+theme_override_font_sizes/font_size = 17
 text = "Sort by:"
 vertical_alignment = 1
 
 [node name="SortFilter" type="OptionButton" parent="RootMargin/MainColumns/LeftSide/TopBar"]
-custom_minimum_size = Vector2(130, 0)
+custom_minimum_size = Vector2(150, 52)
 layout_mode = 2
+theme_override_font_sizes/font_size = 16
 item_count = 3
 popup/item_0/text = "NAME"
 popup/item_0/id = 0
@@ -109,10 +119,16 @@ popup/item_2/text = "ATK"
 popup/item_2/id = 2
 
 [node name="BackButton" type="Button" parent="RootMargin/MainColumns/LeftSide/TopBar"]
-custom_minimum_size = Vector2(63, 0)
+custom_minimum_size = Vector2(108, 52)
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 17
 text = "Menu"
+
+[node name="DeckButton" type="Button" parent="RootMargin/MainColumns/LeftSide/TopBar"]
+custom_minimum_size = Vector2(108, 52)
+layout_mode = 2
+theme_override_font_sizes/font_size = 17
+text = "Deck"
 
 [node name="CardGridScroll" type="ScrollContainer" parent="RootMargin/MainColumns/LeftSide"]
 layout_mode = 2
@@ -122,25 +138,31 @@ horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 
 [node name="CardArea" type="Control" parent="RootMargin/MainColumns/LeftSide/CardGridScroll"]
-custom_minimum_size = Vector2(0, 500)
+custom_minimum_size = Vector2(0, 620)
 layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="CardGrid" type="GridContainer" parent="RootMargin/MainColumns/LeftSide/CardGridScroll/CardArea"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/h_separation = 10
-theme_override_constants/v_separation = 10
-columns = 4
+theme_override_constants/h_separation = 14
+theme_override_constants/v_separation = 14
+columns = 5
 
 [node name="CardTileTemplate" parent="RootMargin/MainColumns/LeftSide/CardGridScroll/CardArea/CardGrid" instance=ExtResource("4_tile_scene")]
 visible = false
+custom_minimum_size = Vector2(260, 372)
 layout_mode = 2
 
 [node name="EmptyState" type="Label" parent="RootMargin/MainColumns/LeftSide"]
+custom_minimum_size = Vector2(100, 20)
 layout_mode = 2
+theme_override_font_sizes/font_size = 18
 text = "No card found."
 horizontal_alignment = 1
 
 [node name="RightSideDetails" parent="RootMargin/MainColumns" instance=ExtResource("3_details_scene")]
+custom_minimum_size = Vector2(460, 720)
 layout_mode = 2
+
+[connection signal="pressed" from="RootMargin/MainColumns/LeftSide/TopBar/DeckButton" to="." method="_on_deck_button_pressed"]

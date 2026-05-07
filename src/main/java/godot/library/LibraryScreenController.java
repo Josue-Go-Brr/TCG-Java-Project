@@ -29,6 +29,7 @@ import godot.library.ui.LibraryUiBinder;
 public class LibraryScreenController extends Control {
 	private static final String CARD_TILE_SCENE_PATH = "res://scene/Library/card_tile.tscn";
 	private static final String START_MENU_SCENE_PATH = "res://scene/menu/start_menu.tscn";
+	private static final String DECK_SCENE_PATH = "res://scene/deck/deck_screen.tscn";
 	private static final int MANUAL_SCROLL_STEP = 25;
 
 	private LineEdit searchInputNode;
@@ -51,10 +52,10 @@ public class LibraryScreenController extends Control {
 	public void _ready() {
 		GD.INSTANCE.print("[Library] _ready entered");
 
-		searchInputNode = (LineEdit) getNodeOrNull("RootMargin/MainColumns/LeftSide/TopBar/SearchInput");
-		typeFilterNode = (OptionButton) getNodeOrNull("RootMargin/MainColumns/LeftSide/TopBar/TypeFilter");
-		sortFilterNode = (OptionButton) getNodeOrNull("RootMargin/MainColumns/LeftSide/TopBar/SortFilter");
-		backButtonNode = (Button) getNodeOrNull("RootMargin/MainColumns/LeftSide/TopBar/BackButton");
+		searchInputNode = (LineEdit) getNodeOrNull("RootMargin/MainColumns/LeftSide/TopBarColumn/TopBarFilters/SearchInput");
+		typeFilterNode = (OptionButton) getNodeOrNull("RootMargin/MainColumns/LeftSide/TopBarColumn/TopBarFilters/TypeFilter");
+		sortFilterNode = (OptionButton) getNodeOrNull("RootMargin/MainColumns/LeftSide/TopBarColumn/TopBarFilters/SortFilter");
+		backButtonNode = (Button) getNodeOrNull("RootMargin/MainColumns/LeftSide/TopBarColumn/TopBarNav/BackButton");
 		cardGridScrollNode = (ScrollContainer) getNodeOrNull("RootMargin/MainColumns/LeftSide/CardGridScroll");
 		cardGridNode = (GridContainer) getNodeOrNull("RootMargin/MainColumns/LeftSide/CardGridScroll/CardArea/CardGrid");
 		emptyStateNode = (Label) getNodeOrNull("RootMargin/MainColumns/LeftSide/EmptyState");
@@ -194,6 +195,16 @@ public class LibraryScreenController extends Control {
 	@RegisterFunction
 	public void _on_back_button_pressed() {
 		getTree().changeSceneToFile(START_MENU_SCENE_PATH);
+	}
+
+	@RegisterFunction
+	public void _on_deck_button_pressed() {
+		callDeferred(StringNames.toGodotName("_deferred_change_scene_to_deck"));
+	}
+
+	@RegisterFunction
+	public void _deferred_change_scene_to_deck() {
+		getTree().changeSceneToFile(DECK_SCENE_PATH);
 	}
 
 }

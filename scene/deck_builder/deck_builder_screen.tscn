@@ -61,8 +61,10 @@ size_flags_horizontal = 3
 theme_override_constants/separation = 12
 
 [node name="TopBar" type="HBoxContainer" parent="RootMargin/MainColumns/LeftSide"]
+custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
 theme_override_constants/separation = 8
+alignment = 1
 
 [node name="SearchLabel" type="Label" parent="RootMargin/MainColumns/LeftSide/TopBar"]
 layout_mode = 2
@@ -149,7 +151,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
-columns = 4
+columns = 7
 
 [node name="CardTileTemplate" parent="RootMargin/MainColumns/LeftSide/CardGridScroll/CardArea/CardGrid" instance=ExtResource("5_tile_scene")]
 visible = false
