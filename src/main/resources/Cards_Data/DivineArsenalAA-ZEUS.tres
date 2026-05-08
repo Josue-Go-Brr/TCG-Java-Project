@@ -7,8 +7,9 @@
 script = ExtResource("1_bgaso")
 id = "Divine_Arsenal_AA-ZEUS"
 name = "Divine Arsenal AA-ZEUS"
-alphabetical_id = 11
+alphabetical_id = 14
 type = "MONSTER"
+monster_type = "Machine"
 cost = 7
 atk = 3000
 defense = 3000

@@ -7,8 +7,9 @@
 script = ExtResource("1_etp7h")
 id = "Dark_Magician"
 name = "Dark Magician"
-alphabetical_id = 6
+alphabetical_id = 9
 type = "MONSTER"
+monster_type = "Spellcaster"
 cost = 6
 atk = 2500
 defense = 2100

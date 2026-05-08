@@ -7,8 +7,9 @@
 script = ExtResource("1_3ysnx")
 id = "Summoned_Skull"
 name = "Summoned Skull"
-alphabetical_id = 28
+alphabetical_id = 43
 type = "MONSTER"
+monster_type = "Demon"
 cost = 6
 atk = 2500
 defense = 1200

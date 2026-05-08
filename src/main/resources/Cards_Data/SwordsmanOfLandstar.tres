@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3 uid="uid://dgwtciib6psjl"]
+
+[ext_resource type="Script" uid="uid://cjyi6kw1mh1pk" path="res://scripts/godot/CardData.gdj" id="1_cfl3t"]
+[ext_resource type="Texture2D" uid="uid://bdwxk8c8xo4qw" path="res://assets/sprites/CartesMonstre/Swordsman of Landstar.png" id="1_xsmyr"]
+
+[resource]
+script = ExtResource("1_cfl3t")
+id = "Swordsman_of_Landstar"
+name = "Swordsman of Landstar"
+alphabetical_id = 44
+type = "MONSTER"
+monster_type = "Warrior"
+cost = 3
+atk = 500
+defense = 1200
+description = "An amateur with a sword, this fairy warrior relies on its mysterious powers."
+image = ExtResource("1_xsmyr")
+image_path = "res://assets/sprites/CartesMonstre/Swordsman of Landstar.png"
+metadata/_custom_type_script = "uid://cjyi6kw1mh1pk"

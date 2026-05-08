@@ -7,8 +7,9 @@
 script = ExtResource("1_4eapm")
 id = "Left_Arm_of_the_Forbidden_One"
 name = "Left Arm of the Forbidden One"
-alphabetical_id = 13
+alphabetical_id = 25
 type = "MONSTER"
+monster_type = "Spellcaster"
 cost = 2
 atk = 200
 defense = 300

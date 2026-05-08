@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3 uid="uid://dey8yncmrutui"]
+
+[ext_resource type="Script" uid="uid://cjyi6kw1mh1pk" path="res://scripts/godot/CardData.gdj" id="1_dntgr"]
+[ext_resource type="Texture2D" uid="uid://d3qa4kuu5xekn" path="res://assets/sprites/CartesMonstre/Chu-Ske the Mouse Fighter.png" id="1_e6dub"]
+
+[resource]
+script = ExtResource("1_dntgr")
+id = "Chu-Ske_the_Mouse_Fighter"
+name = "Chu-Ske the Mouse Fighter"
+alphabetical_id = 5
+type = "MONSTER"
+monster_type = "Beast"
+cost = 3
+atk = 1200
+defense = 0
+description = "A fiery mouse, travelling the world to become the strongest fighter in the world of mice. Be careful not to touch him, or you will get burned."
+image = ExtResource("1_e6dub")
+image_path = "res://assets/sprites/CartesMonstre/Chu-Ske the Mouse Fighter.png"
+metadata/_custom_type_script = "uid://cjyi6kw1mh1pk"

@@ -7,8 +7,9 @@
 script = ExtResource("1_o2upp")
 id = "Revival_Jam"
 name = "Revival Jam"
-alphabetical_id = 22
+alphabetical_id = 36
 type = "MONSTER"
+monster_type = "Aqua"
 cost = 4
 atk = 1500
 defense = 500
