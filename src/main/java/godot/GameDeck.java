@@ -51,7 +51,7 @@ public class GameDeck extends Node2D {
 
 		if (!player_deck.isEmpty()) {
 
-			//I get the first card
+			//I get the first card, you can make an random number here
 			id = player_deck.get(0);
 
 			//remove the card from the deck
@@ -83,9 +83,15 @@ public class GameDeck extends Node2D {
 			cardcompteur += 1;
 			player_hand_ref.set("cardcompteur", cardcompteur);
 
+
+			Card.set("position",  this.get("position"));
+			AnimationPlayer anim = (AnimationPlayer) Card.getNode("AnimationPlayer");
+			anim.play("card_flip");
+
 			//to call addtohand from PlayerHand
 			player_hand_ref.call("drawing");
-		}
 
+
+		}
 	}
 }

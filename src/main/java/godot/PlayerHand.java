@@ -136,7 +136,7 @@ public class PlayerHand extends Node2D {
 	@RegisterFunction
 	public void animate_card_to_position(Node Card, Vector2 new_position) {
 		Tween replace = getTree().createTween();
-		replace.tweenProperty(Card, "position", new_position, 0.1);
+		replace.tweenProperty(Card, "position", new_position, 0.2);
 	}
 
 	@RegisterFunction

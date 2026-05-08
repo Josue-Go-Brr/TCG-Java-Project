@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://dycoucv5h78hw"]
+[gd_scene load_steps=11 format=3 uid="uid://dycoucv5h78hw"]
 
 [ext_resource type="Script" uid="uid://cps13nbmhe0do" path="res://src/main/java/godot/Card.java" id="1_gw1lc"]
+[ext_resource type="Texture2D" uid="uid://bjwajby5jffb8" path="res://assets/sprites/Autres/monstercard.webp" id="2_g4cc7"]
 [ext_resource type="FontFile" uid="uid://xc5qs11fov6e" path="res://assets/fonts/TCG fonts/Stone Serif Semibold.ttf" id="2_md2gi"]
-[ext_resource type="Script" uid="uid://c7ljm7hhfomeq" path="res://src/main/java/godot/CardLabel.java" id="3_lu544"]
-[ext_resource type="FontFile" uid="uid://4bfo6wrbxuil" path="res://assets/fonts/TCG fonts/Yu-Gi-Oh! ITC Stone Serif Small Caps Bold.ttf" id="4_g4cc7"]
 [ext_resource type="Texture2D" uid="uid://co3wfjv2t0377" path="res://assets/sprites/CartesMonstre/BlacklandFireDragon.png" id="4_irop6"]
 [ext_resource type="Script" uid="uid://cedmmmmtc4god" path="res://src/main/java/godot/CardSprite.java" id="4_md2gi"]
 
@@ -15,58 +14,235 @@ default_font_size = 15
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gw1lc"]
 size = Vector2(1024.17, 1480)
 
+[sub_resource type="Animation" id="Animation_irop6"]
+resource_name = "card_flip"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CardLabelAtkDef:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CardLabelCost:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CardLabelName:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CardBackImage:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.348048, 0.345363), Vector2(0.035, 0.35), Vector2(0.35, 0.35)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CardBackImage:z_index")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, -1]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CardSprite:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.1, 1), Vector2(1, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("CardSprite:z_index")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [-1, 0]
+}
+
+[sub_resource type="Animation" id="Animation_g4cc7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CardLabelAtkDef:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CardLabelCost:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CardLabelName:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CardBackImage:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.348048, 0.345363)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CardBackImage:z_index")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CardSprite:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("CardSprite:z_index")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [-1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jdt11"]
+_data = {
+&"RESET": SubResource("Animation_g4cc7"),
+&"card_flip": SubResource("Animation_irop6")
+}
+
 [node name="card" type="Node2D"]
 top_level = true
 scale = Vector2(0.6, 0.6)
 script = ExtResource("1_gw1lc")
 
+[node name="CardBackImage" type="Sprite2D" parent="."]
+position = Vector2(-0.833334, 1.12057e-05)
+scale = Vector2(0.348048, 0.345363)
+texture = ExtResource("2_g4cc7")
+
 [node name="CardSprite" type="Sprite2D" parent="."]
+z_index = -1
 texture = ExtResource("4_irop6")
 script = ExtResource("4_md2gi")
 
-[node name="CardLabelAtkDef" type="Label" parent="."]
+[node name="CardLabelAtkDef" type="RichTextLabel" parent="."]
+modulate = Color(0, 0, 0, 0)
+z_index = 1
 offset_left = -83.0
 offset_top = 76.0
 offset_right = 86.0
 offset_bottom = 130.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_md2gi")
-theme_override_font_sizes/font_size = 17
-script = ExtResource("3_lu544")
-label_i_d = "CardLabelAtkDef"
+text = " "
 
-[node name="CardLabelCost" type="Label" parent="."]
+[node name="CardLabelCost" type="RichTextLabel" parent="."]
+modulate = Color(0, 0, 0, 0)
 offset_left = 42.0
 offset_top = 78.0
 offset_right = 91.0
 offset_bottom = 125.0
-theme_override_colors/font_color = Color(0.618854, 0.748261, 0.952736, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 4
-theme_override_constants/shadow_offset_y = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
-theme_override_fonts/font = ExtResource("4_g4cc7")
-theme_override_font_sizes/font_size = 25
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_offset_x = 4
 horizontal_alignment = 1
 vertical_alignment = 1
-script = ExtResource("3_lu544")
-label_i_d = "CardLabelCost"
 
-[node name="CardLabelName" type="Label" parent="."]
+[node name="CardLabelName" type="RichTextLabel" parent="."]
+modulate = Color(0, 0, 0, 0)
 offset_left = -87.0
 offset_top = -138.0
 offset_right = 93.0
 offset_bottom = -114.0
 theme = SubResource("Theme_g4cc7")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 1
 text = "Dark Magician"
 vertical_alignment = 1
-autowrap_mode = 3
-ellipsis_char = ""
-script = ExtResource("3_lu544")
-label_i_d = "CardLabelName"
 
 [node name="Area2D" type="Area2D" parent="."]
 scale = Vector2(0.2, 0.2)
@@ -74,6 +250,11 @@ scale = Vector2(0.2, 0.2)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-3.75002, 0)
 shape = SubResource("RectangleShape2D_gw1lc")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_jdt11")
+}
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

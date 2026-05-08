@@ -19,7 +19,8 @@ public class Card extends Node2D {
 	public Vector2 starting_pos = new Vector2();
 	public Vector2 hovered_off = new Vector2(0.6, 0.6);
 	public Vector2 hovered_on = new Vector2(0.7, 0.7);
-	
+
+	public String labelID = "";
 	public StringName cardID;
 	public String name = "";
 	public int atk;
@@ -68,8 +69,9 @@ public class Card extends Node2D {
 			cardSprite = data.image;
 			name = data.name;
 
-			updateLabel();		// Update Label et Sprite pour qu'ils s'affichent après l'exécution du script de la carte
 			updateSprite();
+			updateLabel();		// Update Label et Sprite pour qu'ils s'affichent après l'exécution du script de la carte
+
 		}
 		else {
 			//GD.INSTANCE.print("Card not found for id :" + cardID);
@@ -88,28 +90,16 @@ public class Card extends Node2D {
 	public void updateLabel(){
 		GD.INSTANCE.print("card Label updated!");
 
-		CardLabel label = (CardLabel) getNode("CardLabelAtkDef");
-		CardLabel label2 = (CardLabel) getNode("CardLabelCost");
-		CardLabel label3 = (CardLabel) getNode("CardLabelName");
-		if (label != null){
-			label.updateFromCard(this);
-		}
-		else {
-			GD.INSTANCE.print("Label not found");
-		}
-		if (label2 != null){
-			label2.updateFromCard(this);
-		}
-		else {
-			GD.INSTANCE.print("Label 2 not found");
-		}
-		if (label3 != null){
-			label3.updateFromCard(this);
-		}
-		else {
-			GD.INSTANCE.print("Label 3 not found");
-		}
+		RichTextLabel label = (RichTextLabel) getNode("CardLabelAtkDef");
+		RichTextLabel  label2 = (RichTextLabel) getNode("CardLabelCost");
+		RichTextLabel  label3 = (RichTextLabel) getNode("CardLabelName");
+
+		label.setText("ATK : " + this.atk + "\nDEF : " + this.defense);
+		label2.setText(String.valueOf(this.cost));
+		label3.setText(this.name);
+
 	}
+
 
 	@RegisterFunction
 	public void updateSprite(){
