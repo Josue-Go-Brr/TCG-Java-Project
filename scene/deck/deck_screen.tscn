@@ -60,28 +60,29 @@ theme_override_constants/separation = 12
 
 [node name="TopBar" type="HBoxContainer" parent="RootMargin/MainColumns/LeftSide"]
 layout_mode = 2
-theme_override_constants/separation = 20
+theme_override_constants/separation = 25
 alignment = 1
 
 [node name="DeckCountLabel" type="Label" parent="RootMargin/MainColumns/LeftSide/TopBar"]
 modulate = Color(0.75, 0.75, 0.75, 1)
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 40
 text = "Deck: 0/40 — Invalid"
 vertical_alignment = 1
 
 [node name="SaveDeckButton" type="Button" parent="RootMargin/MainColumns/LeftSide/TopBar"]
 modulate = Color(0.7, 0.7, 0.7, 1)
-custom_minimum_size = Vector2(140, 42)
+custom_minimum_size = Vector2(190, 50)
 layout_mode = 2
-theme_override_font_sizes/font_size = 16
+theme_override_colors/icon_pressed_color = Color(0.0313726, 0.258824, 0.160784, 1)
+theme_override_font_sizes/font_size = 30
 text = "Save deck"
 
 [node name="ClearDeckButton" type="Button" parent="RootMargin/MainColumns/LeftSide/TopBar"]
 modulate = Color(0.7, 0.7, 0.7, 1)
-custom_minimum_size = Vector2(140, 42)
+custom_minimum_size = Vector2(190, 50)
 layout_mode = 2
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 30
 text = "Clear deck"
 
 [node name="MenuSpacer" type="Control" parent="RootMargin/MainColumns/LeftSide/TopBar"]
@@ -90,16 +91,16 @@ layout_mode = 2
 
 [node name="BackButton" type="Button" parent="RootMargin/MainColumns/LeftSide/TopBar"]
 modulate = Color(0.7, 0.7, 0.7, 1)
-custom_minimum_size = Vector2(100, 42)
+custom_minimum_size = Vector2(190, 50)
 layout_mode = 2
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 30
 text = "Menu"
 
 [node name="DeckBuilderButton" type="Button" parent="RootMargin/MainColumns/LeftSide/TopBar"]
 modulate = Color(0.7, 0.7, 0.7, 1)
-custom_minimum_size = Vector2(170, 42)
+custom_minimum_size = Vector2(200, 55)
 layout_mode = 2
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 30
 text = "Deck Builder"
 
 [node name="CardGridScroll" type="ScrollContainer" parent="RootMargin/MainColumns/LeftSide"]
@@ -110,16 +111,17 @@ horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 
 [node name="CardArea" type="Control" parent="RootMargin/MainColumns/LeftSide/CardGridScroll"]
-custom_minimum_size = Vector2(0, 500)
+custom_minimum_size = Vector2(0, 620)
 layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="CardGrid" type="GridContainer" parent="RootMargin/MainColumns/LeftSide/CardGridScroll/CardArea"]
 layout_mode = 2
+offset_bottom = 60.0
 size_flags_horizontal = 3
 theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
-columns = 5
+columns = 7
 
 [node name="CardTileTemplate" parent="RootMargin/MainColumns/LeftSide/CardGridScroll/CardArea/CardGrid" instance=ExtResource("4_tile_scene")]
 visible = false
@@ -127,6 +129,7 @@ layout_mode = 2
 
 [node name="EmptyState" type="Label" parent="RootMargin/MainColumns/LeftSide"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 40
 text = "No cards loaded"
 horizontal_alignment = 1
 

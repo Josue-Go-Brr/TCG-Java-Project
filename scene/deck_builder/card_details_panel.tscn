@@ -1,9 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://dbkrddetailpnl"]
+[gd_scene load_steps=2 format=3 uid="uid://c25p0wwptcxxp"]
 
-[ext_resource type="Script" path="res://src/main/java/godot/deckbuilder/DeckBuilderCardDetailsPanelController.java" id="1_deck_details_script"]
+[ext_resource type="Script" uid="uid://d2h78yw7ieu2h" path="res://src/main/java/godot/deckbuilder/DeckBuilderCardDetailsPanelController.java" id="1_deck_details_script"]
 
 [node name="CardDetailsPanel" type="PanelContainer"]
-custom_minimum_size = Vector2(210, 520)
+custom_minimum_size = Vector2(460, 720)
 script = ExtResource("1_deck_details_script")
 
 [node name="Margin" type="MarginContainer" parent="."]
@@ -15,40 +15,43 @@ theme_override_constants/margin_bottom = 12
 
 [node name="Content" type="VBoxContainer" parent="Margin"]
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 20
 
 [node name="CardImage" type="TextureRect" parent="Margin/Content"]
-custom_minimum_size = Vector2(220, 300)
+custom_minimum_size = Vector2(300, 400)
 layout_mode = 2
 expand_mode = 1
 stretch_mode = 5
 
 [node name="CardName" type="Label" parent="Margin/Content"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 25
 text = "Select a card"
 
 [node name="CardType" type="Label" parent="Margin/Content"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 25
 text = "Type: -"
 
 [node name="CardCost" type="Label" parent="Margin/Content"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 25
 text = "Cost: -"
 
 [node name="CopiesInDeckLabel" type="Label" parent="Margin/Content"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 25
 text = "Copies in deck: 0"
 
 [node name="AddCardButton" type="Button" parent="Margin/Content"]
 custom_minimum_size = Vector2(0, 36)
 layout_mode = 2
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 25
 text = "Add card"
 
 [node name="CardDescription" type="RichTextLabel" parent="Margin/Content"]
-custom_minimum_size = Vector2(0, 100)
+custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 25
 text = "Description"

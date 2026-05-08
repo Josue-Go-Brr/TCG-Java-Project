@@ -11,7 +11,6 @@ import godot.global.GD;
 
 @RegisterClass
 public class StartMenuController extends Control {
-
 	private static final NodePath PLAY_BUTTON_PATH =
 			new NodePath("CenterContainer/ButtonStack/PlayButton");
 	private static final NodePath LIBRARY_BUTTON_PATH =
