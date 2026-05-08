@@ -26,6 +26,7 @@ public class Card extends Node2D {
 	public int atk;
 	public int defense;
 	public int cost;
+	public String type;
 	
 	public Texture2D cardSprite;
 	public CardDB db;		// Attribut DATABASE
@@ -68,7 +69,9 @@ public class Card extends Node2D {
 			cost = data.cost;
 			cardSprite = data.image;
 			name = data.name;
+			type = data.type;
 
+			GD.INSTANCE.print(type);
 			updateSprite();
 			updateLabel();		// Update Label et Sprite pour qu'ils s'affichent après l'exécution du script de la carte
 

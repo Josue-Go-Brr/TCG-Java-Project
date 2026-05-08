@@ -13,6 +13,9 @@ import java.lang.Object;
 public class CardManager extends Node2D {
 	@Export
 	@RegisterProperty
+
+
+	public boolean card_played_this_turn = false;
 	public int COLLISION_MASK_CARD_SLOT = 2;
 	public Node2D cardDragged;
 	public Rect2 screen_Size;
@@ -65,6 +68,7 @@ public class CardManager extends Node2D {
 				if (cardDeck != null) {
 					//met une carte en main
 					game_deck_ref.call("draw_card");
+
 				}
 
 				if (card != null){
@@ -179,11 +183,15 @@ public class CardManager extends Node2D {
 	public void stop_drag(){
 		Node2D card_slot_found = _raycast_check_for_card_slot();
 
+		//if (card.get("type").equals("MONSTER"))
+
 		//since card_slot_found.get returns an object the .equals method is used instead
-		if (card_slot_found != null && card_slot_found.get("card_in_slot").equals(false)) {
+		//add this line if you only want to move Monster card cardDragged.get("type").equals("MONSTER")
+		if (card_slot_found != null && card_slot_found.get("card_in_slot").equals(false)
+				&& !card_played_this_turn) {
 
 
-
+			card_played_this_turn = true;
 			cardDragged.setPosition(card_slot_found.getPosition());
 			//Basic solution is to disable the collision of the card
 			//Never trust shown name, right click > copy property path is safer

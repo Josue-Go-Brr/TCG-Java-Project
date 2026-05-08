@@ -12,6 +12,4 @@ public class CardSlot extends Node2D {
 	@Export
 	@RegisterProperty
 	public boolean card_in_slot = false;
-
-
 }

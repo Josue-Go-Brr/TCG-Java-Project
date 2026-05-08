@@ -147,7 +147,7 @@ public class PlayerHand extends Node2D {
 				//GD.INSTANCE.print(player_hand.get(i).get("Starting_pos"));
 				player_hand.remove(i);
 			}
-				GD.INSTANCE.print(player_hand);
+				//GD.INSTANCE.print(player_hand);
 			}
 
 	}

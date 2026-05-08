@@ -1,18 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://myg5lg82w17y"]
+[gd_scene load_steps=6 format=3 uid="uid://ci8t2f8gixj3h"]
 
-[ext_resource type="Script" uid="uid://5os8rlie30wp" path="res://src/main/java/godot/GameDeck.java" id="1_q2gmn"]
-[ext_resource type="Texture2D" uid="uid://bdb6xwpugieec" path="res://assets/sprites/Autres/deck.png" id="2_nifqd"]
+[ext_resource type="Script" uid="uid://5os8rlie30wp" path="res://src/main/java/godot/GameDeck.java" id="1_u0kq4"]
+[ext_resource type="Texture2D" uid="uid://bjwajby5jffb8" path="res://assets/sprites/Autres/monstercard.webp" id="2_e6ty6"]
+[ext_resource type="Texture2D" uid="uid://bbiivmtwbym8m" path="res://assets/sprites/Autres/CardSlotDeckFrame.png" id="3_6bem1"]
+[ext_resource type="FontFile" uid="uid://xc5qs11fov6e" path="res://assets/fonts/TCG fonts/Stone Serif Semibold.ttf" id="4_dh2vg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4j5ol"]
 size = Vector2(128.889, 190)
 
 [node name="Deck" type="Node2D"]
 scale = Vector2(0.9, 0.9)
-script = ExtResource("1_q2gmn")
+script = ExtResource("1_u0kq4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_nifqd")
+position = Vector2(-4.76837e-06, -9.53674e-07)
+scale = Vector2(0.218827, 0.219894)
+texture = ExtResource("2_e6ty6")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4
@@ -21,3 +24,22 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0.000244141, 0)
 shape = SubResource("RectangleShape2D_4j5ol")
+
+[node name="hornement" type="Sprite2D" parent="."]
+position = Vector2(-0.55556, 0.555559)
+scale = Vector2(0.643275, 0.643791)
+texture = ExtResource("3_6bem1")
+
+[node name="CardNumber" type="RichTextLabel" parent="."]
+z_index = 1
+offset_left = -42.0
+offset_top = -38.0
+offset_right = 42.0
+offset_bottom = 40.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/normal_font = ExtResource("4_dh2vg")
+theme_override_font_sizes/normal_font_size = 35
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
