@@ -14,21 +14,25 @@ import java.util.Random;
 
 
 @RegisterClass
-public class GameDeck extends Node2D {
+public class GameDeckEnemy extends Node2D {
 	@Export
 	@RegisterProperty
+
+	//see the enemy cards
+	public boolean debugmode = false;
+
 	public boolean card_drawn = false;
 	public boolean starting_hand = false;
 
 	public String id = "";
-	public List<String> player_deck = new ArrayList<String>();
+	@Export public List<String> enemy_deck = new ArrayList<String>();
+	@Export public Node bestcard;
 	public int cardcompteur = -1;
 	public int random;
-	public Node current_card;
 
 
 	//Calling property
-	public Node player_hand_ref;
+	public Node enemy_hand_ref;
 	public Node cardManager;
 
 
@@ -36,23 +40,23 @@ public class GameDeck extends Node2D {
 	@Override
 	public void _ready() {
 
-		player_hand_ref = getNode("../PlayerHand");
+		enemy_hand_ref = getNode("../EnemyHand");
 		cardManager = getNode("../Cardmanager");
 
 
 		for (int i = 0; i < 10; i++) {
-			player_deck.add("Dark_Blade");
-			player_deck.add("Dark_Magician_Girl");
-			player_deck.add("Blue_Eyes_White_Dragon");
-			player_deck.add("Slifer_The_Sky_Dragon");
+			enemy_deck.add("Dark_Blade");
+			enemy_deck.add("Dark_Magician_Girl");
+			enemy_deck.add("Blue_Eyes_White_Dragon");
+			enemy_deck.add("Slifer_The_Sky_Dragon");
 		}
 
 		for (int i = 0; i < 5; i++) {
 			draw_card();
 		}
 
-		// Label for deck size
-		this.getNode("CardNumber").set("text", String.valueOf(player_deck.size()));
+		// Label for deck size Useless for enemy deck
+		//this.getNode("CardNumber").set("text", String.valueOf(player_deck.size()));
 	}
 
 
@@ -61,18 +65,18 @@ public class GameDeck extends Node2D {
 		if (card_drawn) {
 			return;
 		}
-			if (!player_deck.isEmpty()) {
+			if (!enemy_deck.isEmpty()) {
 
-				random = GD.INSTANCE.randiRange(0, player_deck.size() - 1);
+				random = GD.INSTANCE.randiRange(0, enemy_deck.size() - 1);
 				//I get the first card, you can make an random number here
-				id = player_deck.get(random);
+				id = enemy_deck.get(random);
 
 				//remove the card from the deck
-				player_deck.remove(random);
-				this.getNode("CardNumber").set("text", String.valueOf(player_deck.size()));
+				enemy_deck.remove(random);
+				this.getNode("Deckopp/CardNumber").set("text", String.valueOf(enemy_deck.size()));
 
 				//getting the right scene
-				PackedScene instance = GD.load("res://scene/card.tscn");
+				PackedScene instance = GD.load("res://scene/cardEnemy.tscn");
 
 				//Getting the right Node to make it work with my card functions
 				Node CardManagerPath = getNode("../Cardmanager");
@@ -95,15 +99,19 @@ public class GameDeck extends Node2D {
 
 				//I get this compteur to the other file juste in case
 				cardcompteur += 1;
-				player_hand_ref.set("cardcompteur", cardcompteur);
+				enemy_hand_ref.set("cardcompteur", cardcompteur);
 
 
-				Card.set("position", this.get("position"));
-				AnimationPlayer anim = (AnimationPlayer) Card.getNode("AnimationPlayer");
-				anim.play("card_flip");
+				//Card.set("position", this.get("position"));
+				if (debugmode) {
+					AnimationPlayer anim = (AnimationPlayer) Card.getNode("AnimationPlayer");
+					anim.play("card_flip");
+				}
+
+
 
 				//to call addtohand from PlayerHand
-				player_hand_ref.call("drawing");
+				enemy_hand_ref.call("drawing");
 
 
 			}
