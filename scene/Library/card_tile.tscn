@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://dx3xso4bloex4"]
+[gd_scene load_steps=5 format=3 uid="uid://dx3xso4bloex4"]
 
 [ext_resource type="Script" uid="uid://bxgwq7j71l2p3" path="res://src/main/java/godot/library/CardTileController.java" id="1_card_tile_script"]
+[ext_resource type="Texture2D" uid="uid://co3wfjv2t0377" path="res://assets/sprites/CartesMonstre/BlacklandFireDragon.png" id="2_jwnsp"]
+[ext_resource type="FontFile" uid="uid://xc5qs11fov6e" path="res://assets/fonts/TCG fonts/Stone Serif Semibold.ttf" id="3_qhril"]
+[ext_resource type="FontFile" uid="uid://4bfo6wrbxuil" path="res://assets/fonts/TCG fonts/Yu-Gi-Oh! ITC Stone Serif Small Caps Bold.ttf" id="4_yu721"]
 
 [node name="CardTile" type="PanelContainer"]
 custom_minimum_size = Vector2(260, 372)
@@ -22,6 +25,7 @@ theme_override_constants/separation = 8
 custom_minimum_size = Vector2(240, 304)
 layout_mode = 2
 size_flags_vertical = 3
+texture = ExtResource("2_jwnsp")
 expand_mode = 1
 stretch_mode = 5
 
@@ -36,28 +40,43 @@ mouse_filter = 2
 
 [node name="CardStats" type="Label" parent="Margin/Content/CardImage/Overlay"]
 layout_mode = 0
-offset_left = 14.0
-offset_top = 260.0
-offset_right = 170.0
-offset_bottom = 300.0
-theme_override_font_sizes/font_size = 15
+offset_left = 22.0
+offset_top = 270.0
+offset_right = 178.0
+offset_bottom = 317.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_qhril")
+theme_override_font_sizes/font_size = 18
 text = "ATK: -
 DEF: -"
 
+[node name="CardNameonCard" type="Label" parent="Margin/Content/CardImage/Overlay"]
+offset_left = 21.0
+offset_top = 13.0
+offset_right = 217.0
+offset_bottom = 42.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("3_qhril")
+theme_override_font_sizes/font_size = 16
+text = "Dark Magician"
+vertical_alignment = 1
+autowrap_mode = 3
+
 [node name="CardCostValue" type="Label" parent="Margin/Content/CardImage/Overlay"]
 layout_mode = 0
-offset_left = 186.0
-offset_top = 268.0
-offset_right = 226.0
-offset_bottom = 300.0
-theme_override_font_sizes/font_size = 24
-text = "-"
+offset_left = 173.0
+offset_top = 274.0
+offset_right = 221.0
+offset_bottom = 318.0
+theme_override_colors/font_color = Color(0.619608, 0.74902, 0.952941, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("4_yu721")
+theme_override_font_sizes/font_size = 26
+text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="CardName" type="Label" parent="Margin/Content"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 14
-text = "Card Name"
-horizontal_alignment = 1
-autowrap_mode = 3

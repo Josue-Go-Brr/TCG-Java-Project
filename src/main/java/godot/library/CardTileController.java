@@ -18,6 +18,7 @@ import godot.core.MouseButton;
 public class CardTileController extends PanelContainer {
 	private TextureRect cardImageNode;
 	private Label cardNameNode;
+	private Label cardNameonCardNode;
 	private Label cardStatsNode;
 	private Label cardCostValueNode;
 	private BaseCarte cardData;
@@ -29,6 +30,7 @@ public class CardTileController extends PanelContainer {
 		cardImageNode = (TextureRect) getNodeOrNull("Margin/Content/CardImage");
 		cardStatsNode = (Label) getNodeOrNull("Margin/Content/CardImage/Overlay/CardStats");
 		cardCostValueNode = (Label) getNodeOrNull("Margin/Content/CardImage/Overlay/CardCostValue");
+		cardNameonCardNode = (Label) getNodeOrNull("Margin/Content/CardImage/Overlay/CardNameonCard");
 		cardNameNode = (Label) getNodeOrNull("Margin/Content/CardName");
 		ensureOverlayLabels();
 
@@ -38,6 +40,9 @@ public class CardTileController extends PanelContainer {
 			cardImageNode.setMouseFilter(Control.MouseFilter.IGNORE);
 		}
 		if (cardNameNode != null) {
+			cardNameNode.setMouseFilter(Control.MouseFilter.IGNORE);
+		}
+		if (cardNameonCardNode != null) {
 			cardNameNode.setMouseFilter(Control.MouseFilter.IGNORE);
 		}
 		if (cardStatsNode != null) {
@@ -55,6 +60,9 @@ public class CardTileController extends PanelContainer {
 		}
 		if (cardNameNode != null) {
 			cardNameNode.setText(card.getName());
+		}
+		if (cardNameonCardNode != null){
+			cardNameonCardNode.setText(card.getName());
 		}
 		if (cardImageNode != null) {
 			cardImageNode.setTexture(resolveTexture(card));
