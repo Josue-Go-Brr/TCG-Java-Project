@@ -7,8 +7,9 @@
 script = ExtResource("1_l6sq8")
 id = "Dark_Blade"
 name = "Dark Blade"
-alphabetical_id = 5
+alphabetical_id = 8
 type = "MONSTER"
+monster_type = "Warrior"
 cost = 4
 atk = 1800
 defense = 1500

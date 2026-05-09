@@ -6,9 +6,10 @@
 [resource]
 script = ExtResource("2_wak3j")
 id = "Dark_Magician_Girl_Dragon_Knight"
-name = "Magician Girl Dragon Knight"
-alphabetical_id = 8
+name = "Dark Magician Girl the Dragon Knight"
+alphabetical_id = 11
 type = "MONSTER"
+monster_type = "Warrior"
 cost = 6
 atk = 2600
 defense = 1700
