@@ -9,6 +9,7 @@ id = "Black_Rose_Dragon"
 name = "Black Rose Dragon"
 alphabetical_id = 2
 type = "MONSTER"
+monster_type = "Dragon"
 cost = 6
 atk = 2400
 defense = 1800

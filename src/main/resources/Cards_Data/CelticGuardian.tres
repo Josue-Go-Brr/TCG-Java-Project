@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3 uid="uid://cbhk2r4xlrmku"]
+
+[ext_resource type="Script" uid="uid://cjyi6kw1mh1pk" path="res://scripts/godot/CardData.gdj" id="1_lqy7c"]
+[ext_resource type="Texture2D" uid="uid://phxsc6rndt8y" path="res://assets/sprites/CartesMonstre/Celtic Guardian.png" id="1_xgfke"]
+
+[resource]
+script = ExtResource("1_lqy7c")
+id = "Celtic_Guardian"
+name = "Celtic Guardian"
+alphabetical_id = 4
+type = "MONSTER"
+monster_type = "Elf"
+cost = 4
+atk = 1400
+defense = 1200
+description = "An elf who learned to wield a sword, he baffles enemies with lightning-swift attacks."
+image = ExtResource("1_xgfke")
+image_path = "res://assets/sprites/CartesMonstre/Celtic Guardian.png"
+metadata/_custom_type_script = "uid://cjyi6kw1mh1pk"

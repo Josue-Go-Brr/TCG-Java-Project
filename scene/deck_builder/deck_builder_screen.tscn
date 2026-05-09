@@ -61,27 +61,35 @@ size_flags_horizontal = 3
 theme_override_constants/separation = 12
 
 [node name="TopBar" type="HBoxContainer" parent="RootMargin/MainColumns/LeftSide"]
+custom_minimum_size = Vector2(100, 45)
 layout_mode = 2
-theme_override_constants/separation = 8
+theme_override_constants/separation = 25
+alignment = 1
 
 [node name="SearchLabel" type="Label" parent="RootMargin/MainColumns/LeftSide/TopBar"]
+custom_minimum_size = Vector2(100, 25)
 layout_mode = 2
+theme_override_font_sizes/font_size = 30
 text = "Search:"
 vertical_alignment = 1
 
 [node name="SearchInput" type="LineEdit" parent="RootMargin/MainColumns/LeftSide/TopBar"]
-custom_minimum_size = Vector2(158, 0)
+custom_minimum_size = Vector2(250, 15)
 layout_mode = 2
+theme_override_font_sizes/font_size = 25
 placeholder_text = "Search card..."
 
 [node name="TypeLabel" type="Label" parent="RootMargin/MainColumns/LeftSide/TopBar"]
+custom_minimum_size = Vector2(100, 25)
 layout_mode = 2
+theme_override_font_sizes/font_size = 30
 text = "Type:"
 vertical_alignment = 1
 
 [node name="TypeFilter" type="OptionButton" parent="RootMargin/MainColumns/LeftSide/TopBar"]
-custom_minimum_size = Vector2(105, 0)
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+theme_override_font_sizes/font_size = 25
 item_count = 4
 popup/item_0/text = "ALL"
 popup/item_0/id = 0
@@ -93,13 +101,16 @@ popup/item_3/text = "TRAP"
 popup/item_3/id = 3
 
 [node name="SortLabel" type="Label" parent="RootMargin/MainColumns/LeftSide/TopBar"]
+custom_minimum_size = Vector2(100, 25)
 layout_mode = 2
+theme_override_font_sizes/font_size = 30
 text = "Sort by:"
 vertical_alignment = 1
 
 [node name="SortFilter" type="OptionButton" parent="RootMargin/MainColumns/LeftSide/TopBar"]
-custom_minimum_size = Vector2(105, 0)
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+theme_override_font_sizes/font_size = 25
 item_count = 3
 popup/item_0/text = "NAME"
 popup/item_0/id = 0
@@ -109,15 +120,15 @@ popup/item_2/text = "ATK"
 popup/item_2/id = 2
 
 [node name="BackButton" type="Button" parent="RootMargin/MainColumns/LeftSide/TopBar"]
-custom_minimum_size = Vector2(66, 0)
+custom_minimum_size = Vector2(100, 25)
 layout_mode = 2
-theme_override_font_sizes/font_size = 13
+theme_override_font_sizes/font_size = 28
 text = "Menu"
 
 [node name="BackToDeckButton" type="Button" parent="RootMargin/MainColumns/LeftSide/TopBar"]
-custom_minimum_size = Vector2(126, 0)
+custom_minimum_size = Vector2(100, 25)
 layout_mode = 2
-theme_override_font_sizes/font_size = 13
+theme_override_font_sizes/font_size = 28
 text = "Back to Deck"
 
 [node name="DeckInfoBar" type="HBoxContainer" parent="RootMargin/MainColumns/LeftSide"]
@@ -128,7 +139,7 @@ alignment = 1
 [node name="DeckCardCountLabel" type="Label" parent="RootMargin/MainColumns/LeftSide/DeckInfoBar"]
 custom_minimum_size = Vector2(231, 29)
 layout_mode = 2
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 28
 text = "Deck: 0/40 — Invalid"
 vertical_alignment = 1
 
@@ -140,16 +151,21 @@ horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 
 [node name="CardArea" type="Control" parent="RootMargin/MainColumns/LeftSide/CardGridScroll"]
-custom_minimum_size = Vector2(0, 500)
+custom_minimum_size = Vector2(0, 620)
 layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="CardGrid" type="GridContainer" parent="RootMargin/MainColumns/LeftSide/CardGridScroll/CardArea"]
+custom_minimum_size = Vector2(0, 900)
 layout_mode = 2
+offset_left = -8.0
+offset_top = -13.0
+offset_right = 659.0
+offset_bottom = 942.0
 size_flags_horizontal = 3
 theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
-columns = 4
+columns = 5
 
 [node name="CardTileTemplate" parent="RootMargin/MainColumns/LeftSide/CardGridScroll/CardArea/CardGrid" instance=ExtResource("5_tile_scene")]
 visible = false
@@ -157,6 +173,7 @@ layout_mode = 2
 
 [node name="EmptyState" type="Label" parent="RootMargin/MainColumns/LeftSide"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 40
 text = "No card found."
 horizontal_alignment = 1
 

@@ -6,7 +6,7 @@ fqName = godot.CardLabel
 relativeSourcePath = src/main/java/godot/CardLabel.java
 baseType = Label
 supertypes = [
-    godot.api.Label,
+	godot.api.Label,
 	godot.api.Control,
 	godot.api.CanvasItem,
 	godot.api.Node,
@@ -17,12 +17,12 @@ supertypes = [
 	kotlin.Any
 ]
 signals = [
-    
+	
 ]
 properties = [
-    label_i_d
+	label_i_d
 ]
 functions = [
-    _ready,
+	_ready,
 	update_from_card
 ]

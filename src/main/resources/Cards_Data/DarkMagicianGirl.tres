@@ -7,11 +7,12 @@
 script = ExtResource("1_o6isf")
 id = "Dark_Magician_Girl"
 name = "Dark Magician Girl"
-alphabetical_id = 7
+alphabetical_id = 10
 type = "MONSTER"
+monster_type = "Spellcaster"
 cost = 5
 atk = 2000
-defense = 700
+defense = 1700
 description = "A young female magician who learned magic from the powerful Dark Magician."
 image = ExtResource("1_btw7l")
 image_path = "res://assets/sprites/CartesMonstre/DarkMagicianGirl.png"

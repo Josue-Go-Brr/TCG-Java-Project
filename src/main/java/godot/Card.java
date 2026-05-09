@@ -16,12 +16,18 @@ import java.lang.Object;
 @RegisterClass
 public class Card extends Node2D {
 
-
-	@RegisterProperty @Export public String cardID = "";
-	@RegisterProperty @Export public String name = "";
-	@RegisterProperty @Export public int atk;
-	@RegisterProperty @Export public int defense;
-	@RegisterProperty @Export public int cost;
+	@RegisterProperty @Export
+	public boolean in_slot = false;
+	public Vector2 starting_pos = new Vector2();
+	public Vector2 hovered_off = new Vector2(0.6, 0.6);
+	public Vector2 hovered_on = new Vector2(0.7, 0.7);
+	
+	public String cardID = "";
+	public String name = "";
+	public int atk;
+	public int defense;
+	public int cost;
+	
 	public Texture2D cardSprite;
 	public CardDB db;		// Attribut DATABASE
 	public CardData data;		// Attribut de Données d'une carte
@@ -103,13 +109,13 @@ public class Card extends Node2D {
 
 	@RegisterFunction
 	public void _on_area_2d_mouse_entered() {
-		setScale(new Vector2(1.05, 1.05));
+		setScale(hovered_on);
 		this.setZIndex(2);
 	}
 
 	@RegisterFunction
 	public void _on_area_2d_mouse_exited() {
-		setScale(new Vector2(1, 1));
+		setScale(hovered_off);
 		this.setZIndex(1);
 	}
 

@@ -13,10 +13,11 @@ default_font = ExtResource("2_md2gi")
 default_font_size = 15
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gw1lc"]
-size = Vector2(1015, 1480)
+size = Vector2(1024.17, 1480)
 
 [node name="card" type="Node2D"]
 top_level = true
+scale = Vector2(0.6, 0.6)
 script = ExtResource("1_gw1lc")
 
 [node name="CardSprite" type="Sprite2D" parent="."]
@@ -47,6 +48,7 @@ theme_override_constants/shadow_offset_y = 2
 theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("4_g4cc7")
 theme_override_font_sizes/font_size = 25
+text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("3_lu544")
@@ -71,7 +73,7 @@ label_i_d = "CardLabelName"
 scale = Vector2(0.2, 0.2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-1.42109e-14, 2.84217e-14)
+position = Vector2(-3.75002, 0)
 shape = SubResource("RectangleShape2D_gw1lc")
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]

@@ -7,12 +7,13 @@
 script = ExtResource("1_1eki6")
 id = "Ojama_King"
 name = "Ojama King"
-alphabetical_id = 19
+alphabetical_id = 33
 type = "MONSTER"
+monster_type = "Beast"
 cost = 6
-atk = 0
+atk = 2000
 defense = 3000
-description = "\"Ojama Green\" + \"Ojama Yellow\" + \"Ojama Black\"Select up to 3 of your opponent's Monster Card Zones. The selected zones cannot be used."
+description = "The King of the Ojama's, he is as weird as his servants."
 image = ExtResource("1_hr6wj")
 image_path = "res://assets/sprites/CartesMonstre/OjamaKing.png"
 metadata/_custom_type_script = "uid://cjyi6kw1mh1pk"

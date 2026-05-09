@@ -13,9 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LibraryGridRenderer {
-	private static final float BASE_MIN_HEIGHT = 500f;
-	private static final float ESTIMATED_TILE_HEIGHT = 280f;
-	private static final float ESTIMATED_VERTICAL_SEPARATION = 10f;
+	private static final float BASE_MIN_HEIGHT = 620f;
+	private static final float ESTIMATED_TILE_HEIGHT = 372f;
+	private static final float ESTIMATED_VERTICAL_SEPARATION = 12f;
 
 	private final GridContainer cardGrid;
 	private final PackedScene cardTileScene;

@@ -6,7 +6,7 @@ fqName = godot.CardSprite
 relativeSourcePath = src/main/java/godot/CardSprite.java
 baseType = Sprite2D
 supertypes = [
-    godot.api.Sprite2D,
+	godot.api.Sprite2D,
 	godot.api.Node2D,
 	godot.api.CanvasItem,
 	godot.api.Node,
@@ -17,12 +17,12 @@ supertypes = [
 	kotlin.Any
 ]
 signals = [
-    
+	
 ]
 properties = [
-    
+	
 ]
 functions = [
-    _ready,
+	_ready,
 	update_from_card
 ]

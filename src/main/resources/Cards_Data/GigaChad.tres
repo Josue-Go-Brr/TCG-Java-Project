@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3 uid="uid://cn1641cs1ojnm"]
+
+[ext_resource type="Script" uid="uid://cjyi6kw1mh1pk" path="res://scripts/godot/CardData.gdj" id="1_4njm4"]
+[ext_resource type="Texture2D" uid="uid://b463wrrpekkyr" path="res://assets/sprites/CartesMonstre/Giga Chad.png" id="1_68m1u"]
+
+[resource]
+script = ExtResource("1_4njm4")
+id = "Giga_Chad"
+name = "Giga Chad"
+alphabetical_id = 20
+type = "MONSTER"
+monster_type = "Rock"
+cost = 4
+atk = 1100
+defense = 1400
+description = "A stone monument from Easter Island that launches laser blasts from its rock-hewn lips."
+image = ExtResource("1_68m1u")
+image_path = "res://assets/sprites/CartesMonstre/Giga Chad.png"
+metadata/_custom_type_script = "uid://cjyi6kw1mh1pk"

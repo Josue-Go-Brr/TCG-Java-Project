@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3 uid="uid://cafnxpjw3i5v5"]
+
+[ext_resource type="Texture2D" uid="uid://bphs53k3kv1xl" path="res://assets/sprites/CartesMonstre/Headless Knight.png" id="1_5hki7"]
+[ext_resource type="Script" uid="uid://cjyi6kw1mh1pk" path="res://scripts/godot/CardData.gdj" id="1_xdt42"]
+
+[resource]
+script = ExtResource("1_xdt42")
+id = "Headless_Knight"
+name = "Headless Knight"
+alphabetical_id = 21
+type = "MONSTER"
+monster_type = "Demon"
+cost = 4
+atk = 1450
+defense = 1700
+description = "A haunted spirit of a falsely accused knight who wanders in search of truth and justice."
+image = ExtResource("1_5hki7")
+image_path = "res://assets/sprites/CartesMonstre/Headless Knight.png"
+metadata/_custom_type_script = "uid://cjyi6kw1mh1pk"

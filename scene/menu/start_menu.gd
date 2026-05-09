@@ -15,7 +15,7 @@ func _ready() -> void:
 
 func _on_play_pressed() -> void:
 	print("Play pressed")
-	get_tree().change_scene_to_file("res://scene/main.tscn")
+	get_tree().change_scene_to_file("res://scene/game.tscn")
 
 func _on_library_pressed() -> void:
 	print("Library pressed")

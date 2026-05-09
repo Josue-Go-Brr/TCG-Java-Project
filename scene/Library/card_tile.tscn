@@ -1,32 +1,80 @@
-[gd_scene load_steps=2 format=3 uid="uid://dx3xso4bloex4"]
+[gd_scene load_steps=4 format=3 uid="uid://dx3xso4bloex4"]
 
 [ext_resource type="Script" uid="uid://bxgwq7j71l2p3" path="res://src/main/java/godot/library/CardTileController.java" id="1_card_tile_script"]
+[ext_resource type="FontFile" uid="uid://xc5qs11fov6e" path="res://assets/fonts/TCG fonts/Stone Serif Semibold.ttf" id="2_stone_serif"]
+[ext_resource type="FontFile" uid="uid://4bfo6wrbxuil" path="res://assets/fonts/TCG fonts/Yu-Gi-Oh! ITC Stone Serif Small Caps Bold.ttf" id="3_ygo_cost"]
 
 [node name="CardTile" type="PanelContainer"]
-custom_minimum_size = Vector2(200, 280)
+custom_minimum_size = Vector2(260, 372)
 size_flags_horizontal = 3
 script = ExtResource("1_card_tile_script")
 
 [node name="Margin" type="MarginContainer" parent="."]
 layout_mode = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
 [node name="Content" type="VBoxContainer" parent="Margin"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
 [node name="CardImage" type="TextureRect" parent="Margin/Content"]
-custom_minimum_size = Vector2(180, 220)
+custom_minimum_size = Vector2(240, 304)
 layout_mode = 2
 size_flags_vertical = 3
 expand_mode = 1
 stretch_mode = 5
 
-[node name="CardName" type="Label" parent="Margin/Content"]
-layout_mode = 2
-text = "Card Name"
+[node name="Overlay" type="Control" parent="Margin/Content/CardImage"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CardStats" type="Label" parent="Margin/Content/CardImage/Overlay"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 271.0
+offset_right = 180.0
+offset_bottom = 318.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_stone_serif")
+theme_override_font_sizes/font_size = 18
+text = "ATK : -
+DEF : -"
+
+[node name="CardCostValue" type="Label" parent="Margin/Content/CardImage/Overlay"]
+layout_mode = 0
+offset_left = 178.0
+offset_top = 278.0
+offset_right = 218.0
+offset_bottom = 310.0
+theme_override_colors/font_color = Color(0.618854, 0.748261, 0.952736, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_ygo_cost")
+theme_override_font_sizes/font_size = 25
+text = "-"
 horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CardName" type="Label" parent="Margin/Content/CardImage/Overlay"]
+layout_mode = 2
+offset_top = 15.0
+offset_right = 240.0
+offset_bottom = 34.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("2_stone_serif")
+theme_override_font_sizes/font_size = 20
+text = "   Card Name"
+vertical_alignment = 1
 autowrap_mode = 3

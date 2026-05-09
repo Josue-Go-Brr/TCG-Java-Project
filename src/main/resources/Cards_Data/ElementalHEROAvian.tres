@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3 uid="uid://b8vopspi72g6m"]
+
+[ext_resource type="Texture2D" uid="uid://dycwt4x3l68os" path="res://assets/sprites/CartesMonstre/Elemental HERO Avian.png" id="1_7aiwe"]
+[ext_resource type="Script" uid="uid://cjyi6kw1mh1pk" path="res://scripts/godot/CardData.gdj" id="1_7na0g"]
+
+[resource]
+script = ExtResource("1_7na0g")
+id = "Elemental_HERO_Avian"
+name = "Elemental HERO Avian"
+alphabetical_id = 15
+type = "MONSTER"
+monster_type = "Warrior"
+cost = 3
+atk = 1000
+defense = 1000
+description = "A winged Elemental HERO who wheels through the sky and manipulates the wind. His signature move, Featherbreak, gives villainy a blow from sky-high."
+image = ExtResource("1_7aiwe")
+image_path = "res://assets/sprites/CartesMonstre/Elemental HERO Avian.png"
+metadata/_custom_type_script = "uid://cjyi6kw1mh1pk"

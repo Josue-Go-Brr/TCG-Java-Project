@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3 uid="uid://cx76ld02y1bro"]
+
+[ext_resource type="Texture2D" uid="uid://ypxvvi6ptgvb" path="res://assets/sprites/CartesMonstre/Jerry Beans Man.png" id="1_61rtj"]
+[ext_resource type="Script" uid="uid://cjyi6kw1mh1pk" path="res://scripts/godot/CardData.gdj" id="1_f307f"]
+
+[resource]
+script = ExtResource("1_f307f")
+id = "Jerry_Beans_Man"
+name = "Jerry Beans Man"
+alphabetical_id = 24
+type = "MONSTER"
+monster_type = "Warriror"
+cost = 3
+atk = 1750
+defense = 0
+description = "Jerry, a bean soldier, believes he is the strongest warrior in the world, but his true abilities are still untested."
+image = ExtResource("1_61rtj")
+image_path = "res://assets/sprites/CartesMonstre/Jerry Beans Man.png"
+metadata/_custom_type_script = "uid://cjyi6kw1mh1pk"

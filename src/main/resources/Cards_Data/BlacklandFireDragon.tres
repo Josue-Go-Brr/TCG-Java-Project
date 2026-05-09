@@ -9,6 +9,7 @@ id = "Blackland_fire_dragon"
 name = "Blackland Fire Dragon"
 alphabetical_id = 1
 type = "MONSTER"
+monster_type = "Dragon"
 cost = 4
 atk = 1500
 defense = 800

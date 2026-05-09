@@ -7,8 +7,9 @@
 script = ExtResource("1_otnf5")
 id = "Stardust_Dragon"
 name = "Stardust Dragon"
-alphabetical_id = 27
+alphabetical_id = 42
 type = "MONSTER"
+monster_type = "Dragon"
 cost = 7
 atk = 2500
 defense = 2000

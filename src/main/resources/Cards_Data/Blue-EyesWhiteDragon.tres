@@ -9,6 +9,7 @@ id = "Blue_Eyes_White_Dragon"
 name = "Blue-Eyes White Dragon"
 alphabetical_id = 3
 type = "MONSTER"
+monster_type = "Dragon"
 cost = 7
 atk = 3000
 defense = 2500

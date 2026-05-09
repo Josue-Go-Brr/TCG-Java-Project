@@ -25,7 +25,11 @@ public class CardData extends Resource{
 
 	@Export
 	@RegisterProperty
-	public String type = "MONSTER";// MONSTER, EFFECT MONSTER MAGIE, TRAP
+	public String type = "MONSTER";// MONSTER, EFFECT MONSTER, MAGIC, TRAP
+
+	@Export
+	@RegisterProperty
+	public String monster_type = "";
 
 	@Export
 	@RegisterProperty

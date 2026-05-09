@@ -6,7 +6,7 @@ fqName = godot.Card
 relativeSourcePath = src/main/java/godot/Card.java
 baseType = Node2D
 supertypes = [
-    godot.api.Node2D,
+	godot.api.Node2D,
 	godot.api.CanvasItem,
 	godot.api.Node,
 	godot.api.Object,
@@ -16,17 +16,17 @@ supertypes = [
 	kotlin.Any
 ]
 signals = [
-    
+	
 ]
 properties = [
-    card_i_d,
+	card_i_d,
 	name,
 	atk,
 	defense,
 	cost
 ]
 functions = [
-    _ready,
+	_ready,
 	get_card_i_d,
 	update_label,
 	update_sprite,
