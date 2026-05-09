@@ -22,6 +22,7 @@ properties = [
 	name,
 	alphabetical_id,
 	type,
+	monster_type,
 	cost,
 	atk,
 	defense,

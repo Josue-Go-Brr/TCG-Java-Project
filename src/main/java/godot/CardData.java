@@ -29,7 +29,7 @@ public class CardData extends Resource{
 
 	@Export
 	@RegisterProperty
-	public String monsterType = "";
+	public String monster_type = "";
 
 	@Export
 	@RegisterProperty

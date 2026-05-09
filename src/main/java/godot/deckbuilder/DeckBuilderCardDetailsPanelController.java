@@ -21,6 +21,7 @@ public class DeckBuilderCardDetailsPanelController extends PanelContainer {
 	private Label cardNameNode;
 	private Label cardTypeNode;
 	private Label cardCostNode;
+	private Label cardMonsterTypeNode;
 	private Label copiesInDeckLabelNode;
 	private RichTextLabel cardDescriptionNode;
 	private Button addCardButtonNode;
@@ -35,6 +36,7 @@ public class DeckBuilderCardDetailsPanelController extends PanelContainer {
 		cardNameNode = (Label) getNodeOrNull("Margin/Content/CardName");
 		cardTypeNode = (Label) getNodeOrNull("Margin/Content/CardType");
 		cardCostNode = (Label) getNodeOrNull("Margin/Content/CardCost");
+		cardMonsterTypeNode = (Label) getNodeOrNull("Margin/Content/CardMonsterType");
 		copiesInDeckLabelNode = (Label) getNodeOrNull("Margin/Content/CopiesInDeckLabel");
 		cardDescriptionNode = (RichTextLabel) getNodeOrNull("Margin/Content/CardDescription");
 		addCardButtonNode = (Button) getNodeOrNull("Margin/Content/AddCardButton");
@@ -73,6 +75,9 @@ public class DeckBuilderCardDetailsPanelController extends PanelContainer {
 		if (cardCostNode != null) {
 			cardCostNode.setText("Cost: " + card.getCost());
 		}
+		if (cardMonsterTypeNode != null) {
+			cardMonsterTypeNode.setText(buildMonsterTypeText(card));
+		}
 		if (cardDescriptionNode != null) {
 			cardDescriptionNode.setText(card.getDescription());
 		}
@@ -100,6 +105,9 @@ public class DeckBuilderCardDetailsPanelController extends PanelContainer {
 		}
 		if (cardCostNode != null) {
 			cardCostNode.setText("Cost: -");
+		}
+		if (cardMonsterTypeNode != null) {
+			cardMonsterTypeNode.setText("Monster type: -");
 		}
 		if (copiesInDeckLabelNode != null) {
 			copiesInDeckLabelNode.setText("Copies in deck: 0");
@@ -150,6 +158,17 @@ public class DeckBuilderCardDetailsPanelController extends PanelContainer {
 			value += " | ATK " + monster.getAttack() + " DEF " + monster.getDefense();
 		}
 		return "Type: " + value;
+	}
+
+	private String buildMonsterTypeText(BaseCarte card) {
+		if (!(card instanceof CarteMonster monster)) {
+			return "Monster type: —";
+		}
+		String monsterType = monster.getMonsterType();
+		if (monsterType == null || monsterType.isBlank()) {
+			return "Monster type: —";
+		}
+		return "Monster type: " + monsterType;
 	}
 
 	private Texture2D loadTexture(String path) {

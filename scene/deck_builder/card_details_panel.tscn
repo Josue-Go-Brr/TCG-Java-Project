@@ -38,6 +38,11 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Cost: -"
 
+[node name="CardMonsterType" type="Label" parent="Margin/Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Monster type: -"
+
 [node name="CopiesInDeckLabel" type="Label" parent="Margin/Content"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
