@@ -49,6 +49,7 @@ public class CardLibrary {
 		}
 		int cost = resource.cost;
 		String type = safe(resource.type).toUpperCase();
+		String effect = safe(resource.description);
 		return switch (type) {
 			case "MAGIE" -> new CarteMagie(
 				id, name, cost, description, image, imagePath, "none"
@@ -57,7 +58,7 @@ public class CardLibrary {
 				id, name, cost, description, image, imagePath, "none"
 			);
 			default -> new CarteMonster(
-				id, name, cost, description, image, imagePath, resource.atk, resource.defense, "none"
+				id, name, cost, description, image, imagePath, resource.atk, resource.defense, effect
 			);
 		};
 	}
