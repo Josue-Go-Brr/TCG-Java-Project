@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://bonscbd130sl5"]
 
 [ext_resource type="Script" uid="uid://bsiptvby6lt5w" path="res://src/main/java/godot/EnemyCard.java" id="1_tv2od"]
-[ext_resource type="Texture2D" uid="uid://bjwajby5jffb8" path="res://assets/sprites/Autres/monstercard.webp" id="2_7uaap"]
+[ext_resource type="Texture2D" uid="uid://cmejajvwu6p13" path="res://assets/sprites/Autres/monstercardOpp.png" id="2_tv2od"]
 [ext_resource type="Texture2D" uid="uid://co3wfjv2t0377" path="res://assets/sprites/CartesMonstre/BlacklandFireDragon.png" id="3_nje03"]
 [ext_resource type="Script" uid="uid://cedmmmmtc4god" path="res://src/main/java/godot/CardSprite.java" id="4_f735c"]
 [ext_resource type="FontFile" uid="uid://xc5qs11fov6e" path="res://assets/fonts/TCG fonts/Stone Serif Semibold.ttf" id="5_kenqy"]
@@ -201,7 +201,7 @@ script = ExtResource("1_tv2od")
 [node name="CardBackImage" type="Sprite2D" parent="."]
 position = Vector2(-0.833334, 1.12057e-05)
 scale = Vector2(0.348048, 0.345363)
-texture = ExtResource("2_7uaap")
+texture = ExtResource("2_tv2od")
 
 [node name="CardSprite" type="Sprite2D" parent="."]
 z_index = -1

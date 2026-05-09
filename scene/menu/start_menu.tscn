@@ -28,6 +28,11 @@ texture = ExtResource("2_bg")
 expand_mode = 1
 stretch_mode = 5
 
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
 [node name="CenterContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15

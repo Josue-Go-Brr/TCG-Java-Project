@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://6k2sbd8yabr5"]
 
 [ext_resource type="Script" uid="uid://b8jto1kh2xja5" path="res://src/main/java/godot/CardSlot.java" id="1_ded6y"]
-[ext_resource type="Texture2D" uid="uid://c0nns58d602ei" path="res://assets/sprites/Autres/CardSlotMonstre.png" id="2_hryih"]
+[ext_resource type="Texture2D" uid="uid://cxpj8mt2esyg8" path="res://assets/sprites/Autres/CardSlotMonstreOpp.png" id="2_j3p8g"]
 
 [node name="CardSlot" type="Node2D"]
 position = Vector2(-34, 158)
@@ -10,4 +10,4 @@ script = ExtResource("1_ded6y")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(4.17233e-07, -1.4782e-05)
 scale = Vector2(0.896552, 0.898649)
-texture = ExtResource("2_hryih")
+texture = ExtResource("2_j3p8g")

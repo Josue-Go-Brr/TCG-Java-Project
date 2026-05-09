@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://g06k41ico0ce"]
 
 [ext_resource type="Script" uid="uid://5os8rlie30wp" path="res://src/main/java/godot/GameDeck.java" id="1_vky2i"]
-[ext_resource type="Texture2D" uid="uid://bjwajby5jffb8" path="res://assets/sprites/Autres/monstercard.webp" id="2_14f6o"]
-[ext_resource type="Texture2D" uid="uid://bbiivmtwbym8m" path="res://assets/sprites/Autres/CardSlotDeckFrame.png" id="3_oycoy"]
+[ext_resource type="Texture2D" uid="uid://cmejajvwu6p13" path="res://assets/sprites/Autres/monstercardOpp.png" id="2_vky2i"]
+[ext_resource type="Texture2D" uid="uid://bgvobtt6ws0f3" path="res://assets/sprites/Autres/OppDeckSlot.png" id="3_vky2i"]
 [ext_resource type="FontFile" uid="uid://xc5qs11fov6e" path="res://assets/fonts/TCG fonts/Stone Serif Semibold.ttf" id="4_whwly"]
 
 [node name="Deck" type="Node2D"]
@@ -12,12 +12,12 @@ script = ExtResource("1_vky2i")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-4.76837e-06, -9.53674e-07)
 scale = Vector2(0.218827, 0.219894)
-texture = ExtResource("2_14f6o")
+texture = ExtResource("2_vky2i")
 
 [node name="hornement" type="Sprite2D" parent="."]
 position = Vector2(-0.55556, 0.555559)
 scale = Vector2(0.643275, 0.643791)
-texture = ExtResource("3_oycoy")
+texture = ExtResource("3_vky2i")
 
 [node name="CardNumber" type="RichTextLabel" parent="."]
 z_index = 1
