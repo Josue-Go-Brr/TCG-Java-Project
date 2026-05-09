@@ -34,6 +34,10 @@ public class PlayerHand extends Node2D {
 
 	public Node drawingcard;
 
+
+
+
+
 	@RegisterFunction
 	@Override
 	public void _ready(){
@@ -98,7 +102,7 @@ public class PlayerHand extends Node2D {
 		if (!player_hand.contains(card)) {
 			player_hand.add(0, card);
 			HAND_SIZE = player_hand.size();
-			GD.INSTANCE.print("added!");
+			//GD.INSTANCE.print("added!");
 			update_hand_position();
 		}
 

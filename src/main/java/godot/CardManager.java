@@ -8,21 +8,34 @@ import godot.api.*;
 import godot.core.*;
 import godot.global.GD;
 import java.lang.Object;
+import java.util.ArrayList;
+import java.util.List;
 
 @RegisterClass
 public class CardManager extends Node2D {
 	@Export
 	@RegisterProperty
 
-
+	//Function for the player rules
 	public boolean card_played_this_turn = false;
+
+	@Export
+	@RegisterProperty
+	public boolean card_drawn_this_turn = false;
+
+	@RegisterProperty @Export
+	public List<Node> player_field = new ArrayList<>();
+
+	//Used with raycast
 	public int COLLISION_MASK_CARD_SLOT = 2;
 	public Node2D cardDragged;
 	public Rect2 screen_Size;
 
+	//references
 	public Node player_hand_ref;
 	public Node game_deck_ref;
 
+	//collision mask
 	public int COLLISION_MASK_DECK = 4;
 	public int COLLISION_MASK_CARD = 1;
 
@@ -65,9 +78,10 @@ public class CardManager extends Node2D {
 				Node2D card = _raycast_check_for_card();
 
 
-				if (cardDeck != null) {
-					//met une carte en main
+				if (cardDeck != null && !card_drawn_this_turn) {
+					//met une carte en main quand on clique sur le deck
 					game_deck_ref.call("draw_card");
+					card_drawn_this_turn = true;
 
 				}
 
@@ -193,6 +207,7 @@ public class CardManager extends Node2D {
 
 			card_played_this_turn = true;
 			cardDragged.setPosition(card_slot_found.getPosition());
+			player_field.add(cardDragged);
 			//Basic solution is to disable the collision of the card
 			//Never trust shown name, right click > copy property path is safer
 			//if you want to make things with those cards later on use those instead:
@@ -201,10 +216,7 @@ public class CardManager extends Node2D {
 			cardDragged.getNode("Area2D/CollisionShape2D").set("disabled", true);
 
 
-
-
 			// I made a variable in each CardSlots, when true the slot is occupied
-
 			card_slot_found.set("card_in_slot", true);
 			cardDragged.set("in_slot", true);
 		}

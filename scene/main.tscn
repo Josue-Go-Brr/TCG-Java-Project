@@ -1,12 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://dfkd35ltv4pqr"]
+[gd_scene load_steps=11 format=3 uid="uid://dfkd35ltv4pqr"]
 
 [ext_resource type="Script" uid="uid://dw53lqsy3v72f" path="res://src/main/java/godot/CardManager.java" id="1_v0l8b"]
 [ext_resource type="Script" uid="uid://rsyefomuqj0a" path="res://src/main/java/godot/PlayerHand.java" id="2_brvut"]
 [ext_resource type="PackedScene" uid="uid://cumnyia0a7g5u" path="res://scene/card_slot.tscn" id="3_0ha60"]
+[ext_resource type="Script" uid="uid://dgkcp57yogy60" path="res://src/main/java/godot/EnemyHand.java" id="4_b5f6u"]
 [ext_resource type="PackedScene" uid="uid://ci8t2f8gixj3h" path="res://scene/deck.tscn" id="4_brvut"]
 [ext_resource type="PackedScene" uid="uid://do7i8mdcl3inq" path="res://scene/card_db.tscn" id="5_0ha60"]
 [ext_resource type="PackedScene" uid="uid://6k2sbd8yabr5" path="res://scene/card_slot_enemy.tscn" id="5_p1hux"]
 [ext_resource type="PackedScene" uid="uid://g06k41ico0ce" path="res://scene/deckopp.tscn" id="6_4j5ol"]
+[ext_resource type="Script" uid="uid://l1m2071a8m1y" path="res://src/main/java/godot/battle_manager.java" id="8_of57s"]
+[ext_resource type="Script" uid="uid://dpleoygnx6lkv" path="res://src/main/java/godot/GameDeckEnemy.java" id="8_tqoya"]
 
 [node name="main" type="Node2D"]
 
@@ -17,6 +20,31 @@ script = ExtResource("1_v0l8b")
 
 [node name="PlayerHand" type="Node2D" parent="."]
 script = ExtResource("2_brvut")
+
+[node name="EnemyHand" type="Node2D" parent="."]
+script = ExtResource("4_b5f6u")
+
+[node name="SlotsEnemy" type="Node2D" parent="."]
+
+[node name="EnemyCardSlot" parent="SlotsEnemy" instance=ExtResource("5_p1hux")]
+position = Vector2(680, 440)
+scale = Vector2(0.65, 0.65)
+
+[node name="EnemyCardSlot2" parent="SlotsEnemy" instance=ExtResource("5_p1hux")]
+position = Vector2(820, 440)
+scale = Vector2(0.65, 0.65)
+
+[node name="EnemyCardSlot3" parent="SlotsEnemy" instance=ExtResource("5_p1hux")]
+position = Vector2(960, 440)
+scale = Vector2(0.65, 0.65)
+
+[node name="EnemyCardSlot4" parent="SlotsEnemy" instance=ExtResource("5_p1hux")]
+position = Vector2(1100, 440)
+scale = Vector2(0.65, 0.65)
+
+[node name="EnemyCardSlot5" parent="SlotsEnemy" instance=ExtResource("5_p1hux")]
+position = Vector2(1240, 440)
+scale = Vector2(0.65, 0.65)
 
 [node name="Slots" type="Node2D" parent="."]
 
@@ -40,30 +68,11 @@ scale = Vector2(0.65, 0.65)
 position = Vector2(1240, 660)
 scale = Vector2(0.65, 0.65)
 
-[node name="EnemyCardSlot" parent="Slots" instance=ExtResource("5_p1hux")]
-position = Vector2(680, 440)
-scale = Vector2(0.65, 0.65)
-
-[node name="EnemyCardSlot2" parent="Slots" instance=ExtResource("5_p1hux")]
-position = Vector2(820, 440)
-scale = Vector2(0.65, 0.65)
-
-[node name="EnemyCardSlot3" parent="Slots" instance=ExtResource("5_p1hux")]
-position = Vector2(960, 440)
-scale = Vector2(0.65, 0.65)
-
-[node name="EnemyCardSlot4" parent="Slots" instance=ExtResource("5_p1hux")]
-position = Vector2(1100, 440)
-scale = Vector2(0.65, 0.65)
-
-[node name="EnemyCardSlot5" parent="Slots" instance=ExtResource("5_p1hux")]
-position = Vector2(1240, 440)
-scale = Vector2(0.65, 0.65)
-
 [node name="Deck" parent="." instance=ExtResource("4_brvut")]
 position = Vector2(350, 700)
 
 [node name="OpponentDeck" type="Node2D" parent="."]
+script = ExtResource("8_tqoya")
 
 [node name="Deckopp" parent="OpponentDeck" instance=ExtResource("6_4j5ol")]
 position = Vector2(1580, 380)
@@ -75,3 +84,11 @@ offset_top = 540.0
 offset_right = 1495.0
 offset_bottom = 571.0
 text = "End turn"
+
+[node name="BattleManager" type="Node" parent="."]
+script = ExtResource("8_of57s")
+
+[node name="AttackTimer" type="Timer" parent="."]
+
+[node name="BattleTimer" type="Timer" parent="."]
+one_shot = true

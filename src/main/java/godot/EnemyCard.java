@@ -10,11 +10,12 @@ import godot.global.GD;
 import java.lang.Object;
 
 @RegisterClass
-public class Card extends Node2D {
+public class EnemyCard extends Node2D {
 
 	@RegisterProperty @Export
 
 	public boolean in_slot = false;
+	@RegisterProperty @Export public Node slot;
 
 	public Vector2 starting_pos = new Vector2();
 	public Vector2 hovered_off = new Vector2(0.6, 0.6);
@@ -26,7 +27,7 @@ public class Card extends Node2D {
 	@RegisterProperty @Export public int atk;
 	@RegisterProperty @Export public int incoming_atk;
 	@RegisterProperty @Export public int defense;
-	public int cost;
+	@RegisterProperty @Export public int cost;
 	public String type;
 	
 	public Texture2D cardSprite;
@@ -35,13 +36,13 @@ public class Card extends Node2D {
 
 	//this is used to get the last card instaciated
 	public Node cardManager;
-	public Node player_hand_ref;
+	public Node enemy_hand_ref;
 	public Node card;
 
 	@RegisterFunction
 	@Override
 	public void _ready(){
-		player_hand_ref = getNode("../../PlayerHand");
+		enemy_hand_ref = getNode("../../PlayerHand");
 		cardManager = getNode("../Cardmanager");
 		db = (CardDB) getNode("/root/main/CardDB");	// Récupération de la DATABASE
 	}
@@ -58,7 +59,7 @@ public class Card extends Node2D {
 
 		//setting the card ID to instanciate the card and then modify the name to avoid conflicts
 		cardID = getName();
-		setName(cardID + (String.valueOf(player_hand_ref.get("cardcompteur"))));
+		setName(cardID + (String.valueOf(enemy_hand_ref.get("cardcompteur"))));
 
 
 		if (db == null){		// Affiche si la BDD n'est pas trouvée
@@ -77,7 +78,7 @@ public class Card extends Node2D {
 			name = data.name;
 			type = data.type;
 
-			GD.INSTANCE.print(type);
+			//GD.INSTANCE.print(type);
 			updateSprite();
 			updateLabel();		// Update Label et Sprite pour qu'ils s'affichent après l'exécution du script de la carte
 
@@ -95,21 +96,23 @@ public class Card extends Node2D {
 		return cardID;
 	}
 
-
 	@RegisterFunction
 	public void updateStats(){
+
+
 		if (incoming_atk != 0) {
 			defense = defense - incoming_atk;
 			if (defense < 0) {
 				defense = 0;
-				//Getting the Player card slots and making the variable card_in_slot false
-				for (int i = 0; i < getNode("../../Slots").getChildCount(); i++) {
-					if (getNode("../../Slots").getChild(i).get("position").equals(this.getPosition())) {
-						getNode("../../Slots").getChild(i).set("card_in_slot", false);
+				//Getting the Player card slots and making the variable card_in_slot false to free the card slot
+				for (int i = 0; i < getNode("../../SlotsEnemy").getChildCount(); i++) {
+					if (getNode("../../SlotsEnemy").getChild(i).get("position").equals(this.getPosition())) {
+						getNode("../../SlotsEnemy").getChild(i).set("card_in_slot", false);
 					}
 				}
 				this.queueFree();
 			}
+
 			incoming_atk = 0;
 			GD.INSTANCE.print("Stats updated");
 			updateLabel();
@@ -144,6 +147,13 @@ public class Card extends Node2D {
 		// WHEN YOU WANT TO KNOW A PROPERTY HOVER AND GET Property: THISTHING: NOT THIS
 		getNode("CardSprite").set("texture", cardSprite);
 	}
+
+
+	@RegisterFunction
+	public void cost() {
+		getNode("../../EnemyHand").set("cost", cost);
+	}
+
 
 	@RegisterFunction
 	public void _on_area_2d_mouse_entered() {
