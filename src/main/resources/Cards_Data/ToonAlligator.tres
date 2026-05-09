@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3 uid="uid://i7ymxhlrqdac"]
+
+[ext_resource type="Texture2D" uid="uid://d3yui58ep5ln2" path="res://assets/sprites/CartesMonstre/Toon Alligator.png" id="1_61oyu"]
+[ext_resource type="Script" uid="uid://cjyi6kw1mh1pk" path="res://scripts/godot/CardData.gdj" id="1_tex4s"]
+
+[resource]
+script = ExtResource("1_tex4s")
+id = "Toon_Alligator"
+name = "Toon Aligator"
+alphabetical_id = 45
+type = "MONSTER"
+monster_type = "Beast"
+cost = 3
+atk = 800
+defense = 1600
+description = "An alligator monster straight from the cartoons."
+image = ExtResource("1_61oyu")
+image_path = "res://assets/sprites/CartesMonstre/Toon Alligator.png"
+metadata/_custom_type_script = "uid://cjyi6kw1mh1pk"

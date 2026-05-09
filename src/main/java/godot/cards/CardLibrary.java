@@ -11,6 +11,19 @@ import java.util.List;
 import java.util.Map;
 
 public class CardLibrary {
+
+	public static final List<String> MONSTER_TYPE_FILTER_OPTIONS = List.of(
+			"Dragon",
+			"Machine",
+			"Warrior",
+			"Demon",
+			"Spellcaster",
+			"Beast",
+			"Divine_Beast",
+			"Aqua Elf",
+			"Rock"
+	);
+
 	private final Map<Integer, BaseCarte> database = new LinkedHashMap<>();
 
 	public CardLibrary(CardDB cardDB) {
@@ -49,6 +62,8 @@ public class CardLibrary {
 		}
 		int cost = resource.cost;
 		String type = safe(resource.type).toUpperCase();
+		String monsterType = safe(resource.monster_type);
+		String effect = safe(resource.description);
 		return switch (type) {
 			case "MAGIE" -> new CarteMagie(
 				id, name, cost, description, image, imagePath, "none"
@@ -57,7 +72,7 @@ public class CardLibrary {
 				id, name, cost, description, image, imagePath, "none"
 			);
 			default -> new CarteMonster(
-				id, name, cost, description, image, imagePath, resource.atk, resource.defense, "none"
+				id, name, cost, description, image, imagePath, resource.atk, resource.defense, monsterType, effect
 			);
 		};
 	}
@@ -73,7 +88,6 @@ public class CardLibrary {
 		return new ArrayList<>(database.values());
 	}
 
-	/** Numeric id assigned when the library was built from {@link CardDB}. */
 	public BaseCarte getCardById(int id) {
 		return database.get(id);
 	}
@@ -130,10 +144,51 @@ public class CardLibrary {
 			}
 		}
 
-		// Sort them by attack (highest to lowest)
+		// Sort them by attack 
 		monstersOnly.sort((monster1, monster2) ->
 				Integer.compare(monster2.getAttack(), monster1.getAttack()));
 
 		return monstersOnly;
+	}
+
+	/** All monster cards, sorted by monster type (then by name). */
+	public List<CarteMonster> sortMonstersByMonsterType() {
+		List<CarteMonster> monstersOnly = new ArrayList<>();
+		for (BaseCarte card : database.values()) {
+			if (card instanceof CarteMonster) {
+				monstersOnly.add((CarteMonster) card);
+			}
+		}
+		monstersOnly.sort(Comparator
+				.comparing(CarteMonster::getMonsterType, String.CASE_INSENSITIVE_ORDER)
+				.thenComparing(CarteMonster::getName, String.CASE_INSENSITIVE_ORDER));
+		return monstersOnly;
+	}
+
+	
+	public List<CarteMonster> getMonstersForMonsterTypeOption(String selectedMonsterType) {
+		if (selectedMonsterType == null || selectedMonsterType.isBlank()) {
+			return sortMonstersByMonsterType();
+		}
+		String want = normalizeMonsterTypeForMatch(selectedMonsterType);
+		List<CarteMonster> filtered = new ArrayList<>();
+		for (BaseCarte card : database.values()) {
+			if (!(card instanceof CarteMonster monster)) {
+				continue;
+			}
+			if (normalizeMonsterTypeForMatch(monster.getMonsterType()).equals(want)) {
+				filtered.add(monster);
+			}
+		}
+		filtered.sort(Comparator.comparing(CarteMonster::getName, String.CASE_INSENSITIVE_ORDER));
+		return filtered;
+	}
+
+	private static String normalizeMonsterTypeForMatch(String value) {
+		if (value == null) {
+			return "";
+		}
+		String collapsed = value.trim().replace('_', ' ').replaceAll("\\s+", " ");
+		return collapsed.toLowerCase();
 	}
 }

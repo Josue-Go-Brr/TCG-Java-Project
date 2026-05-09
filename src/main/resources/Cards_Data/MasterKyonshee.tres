@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3 uid="uid://c1j1ns36fm0wk"]
+
+[ext_resource type="Texture2D" uid="uid://cspsla0cspvga" path="res://assets/sprites/CartesMonstre/Master Kyonshee.png" id="1_aepqk"]
+[ext_resource type="Script" uid="uid://cjyi6kw1mh1pk" path="res://scripts/godot/CardData.gdj" id="1_n7xhv"]
+
+[resource]
+script = ExtResource("1_n7xhv")
+id = "Master_Kyonshee"
+name = "Master Kyonshee"
+alphabetical_id = 28
+type = "MONSTER"
+monster_type = "Demon"
+cost = 4
+atk = 1750
+defense = 1000
+description = "A wandering Kyonshee searching for a strong rival to defeat. They say he was known as the master of all martial arts."
+image = ExtResource("1_aepqk")
+image_path = "res://assets/sprites/CartesMonstre/Master Kyonshee.png"
+metadata/_custom_type_script = "uid://cjyi6kw1mh1pk"

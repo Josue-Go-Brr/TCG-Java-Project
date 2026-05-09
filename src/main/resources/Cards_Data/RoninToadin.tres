@@ -7,8 +7,9 @@
 script = ExtResource("2_p3084")
 id = "RoninToadin"
 name = "RoninToadin"
-alphabetical_id = 25
+alphabetical_id = 39
 type = "MONSTER"
+monster_type = "Aqua"
 cost = 3
 atk = 100
 defense = 2000

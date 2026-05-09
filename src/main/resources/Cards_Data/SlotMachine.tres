@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3 uid="uid://dvpl6oh7juhon"]
+
+[ext_resource type="Script" uid="uid://cjyi6kw1mh1pk" path="res://scripts/godot/CardData.gdj" id="1_3ud64"]
+[ext_resource type="Texture2D" uid="uid://kjor17pvj6c8" path="res://assets/sprites/CartesMonstre/Slot Machine.png" id="1_w38x3"]
+
+[resource]
+script = ExtResource("1_3ud64")
+id = "Slot_Machine"
+name = "Slot Machine"
+alphabetical_id = 41
+type = "MONSTER"
+monster_type = "Machine"
+cost = 5
+atk = 2000
+defense = 2300
+description = "The machine's ability is said to vary according to its slot results."
+image = ExtResource("1_w38x3")
+image_path = "res://assets/sprites/CartesMonstre/Slot Machine.png"
+metadata/_custom_type_script = "uid://cjyi6kw1mh1pk"

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3 uid="uid://dohfhepw602rn"]
+
+[ext_resource type="Texture2D" uid="uid://dnsgl68fooxiv" path="res://assets/sprites/CartesMonstre/Cycroid.png" id="1_2r8t3"]
+[ext_resource type="Script" uid="uid://cjyi6kw1mh1pk" path="res://scripts/godot/CardData.gdj" id="1_mnd60"]
+
+[resource]
+script = ExtResource("1_mnd60")
+id = "Cycroid"
+name = "Cycroid"
+alphabetical_id = 7
+type = "MONSTER"
+monster_type = "Machine"
+cost = 3
+atk = 800
+defense = 1000
+description = "The most lovable and friendly of all the Vehicroids. It can arm itself with training wheels!"
+image = ExtResource("1_2r8t3")
+image_path = "res://assets/sprites/CartesMonstre/Cycroid.png"
+metadata/_custom_type_script = "uid://cjyi6kw1mh1pk"

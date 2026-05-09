@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3 uid="uid://biswgjobeea6i"]
+
+[ext_resource type="Script" uid="uid://cjyi6kw1mh1pk" path="res://scripts/godot/CardData.gdj" id="1_c2sff"]
+[ext_resource type="Texture2D" uid="uid://beuddju1emrm4" path="res://assets/sprites/CartesMonstre/Mystical Elf.png" id="1_l1883"]
+
+[resource]
+script = ExtResource("1_c2sff")
+id = "Mystical_Elf"
+name = "Mystical Elf"
+alphabetical_id = 29
+type = "MONSTER"
+monster_type = "Elf"
+cost = 4
+atk = 800
+defense = 2000
+description = "A delicate elf that lacks offense, but has a terrific defense backed by mystical power."
+image = ExtResource("1_l1883")
+image_path = "res://assets/sprites/CartesMonstre/Mystical Elf.png"
+metadata/_custom_type_script = "uid://cjyi6kw1mh1pk"

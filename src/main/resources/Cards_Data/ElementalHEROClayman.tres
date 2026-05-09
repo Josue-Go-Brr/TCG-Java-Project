@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3 uid="uid://dm0yo1v8pufcj"]
+
+[ext_resource type="Texture2D" uid="uid://dh42ab5bduttq" path="res://assets/sprites/CartesMonstre/Elemental HERO Clayman.png" id="1_fhlb1"]
+[ext_resource type="Script" uid="uid://cjyi6kw1mh1pk" path="res://scripts/godot/CardData.gdj" id="1_kx8fu"]
+
+[resource]
+script = ExtResource("1_kx8fu")
+id = "Elemental_HERO_Clayman"
+name = "Elemental HERO Clayman"
+alphabetical_id = 16
+type = "MONSTER"
+monster_type = "Warrior"
+cost = 4
+atk = 800
+defense = 2000
+description = "An Elemental HERO with a clay body built-to-last. He'll preserve his Elemental HERO colleagues at any cost."
+image = ExtResource("1_fhlb1")
+image_path = "res://assets/sprites/CartesMonstre/Elemental HERO Clayman.png"
+metadata/_custom_type_script = "uid://cjyi6kw1mh1pk"

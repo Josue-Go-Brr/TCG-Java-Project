@@ -7,8 +7,9 @@
 script = ExtResource("1_ce0bm")
 id = "Trade_Toad"
 name = "Trade Toad"
-alphabetical_id = 29
+alphabetical_id = 48
 type = "MONSTER"
+monster_type = "Aqua"
 cost = 3
 atk = 100
 defense = 2000

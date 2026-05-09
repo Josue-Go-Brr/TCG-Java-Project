@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=3 format=3 uid="uid://1my3jhxvxkp1"]
+
+[ext_resource type="Script" uid="uid://cjyi6kw1mh1pk" path="res://scripts/godot/CardData.gdj" id="1_bma3c"]
+[ext_resource type="Texture2D" uid="uid://sy0xryl1j3ci" path="res://assets/sprites/CartesMonstre/Elemental HERO Neos.png" id="1_c0ptd"]
+
+[resource]
+script = ExtResource("1_bma3c")
+id = "Elemental_HERO_Neos"
+name = "Elemental HERO Neos"
+alphabetical_id = 17
+type = "MONSTER"
+monster_type = "Warrior"
+cost = 6
+atk = 2500
+defense = 2000
+description = "A new Elemental HERO has arrived from Neo-Space! When he initiates a Contact Fusion with a Neo-Spacian his unknown powers are unleashed."
+image = ExtResource("1_c0ptd")
+image_path = "res://assets/sprites/CartesMonstre/Elemental HERO Neos.png"
+metadata/_custom_type_script = "uid://cjyi6kw1mh1pk"

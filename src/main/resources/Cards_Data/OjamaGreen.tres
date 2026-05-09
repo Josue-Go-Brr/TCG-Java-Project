@@ -7,8 +7,9 @@
 script = ExtResource("1_4nmbb")
 id = "Ojama_Green"
 name = "Ojama Grenn"
-alphabetical_id = 18
+alphabetical_id = 32
 type = "MONSTER"
+monster_type = "Beast"
 cost = 3
 atk = 0
 defense = 1000

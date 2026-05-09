@@ -7,8 +7,9 @@
 script = ExtResource("1_tmh42")
 id = "Red-Eyes_Black_Dragon"
 name = "Red-Eyes Black Dragon"
-alphabetical_id = 21
+alphabetical_id = 35
 type = "MONSTER"
+monster_type = "Dragon"
 cost = 6
 atk = 2400
 defense = 1800

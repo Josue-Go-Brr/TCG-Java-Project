@@ -37,8 +37,16 @@ public class CardDB extends Node {
 					CardData card = (CardData) ResourceLoader.load("res://src/main/resources/Cards_Data/" + file);
 
 					if (card != null && card.id != null){
+						// Defensive sync: ensure monster_type is populated even if JVM field binding misses it.
+						if (card.monster_type == null || card.monster_type.isBlank()) {
+							Object rawMonsterType = card.get("monster_type");
+							if (rawMonsterType instanceof String value) {
+								card.monster_type = value;
+							}
+						}
 						GD.INSTANCE.print(
 								"LOADED : " + card.id +
+								" MONSTER_TYPE : " + card.monster_type +
 								" ATK : " + card.atk +
 								" DEF : " + card.defense
 						);
