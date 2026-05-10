@@ -109,6 +109,8 @@ public class GameDeckEnemy extends Node2D {
 				}
 
 
+				Card.getNode("Area2D").set("collision_layer", 16);
+				Card.getNode("Area2D").set("collision_mask", 16);
 
 				//to call addtohand from PlayerHand
 				enemy_hand_ref.call("drawing");

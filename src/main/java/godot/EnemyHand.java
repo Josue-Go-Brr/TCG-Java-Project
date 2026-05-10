@@ -37,6 +37,8 @@ public class EnemyHand extends Node2D {
 	public List<Node2D> player_slots = new ArrayList<Node2D>();
 	public List<Node2D> enemy_slots = new ArrayList<Node2D>();
 	@Export @RegisterProperty public int compteur = 0;
+	public long EnemyHPcount = 8000;
+	public RichTextLabel EnemyHP;
 
 	//Timer to make attack less often
 	public Timer timer;
@@ -63,6 +65,11 @@ public class EnemyHand extends Node2D {
 	@RegisterFunction
 	@Override
 	public void _ready() {
+
+
+		EnemyHP = (RichTextLabel) getNode("../PlayerHP");
+		EnemyHP.setText(String.valueOf(EnemyHPcount));
+
 		cardManager = getNode("../Cardmanager");
 		game_deck_ref = getNode("../OpponentDeck");
 
@@ -145,6 +152,7 @@ public class EnemyHand extends Node2D {
 	public void animate_card_to_position(Node Card, Vector2 new_position) {
 		Tween replace = getTree().createTween();
 		replace.tweenProperty(Card, "position", new_position, 0.2);
+
 	}
 
 	@RegisterFunction
@@ -216,6 +224,11 @@ public class EnemyHand extends Node2D {
 
 			Tween tween2 = getTree().createTween();
 			tween2.tweenProperty(bestcard, "scale", 0.65, 0.2);
+
+			//make it clickable
+			bestcard.getNode("Area2D").set("collision_layer", 8);
+			bestcard.getNode("Area2D").set("collision_mask", 8);
+
 			bestcard.set("in_slot", true);
 
 				AnimationPlayer anim = (AnimationPlayer) bestcard.getNode("AnimationPlayer");
@@ -253,7 +266,9 @@ public class EnemyHand extends Node2D {
 	public void card_attack(Node card) {
 
 		if (playerfieldempty && !enemy_field.isEmpty()) {
-			GD.INSTANCE.print("Direct attack! " + card);
+			//GD.INSTANCE.print("Direct attack! " + card);
+			EnemyHPcount = EnemyHPcount - (long) card.get("atk");
+			EnemyHP.setText(String.valueOf(EnemyHPcount));
 			return;
 		}
 

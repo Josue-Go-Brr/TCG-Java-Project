@@ -17,11 +17,14 @@ public class battle_manager extends Node {
 	@RegisterProperty
 	@Export
 	public Node EndTurnButton;
+	public Timer timer;
 	public Node2D OppDeck;
 	public Node2D PlayerDeck;
-	public Timer timer;
-	List<Node> enemy_hand = new ArrayList<>();
-	public List<Node2D> empty_slots = new ArrayList<Node2D>();
+
+
+	@RegisterProperty @Export public int enemyAtk;
+	@RegisterProperty @Export public int playerAtk;
+
 	public int turn = 1;
 	@RegisterProperty @Export public boolean player_turn= true;
 
@@ -29,6 +32,10 @@ public class battle_manager extends Node {
 	@RegisterFunction
 	@Override
 	public void _ready() {
+
+
+
+
 		PlayerDeck = (Node2D) getNode("../Deck");
 		OppDeck = (Node2D) getNode("../OpponentDeck");
 		EndTurnButton = getNode("../EndTurnButton");
@@ -46,15 +53,11 @@ public class battle_manager extends Node {
 				Callable.create(this, StringNames.toGodotName("onEndTurnPressed")),
 				0
 		);
-
-		empty_slots.add((Node2D) getNode("../Slots/EnemyCardSlot"));
-		empty_slots.add((Node2D) getNode("../Slots/EnemyCardSlot2"));
-		empty_slots.add((Node2D) getNode("../Slots/EnemyCardSlot3"));
-		empty_slots.add((Node2D) getNode("../Slots/EnemyCardSlot4"));
-		empty_slots.add((Node2D) getNode("../Slots/EnemyCardSlot5"));
 	}
-	
-	@RegisterFunction
+
+
+
+		@RegisterFunction
 	public void onEndTurnPressed() {
 		//resets selected card size
 

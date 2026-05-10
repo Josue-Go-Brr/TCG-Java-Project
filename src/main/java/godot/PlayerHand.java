@@ -55,13 +55,19 @@ public class PlayerHand extends Node2D {
 
 	public Node drawingcard;
 
+	public long EnemyHPcount = 8000;
+	public RichTextLabel EnemyHP;
+
 
 
 
 
 	@RegisterFunction
 	@Override
-	public void _ready(){
+	public void _ready() {
+		EnemyHP = (RichTextLabel) getNode("../EnemyHP");
+		EnemyHP.setText(String.valueOf(EnemyHPcount));
+
 		cardManager = getNode("../Cardmanager");
 		game_deck_ref = getNode("../Deck");
 
@@ -86,48 +92,7 @@ public class PlayerHand extends Node2D {
 		player_slots.add((Node2D) getNode("../Slots/CardSlot5"));
 
 
-//		for (int i = 0; i < HAND_COUNT; i++) {
-
-
-//			//Getting the right Node to make it work with my card functions
-//			Node CardManagerPath = getNode("../Cardmanager");
-//
-//			// And then make a card instance
-//			Node MagicCard = instance.instantiate();
-//			CardManagerPath.addChild(MagicCard);
-//
-//			MagicCard.setName("card");
-//			drawing_card = MagicCard;
-//			add_card_to_hand(MagicCard);
-//
-
-
-//		}
-
 	}
-
-//	@RegisterFunction
-//	@Override
-//	public void _process(double delta) {
-//		for (int i = 0; i < player_hand.size(); i++) {
-//			if (player_hand.get(i).getNode("Card").get("flag").equals(true)) {
-//				remove_card_from_hand(player_hand.get(i));
-//			}
-//		}
-//	}
-
-//	@RegisterFunction
-//	@Override
-//	public void _input(InputEvent event) {
-//
-//		if (event instanceof InputEventMouseButton mouseEvent && mouseEvent.getButtonIndex() == MouseButton.RIGHT) {
-//			// Listener du Clique Droit
-//			if (mouseEvent.isPressed()) {
-//				update_hand_position();
-//			}
-//		}
-//	}
-
 
 
 
