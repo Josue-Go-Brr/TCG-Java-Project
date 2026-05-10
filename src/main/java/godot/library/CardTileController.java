@@ -14,6 +14,8 @@ import godot.cards.BaseCarte;
 import godot.cards.CarteMonster;
 import godot.core.MouseButton;
 
+import java.util.function.Consumer;
+
 @RegisterClass
 public class CardTileController extends PanelContainer {
 	private TextureRect cardImageNode;
@@ -22,7 +24,8 @@ public class CardTileController extends PanelContainer {
 	private Label cardStatsNode;
 	private Label cardCostValueNode;
 	private BaseCarte cardData;
-	private LibraryScreenController libraryScreenController;
+	/** Left click: Library wires this via {@link #setLibraryScreenController}; Deck Builder via {@link #setTileClickHandler(Consumer)}. */
+	private Consumer<BaseCarte> tileClickHandler;
 
 	@RegisterFunction
 	@Override
@@ -43,7 +46,7 @@ public class CardTileController extends PanelContainer {
 			cardNameNode.setMouseFilter(Control.MouseFilter.IGNORE);
 		}
 		if (cardNameonCardNode != null) {
-			cardNameNode.setMouseFilter(Control.MouseFilter.IGNORE);
+			cardNameonCardNode.setMouseFilter(Control.MouseFilter.IGNORE);
 		}
 		if (cardStatsNode != null) {
 			cardStatsNode.setMouseFilter(Control.MouseFilter.IGNORE);
@@ -142,7 +145,12 @@ public class CardTileController extends PanelContainer {
 	}
 
 	public void setLibraryScreenController(LibraryScreenController controller) {
-		libraryScreenController = controller;
+		tileClickHandler = controller == null ? null : controller::onCardTileClicked;
+	}
+
+	/** Used when this tile is shown outside the Library (e.g. Deck Builder) with the same {@code .tscn} and {@link #setCardData} visuals. */
+	public void setTileClickHandler(Consumer<BaseCarte> handler) {
+		tileClickHandler = handler;
 	}
 
 	@RegisterFunction
@@ -153,8 +161,8 @@ public class CardTileController extends PanelContainer {
 		if (mouseEvent.getButtonIndex() != MouseButton.LEFT || !mouseEvent.isPressed()) {
 			return;
 		}
-		if (libraryScreenController != null && cardData != null) {
-			libraryScreenController.onCardTileClicked(cardData);
+		if (tileClickHandler != null && cardData != null) {
+			tileClickHandler.accept(cardData);
 		}
 	}
 

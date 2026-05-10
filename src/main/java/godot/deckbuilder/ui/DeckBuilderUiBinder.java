@@ -7,16 +7,20 @@ import godot.core.StringNames;
 import godot.deckbuilder.DeckBuilderQueryService;
 import godot.deckbuilder.DeckBuilderScreenController;
 
-
 public class DeckBuilderUiBinder {
 	private final LineEdit searchInput;
 	private final OptionButton typeFilter;
+	private final OptionButton monsterTypeFilter;
 	private final OptionButton sortFilter;
+	private final OptionButton sortOrderFilter;
 
-	public DeckBuilderUiBinder(LineEdit searchInput, OptionButton typeFilter, OptionButton sortFilter) {
+	public DeckBuilderUiBinder(LineEdit searchInput, OptionButton typeFilter, OptionButton monsterTypeFilter,
+			OptionButton sortFilter, OptionButton sortOrderFilter) {
 		this.searchInput = searchInput;
 		this.typeFilter = typeFilter;
+		this.monsterTypeFilter = monsterTypeFilter;
 		this.sortFilter = sortFilter;
+		this.sortOrderFilter = sortOrderFilter;
 	}
 
 	public void setupDefaultOptions() {
@@ -29,12 +33,30 @@ public class DeckBuilderUiBinder {
 			typeFilter.select(0);
 		}
 
+		if (monsterTypeFilter != null) {
+			monsterTypeFilter.clear();
+			monsterTypeFilter.addItem(DeckBuilderQueryService.TYPE_ALL);
+			String[] types = {"Dragon", "Machine", "Warrior", "Demon", "Spellcaster", "Beast", "Divine_Beast", "Aqua", "Elf", "Rock"};
+			for (String t : types) {
+				monsterTypeFilter.addItem(t);
+			}
+			monsterTypeFilter.select(0);
+		}
+
 		if (sortFilter != null) {
 			sortFilter.clear();
 			sortFilter.addItem(DeckBuilderQueryService.SORT_NAME);
 			sortFilter.addItem(DeckBuilderQueryService.SORT_COST);
 			sortFilter.addItem(DeckBuilderQueryService.SORT_ATK);
+			sortFilter.addItem(DeckBuilderQueryService.SORT_DEFENSE);
 			sortFilter.select(0);
+		}
+
+		if (sortOrderFilter != null) {
+			sortOrderFilter.clear();
+			sortOrderFilter.addItem(DeckBuilderQueryService.ORDER_ASC);
+			sortOrderFilter.addItem(DeckBuilderQueryService.ORDER_DESC);
+			sortOrderFilter.select(0);
 		}
 	}
 
@@ -45,17 +67,27 @@ public class DeckBuilderUiBinder {
 					0
 			);
 		}
-
 		if (typeFilter != null) {
 			typeFilter.getItemSelected().connect(
-					Callable.create(controller, StringNames.toGodotName("_on_type_filter_item_selected")),
+					Callable.create(controller, StringNames.toGodotName("_on_dropdown_item_selected")),
 					0
 			);
 		}
-
+		if (monsterTypeFilter != null) {
+			monsterTypeFilter.getItemSelected().connect(
+					Callable.create(controller, StringNames.toGodotName("_on_dropdown_item_selected")),
+					0
+			);
+		}
 		if (sortFilter != null) {
 			sortFilter.getItemSelected().connect(
-					Callable.create(controller, StringNames.toGodotName("_on_sort_filter_item_selected")),
+					Callable.create(controller, StringNames.toGodotName("_on_dropdown_item_selected")),
+					0
+			);
+		}
+		if (sortOrderFilter != null) {
+			sortOrderFilter.getItemSelected().connect(
+					Callable.create(controller, StringNames.toGodotName("_on_dropdown_item_selected")),
 					0
 			);
 		}
@@ -66,16 +98,18 @@ public class DeckBuilderUiBinder {
 	}
 
 	public String getSelectedType() {
-		if (typeFilter == null || typeFilter.getItemCount() == 0) {
-			return DeckBuilderQueryService.TYPE_ALL;
-		}
-		return typeFilter.getItemText(typeFilter.getSelected());
+		return typeFilter == null ? DeckBuilderQueryService.TYPE_ALL : typeFilter.getItemText(typeFilter.getSelected());
+	}
+
+	public String getSelectedMonsterType() {
+		return monsterTypeFilter == null ? DeckBuilderQueryService.TYPE_ALL : monsterTypeFilter.getItemText(monsterTypeFilter.getSelected());
 	}
 
 	public String getSelectedSort() {
-		if (sortFilter == null || sortFilter.getItemCount() == 0) {
-			return DeckBuilderQueryService.SORT_NAME;
-		}
-		return sortFilter.getItemText(sortFilter.getSelected());
+		return sortFilter == null ? DeckBuilderQueryService.SORT_NAME : sortFilter.getItemText(sortFilter.getSelected());
+	}
+
+	public String getSelectedSortOrder() {
+		return sortOrderFilter == null ? DeckBuilderQueryService.ORDER_ASC : sortOrderFilter.getItemText(sortOrderFilter.getSelected());
 	}
 }

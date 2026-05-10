@@ -3,14 +3,8 @@ package godot.deckbuilder;
 import godot.CardDB;
 import godot.cards.BaseCarte;
 import godot.cards.CardLibrary;
-import godot.cards.CarteMonster;
 
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-
-
-
 
 public class DeckBuilderQueryService {
 	public static final String TYPE_ALL = "ALL";
@@ -21,6 +15,10 @@ public class DeckBuilderQueryService {
 	public static final String SORT_NAME = "NAME";
 	public static final String SORT_COST = "COST";
 	public static final String SORT_ATK = "ATK";
+	public static final String SORT_DEFENSE = "DEFENSE";
+
+	public static final String ORDER_ASC = "CROISSANT";
+	public static final String ORDER_DESC = "DECROISSANT";
 
 	private final CardLibrary cardLibrary;
 
@@ -28,61 +26,14 @@ public class DeckBuilderQueryService {
 		this.cardLibrary = new CardLibrary(cardDB);
 	}
 
-	public List<BaseCarte> queryCards(String searchText, String typeFilter, String sortFilter) {
-		List<BaseCarte> cards = new ArrayList<>(cardLibrary.getAllCards());
-		String normalizedSearch = searchText == null ? "" : searchText.trim().toLowerCase();
-		String normalizedType = normalizeType(typeFilter);
-		String normalizedSort = normalizeSort(sortFilter);
+	public List<BaseCarte> queryCards(String searchText, String typeFilter, String monsterTypeFilter, String sortFilter, String sortOrder) {
+		String safeSearch = searchText == null ? "" : searchText.trim().toLowerCase();
+		String safeType = (typeFilter == null || typeFilter.isBlank()) ? TYPE_ALL : typeFilter.trim().toUpperCase();
+		String safeMonsterType = (monsterTypeFilter == null || monsterTypeFilter.isBlank()) ? TYPE_ALL : monsterTypeFilter.trim();
+		String safeSort = (sortFilter == null || sortFilter.isBlank()) ? SORT_NAME : sortFilter.trim().toUpperCase();
 
-		cards.removeIf(card -> !matchesSearch(card, normalizedSearch));
-		cards.removeIf(card -> !matchesType(card, normalizedType));
+		boolean isDescending = sortOrder != null && ORDER_DESC.equalsIgnoreCase(sortOrder.trim());
 
-		sortCards(cards, normalizedSort);
-		return cards;
-	}
-
-	private boolean matchesSearch(BaseCarte card, String normalizedSearch) {
-		return normalizedSearch.isEmpty()
-				|| card.getName().toLowerCase().contains(normalizedSearch);
-	}
-
-	private boolean matchesType(BaseCarte card, String normalizedType) {
-		return TYPE_ALL.equals(normalizedType) || card.getType().equalsIgnoreCase(normalizedType);
-	}
-
-	private void sortCards(List<BaseCarte> cards, String normalizedSort) {
-		if (SORT_COST.equals(normalizedSort)) {
-			cards.sort(Comparator.comparingInt(BaseCarte::getCost).thenComparing(BaseCarte::getName));
-			return;
-		}
-
-		if (SORT_ATK.equals(normalizedSort)) {
-			cards.sort((left, right) -> {
-				int rightAtk = right instanceof CarteMonster ? ((CarteMonster) right).getAttack() : Integer.MIN_VALUE;
-				int leftAtk = left instanceof CarteMonster ? ((CarteMonster) left).getAttack() : Integer.MIN_VALUE;
-				int compareAtk = Integer.compare(rightAtk, leftAtk);
-				if (compareAtk != 0) {
-					return compareAtk;
-				}
-				return left.getName().compareToIgnoreCase(right.getName());
-			});
-			return;
-		}
-
-		cards.sort(Comparator.comparing(BaseCarte::getName, String.CASE_INSENSITIVE_ORDER));
-	}
-
-	private String normalizeType(String typeFilter) {
-		if (typeFilter == null || typeFilter.isBlank()) {
-			return TYPE_ALL;
-		}
-		return typeFilter.trim().toUpperCase();
-	}
-
-	private String normalizeSort(String sortFilter) {
-		if (sortFilter == null || sortFilter.isBlank()) {
-			return SORT_NAME;
-		}
-		return sortFilter.trim().toUpperCase();
+		return cardLibrary.queryLibrary(safeSearch, safeType, safeMonsterType, safeSort, isDescending);
 	}
 }

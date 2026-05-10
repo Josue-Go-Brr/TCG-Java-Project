@@ -20,7 +20,8 @@ public class CardLibrary {
 			"Spellcaster",
 			"Beast",
 			"Divine_Beast",
-			"Aqua Elf",
+			"Aqua",
+			"Elf",
 			"Rock"
 	);
 
@@ -72,7 +73,8 @@ public class CardLibrary {
 				id, name, cost, description, image, imagePath, "none"
 			);
 			default -> new CarteMonster(
-				id, name, cost, description, image, imagePath, resource.atk, resource.defense, monsterType, effect
+				id, name, cost, description, image, imagePath, resource.atk, resource.defense, monsterType, effect,
+				resource
 			);
 		};
 	}
@@ -151,6 +153,17 @@ public class CardLibrary {
 		return monstersOnly;
 	}
 
+	public List<CarteMonster> sortMonstersByDefense() {
+		List<CarteMonster> monstersOnly = new ArrayList<>();
+		for (BaseCarte card : database.values()) {
+			if (card instanceof CarteMonster) {
+				monstersOnly.add((CarteMonster) card);
+			}
+		}
+		monstersOnly.sort((m1, m2) -> Integer.compare(m2.getDefense(), m1.getDefense()));
+		return monstersOnly;
+	}
+
 	/** All monster cards, sorted by monster type (then by name). */
 	public List<CarteMonster> sortMonstersByMonsterType() {
 		List<CarteMonster> monstersOnly = new ArrayList<>();
@@ -190,5 +203,53 @@ public class CardLibrary {
 		}
 		String collapsed = value.trim().replace('_', ' ').replaceAll("\\s+", " ");
 		return collapsed.toLowerCase();
+	}
+
+	public static final String QUERY_TYPE_ALL = "ALL";
+
+	/** Filters and sorts cards for Library and Deck Builder (shared with {@code LibraryQueryService} / {@code DeckBuilderQueryService}). */
+	public List<BaseCarte> queryLibrary(String searchText, String type, String monsterType, String sortField,
+			boolean isDescending) {
+		List<BaseCarte> results = new ArrayList<>(database.values());
+
+		if (searchText != null && !searchText.trim().isEmpty()) {
+			String q = searchText.trim().toLowerCase();
+			results.removeIf(c -> !c.getName().toLowerCase().contains(q));
+		}
+
+		if (type != null && !QUERY_TYPE_ALL.equalsIgnoreCase(type.trim())) {
+			String wantType = type.trim();
+			results.removeIf(c -> !c.getType().equalsIgnoreCase(wantType));
+		}
+
+		if (monsterType != null && !QUERY_TYPE_ALL.equalsIgnoreCase(monsterType.trim())) {
+			String wantMonster = normalizeMonsterTypeForMatch(monsterType);
+			results.removeIf(c -> {
+				if (!(c instanceof CarteMonster monster)) {
+					return true;
+				}
+				return !normalizeMonsterTypeForMatch(monster.getMonsterType()).equals(wantMonster);
+			});
+		}
+
+		String sort = sortField == null || sortField.isBlank() ? "NAME" : sortField.trim().toUpperCase();
+		Comparator<BaseCarte> comparator = switch (sort) {
+			case "ATK" -> Comparator.<BaseCarte>comparingInt(
+					c -> c instanceof CarteMonster m ? m.getAttack() : Integer.MIN_VALUE)
+					.thenComparing(BaseCarte::getName, String.CASE_INSENSITIVE_ORDER);
+			case "DEFENSE" -> Comparator.<BaseCarte>comparingInt(
+					c -> c instanceof CarteMonster m ? m.getDefense() : Integer.MIN_VALUE)
+					.thenComparing(BaseCarte::getName, String.CASE_INSENSITIVE_ORDER);
+			case "COST" -> Comparator.comparingInt(BaseCarte::getCost)
+					.thenComparing(BaseCarte::getName, String.CASE_INSENSITIVE_ORDER);
+			default -> Comparator.comparing(BaseCarte::getName, String.CASE_INSENSITIVE_ORDER);
+		};
+
+		if (isDescending) {
+			comparator = comparator.reversed();
+		}
+
+		results.sort(comparator);
+		return results;
 	}
 }

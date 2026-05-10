@@ -6,8 +6,8 @@ import godot.api.Node;
 import godot.api.PackedScene;
 import godot.cards.BaseCarte;
 import godot.core.Vector2;
-import godot.deck.DeckCardTileController;
 import godot.deck.DeckScreenController;
+import godot.library.CardTileController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,14 +16,14 @@ import java.util.List;
 
 
 public class DeckGridRenderer {
-	private static final float BASE_MIN_HEIGHT = 500f;
-	private static final float ESTIMATED_TILE_HEIGHT = 280f;
-	private static final float ESTIMATED_VERTICAL_SEPARATION = 10f;
+	private static final float BASE_MIN_HEIGHT = 620f;
+	private static final float ESTIMATED_TILE_HEIGHT = 372f;
+	private static final float ESTIMATED_VERTICAL_SEPARATION = 12f;
 
 	private final GridContainer cardGrid;
 	private final PackedScene cardTileScene;
 	private final DeckScreenController controller;
-	private final List<DeckCardTileController> activeTiles = new ArrayList<>();
+	private final List<CardTileController> activeTiles = new ArrayList<>();
 
 	public DeckGridRenderer(GridContainer cardGrid, PackedScene cardTileScene, DeckScreenController controller) {
 		this.cardGrid = cardGrid;
@@ -40,7 +40,7 @@ public class DeckGridRenderer {
 
 		for (BaseCarte card : cards) {
 			Node instance = cardTileScene.instantiate();
-			if (!(instance instanceof DeckCardTileController tileController)) {
+			if (!(instance instanceof CardTileController tileController)) {
 				if (instance != null) {
 					instance.queueFree();
 				}
@@ -49,7 +49,7 @@ public class DeckGridRenderer {
 
 			cardGrid.addChild(tileController);
 			tileController.setCardData(card);
-			tileController.setDeckScreenController(controller);
+			tileController.setTileClickHandler(controller::onCardTileClicked);
 			activeTiles.add(tileController);
 		}
 
@@ -57,7 +57,7 @@ public class DeckGridRenderer {
 	}
 
 	private void clear() {
-		for (DeckCardTileController tile : activeTiles) {
+		for (CardTileController tile : activeTiles) {
 			if (tile != null) {
 				tile.queueFree();
 			}

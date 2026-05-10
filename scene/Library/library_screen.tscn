@@ -62,7 +62,7 @@ theme_override_constants/separation = 14
 
 [node name="TopBar" type="HBoxContainer" parent="RootMargin/MainColumns/LeftSide"]
 layout_mode = 2
-theme_override_constants/separation = 22
+theme_override_constants/separation = 20
 alignment = 1
 
 [node name="SearchLabel" type="Label" parent="RootMargin/MainColumns/LeftSide/TopBar"]
@@ -73,20 +73,20 @@ text = "Search:"
 vertical_alignment = 1
 
 [node name="SearchInput" type="LineEdit" parent="RootMargin/MainColumns/LeftSide/TopBar"]
-custom_minimum_size = Vector2(340, 52)
+custom_minimum_size = Vector2(350, 52)
 layout_mode = 2
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 30
 placeholder_text = "Search card..."
 
 [node name="TypeLabel" type="Label" parent="RootMargin/MainColumns/LeftSide/TopBar"]
-custom_minimum_size = Vector2(52, 54)
+custom_minimum_size = Vector2(80, 54)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Type:"
 vertical_alignment = 1
 
 [node name="TypeFilter" type="OptionButton" parent="RootMargin/MainColumns/LeftSide/TopBar"]
-custom_minimum_size = Vector2(220, 52)
+custom_minimum_size = Vector2(100, 52)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 item_count = 4
@@ -99,30 +99,66 @@ popup/item_2/id = 2
 popup/item_3/text = "TRAP"
 popup/item_3/id = 3
 
-[node name="SortLabel" type="Label" parent="RootMargin/MainColumns/LeftSide/TopBar"]
-custom_minimum_size = Vector2(72, 54)
+[node name="MonsterTypeLabel" type="Label" parent="RootMargin/MainColumns/LeftSide/TopBar"]
+custom_minimum_size = Vector2(80, 54)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "Sort by:"
+text = "Monster Type"
 vertical_alignment = 1
 
-[node name="SortFilter" type="OptionButton" parent="RootMargin/MainColumns/LeftSide/TopBar"]
+[node name="MonsterTypeFilter" type="OptionButton" parent="RootMargin/MainColumns/LeftSide/TopBar"]
 custom_minimum_size = Vector2(150, 52)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-item_count = 3
+
+[node name="BackButton" type="Button" parent="RootMargin/MainColumns/LeftSide/TopBar"]
+custom_minimum_size = Vector2(150, 52)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Menu"
+
+[node name="SortBar" type="HBoxContainer" parent="RootMargin/MainColumns/LeftSide"]
+layout_mode = 2
+theme_override_constants/separation = 5
+alignment = 1
+
+[node name="SortLabel" type="Label" parent="RootMargin/MainColumns/LeftSide/SortBar"]
+custom_minimum_size = Vector2(100, 54)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Sort :"
+vertical_alignment = 1
+
+[node name="SortFilter" type="OptionButton" parent="RootMargin/MainColumns/LeftSide/SortBar"]
+custom_minimum_size = Vector2(120, 52)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+item_count = 4
 popup/item_0/text = "NAME"
 popup/item_0/id = 0
 popup/item_1/text = "COST"
 popup/item_1/id = 1
 popup/item_2/text = "ATK"
 popup/item_2/id = 2
+popup/item_3/text = "DEFENSE"
+popup/item_3/id = 3
 
-[node name="BackButton" type="Button" parent="RootMargin/MainColumns/LeftSide/TopBar"]
-custom_minimum_size = Vector2(108, 52)
+[node name="OrderLabel" type="Label" parent="RootMargin/MainColumns/LeftSide/SortBar"]
+custom_minimum_size = Vector2(100, 54)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "Menu"
+text = "Ordre"
+vertical_alignment = 1
+
+[node name="SortOrderFilter" type="OptionButton" parent="RootMargin/MainColumns/LeftSide/SortBar"]
+custom_minimum_size = Vector2(100, 10)
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+item_count = 2
+popup/item_0/text = "CROISSANT"
+popup/item_0/id = 0
+popup/item_1/text = "DECROISSANT"
+popup/item_1/id = 1
 
 [node name="CardGridScroll" type="ScrollContainer" parent="RootMargin/MainColumns/LeftSide"]
 layout_mode = 2
@@ -155,4 +191,5 @@ text = "No card found."
 horizontal_alignment = 1
 
 [node name="RightSideDetails" parent="RootMargin/MainColumns" instance=ExtResource("3_details_scene")]
+custom_minimum_size = Vector2(445, 720)
 layout_mode = 2

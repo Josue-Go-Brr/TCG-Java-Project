@@ -10,12 +10,41 @@ import godot.library.LibraryScreenController;
 public class LibraryUiBinder {
 	private final LineEdit searchInput;
 	private final OptionButton typeFilter;
-	private final OptionButton sortFilter;
+	private OptionButton monsterTypeFilter;
+	private OptionButton sortFilter;
+	private OptionButton sortOrderFilter;
 
-	public LibraryUiBinder(LineEdit searchInput, OptionButton typeFilter, OptionButton sortFilter) {
+	private boolean monsterFilterSignalConnected;
+	private boolean sortBySignalConnected;
+	private boolean sortOrderSignalConnected;
+
+	public LibraryUiBinder(LineEdit searchInput, OptionButton typeFilter, OptionButton monsterTypeFilter,
+			OptionButton sortFilter, OptionButton sortOrderFilter) {
 		this.searchInput = searchInput;
 		this.typeFilter = typeFilter;
+		this.monsterTypeFilter = monsterTypeFilter;
 		this.sortFilter = sortFilter;
+		this.sortOrderFilter = sortOrderFilter;
+	}
+
+	/**
+	 * When {@code getNodeOrNull} misses on the first frame (godot-kotlin-jvm), deferred code can supply
+	 * the real OptionButton references. All three must be refreshable so DEFENSE items and signals apply.
+	 */
+	public void setLibraryFilterOptionButtons(OptionButton monsterTypeFilter, OptionButton sortFilter,
+			OptionButton sortOrderFilter) {
+		if (this.monsterTypeFilter != monsterTypeFilter) {
+			monsterFilterSignalConnected = false;
+		}
+		if (this.sortFilter != sortFilter) {
+			sortBySignalConnected = false;
+		}
+		if (this.sortOrderFilter != sortOrderFilter) {
+			sortOrderSignalConnected = false;
+		}
+		this.monsterTypeFilter = monsterTypeFilter;
+		this.sortFilter = sortFilter;
+		this.sortOrderFilter = sortOrderFilter;
 	}
 
 	public void setupDefaultOptions() {
@@ -28,12 +57,30 @@ public class LibraryUiBinder {
 			typeFilter.select(0);
 		}
 
+		if (monsterTypeFilter != null) {
+			monsterTypeFilter.clear();
+			monsterTypeFilter.addItem(LibraryQueryService.TYPE_ALL);
+			String[] types = {"Dragon", "Machine", "Warrior", "Demon", "Spellcaster", "Beast", "Divine_Beast", "Aqua", "Elf", "Rock"};
+			for (String t : types) {
+				monsterTypeFilter.addItem(t);
+			}
+			monsterTypeFilter.select(0);
+		}
+
 		if (sortFilter != null) {
 			sortFilter.clear();
 			sortFilter.addItem(LibraryQueryService.SORT_NAME);
 			sortFilter.addItem(LibraryQueryService.SORT_COST);
 			sortFilter.addItem(LibraryQueryService.SORT_ATK);
+			sortFilter.addItem(LibraryQueryService.SORT_DEFENSE);
 			sortFilter.select(0);
+		}
+
+		if (sortOrderFilter != null) {
+			sortOrderFilter.clear();
+			sortOrderFilter.addItem(LibraryQueryService.ORDER_ASC);
+			sortOrderFilter.addItem(LibraryQueryService.ORDER_DESC);
+			sortOrderFilter.select(0);
 		}
 	}
 
@@ -44,19 +91,56 @@ public class LibraryUiBinder {
 					0
 			);
 		}
-
 		if (typeFilter != null) {
 			typeFilter.getItemSelected().connect(
-					Callable.create(controller, StringNames.toGodotName("_on_type_filter_item_selected")),
+					Callable.create(controller, StringNames.toGodotName("_on_dropdown_item_selected")),
 					0
 			);
 		}
-
-		if (sortFilter != null) {
-			sortFilter.getItemSelected().connect(
-					Callable.create(controller, StringNames.toGodotName("_on_sort_filter_item_selected")),
+		if (monsterTypeFilter != null && !monsterFilterSignalConnected) {
+			monsterTypeFilter.getItemSelected().connect(
+					Callable.create(controller, StringNames.toGodotName("_on_dropdown_item_selected")),
 					0
 			);
+			monsterFilterSignalConnected = true;
+		}
+		if (sortFilter != null && !sortBySignalConnected) {
+			sortFilter.getItemSelected().connect(
+					Callable.create(controller, StringNames.toGodotName("_on_dropdown_item_selected")),
+					0
+			);
+			sortBySignalConnected = true;
+		}
+		if (sortOrderFilter != null && !sortOrderSignalConnected) {
+			sortOrderFilter.getItemSelected().connect(
+					Callable.create(controller, StringNames.toGodotName("_on_dropdown_item_selected")),
+					0
+			);
+			sortOrderSignalConnected = true;
+		}
+	}
+
+	public void connectMonsterSortByAndOrderSignalsIfNeeded(LibraryScreenController controller) {
+		if (monsterTypeFilter != null && !monsterFilterSignalConnected) {
+			monsterTypeFilter.getItemSelected().connect(
+					Callable.create(controller, StringNames.toGodotName("_on_dropdown_item_selected")),
+					0
+			);
+			monsterFilterSignalConnected = true;
+		}
+		if (sortFilter != null && !sortBySignalConnected) {
+			sortFilter.getItemSelected().connect(
+					Callable.create(controller, StringNames.toGodotName("_on_dropdown_item_selected")),
+					0
+			);
+			sortBySignalConnected = true;
+		}
+		if (sortOrderFilter != null && !sortOrderSignalConnected) {
+			sortOrderFilter.getItemSelected().connect(
+					Callable.create(controller, StringNames.toGodotName("_on_dropdown_item_selected")),
+					0
+			);
+			sortOrderSignalConnected = true;
 		}
 	}
 
@@ -65,16 +149,18 @@ public class LibraryUiBinder {
 	}
 
 	public String getSelectedType() {
-		if (typeFilter == null || typeFilter.getItemCount() == 0) {
-			return LibraryQueryService.TYPE_ALL;
-		}
-		return typeFilter.getItemText(typeFilter.getSelected());
+		return typeFilter == null ? LibraryQueryService.TYPE_ALL : typeFilter.getItemText(typeFilter.getSelected());
+	}
+
+	public String getSelectedMonsterType() {
+		return monsterTypeFilter == null ? LibraryQueryService.TYPE_ALL : monsterTypeFilter.getItemText(monsterTypeFilter.getSelected());
 	}
 
 	public String getSelectedSort() {
-		if (sortFilter == null || sortFilter.getItemCount() == 0) {
-			return LibraryQueryService.SORT_NAME;
-		}
-		return sortFilter.getItemText(sortFilter.getSelected());
+		return sortFilter == null ? LibraryQueryService.SORT_NAME : sortFilter.getItemText(sortFilter.getSelected());
+	}
+
+	public String getSelectedSortOrder() {
+		return sortOrderFilter == null ? LibraryQueryService.ORDER_ASC : sortOrderFilter.getItemText(sortOrderFilter.getSelected());
 	}
 }

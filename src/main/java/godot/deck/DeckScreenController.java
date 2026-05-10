@@ -27,7 +27,7 @@ import java.util.List;
 
 @RegisterClass
 public class DeckScreenController extends Control {
-	private static final String CARD_TILE_SCENE_PATH = "res://scene/deck/card_tile.tscn";
+	private static final String CARD_TILE_SCENE_PATH = "res://scene/Library/card_tile.tscn";
 	private static final String START_MENU_SCENE_PATH = "res://scene/menu/start_menu.tscn";
 	private static final String DECK_BUILDER_SCENE_PATH = "res://scene/deck_builder/deck_builder_screen.tscn";
 	private static final String USER_DECK_SAVE_PATH = "user://saved_deck.txt";

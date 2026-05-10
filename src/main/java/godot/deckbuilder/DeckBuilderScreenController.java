@@ -38,7 +38,9 @@ public class DeckBuilderScreenController extends Control {
 
 	private LineEdit searchInputNode;
 	private OptionButton typeFilterNode;
+	private OptionButton monsterTypeFilterNode;
 	private OptionButton sortFilterNode;
+	private OptionButton sortOrderFilterNode;
 	private Button backButtonNode;
 	private GridContainer cardGridNode;
 	private ScrollContainer cardGridScrollNode;
@@ -59,7 +61,9 @@ public class DeckBuilderScreenController extends Control {
 
 		searchInputNode = (LineEdit) getNodeOrNull("RootMargin/MainColumns/LeftSide/TopBar/SearchInput");
 		typeFilterNode = (OptionButton) getNodeOrNull("RootMargin/MainColumns/LeftSide/TopBar/TypeFilter");
+		monsterTypeFilterNode = (OptionButton) getNodeOrNull("RootMargin/MainColumns/LeftSide/TopBar/MonsterTypeFilter");
 		sortFilterNode = (OptionButton) getNodeOrNull("RootMargin/MainColumns/LeftSide/TopBar/SortFilter");
+		sortOrderFilterNode = (OptionButton) getNodeOrNull("RootMargin/MainColumns/LeftSide/TopBar/SortOrderFilter");
 		backButtonNode = (Button) getNodeOrNull("RootMargin/MainColumns/LeftSide/TopBar/BackButton");
 		cardGridScrollNode = (ScrollContainer) getNodeOrNull("RootMargin/MainColumns/LeftSide/CardGridScroll");
 		cardGridNode = (GridContainer) getNodeOrNull("RootMargin/MainColumns/LeftSide/CardGridScroll/CardArea/CardGrid");
@@ -75,11 +79,11 @@ public class DeckBuilderScreenController extends Control {
 		CardDB cardDB = resolveCardDB();
 		queryService = new DeckBuilderQueryService(cardDB);
 
-		uiBinder = new DeckBuilderUiBinder(searchInputNode, typeFilterNode, sortFilterNode);
+		uiBinder = new DeckBuilderUiBinder(searchInputNode, typeFilterNode, monsterTypeFilterNode, sortFilterNode, sortOrderFilterNode);
 		uiBinder.setupDefaultOptions();
 		uiBinder.connect(this);
 		connectBackButton();
-		
+
 		connectManualScrollFallback();
 
 		DeckBuilderCardDetailsPanelController detailsController = getDetailsController();
@@ -94,17 +98,12 @@ public class DeckBuilderScreenController extends Control {
 	}
 
 	@RegisterFunction
+	public void _on_dropdown_item_selected(long index) {
+		refreshGrid();
+	}
+
+	@RegisterFunction
 	public void _on_search_input_text_changed(String newText) {
-		refreshGrid();
-	}
-
-	@RegisterFunction
-	public void _on_type_filter_item_selected(long index) {
-		refreshGrid();
-	}
-
-	@RegisterFunction
-	public void _on_sort_filter_item_selected(long index) {
 		refreshGrid();
 	}
 
@@ -165,7 +164,6 @@ public class DeckBuilderScreenController extends Control {
 		}
 	}
 
-	
 	public void refreshAfterDeckChange() {
 		refreshGrid();
 		callDeferred(StringNames.toGodotName("_deferred_refresh_deck_count_label"));
@@ -195,7 +193,9 @@ public class DeckBuilderScreenController extends Control {
 		List<BaseCarte> cards = new ArrayList<>(queryService.queryCards(
 				uiBinder.getSearchText(),
 				uiBinder.getSelectedType(),
-				uiBinder.getSelectedSort()
+				uiBinder.getSelectedMonsterType(),
+				uiBinder.getSelectedSort(),
+				uiBinder.getSelectedSortOrder()
 		));
 
 		gridRenderer.render(cards);

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dew3niq3oyoxo"]
 
-[ext_resource type="Script" uid="uid://c414xskin161v" path="res://src/main/java/godot/deckbuilder/DeckBuilderCardTileController.java" id="1_deck_tile_script"]
+[ext_resource type="Script" path="res://src/main/java/godot/deckbuilder/DeckBuilderCardTileController.java" id="1_deck_tile_script"]
 
 [node name="CardTile" type="PanelContainer"]
 custom_minimum_size = Vector2(260, 372)

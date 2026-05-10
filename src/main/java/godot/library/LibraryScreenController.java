@@ -3,18 +3,7 @@ package godot.library;
 import godot.CardDB;
 import godot.annotation.RegisterClass;
 import godot.annotation.RegisterFunction;
-import godot.api.Button;
-import godot.api.Control;
-import godot.api.GridContainer;
-import godot.api.InputEvent;
-import godot.api.InputEventMouseButton;
-import godot.api.Label;
-import godot.api.LineEdit;
-import godot.api.OptionButton;
-import godot.api.PanelContainer;
-import godot.api.PackedScene;
-import godot.api.ResourceLoader;
-import godot.api.ScrollContainer;
+import godot.api.*;
 import godot.cards.BaseCarte;
 import godot.core.Callable;
 import godot.core.MouseButton;
@@ -33,7 +22,10 @@ public class LibraryScreenController extends Control {
 
 	private LineEdit searchInputNode;
 	private OptionButton typeFilterNode;
+	private OptionButton monsterTypeFilterNode;
 	private OptionButton sortFilterNode;
+	private OptionButton sortOrderFilterNode;
+
 	private Button backButtonNode;
 	private GridContainer cardGridNode;
 	private ScrollContainer cardGridScrollNode;
@@ -53,24 +45,34 @@ public class LibraryScreenController extends Control {
 
 		searchInputNode = (LineEdit) getNodeOrNull("RootMargin/MainColumns/LeftSide/TopBar/SearchInput");
 		typeFilterNode = (OptionButton) getNodeOrNull("RootMargin/MainColumns/LeftSide/TopBar/TypeFilter");
-		sortFilterNode = (OptionButton) getNodeOrNull("RootMargin/MainColumns/LeftSide/TopBar/SortFilter");
+		monsterTypeFilterNode = (OptionButton) getNodeOrNull("RootMargin/MainColumns/LeftSide/TopBar/MonsterTypeFilter");
+		sortFilterNode = (OptionButton) getNodeOrNull("RootMargin/MainColumns/LeftSide/SortBar/SortFilter");
+		sortOrderFilterNode = (OptionButton) getNodeOrNull("RootMargin/MainColumns/LeftSide/SortBar/SortOrderFilter");
+
+		if (monsterTypeFilterNode == null) {
+			GD.INSTANCE.printErr("ERROR: MonsterTypeFilter NOT FOUND in library scene (expected path TopBar/MonsterTypeFilter)");
+		}
+		if (sortOrderFilterNode == null) {
+			GD.INSTANCE.printErr("ERROR: SortOrderFilter NOT FOUND in library scene (expected path SortBar/SortOrderFilter)");
+		}
+		if (sortFilterNode == null) {
+			GD.INSTANCE.printErr("ERROR: SortFilter NOT FOUND in library scene — DEFENSE/items will not be applied (expected path SortBar/SortFilter).");
+		}
+
 		backButtonNode = (Button) getNodeOrNull("RootMargin/MainColumns/LeftSide/TopBar/BackButton");
 		cardGridScrollNode = (ScrollContainer) getNodeOrNull("RootMargin/MainColumns/LeftSide/CardGridScroll");
 		cardGridNode = (GridContainer) getNodeOrNull("RootMargin/MainColumns/LeftSide/CardGridScroll/CardArea/CardGrid");
 		emptyStateNode = (Label) getNodeOrNull("RootMargin/MainColumns/LeftSide/EmptyState");
 		detailsPanelNode = (PanelContainer) getNodeOrNull("RootMargin/MainColumns/RightSideDetails");
-		cardTileScene = (PackedScene) ResourceLoader.load(
-				CARD_TILE_SCENE_PATH,
-				"PackedScene",
-				ResourceLoader.CacheMode.REUSE
-		);
+		cardTileScene = (PackedScene) ResourceLoader.load(CARD_TILE_SCENE_PATH, "PackedScene", ResourceLoader.CacheMode.REUSE);
 
 		CardDB cardDB = resolveCardDB();
 		queryService = new LibraryQueryService(cardDB);
 
-		uiBinder = new LibraryUiBinder(searchInputNode, typeFilterNode, sortFilterNode);
+		uiBinder = new LibraryUiBinder(searchInputNode, typeFilterNode, monsterTypeFilterNode, sortFilterNode, sortOrderFilterNode);
 		uiBinder.setupDefaultOptions();
 		uiBinder.connect(this);
+
 		connectBackButton();
 		connectManualScrollFallback();
 
@@ -79,6 +81,31 @@ public class LibraryScreenController extends Control {
 		gridRenderer = new LibraryGridRenderer(cardGridNode, cardTileScene, this);
 
 		refreshGrid();
+		callDeferred(StringNames.toGodotName("_deferred_library_bind_filters"));
+	}
+
+	@RegisterFunction
+	public void _deferred_library_bind_filters() {
+		if (monsterTypeFilterNode == null) {
+			monsterTypeFilterNode = (OptionButton) getNodeOrNull("RootMargin/MainColumns/LeftSide/TopBar/MonsterTypeFilter");
+		}
+		if (sortOrderFilterNode == null) {
+			sortOrderFilterNode = (OptionButton) getNodeOrNull("RootMargin/MainColumns/LeftSide/SortBar/SortOrderFilter");
+		}
+		if (sortFilterNode == null) {
+			sortFilterNode = (OptionButton) getNodeOrNull("RootMargin/MainColumns/LeftSide/SortBar/SortFilter");
+		}
+		if (uiBinder != null) {
+			uiBinder.setLibraryFilterOptionButtons(monsterTypeFilterNode, sortFilterNode, sortOrderFilterNode);
+			uiBinder.connectMonsterSortByAndOrderSignalsIfNeeded(this);
+			uiBinder.setupDefaultOptions();
+			refreshGrid();
+		}
+	}
+
+	@RegisterFunction
+	public void _on_dropdown_item_selected(long index) {
+		refreshGrid();
 	}
 
 	@RegisterFunction
@@ -86,15 +113,26 @@ public class LibraryScreenController extends Control {
 		refreshGrid();
 	}
 
-	@RegisterFunction
-	public void _on_type_filter_item_selected(long index) {
-		refreshGrid();
+	private void refreshGrid() {
+		if (queryService == null || uiBinder == null || gridRenderer == null) return;
+
+		List<BaseCarte> cards = queryService.queryCards(
+				uiBinder.getSearchText(),
+				uiBinder.getSelectedType(),
+				uiBinder.getSelectedMonsterType(),
+				uiBinder.getSelectedSort(),
+				uiBinder.getSelectedSortOrder()
+		);
+
+		gridRenderer.render(cards);
+		if (emptyStateNode != null) emptyStateNode.setVisible(cards.isEmpty());
+		if (selectionCoordinator != null) selectionCoordinator.sync(cards);
 	}
 
-	@RegisterFunction
-	public void _on_sort_filter_item_selected(long index) {
-		refreshGrid();
-	}
+	// ----------------------------------------------------
+	// Keep your existing input / scroll / back button methods
+	// exactly as they were! DO NOT DELETE OR MODIFY BELOW THIS LINE.
+	// ----------------------------------------------------
 
 	@RegisterFunction
 	public void _unhandled_input(InputEvent event) {
@@ -150,25 +188,6 @@ public class LibraryScreenController extends Control {
 	public void onCardTileClicked(BaseCarte card) {
 		if (selectionCoordinator != null) {
 			selectionCoordinator.select(card);
-		}
-	}
-
-	private void refreshGrid() {
-		if (queryService == null || uiBinder == null || gridRenderer == null) {
-			return;
-		}
-
-		List<BaseCarte> cards = queryService.queryCards(
-				uiBinder.getSearchText(),
-				uiBinder.getSelectedType(),
-				uiBinder.getSelectedSort()
-		);
-		gridRenderer.render(cards);
-		if (emptyStateNode != null) {
-			emptyStateNode.setVisible(cards.isEmpty());
-		}
-		if (selectionCoordinator != null) {
-			selectionCoordinator.sync(cards);
 		}
 	}
 

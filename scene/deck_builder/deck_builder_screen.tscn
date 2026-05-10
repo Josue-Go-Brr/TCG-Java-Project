@@ -100,6 +100,18 @@ popup/item_2/id = 2
 popup/item_3/text = "TRAP"
 popup/item_3/id = 3
 
+[node name="MonsterTypeLabel" type="Label" parent="RootMargin/MainColumns/LeftSide/TopBar"]
+custom_minimum_size = Vector2(100, 25)
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Monster:"
+vertical_alignment = 1
+
+[node name="MonsterTypeFilter" type="OptionButton" parent="RootMargin/MainColumns/LeftSide/TopBar"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+
 [node name="SortLabel" type="Label" parent="RootMargin/MainColumns/LeftSide/TopBar"]
 custom_minimum_size = Vector2(100, 25)
 layout_mode = 2
@@ -111,13 +123,32 @@ vertical_alignment = 1
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
-item_count = 3
+item_count = 4
 popup/item_0/text = "NAME"
 popup/item_0/id = 0
 popup/item_1/text = "COST"
 popup/item_1/id = 1
 popup/item_2/text = "ATK"
 popup/item_2/id = 2
+popup/item_3/text = "DEFENSE"
+popup/item_3/id = 3
+
+[node name="OrderLabel" type="Label" parent="RootMargin/MainColumns/LeftSide/TopBar"]
+custom_minimum_size = Vector2(60, 25)
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Ordre"
+vertical_alignment = 1
+
+[node name="SortOrderFilter" type="OptionButton" parent="RootMargin/MainColumns/LeftSide/TopBar"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+item_count = 2
+popup/item_0/text = "CROISSANT"
+popup/item_0/id = 0
+popup/item_1/text = "DECROISSANT"
+popup/item_1/id = 1
 
 [node name="BackButton" type="Button" parent="RootMargin/MainColumns/LeftSide/TopBar"]
 custom_minimum_size = Vector2(100, 25)
