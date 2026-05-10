@@ -3,18 +3,7 @@ package godot.deckbuilder;
 import godot.CardDB;
 import godot.annotation.RegisterClass;
 import godot.annotation.RegisterFunction;
-import godot.api.Button;
-import godot.api.Control;
-import godot.api.GridContainer;
-import godot.api.InputEvent;
-import godot.api.InputEventMouseButton;
-import godot.api.Label;
-import godot.api.LineEdit;
-import godot.api.OptionButton;
-import godot.api.PanelContainer;
-import godot.api.PackedScene;
-import godot.api.ResourceLoader;
-import godot.api.ScrollContainer;
+import godot.api.*;
 import godot.cards.BaseCarte;
 import godot.core.Callable;
 import godot.core.MouseButton;
@@ -31,81 +20,110 @@ import java.util.List;
 
 @RegisterClass
 public class DeckBuilderScreenController extends Control {
-	private static final String CARD_TILE_SCENE_PATH = "res://scene/deck_builder/card_tile.tscn";
-	private static final String START_MENU_SCENE_PATH = "res://scene/menu/start_menu.tscn";
-	private static final String DECK_SCENE_PATH = "res://scene/deck/deck_screen.tscn";
-	private static final int MANUAL_SCROLL_STEP = 25;
+    private static final String CARD_TILE_SCENE_PATH = "res://scene/deck_builder/card_tile.tscn";
+    private static final String START_MENU_SCENE_PATH = "res://scene/menu/start_menu.tscn";
+    private static final String DECK_SCENE_PATH = "res://scene/deck/deck_screen.tscn";
+    private static final int MANUAL_SCROLL_STEP = 25;
 
-	private LineEdit searchInputNode;
-	private OptionButton typeFilterNode;
-	private OptionButton monsterTypeFilterNode;
-	private OptionButton sortFilterNode;
-	private OptionButton sortOrderFilterNode;
-	private Button backButtonNode;
-	private GridContainer cardGridNode;
-	private ScrollContainer cardGridScrollNode;
-	private Label emptyStateNode;
-	private Label deckCardCountLabelNode;
-	private PanelContainer detailsPanelNode;
-	private PackedScene cardTileScene;
+    private LineEdit searchInputNode;
+    private OptionButton typeFilterNode;
+    private OptionButton monsterTypeFilterNode;
+    private OptionButton sortFilterNode;
+    private OptionButton sortOrderFilterNode;
+    
+    private Button backButtonNode;
+    private GridContainer cardGridNode;
+    private ScrollContainer cardGridScrollNode;
+    private Label emptyStateNode;
+    private Label deckCardCountLabelNode;
+    private PanelContainer detailsPanelNode;
+    private PackedScene cardTileScene;
 
-	private DeckBuilderQueryService queryService;
-	private DeckBuilderUiBinder uiBinder;
-	private DeckBuilderGridRenderer gridRenderer;
-	private DeckBuilderSelectionCoordinator selectionCoordinator;
+    private DeckBuilderQueryService queryService;
+    private DeckBuilderUiBinder uiBinder;
+    private DeckBuilderGridRenderer gridRenderer;
+    private DeckBuilderSelectionCoordinator selectionCoordinator;
 
-	@RegisterFunction
-	@Override
-	public void _ready() {
-		GD.INSTANCE.print("[DeckBuilder] _ready entered");
+    @RegisterFunction
+    @Override
+    public void _ready() {
+        GD.INSTANCE.print("[DeckBuilder] _ready entered");
 
-		searchInputNode = (LineEdit) getNodeOrNull("RootMargin/MainColumns/LeftSide/TopBar/SearchInput");
-		typeFilterNode = (OptionButton) getNodeOrNull("RootMargin/MainColumns/LeftSide/TopBar/TypeFilter");
-		monsterTypeFilterNode = (OptionButton) getNodeOrNull("RootMargin/MainColumns/LeftSide/TopBar/MonsterTypeFilter");
-		sortFilterNode = (OptionButton) getNodeOrNull("RootMargin/MainColumns/LeftSide/TopBar/SortFilter");
-		sortOrderFilterNode = (OptionButton) getNodeOrNull("RootMargin/MainColumns/LeftSide/TopBar/SortOrderFilter");
-		backButtonNode = (Button) getNodeOrNull("RootMargin/MainColumns/LeftSide/TopBar/BackButton");
-		cardGridScrollNode = (ScrollContainer) getNodeOrNull("RootMargin/MainColumns/LeftSide/CardGridScroll");
-		cardGridNode = (GridContainer) getNodeOrNull("RootMargin/MainColumns/LeftSide/CardGridScroll/CardArea/CardGrid");
-		emptyStateNode = (Label) getNodeOrNull("RootMargin/MainColumns/LeftSide/EmptyState");
-		deckCardCountLabelNode = (Label) getNodeOrNull("RootMargin/MainColumns/LeftSide/DeckInfoBar/DeckCardCountLabel");
-		detailsPanelNode = (PanelContainer) getNodeOrNull("RootMargin/MainColumns/RightSideDetails");
-		cardTileScene = (PackedScene) ResourceLoader.load(
-				CARD_TILE_SCENE_PATH,
-				"PackedScene",
-				ResourceLoader.CacheMode.REUSE
-		);
+        // 1. Fetch nodes from TopBar
+        searchInputNode = (LineEdit) getNodeOrNull("RootMargin/MainColumns/LeftSide/TopBar/SearchInput");
+        typeFilterNode = (OptionButton) getNodeOrNull("RootMargin/MainColumns/LeftSide/TopBar/TypeFilter");
+        monsterTypeFilterNode = (OptionButton) getNodeOrNull("RootMargin/MainColumns/LeftSide/TopBar/MonsterTypeFilter");
+        
+        // 2. Fetch sorted buttons from the new DeckInfoBar
+        sortFilterNode = (OptionButton) getNodeOrNull("RootMargin/MainColumns/LeftSide/DeckInfoBar/SortFilter");
+        sortOrderFilterNode = (OptionButton) getNodeOrNull("RootMargin/MainColumns/LeftSide/DeckInfoBar/SortOrderFilter");
 
-		CardDB cardDB = resolveCardDB();
-		queryService = new DeckBuilderQueryService(cardDB);
+        if (sortFilterNode == null) GD.INSTANCE.printErr("ERROR: SortFilter NOT FOUND in DeckInfoBar!");
+        if (sortOrderFilterNode == null) GD.INSTANCE.printErr("ERROR: SortOrderFilter NOT FOUND in DeckInfoBar!");
 
-		uiBinder = new DeckBuilderUiBinder(searchInputNode, typeFilterNode, monsterTypeFilterNode, sortFilterNode, sortOrderFilterNode);
-		uiBinder.setupDefaultOptions();
-		uiBinder.connect(this);
-		connectBackButton();
+        // 3. Fetch remaining UI
+        backButtonNode = (Button) getNodeOrNull("RootMargin/MainColumns/LeftSide/TopBar/BackButton");
+        cardGridScrollNode = (ScrollContainer) getNodeOrNull("RootMargin/MainColumns/LeftSide/CardGridScroll");
+        cardGridNode = (GridContainer) getNodeOrNull("RootMargin/MainColumns/LeftSide/CardGridScroll/CardArea/CardGrid");
+        emptyStateNode = (Label) getNodeOrNull("RootMargin/MainColumns/LeftSide/EmptyState");
+        deckCardCountLabelNode = (Label) getNodeOrNull("RootMargin/MainColumns/LeftSide/DeckInfoBar/DeckCardCountLabel");
+        detailsPanelNode = (PanelContainer) getNodeOrNull("RootMargin/MainColumns/RightSideDetails");
+        cardTileScene = (PackedScene) ResourceLoader.load(CARD_TILE_SCENE_PATH, "PackedScene", ResourceLoader.CacheMode.REUSE);
 
-		connectManualScrollFallback();
+        // 4. Initialize Services
+        CardDB cardDB = resolveCardDB();
+        queryService = new DeckBuilderQueryService(cardDB);
 
-		DeckBuilderCardDetailsPanelController detailsController = getDetailsController();
-		if (detailsController != null) {
-			detailsController.bindDeckBuilderScreen(this);
-		}
-		selectionCoordinator = new DeckBuilderSelectionCoordinator(detailsController);
-		gridRenderer = new DeckBuilderGridRenderer(cardGridNode, cardTileScene, this);
+        uiBinder = new DeckBuilderUiBinder(searchInputNode, typeFilterNode, monsterTypeFilterNode, sortFilterNode, sortOrderFilterNode);
+        uiBinder.setupDefaultOptions();
+        uiBinder.connect(this);
 
-		refreshGrid();
-		callDeferred(StringNames.toGodotName("_deferred_refresh_deck_count_label"));
-	}
+        connectBackButton();
+        connectManualScrollFallback();
 
-	@RegisterFunction
-	public void _on_dropdown_item_selected(long index) {
-		refreshGrid();
-	}
+        DeckBuilderCardDetailsPanelController detailsController = getDetailsController();
+        if (detailsController != null) {
+            detailsController.bindDeckBuilderScreen(this);
+        }
 
-	@RegisterFunction
-	public void _on_search_input_text_changed(String newText) {
-		refreshGrid();
-	}
+        selectionCoordinator = new DeckBuilderSelectionCoordinator(detailsController);
+        gridRenderer = new DeckBuilderGridRenderer(cardGridNode, cardTileScene, this);
+
+        refreshGrid();
+        callDeferred(StringNames.toGodotName("_deferred_refresh_deck_count_label"));
+    }
+
+    @RegisterFunction
+    public void _on_dropdown_item_selected(long index) {
+        refreshGrid();
+    }
+
+    @RegisterFunction
+    public void _on_search_input_text_changed(String newText) {
+        refreshGrid();
+    }
+
+    private void refreshGrid() {
+        updateDeckCardCountLabel();
+        if (queryService == null || uiBinder == null || gridRenderer == null) return;
+
+        List<BaseCarte> cards = new ArrayList<>(queryService.queryCards(
+                uiBinder.getSearchText(),
+                uiBinder.getSelectedType(),
+                uiBinder.getSelectedMonsterType(),
+                uiBinder.getSelectedSort(),
+                uiBinder.getSelectedSortOrder()
+        ));
+        
+        gridRenderer.render(cards);
+        if (emptyStateNode != null) emptyStateNode.setVisible(cards.isEmpty());
+        if (selectionCoordinator != null) selectionCoordinator.sync(cards);
+    }
+
+    // ----------------------------------------------------
+    // --- PRESERVED LOGIC --- 
+    // Do not delete anything below this line!
+    // ----------------------------------------------------
 
 	@RegisterFunction
 	public void _unhandled_input(InputEvent event) {
@@ -182,29 +200,6 @@ public class DeckBuilderScreenController extends Control {
 			return;
 		}
 		deckCardCountLabelNode.setText(DeckState.buildDeckStatusLabel());
-	}
-
-	private void refreshGrid() {
-		updateDeckCardCountLabel();
-		if (queryService == null || uiBinder == null || gridRenderer == null) {
-			return;
-		}
-
-		List<BaseCarte> cards = new ArrayList<>(queryService.queryCards(
-				uiBinder.getSearchText(),
-				uiBinder.getSelectedType(),
-				uiBinder.getSelectedMonsterType(),
-				uiBinder.getSelectedSort(),
-				uiBinder.getSelectedSortOrder()
-		));
-
-		gridRenderer.render(cards);
-		if (emptyStateNode != null) {
-			emptyStateNode.setVisible(cards.isEmpty());
-		}
-		if (selectionCoordinator != null) {
-			selectionCoordinator.sync(cards);
-		}
 	}
 
 	private DeckBuilderCardDetailsPanelController getDetailsController() {
