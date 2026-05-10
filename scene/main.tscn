@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://dfkd35ltv4pqr"]
+[gd_scene load_steps=9 format=3 uid="uid://dfkd35ltv4pqr"]
 
 [ext_resource type="Script" uid="uid://dw53lqsy3v72f" path="res://src/main/java/godot/CardManager.java" id="1_v0l8b"]
 [ext_resource type="Script" uid="uid://rsyefomuqj0a" path="res://src/main/java/godot/PlayerHand.java" id="2_brvut"]
 [ext_resource type="PackedScene" uid="uid://cumnyia0a7g5u" path="res://scene/card_slot.tscn" id="3_0ha60"]
 [ext_resource type="PackedScene" uid="uid://myg5lg82w17y" path="res://scene/deck.tscn" id="4_brvut"]
 [ext_resource type="PackedScene" uid="uid://do7i8mdcl3inq" path="res://scene/card_db.tscn" id="5_0ha60"]
+[ext_resource type="AudioStream" uid="uid://cjbchl3xmghxg" path="res://assets/Audio/DeliriousLoop.mp3" id="6_of57s"]
+[ext_resource type="Script" uid="uid://dg653gp1ryw2k" path="res://src/main/java/godot/Loop.java" id="7_of57s"]
+[ext_resource type="AudioStream" uid="uid://obyi054sk3b6" path="res://assets/Audio/DeliriousIntro.mp3" id="8_tqoya"]
 
 [node name="main" type="Node2D"]
 
@@ -40,3 +43,16 @@ scale = Vector2(0.65, 0.65)
 position = Vector2(350, 890)
 
 [node name="CardDB" parent="." instance=ExtResource("5_0ha60")]
+
+[node name="Loop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_of57s")
+volume_db = -15.0
+parameters/looping = true
+script = ExtResource("7_of57s")
+
+[node name="IntroDelirious" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_tqoya")
+volume_db = -15.0
+autoplay = true
+
+[connection signal="finished" from="IntroDelirious" to="Loop" method="_on_intro_delirious_finished"]

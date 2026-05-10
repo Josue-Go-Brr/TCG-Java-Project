@@ -28,6 +28,10 @@ public class CardManager extends Node2D {
 	@RegisterFunction
 	@Override
 	public void _ready(){
+
+		Music_manager music = (Music_manager) getNode("/root/MusicManager");
+		music.stopMusic();
+
 		screen_Size = getViewportRect();
 		player_hand_ref = getNode("../PlayerHand");
 		game_deck_ref = getNode("../Deck");

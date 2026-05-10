@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://ditf3akl3tsey"]
+
+[ext_resource type="Script" uid="uid://dmdmimehnwlsc" path="res://src/main/java/godot/menu/Cinematique_intro.java" id="1_jrjub"]
+[ext_resource type="VideoStream" uid="uid://ce58h23f3n0mg" path="res://assets/sprites/Animation/Yu-Gi-Oh_-Duel-Monsters-Opening-Remastered-_4Kids-Version_-_4K-CC_.ogv" id="2_qebgx"]
+[ext_resource type="Texture2D" uid="uid://cdhiedy5k2x8i" path="res://assets/sprites/Autres/Skip_Button.png" id="3_qsgqg"]
+[ext_resource type="Texture2D" uid="uid://b022ww48h1jk1" path="res://assets/sprites/Autres/Skip_ButtonHovered.png" id="4_3ux6t"]
+[ext_resource type="AudioStream" uid="uid://cmxrmuox4ryow" path="res://assets/Audio/Générique Yu-Gi-Oh [FR] Saison 1.mp3" id="5_3ux6t"]
+
+[node name="Cinematique Intro" type="Node2D"]
+script = ExtResource("1_jrjub")
+
+[node name="Cinematique" type="VideoStreamPlayer" parent="."]
+custom_minimum_size = Vector2(1920, 1080)
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+stream = ExtResource("2_qebgx")
+volume_db = -80.0
+autoplay = true
+expand = true
+
+[node name="SkipButton" type="TextureButton" parent="."]
+z_index = 1
+offset_left = 1787.0
+offset_top = 1003.0
+offset_right = 1887.0
+offset_bottom = 1050.0
+texture_normal = ExtResource("3_qsgqg")
+texture_pressed = ExtResource("3_qsgqg")
+texture_hover = ExtResource("4_3ux6t")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="AudioCinematique" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_3ux6t")
+volume_db = -1.0
+autoplay = true

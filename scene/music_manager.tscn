@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://d31krkkx0xrff"]
+
+[ext_resource type="AudioStream" uid="uid://cfomjv0i7513r" path="res://assets/Audio/Yu-Gi-Oh! Forbidden Memories OST - Main Menu (Remastered).mp3" id="1_bjrqh"]
+[ext_resource type="Script" uid="uid://cx772jqtkn8xp" path="res://src/main/java/godot/Music_manager.java" id="2_wttbj"]
+
+[node name="MusicManager" type="AudioStreamPlayer"]
+stream = ExtResource("1_bjrqh")
+volume_db = -2.0
+parameters/looping = true
+script = ExtResource("2_wttbj")

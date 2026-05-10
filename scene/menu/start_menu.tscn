@@ -1,12 +1,25 @@
-[gd_scene load_steps=8 format=3 uid="uid://bm3yummmknpov"]
+[gd_scene load_steps=21 format=3 uid="uid://bm3yummmknpov"]
 
 [ext_resource type="Script" uid="uid://c1mvbci60wfaf" path="res://src/main/java/godot/menu/StartMenuController.java" id="1_l740r"]
 [ext_resource type="Texture2D" uid="uid://tejt6i5wcse7" path="res://assets/sprites/backgrounds/new_menu_screen.png" id="2_bg"]
-[ext_resource type="Texture2D" uid="uid://cuvngdy82q8cc" path="res://assets/sprites/backgrounds/menu_buttons/play_button.png" id="2_ojgrk"]
-[ext_resource type="Texture2D" uid="uid://comehymp3xa36" path="res://assets/sprites/backgrounds/menu_buttons/librarybtn.png" id="4_otkda"]
-[ext_resource type="Texture2D" uid="uid://csadhxrnifd0v" path="res://assets/sprites/backgrounds/menu_buttons/deck_button.png" id="5_ee38e"]
-[ext_resource type="Texture2D" uid="uid://b2py635sse8g3" path="res://assets/sprites/backgrounds/menu_buttons/tut_button.png" id="6_070gm"]
-[ext_resource type="Texture2D" uid="uid://d0wlkc4no4tfe" path="res://assets/sprites/backgrounds/menu_buttons/quit_button.png" id="8_c4bk1"]
+[ext_resource type="Texture2D" uid="uid://dm8pcnpaesmlw" path="res://assets/sprites/Autres/Boutons Menu/NouveauBouttonSTARTV2.png" id="3_s5ljq"]
+[ext_resource type="Texture2D" uid="uid://do1r75glrhy46" path="res://assets/sprites/Autres/Boutons Menu/NouveauBouttonStartHover.png" id="4_070gm"]
+[ext_resource type="Texture2D" uid="uid://degi4k75acfmk" path="res://assets/sprites/Autres/Boutons Menu/NouveauBouttonLibV2.png" id="4_uvpea"]
+[ext_resource type="Texture2D" uid="uid://bhc5l1yn8uxy3" path="res://assets/sprites/Autres/Boutons Menu/NouveauBouttonLibHover.png" id="5_s5ljq"]
+[ext_resource type="Texture2D" uid="uid://dx4uok0p0iq7x" path="res://assets/sprites/Autres/Boutons Menu/NouveauBouttonDECKV2.png" id="6_kjxn0"]
+[ext_resource type="Texture2D" uid="uid://c3rlw07ury8w" path="res://assets/sprites/Autres/Boutons Menu/NouveauBouttonDeckHover.png" id="8_kjxn0"]
+[ext_resource type="Texture2D" uid="uid://w6vpo16vexm2" path="res://assets/sprites/Autres/Boutons Menu/NouveauBouttonSETV2.png" id="8_v3leb"]
+[ext_resource type="Texture2D" uid="uid://bwkeq64bf041p" path="res://assets/sprites/Autres/Boutons Menu/NouveauBouttonQUITV2.png" id="10_14jpn"]
+[ext_resource type="Texture2D" uid="uid://rt08kaj5a4o4" path="res://assets/sprites/Autres/Boutons Menu/NouveauBouttonSetHover.png" id="10_c4bk1"]
+[ext_resource type="Texture2D" uid="uid://ctp1ekclee1t" path="res://assets/sprites/Autres/Boutons Menu/NouveauBouttonQuitHover.png" id="12_v3leb"]
+[ext_resource type="VideoStream" uid="uid://xipfodjv4276" path="res://assets/sprites/Animation/MenuBackground720.ogv" id="13_070gm"]
+[ext_resource type="Texture2D" uid="uid://cait2jwowig13" path="res://assets/sprites/Autres/Yugi.png" id="14_hyh87"]
+[ext_resource type="Texture2D" uid="uid://dven5ucppc1ks" path="res://assets/sprites/Autres/Kaiba.png" id="15_dn48v"]
+[ext_resource type="AudioStream" uid="uid://mtyq75dnex16" path="res://assets/Audio/MenuHover.mp3" id="17_hyh87"]
+[ext_resource type="Texture2D" uid="uid://co7synmvdvbjf" path="res://assets/sprites/Autres/LogoYuGiHearstone.png" id="18_3rrcd"]
+[ext_resource type="Script" uid="uid://bk805yt7rckxl" path="res://src/main/java/godot/Menu_button_hover.java" id="18_dn48v"]
+[ext_resource type="AudioStream" uid="uid://bfdbpdc5vimwx" path="res://assets/Audio/FAH Echo Sound Effect.mp3" id="19_yf80j"]
+[ext_resource type="Script" uid="uid://drrw82l0g1ixw" path="res://src/main/java/godot/Quit_button_sound.java" id="20_iqy8v"]
 
 [node name="StartMenu" type="Control"]
 layout_mode = 3
@@ -18,12 +31,14 @@ grow_vertical = 2
 script = ExtResource("1_l740r")
 
 [node name="Background" type="TextureRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("2_bg")
 expand_mode = 1
 stretch_mode = 5
@@ -33,62 +48,113 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -35.0
-offset_top = 32.0
-offset_right = -35.0
-offset_bottom = 32.0
+offset_bottom = -68.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 2
 
 [node name="ButtonStack" type="VBoxContainer" parent="CenterContainer"]
+custom_minimum_size = Vector2(280, 200)
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_constants/separation = -70
+theme_override_constants/separation = 50
 alignment = 1
 
 [node name="PlayButton" type="TextureButton" parent="CenterContainer/ButtonStack"]
-custom_minimum_size = Vector2(220, 220)
+custom_minimum_size = Vector2(200, 90)
 layout_mode = 2
 keep_pressed_outside = true
-texture_normal = ExtResource("2_ojgrk")
-texture_pressed = ExtResource("2_ojgrk")
-texture_hover = ExtResource("2_ojgrk")
+texture_normal = ExtResource("3_s5ljq")
+texture_pressed = ExtResource("3_s5ljq")
+texture_hover = ExtResource("4_070gm")
 ignore_texture_size = true
-stretch_mode = 0
+stretch_mode = 3
 
 [node name="LibraryButton" type="TextureButton" parent="CenterContainer/ButtonStack"]
-custom_minimum_size = Vector2(220, 220)
+custom_minimum_size = Vector2(220, 90)
 layout_mode = 2
-texture_normal = ExtResource("4_otkda")
-texture_pressed = ExtResource("4_otkda")
-texture_hover = ExtResource("4_otkda")
+texture_normal = ExtResource("4_uvpea")
+texture_pressed = ExtResource("4_uvpea")
+texture_hover = ExtResource("5_s5ljq")
 ignore_texture_size = true
-stretch_mode = 0
+stretch_mode = 3
 
 [node name="DeckButton" type="TextureButton" parent="CenterContainer/ButtonStack"]
-custom_minimum_size = Vector2(220, 220)
+custom_minimum_size = Vector2(220, 90)
 layout_mode = 2
-texture_normal = ExtResource("5_ee38e")
-texture_pressed = ExtResource("5_ee38e")
-texture_hover = ExtResource("5_ee38e")
+texture_normal = ExtResource("6_kjxn0")
+texture_pressed = ExtResource("6_kjxn0")
+texture_hover = ExtResource("8_kjxn0")
 ignore_texture_size = true
-stretch_mode = 0
+stretch_mode = 3
 
-[node name="TUTButton" type="TextureButton" parent="CenterContainer/ButtonStack"]
-custom_minimum_size = Vector2(220, 220)
+[node name="SettingsButton" type="TextureButton" parent="CenterContainer/ButtonStack"]
+custom_minimum_size = Vector2(220, 90)
 layout_mode = 2
-texture_normal = ExtResource("6_070gm")
-texture_pressed = ExtResource("6_070gm")
-texture_hover = ExtResource("6_070gm")
+texture_normal = ExtResource("8_v3leb")
+texture_pressed = ExtResource("8_v3leb")
+texture_hover = ExtResource("10_c4bk1")
 ignore_texture_size = true
-stretch_mode = 0
+stretch_mode = 3
 
 [node name="QuitButton" type="TextureButton" parent="CenterContainer/ButtonStack"]
-custom_minimum_size = Vector2(220, 220)
+custom_minimum_size = Vector2(220, 90)
 layout_mode = 2
-texture_normal = ExtResource("8_c4bk1")
-texture_pressed = ExtResource("8_c4bk1")
-texture_hover = ExtResource("8_c4bk1")
+texture_normal = ExtResource("10_14jpn")
+texture_pressed = ExtResource("10_14jpn")
+texture_hover = ExtResource("12_v3leb")
 ignore_texture_size = true
-stretch_mode = 0
+stretch_mode = 3
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+z_index = -1
+layout_mode = 0
+offset_right = 1921.0
+offset_bottom = 1079.0
+mouse_filter = 2
+stream = ExtResource("13_070gm")
+autoplay = true
+expand = true
+loop = true
+
+[node name="Yugi" type="Sprite2D" parent="."]
+position = Vector2(476, 756)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("14_hyh87")
+
+[node name="Kaiba" type="Sprite2D" parent="."]
+position = Vector2(1492, 742)
+scale = Vector2(0.505, 0.505)
+texture = ExtResource("15_dn48v")
+
+[node name="LogoYuGiHearstone" type="Sprite2D" parent="."]
+position = Vector2(959, 191)
+scale = Vector2(0.49, 0.49)
+texture = ExtResource("18_3rrcd")
+
+[node name="MusicSlider" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 1669.0
+offset_top = -35.0
+offset_right = 1897.0
+offset_bottom = 91.0
+min_value = -40.0
+max_value = 0.0
+value = -20.0
+ticks_on_borders = true
+
+[node name="MenuButtonHover" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("17_hyh87")
+script = ExtResource("18_dn48v")
+
+[node name="QuitButtonSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("19_yf80j")
+script = ExtResource("20_iqy8v")
+
+[connection signal="mouse_entered" from="CenterContainer/ButtonStack/PlayButton" to="MenuButtonHover" method="_on_play_button_mouse_entered"]
+[connection signal="mouse_entered" from="CenterContainer/ButtonStack/LibraryButton" to="MenuButtonHover" method="_on_library_button_mouse_entered"]
+[connection signal="mouse_entered" from="CenterContainer/ButtonStack/DeckButton" to="MenuButtonHover" method="_on_deck_button_mouse_entered"]
+[connection signal="mouse_entered" from="CenterContainer/ButtonStack/SettingsButton" to="MenuButtonHover" method="_on_settings_button_mouse_entered"]
+[connection signal="mouse_entered" from="CenterContainer/ButtonStack/QuitButton" to="MenuButtonHover" method="_on_quit_button_mouse_entered"]
+[connection signal="pressed" from="CenterContainer/ButtonStack/QuitButton" to="QuitButtonSound" method="_on_quit_button_pressed"]
+[connection signal="value_changed" from="MusicSlider" to="." method="_on_music_slider_value_changed"]

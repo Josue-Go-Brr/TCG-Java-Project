@@ -1,9 +1,11 @@
 package godot.menu;
 
+import godot.Music_manager;
 import godot.annotation.RegisterClass;
 import godot.annotation.RegisterFunction;
 import godot.api.Control;
 import godot.api.TextureButton;
+import godot.api.Timer;
 import godot.core.Callable;
 import godot.core.NodePath;
 import godot.core.StringNames;
@@ -17,8 +19,8 @@ public class StartMenuController extends Control {
 			new NodePath("CenterContainer/ButtonStack/LibraryButton");
 	private static final NodePath DECK_BUTTON_PATH =
 			new NodePath("CenterContainer/ButtonStack/DeckButton");
-	private static final NodePath TUT_BUTTON_PATH =
-			new NodePath("CenterContainer/ButtonStack/TUTButton");
+	private static final NodePath SET_BUTTON_PATH =
+			new NodePath("CenterContainer/ButtonStack/SettingsButton");
 	private static final NodePath QUIT_BUTTON_PATH =
 			new NodePath("CenterContainer/ButtonStack/QuitButton");
 
@@ -32,7 +34,7 @@ public class StartMenuController extends Control {
 		TextureButton playButton = (TextureButton) getNodeOrNull(PLAY_BUTTON_PATH);
 		TextureButton libraryButton = (TextureButton) getNodeOrNull(LIBRARY_BUTTON_PATH);
 		TextureButton deckButton = (TextureButton) getNodeOrNull(DECK_BUTTON_PATH);
-		TextureButton tutButton = (TextureButton) getNodeOrNull(TUT_BUTTON_PATH);
+		TextureButton setButton = (TextureButton) getNodeOrNull(SET_BUTTON_PATH);
 		TextureButton quitButton = (TextureButton) getNodeOrNull(QUIT_BUTTON_PATH);
 
 		if (playButton != null) {
@@ -62,8 +64,8 @@ public class StartMenuController extends Control {
 		} else {
 			GD.INSTANCE.printErr("[StartMenu] DeckButton not found");
 		}
-		if (tutButton != null) {
-			tutButton.connect(
+		if (setButton != null) {
+			setButton.connect(
 					"pressed",
 					Callable.create(this, StringNames.toGodotName("onTutPressed")),
 					0
@@ -104,5 +106,13 @@ public class StartMenuController extends Control {
 	@RegisterFunction
 	public void onQuitPressed() {
 		getTree().quit();
+	}
+	
+	@RegisterFunction
+	public void _on_music_slider_value_changed(double value){
+
+		Music_manager music = (Music_manager) getNode("/root/MusicManager");
+		music.setVolumeDb((float) value);
+		
 	}
 }
