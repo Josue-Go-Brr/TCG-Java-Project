@@ -26,7 +26,6 @@ public class Cinematique_intro extends Node2D{
 	@Override
 	public void _process(double delta) {
 		if (bouton.isPressed()){
-			music.playMusic();
 			getTree().changeSceneToFile("res://scene/menu/start_menu.tscn");
 		}
 		if (cinematique.isPlaying() != true){

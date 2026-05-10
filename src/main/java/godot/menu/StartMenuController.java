@@ -31,6 +31,11 @@ public class StartMenuController extends Control {
 	@RegisterFunction
 	@Override
 	public void _ready() {
+
+		Music_manager music = (Music_manager) getNode("/root/MusicManager");
+		if (!music.isPlaying()){
+			music.play();
+		}
 		TextureButton playButton = (TextureButton) getNodeOrNull(PLAY_BUTTON_PATH);
 		TextureButton libraryButton = (TextureButton) getNodeOrNull(LIBRARY_BUTTON_PATH);
 		TextureButton deckButton = (TextureButton) getNodeOrNull(DECK_BUTTON_PATH);
