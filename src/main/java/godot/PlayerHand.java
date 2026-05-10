@@ -94,6 +94,21 @@ public class PlayerHand extends Node2D {
 
 	}
 
+	@RegisterFunction
+	@Override
+	public void _process(double delta) {
+		update_enemy_field();
+		if (enemyfieldempty) {
+			getNode("../EnemyField/EnemyBox/").set("collision_layer", 8);
+			getNode("../EnemyField/EnemyBox/").set("collision_mask", 8);
+		}
+		else {
+			getNode("../EnemyField/EnemyBox/").set("collision_layer", 16);
+			getNode("../EnemyField/EnemyBox/").set("collision_mask", 16);
+		}
+
+
+	}
 
 
 	@RegisterFunction
@@ -190,19 +205,52 @@ public class PlayerHand extends Node2D {
 		}
 			// Make the card attack, rescale normally and make it unable to attack again this turn
 			if (getNode("../BattleManager").get("player_turn").equals(true)) {
-				card_attack(selectedcard);
+				if (enemyfieldempty) {
+					directattack(selectedcard);
+				}
+				else {
+					card_attack(selectedcard);
+				}
 				selectedcard.set("selected", false);
 				selectedcard.set("scale", new Vector2(0.6, 0.6));
 				selectedcard.set("attacked_this_turn", true);
 				cardManager.set("cardselected", false);
+
+
+				GD.INSTANCE.print(enemy_field);
+
 			}
 		}
 
+	@RegisterFunction
+	public void directattack(Node card) {
+		card.set("target", false);
+		EnemyHPcount = EnemyHPcount - (long) card.get("atk");
+		if (EnemyHPcount < 0){
+			//_exitTree();
+		}
+		Vector2 previousposition = (Vector2) card.get("position");
+
+		Tween tweenattack0 = getTree().createTween();
+		tweenattack0.tweenProperty(card, "position",new Vector2(previousposition.getX(), previousposition.getY() + 20), 0.2);
+
+		Tween tweenattack = getTree().createTween();
+		tweenattack.tweenInterval(0.1);
+		tweenattack.tweenProperty(card, "position", new Vector2(950, 140), 0.1);
+
+		Tween tweenattack2 = getTree().createTween();
+		tweenattack2.tweenInterval(0.3);
+		tweenattack2.tweenProperty(card, "position", card.get("position"), 0.2);
+
+		EnemyHP.setText(String.valueOf(EnemyHPcount));
+		GD.INSTANCE.print("direct attack");
+	}
 
 
 	//This function take argument the card that will attack and select one in opposing field
 	@RegisterFunction
 	public void card_attack(Node card) {
+
 
 		// take a random card slot in player field a find the card there by comparing to the coordinate of the card slot
 		//GD.INSTANCE.print("enemy_field " + enemy_field);
@@ -210,13 +258,32 @@ public class PlayerHand extends Node2D {
 
 		//Searching for the card in the right coordinates
 		for (int i = 0; i < cardManager.getChildCount(); i++) {
+
+			Vector2 previousposition = (Vector2) card.get("position");
+			Vector2 cardposition = (Vector2) cardManager.getChild(i).get("position");
+
 			// On parcourt tout les enfants de card Manager en regardant si l'un d'entre eux a la bonne position
 			if (cardManager.getChild(i).get("target").equals(true)) {
 
 				GD.INSTANCE.print("ATTACK card: " + card + "is attacking " + cardManager.getChild(i));
 
+				card.set("z_index", 5);
+				Tween tweenattack0 = getTree().createTween();
+				tweenattack0.tweenProperty(card, "position",new Vector2(previousposition.getX(), previousposition.getY() + 20), 0.2);
+
+				Tween tweenattack = getTree().createTween();
+				tweenattack.tweenInterval(0.1);
+				tweenattack.tweenProperty(card, "position", new Vector2(cardposition.getX(), cardposition.getY() + 100), 0.1);
+
+				Tween tweenattack2 = getTree().createTween();
+				tweenattack2.tweenInterval(0.3);
+				tweenattack2.tweenProperty(card, "position", previousposition, 0.2);
+
+
 				//I will set an "incomingattack" variable in each card and compare it when loading the lables
+				cardManager.getChild(i).set("z_index", 0);
 				cardManager.getChild(i).set("incoming_atk", (card.get("atk")));
+				cardManager.getChild(i).set("attacked", true);
 				alive();
 			}
 		}

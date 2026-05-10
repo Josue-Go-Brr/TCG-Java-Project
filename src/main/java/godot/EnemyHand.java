@@ -66,7 +66,6 @@ public class EnemyHand extends Node2D {
 	@Override
 	public void _ready() {
 
-
 		EnemyHP = (RichTextLabel) getNode("../PlayerHP");
 		EnemyHP.setText(String.valueOf(EnemyHPcount));
 
@@ -268,6 +267,22 @@ public class EnemyHand extends Node2D {
 		if (playerfieldempty && !enemy_field.isEmpty()) {
 			//GD.INSTANCE.print("Direct attack! " + card);
 			EnemyHPcount = EnemyHPcount - (long) card.get("atk");
+			if (EnemyHPcount < 0){
+				//getNode("../../main")._exitTree();
+			}
+			card.set("z_index", 5);
+			Vector2 previousposition = (Vector2) card.get("position");
+
+			Tween tweenattack0 = getTree().createTween();
+			tweenattack0.tweenProperty(card, "position",new Vector2(previousposition.getX(), previousposition.getY() - 20), 0.2);
+
+			Tween tweenattack = getTree().createTween();
+			tweenattack.tweenInterval(0.1);
+			tweenattack.tweenProperty(card, "position", new Vector2(950, 980), 0.1);
+
+			Tween tweenattack2 = getTree().createTween();
+			tweenattack2.tweenInterval(0.3);
+			tweenattack2.tweenProperty(card, "position", card.get("position"), 0.2);
 			EnemyHP.setText(String.valueOf(EnemyHPcount));
 			return;
 		}
@@ -287,8 +302,27 @@ public class EnemyHand extends Node2D {
 
 				//I will set an "incomingattack" variable in each card and compare it when loading the lables
 
+				Vector2 previousposition = (Vector2) card.get("position");
+				Vector2 cardposition = (Vector2) cardManager.getChild(i).get("position");
 				if (card.get("isalive").equals(true)) {
+
+					card.set("z_index", 5);
+					Tween tweenattack0 = getTree().createTween();
+					tweenattack0.tweenProperty(card, "position",new Vector2(previousposition.getX(), previousposition.getY() - 20), 0.2);
+					
+					Tween tweenattack = getTree().createTween();
+					tweenattack.tweenInterval(0.1);
+					tweenattack.tweenProperty(card, "position", new Vector2(cardposition.getX(), cardposition.getY()-100), 0.1);
+
+					Tween tweenattack2 = getTree().createTween();
+					tweenattack2.tweenInterval(0.3);
+					tweenattack2.tweenProperty(card, "position", previousposition, 0.2);
+
+
+					// je mettrais un timer
+					cardManager.getChild(i).set("z_index", 0);
 					cardManager.getChild(i).set("incoming_atk", (card.get("atk")));
+					cardManager.getChild(i).set("attacked", true);
 					alive();
 				}
 

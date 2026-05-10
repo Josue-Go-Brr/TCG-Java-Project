@@ -20,7 +20,7 @@ public class battle_manager extends Node {
 	public Timer timer;
 	public Node2D OppDeck;
 	public Node2D PlayerDeck;
-
+	@RegisterProperty @Export public int cristals;
 
 	@RegisterProperty @Export public int enemyAtk;
 	@RegisterProperty @Export public int playerAtk;
@@ -29,16 +29,16 @@ public class battle_manager extends Node {
 	@RegisterProperty @Export public boolean player_turn= true;
 
 
+
+
 	@RegisterFunction
 	@Override
 	public void _ready() {
-
-
-
-
+		cristals = 1;
 		PlayerDeck = (Node2D) getNode("../Deck");
 		OppDeck = (Node2D) getNode("../OpponentDeck");
 		EndTurnButton = getNode("../EndTurnButton");
+
 		timer = (Timer) getNode("../BattleTimer");
 		timer.oneShotProperty(true);
 		timer.waitTimeProperty(1.0);
@@ -79,8 +79,6 @@ public class battle_manager extends Node {
 	@RegisterFunction
 
 	public void _on_timer_timeout(){
-
-
 		//Play the card with the highest number of cristal and chose an empty card slot
 		getNode("../EnemyHand").call("highest_card");
 		getNode("../EnemyHand").call("attack");
@@ -106,10 +104,10 @@ public class battle_manager extends Node {
 			getNode("../Cardmanager").getChild(i).set("target", false);
 			getNode("../Cardmanager").getChild(i).set("selected", false);
 			getNode("../Cardmanager").set("cardselected", false);
+			getNode("../PlayerHand").call("update_enemy_field");
 		}
 
 		//getNode("../EnemyHand").set("compteur", 0);
-
 		//If you want to automaticaly get a card
 		//PlayerDeck.callDeferred("draw_card");
 

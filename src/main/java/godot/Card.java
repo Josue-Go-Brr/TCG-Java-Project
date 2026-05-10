@@ -12,6 +12,7 @@ import java.lang.Object;
 @RegisterClass
 public class Card extends Node2D {
 
+	@RegisterProperty @Export public boolean attacked = false;
 	@RegisterProperty @Export public boolean isalive = true;
 	@RegisterProperty @Export public boolean selected = false;
 	@RegisterProperty @Export public boolean in_slot = false;
@@ -38,19 +39,32 @@ public class Card extends Node2D {
 	public Node cardManager;
 	public Node player_hand_ref;
 	public Node card;
+	public Timer timer;
 
 	@RegisterFunction
 	@Override
 	public void _ready(){
 		player_hand_ref = getNode("../../PlayerHand");
 		cardManager = getNode("../Cardmanager");
-		db = (CardDB) getNode("/root/main/CardDB");	// Récupération de la DATABASE
+		db = (CardDB) getNode("/root/main/CardDB");
+
+		timer = (Timer) getNode("../../DeathTimerSec");
+		timer.oneShotProperty(true);
+		timer.waitTimeProperty(0.2);
+
+		timer.connect( "timeout",
+				Callable.create(this, StringNames.toGodotName("_on_timer_timeout")),
+				0);
 	}
 
 	@RegisterFunction
 	@Override
 	public void _process(double delta) {
-		updateStats();
+
+		if (attacked) {
+			updateStats();
+			attacked = false;
+		}
 	}
 
 	// This fonction is used to update the card date with the help of her cardID
@@ -98,27 +112,8 @@ public class Card extends Node2D {
 
 	@RegisterFunction
 	public void updateStats(){
-		if (incoming_atk != 0) {
-			defense = defense - incoming_atk;
-			if (defense < 0) {
-				defense = 0;
-				//Getting the Player card slots and making the variable card_in_slot false
-				for (int i = 0; i < getNode("../../Slots").getChildCount(); i++) {
-					if (getNode("../../Slots").getChild(i).get("position").equals(this.getPosition())) {
-						getNode("../../Slots").getChild(i).set("card_in_slot", false);
-					}
-				}
-				this.getNode("Area2D/CollisionShape2D").set("disabled", true);
-				this.setPosition(new Vector2(200, 200));
-				this.visibleProperty(false);
-				isalive = false;
-				//this.queueFree();
-			}
-			incoming_atk = 0;
-			//GD.INSTANCE.print("Stats updated");
-			updateLabel();
-		}
-
+		timer.start();
+		GD.INSTANCE.print("timercard");
 	}
 
 	@RegisterFunction
@@ -150,13 +145,35 @@ public class Card extends Node2D {
 	}
 
 	@RegisterFunction
+	public void _on_timer_timeout(){
+		if (incoming_atk != 0) {
+			defense = defense - incoming_atk;
+			if (defense < 0) {
+				defense = 0;
+				//Getting the Player card slots and making the variable card_in_slot false
+				for (int i = 0; i < getNode("../../Slots").getChildCount(); i++) {
+					if (getNode("../../Slots").getChild(i).get("position").equals(this.getPosition())) {
+						getNode("../../Slots").getChild(i).set("card_in_slot", false);
+					}
+				}
+				this.getNode("Area2D/CollisionShape2D").set("disabled", true);
+				this.setPosition(new Vector2(200, 200));
+				this.visibleProperty(false);
+				isalive = false;
+				//this.queueFree();
+			}
+			incoming_atk = 0;
+			//GD.INSTANCE.print("Stats updated");
+			updateLabel();
+		}
+	}
+
+	@RegisterFunction
 	public void _on_area_2d_mouse_entered() {
 		if (!selected) {
 			setScale(hovered_on);
 			this.setZIndex(2);
 		}
-
-
 	}
 
 	@RegisterFunction

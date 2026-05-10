@@ -88,12 +88,18 @@ public class CardManager extends Node2D {
 					//card_drawn_this_turn = true;
 
 				//}
+//				if (Target != null) {
+//					GD.INSTANCE.print(Target.getName());
+//				}
 
-				if (Target != null && cardselected && cardselectedNode.get("attacked_this_turn").equals(false)) {
+				if (Target != null
+						&& cardselected
+						&& cardselectedNode.get("attacked_this_turn").equals(false)) {
 					Target.set("target", true);
 					player_hand_ref.call("attack");
-					//GD.INSTANCE.print(Target.get("target"));
 				}
+
+
 
 				if (card != null){
 					start_drag(card);
@@ -105,6 +111,13 @@ public class CardManager extends Node2D {
 					cardselected = true;
 					cardselectedNode = cardDeck;
 				}
+
+				if (cardselected && player_hand_ref.get("enemyfieldempty").equals(true)) {
+					getNode("../EnemyBox/CollisionShape2D").set("collision_layer", 8);
+					getNode("../EnemyBox/CollisionShape2D").set("collision_mask", 8);
+				}
+
+
 
 
 

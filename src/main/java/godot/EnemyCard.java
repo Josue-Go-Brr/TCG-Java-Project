@@ -12,7 +12,7 @@ import java.lang.Object;
 @RegisterClass
 public class EnemyCard extends Node2D {
 
-
+	@RegisterProperty @Export public boolean attacked = false;
 	@RegisterProperty @Export public boolean isalive = true;
 	@RegisterProperty @Export public boolean in_slot = false;
 	@RegisterProperty @Export public Node slot;
@@ -39,19 +39,32 @@ public class EnemyCard extends Node2D {
 	public Node cardManager;
 	public Node enemy_hand_ref;
 	public Node card;
+	public Timer timer;
 
 	@RegisterFunction
 	@Override
 	public void _ready(){
 		enemy_hand_ref = getNode("../../PlayerHand");
 		cardManager = getNode("../Cardmanager");
-		db = (CardDB) getNode("/root/main/CardDB");	// Récupération de la DATABASE
+		db = (CardDB) getNode("/root/main/CardDB");
+
+		timer = (Timer) getNode("../../DeathTimer");
+		timer.oneShotProperty(true);
+		timer.waitTimeProperty(0.2);// Récupération de la DATABASE
+		timer.connect( "timeout",
+				Callable.create(this, StringNames.toGodotName("_on_timer_timeout")),
+				2);
+
 	}
 
 	@RegisterFunction
 	@Override
 	public void _process(double delta) {
+	if (attacked){
 		updateStats();
+		attacked = false;
+	}
+
 	}
 
 	// This fonction is used to update the card date with the help of her cardID
@@ -99,30 +112,7 @@ public class EnemyCard extends Node2D {
 
 	@RegisterFunction
 	public void updateStats(){
-
-
-		if (incoming_atk != 0) {
-			defense = defense - incoming_atk;
-			if (defense < 0) {
-				defense = 0;
-				//Getting the Player card slots and making the variable card_in_slot false to free the card slot
-				for (int i = 0; i < getNode("../../SlotsEnemy").getChildCount(); i++) {
-					if (getNode("../../SlotsEnemy").getChild(i).get("position").equals(this.getPosition())) {
-						getNode("../../SlotsEnemy").getChild(i).set("card_in_slot", false);
-					}
-				}
-				//this.queueFree();
-				this.getNode("Area2D/CollisionShape2D").set("disabled", true);
-				this.setPosition(new Vector2(200, 200));
-				this.visibleProperty(false);
-				atk = 0;
-				isalive = false;
-			}
-
-			incoming_atk = 0;
-			//GD.INSTANCE.print("Stats updated");
-			updateLabel();
-		}
+		timer.start();
 
 	}
 
@@ -154,7 +144,31 @@ public class EnemyCard extends Node2D {
 		getNode("CardSprite").set("texture", cardSprite);
 	}
 
+	@RegisterFunction
+	public void _on_timer_timeout(){
+		if (incoming_atk != 0) {
+			defense = defense - incoming_atk;
+			if (defense < 0) {
+				defense = 0;
+				//Getting the Player card slots and making the variable card_in_slot false to free the card slot
+				for (int i = 0; i < getNode("../../SlotsEnemy").getChildCount(); i++) {
+					if (getNode("../../SlotsEnemy").getChild(i).get("position").equals(this.getPosition())) {
+						getNode("../../SlotsEnemy").getChild(i).set("card_in_slot", false);
+					}
+				}
 
+				this.getNode("Area2D/CollisionShape2D").set("disabled", true);
+				this.setPosition(new Vector2(200, 200));
+				this.visibleProperty(false);
+				atk = 0;
+				isalive = false;
+			}
+
+			incoming_atk = 0;
+			GD.INSTANCE.print("Stats updated");
+			updateLabel();
+		}
+	}
 	@RegisterFunction
 	public void cost() {
 		getNode("../../EnemyHand").set("cost", cost);

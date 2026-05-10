@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dfkd35ltv4pqr"]
+[gd_scene load_steps=13 format=3 uid="uid://dfkd35ltv4pqr"]
 
 [ext_resource type="Script" uid="uid://dw53lqsy3v72f" path="res://src/main/java/godot/CardManager.java" id="1_v0l8b"]
 [ext_resource type="Script" uid="uid://rsyefomuqj0a" path="res://src/main/java/godot/PlayerHand.java" id="2_brvut"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://l1m2071a8m1y" path="res://src/main/java/godot/battle_manager.java" id="8_of57s"]
 [ext_resource type="Script" uid="uid://dpleoygnx6lkv" path="res://src/main/java/godot/GameDeckEnemy.java" id="8_tqoya"]
 [ext_resource type="VideoStream" uid="uid://c00unsylxim6o" path="res://assets/Animation/Melee-HD-Asset-Download-Main-Menu-Background-Seamless-Animation-Loop-_Super-Smash-Bros.-Melee_.ogv" id="10_k65ib"]
+[ext_resource type="PackedScene" uid="uid://dblonf37y56i" path="res://scene/EnemyField.tscn" id="12_mswub"]
 
 [node name="main" type="Node2D"]
 
@@ -108,6 +109,12 @@ one_shot = true
 process_callback = 0
 one_shot = true
 
+[node name="DeathTimerSec" type="Timer" parent="."]
+one_shot = true
+
+[node name="DeathTimer" type="Timer" parent="."]
+one_shot = true
+
 [node name="PlayerHP" type="RichTextLabel" parent="."]
 offset_left = 1421.0
 offset_top = 595.0
@@ -119,3 +126,6 @@ offset_left = 1419.0
 offset_top = 489.0
 offset_right = 1493.0
 offset_bottom = 529.0
+
+[node name="EnemyField" parent="." instance=ExtResource("12_mswub")]
+script = null
