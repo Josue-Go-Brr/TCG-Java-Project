@@ -26,6 +26,10 @@ public class CardManager extends Node2D {
 	@RegisterProperty @Export
 	public List<Node> player_field = new ArrayList<>();
 
+	@RegisterProperty @Export
+	public boolean cardselected = false;
+	public Node2D cardselectedNode;
+
 	//Used with raycast
 	public int COLLISION_MASK_CARD_SLOT = 2;
 	public Node2D cardDragged;
@@ -76,25 +80,44 @@ public class CardManager extends Node2D {
 			if (mouseEvent.isPressed()){
 				Node2D cardDeck = _raycast_check_for_deck();
 				Node2D card = _raycast_check_for_card();
+				Node2D Target = _raycast_check_for_target();
 
-
-				if (cardDeck != null && !card_drawn_this_turn) {
+				//if (cardDeck != null && !card_drawn_this_turn) {
 					//met une carte en main quand on clique sur le deck
-					game_deck_ref.call("draw_card");
-					card_drawn_this_turn = true;
+					//game_deck_ref.call("draw_card");
+					//card_drawn_this_turn = true;
 
+				//}
+
+				if (Target != null && cardselected && cardselectedNode.get("attacked_this_turn").equals(false)) {
+					Target.set("target", true);
+					player_hand_ref.call("attack");
+					//GD.INSTANCE.print(Target.get("target"));
 				}
 
 				if (card != null){
 					start_drag(card);
 				}
+
+				if (cardDeck != null && !cardselected && cardDeck.get("attacked_this_turn").equals(false)) {
+					cardDeck.set("selected", true);
+					cardDeck.setScale(new Vector2(0.7, 0.7));
+					cardselected = true;
+					cardselectedNode = cardDeck;
+				}
+
+
+
 			}
 			else {
 				if (cardDragged != null) {
 					stop_drag();
 				}
 
+
+
 			}
+
 		}
 	}
 
@@ -115,7 +138,6 @@ public class CardManager extends Node2D {
 			if (collider instanceof Node node) {
 				Node parent = node.getParent();
 				if (parent instanceof Node2D nodeCarte){
-					GD.INSTANCE.print("Node name: " + node.getParent());
 					return nodeCarte;
 				}
 
@@ -144,7 +166,6 @@ public class CardManager extends Node2D {
 			if (collider instanceof Node node) {
 				Node parent = node.getParent();
 				if (parent instanceof Node2D nodeCardSlot){
-					GD.INSTANCE.print("Node name: " + node.getParent());
 					return nodeCardSlot;
 				}
 
@@ -173,7 +194,6 @@ public class CardManager extends Node2D {
 			if (collider instanceof Node node) {
 				Node parent = node.getParent();
 				if (parent instanceof Node2D nodeGameDeck){
-					GD.INSTANCE.print(nodeGameDeck.get("collision_mask"));
 					return nodeGameDeck;
 				}
 
@@ -181,6 +201,33 @@ public class CardManager extends Node2D {
 		}
 		return null;
 	}
+
+	@RegisterFunction
+	public Node2D _raycast_check_for_target(){
+		PhysicsDirectSpaceState2D space_state = getWorld2d().getDirectSpaceState();
+		PhysicsPointQueryParameters2D parameters = new PhysicsPointQueryParameters2D();
+		parameters.setPosition(getGlobalMousePosition());
+		parameters.setCollideWithAreas(true);
+		parameters.setCollisionMask(8);
+
+		VariantArray<Dictionary<Object, Object>> result = space_state.intersectPoint(parameters);
+		// If there is any collision Point, return.
+		if (!result.isEmpty()){
+			Dictionary<Object, Object> hit = result.get(0);
+			Object collider = hit.get("collider");
+
+
+			if (collider instanceof Node node) {
+				Node parent = node.getParent();
+				if (parent instanceof Node2D nodeGameTarget){
+					return nodeGameTarget;
+				}
+
+			}
+		}
+		return null;
+	}
+
 
 
 	@RegisterFunction
@@ -211,9 +258,9 @@ public class CardManager extends Node2D {
 			//Basic solution is to disable the collision of the card
 			//Never trust shown name, right click > copy property path is safer
 			//if you want to make things with those cards later on use those instead:
-			//cardDragged.getNode("Area2D").get("collision_mask");
-			//cardDragged.getNode("Area2D").set("collision_layer", 2);
-			cardDragged.getNode("Area2D/CollisionShape2D").set("disabled", true);
+			cardDragged.getNode("Area2D").set("collision_mask", 4);
+			cardDragged.getNode("Area2D").set("collision_layer", 4);
+			//cardDragged.getNode("Area2D/CollisionShape2D").set("disabled", true);
 
 
 			// I made a variable in each CardSlots, when true the slot is occupied
@@ -226,6 +273,13 @@ public class CardManager extends Node2D {
 		}
 		cardDragged = null;
 		player_hand_ref.call("quoi");
+	}
+
+	@RegisterFunction
+	public void resetsize() {
+		if (cardselectedNode != null) {
+			cardselectedNode.setScale(new Vector2(0.6, 0.6));
+		}
 	}
 
 }

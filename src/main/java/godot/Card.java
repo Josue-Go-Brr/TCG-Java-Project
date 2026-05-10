@@ -12,9 +12,10 @@ import java.lang.Object;
 @RegisterClass
 public class Card extends Node2D {
 
-	@RegisterProperty @Export
-
-	public boolean in_slot = false;
+	@RegisterProperty @Export public boolean isalive = true;
+	@RegisterProperty @Export public boolean selected = false;
+	@RegisterProperty @Export public boolean in_slot = false;
+	@RegisterProperty @Export public boolean attacked_this_turn = false;
 
 	public Vector2 starting_pos = new Vector2();
 	public Vector2 hovered_off = new Vector2(0.6, 0.6);
@@ -77,7 +78,6 @@ public class Card extends Node2D {
 			name = data.name;
 			type = data.type;
 
-			GD.INSTANCE.print(type);
 			updateSprite();
 			updateLabel();		// Update Label et Sprite pour qu'ils s'affichent après l'exécution du script de la carte
 
@@ -108,10 +108,14 @@ public class Card extends Node2D {
 						getNode("../../Slots").getChild(i).set("card_in_slot", false);
 					}
 				}
-				this.queueFree();
+				this.getNode("Area2D/CollisionShape2D").set("disabled", true);
+				this.setPosition(new Vector2(200, 200));
+				this.visibleProperty(false);
+				isalive = false;
+				//this.queueFree();
 			}
 			incoming_atk = 0;
-			GD.INSTANCE.print("Stats updated");
+			//GD.INSTANCE.print("Stats updated");
 			updateLabel();
 		}
 
@@ -147,14 +151,21 @@ public class Card extends Node2D {
 
 	@RegisterFunction
 	public void _on_area_2d_mouse_entered() {
-		setScale(hovered_on);
-		this.setZIndex(2);
+		if (!selected) {
+			setScale(hovered_on);
+			this.setZIndex(2);
+		}
+
+
 	}
 
 	@RegisterFunction
 	public void _on_area_2d_mouse_exited() {
-		setScale(hovered_off);
-		this.setZIndex(1);
+		if (!selected) {
+			setScale(hovered_off);
+			this.setZIndex(1);
+		}
+
 	}
 
 }

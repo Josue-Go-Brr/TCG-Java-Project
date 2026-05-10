@@ -23,6 +23,7 @@ public class battle_manager extends Node {
 	List<Node> enemy_hand = new ArrayList<>();
 	public List<Node2D> empty_slots = new ArrayList<Node2D>();
 	public int turn = 1;
+	@RegisterProperty @Export public boolean player_turn= true;
 
 
 	@RegisterFunction
@@ -55,6 +56,11 @@ public class battle_manager extends Node {
 	
 	@RegisterFunction
 	public void onEndTurnPressed() {
+		//resets selected card size
+
+		 getNode("../Cardmanager").call("resetsize");
+
+		player_turn = false;
 		EndTurnButton.set("disabled", true);
 		EndTurnButton.set("visible", false);
 		GD.INSTANCE.print("turn "+ turn);
@@ -70,21 +76,14 @@ public class battle_manager extends Node {
 	@RegisterFunction
 
 	public void _on_timer_timeout(){
-		//GD.INSTANCE.print("timeout");
-		//Check if free monster card slot, if no end turn
-//		if (empty_slots.isEmpty()) {
-//			end_opponent_turn();
-//			return;
-//		}
 
 
 		//Play the card with the highest number of cristal and chose an empty card slot
 		getNode("../EnemyHand").call("highest_card");
 		getNode("../EnemyHand").call("attack");
 
-
-		//End turn, player can draw again
-		end_opponent_turn();
+		//End turn, player can draw again, I call it in the end of the attack fonction
+		//end_opponent_turn();
 
 	}
 
@@ -96,6 +95,17 @@ public class battle_manager extends Node {
 		EndTurnButton.set("disabled", false);
 		EndTurnButton.set("visible", true);
 
+		player_turn = true;
+		getNode("../Deck").call("draw_card");
+
+		for (int i = 0; i < getNode("../Cardmanager").getChildCount(); i++) {
+			getNode("../Cardmanager").getChild(i).set("attacked_this_turn", false);
+			getNode("../Cardmanager").getChild(i).set("target", false);
+			getNode("../Cardmanager").getChild(i).set("selected", false);
+			getNode("../Cardmanager").set("cardselected", false);
+		}
+
+		//getNode("../EnemyHand").set("compteur", 0);
 
 		//If you want to automaticaly get a card
 		//PlayerDeck.callDeferred("draw_card");

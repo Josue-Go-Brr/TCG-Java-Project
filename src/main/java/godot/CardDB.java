@@ -23,7 +23,7 @@ public class CardDB extends Node {
 	@RegisterFunction
 	public void _ready(){
 
-		GD.INSTANCE.print("------LOADING CARD IN DB------");
+		//GD.INSTANCE.print("------LOADING CARD IN DB------");
 		DirAccess dir = DirAccess.open("res://src/main/resources/Cards_Data");
 
 		if (dir != null){
@@ -37,11 +37,11 @@ public class CardDB extends Node {
 					CardData card = (CardData) ResourceLoader.load("res://src/main/resources/Cards_Data/" + file);
 
 					if (card != null && card.id != null){
-						GD.INSTANCE.print(
-								"LOADED : " + card.id +
-								" ATK : " + card.atk +
-								" DEF : " + card.defense
-						);
+//						GD.INSTANCE.print(
+//								"LOADED : " + card.id +
+//								" ATK : " + card.atk +
+//								" DEF : " + card.defense
+//						);
 						cards.put(card.id, card);
 					}
 					else {
@@ -52,7 +52,7 @@ public class CardDB extends Node {
 			}
 			dir.listDirEnd();
 
-			GD.INSTANCE.print("TOTAL CARDS LOADED : " + cards.size());
+			//GD.INSTANCE.print("TOTAL CARDS LOADED : " + cards.size());
 		}
 	}
 
@@ -61,7 +61,7 @@ public class CardDB extends Node {
 	public CardData getCard(String cardId){
 		CardData c = cards.get(cardId);
 
-		GD.INSTANCE.print("Requested card : " + cardId);		// Affiche la carte demandée
+		//GD.INSTANCE.print("Requested card : " + cardId);		// Affiche la carte demandée
 
 		return c;
 	}

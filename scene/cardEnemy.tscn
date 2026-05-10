@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bonscbd130sl5"]
+[gd_scene load_steps=11 format=3 uid="uid://bonscbd130sl5"]
 
 [ext_resource type="Script" uid="uid://bsiptvby6lt5w" path="res://src/main/java/godot/EnemyCard.java" id="1_tv2od"]
 [ext_resource type="Texture2D" uid="uid://cmejajvwu6p13" path="res://assets/sprites/Autres/monstercardOpp.png" id="2_tv2od"]
@@ -192,9 +192,12 @@ _data = {
 &"card_flip": SubResource("Animation_irop6")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tv2od"]
+size = Vector2(208.333, 296.667)
+
 [node name="card" type="Node2D"]
 top_level = true
-position = Vector2(1580, 380)
+position = Vector2(350, 380)
 scale = Vector2(0.6, 0.6)
 script = ExtResource("1_tv2od")
 
@@ -250,3 +253,11 @@ vertical_alignment = 1
 libraries = {
 &"": SubResource("AnimationLibrary_jdt11")
 }
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.833252, 0)
+shape = SubResource("RectangleShape2D_tv2od")

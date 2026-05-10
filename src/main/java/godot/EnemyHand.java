@@ -36,7 +36,7 @@ public class EnemyHand extends Node2D {
 	public List<Node2D> player_empty_slots = new ArrayList<Node2D>();
 	public List<Node2D> player_slots = new ArrayList<Node2D>();
 	public List<Node2D> enemy_slots = new ArrayList<Node2D>();
-	public int compteur = 0;
+	@Export @RegisterProperty public int compteur = 0;
 
 	//Timer to make attack less often
 	public Timer timer;
@@ -95,7 +95,7 @@ public class EnemyHand extends Node2D {
 
 		timer.connect("timeout",
 				Callable.create(this, StringNames.toGodotName("_on_timer_timeout")),
-				0);
+				1);
 	}
 
 
@@ -154,6 +154,7 @@ public class EnemyHand extends Node2D {
 			if (enemy_hand.get(i).get("in_slot").equals(true)) {
 				//GD.INSTANCE.print(player_hand.get(i).get("Starting_pos"));
 				enemy_field.add(enemy_hand.get(i));
+				enemy_hand.get(i).set("in_slot", true);
 				enemy_hand.remove(i);
 			}
 			//GD.INSTANCE.print(player_hand);
@@ -185,6 +186,13 @@ public class EnemyHand extends Node2D {
 	@RegisterFunction
 	public void highest_card() {
 
+		for (int o = 0; o < 4; o++) {
+					if(getNode("../SlotsEnemy").getChild(o).get("card_in_slot").equals(false)
+						&& !empty_slots.contains(getNode("../SlotsEnemy").getChild(o))) {
+						empty_slots.add((Node2D) getNode("../SlotsEnemy").getChild(o));
+					}
+		}
+
 		bestcard = null;
 		bettercost = 0;
 
@@ -201,6 +209,7 @@ public class EnemyHand extends Node2D {
 			int random;
 			random = GD.INSTANCE.randiRange(0, empty_slots.size() - 1);
 			chosen_slot = empty_slots.get(random);
+			chosen_slot.set("card_in_slot", true);
 			empty_slots.remove(random);
 			Tween tween1 = getTree().createTween();
 			tween1.tweenProperty(bestcard, "position", chosen_slot.get("position"), 0.2);
@@ -209,18 +218,16 @@ public class EnemyHand extends Node2D {
 			tween2.tweenProperty(bestcard, "scale", 0.65, 0.2);
 			bestcard.set("in_slot", true);
 
+				AnimationPlayer anim = (AnimationPlayer) bestcard.getNode("AnimationPlayer");
+				anim.play("card_flip");
 
-			AnimationPlayer anim = (AnimationPlayer) bestcard.getNode("AnimationPlayer");
-			anim.play("card_flip");
+				cost_hand.remove(bettercostindex);
 
-			cost_hand.remove(bettercostindex);
-
-			//not enough updated
-			//enemy_field.add(bestcard);
-		}
-		//GD.INSTANCE.print("empty slots " + empty_slots);
-		quoi();
-
+				//not enough updated
+				//enemy_field.add(bestcard);
+			}
+			//GD.INSTANCE.print("empty slots " + empty_slots);
+			quoi();
 	}
 
 	@RegisterFunction
@@ -231,7 +238,13 @@ public class EnemyHand extends Node2D {
 		//Enemy is attacking with each card on his terrain
 		compteur = 0;
 		update_player_field();
+
 		timer.start();
+
+//		for (int i = 0; i < enemy_field.size(); i++) {
+//			update_player_field();
+//			card_attack(enemy_field.get(i));
+//		}
 	}
 
 
@@ -248,17 +261,22 @@ public class EnemyHand extends Node2D {
 		int random;
 		random = GD.INSTANCE.randiRange(0, player_field.size() - 1);
 
-		GD.INSTANCE.print("enemy_field " + enemy_field);
-		GD.INSTANCE.print("player_field " + player_field);
+		//GD.INSTANCE.print("enemy_field " + enemy_field);
+		//GD.INSTANCE.print("player_field " + player_field);
 
 		//Searching for the card in the right coordinates
 		for (int i = 0; i < cardManager.getChildCount(); i++) {
 			// On parcourt tout les enfants de card Manager en regardant si l'un d'entre eux a la bonne position
 			if (cardManager.getChild(i).get("position").equals(player_field.get(random).get("position"))) {
-				GD.INSTANCE.print("ATTACK card: " + card + "is attacking " + cardManager.getChild(i));
+				//GD.INSTANCE.print("ATTACK card: " + card + "is attacking " + cardManager.getChild(i));
 
 				//I will set an "incomingattack" variable in each card and compare it when loading the lables
-				cardManager.getChild(i).set("incoming_atk", (card.get("atk")));
+
+				if (card.get("isalive").equals(true)) {
+					cardManager.getChild(i).set("incoming_atk", (card.get("atk")));
+					alive();
+				}
+
 			}
 		}
 	}
@@ -293,9 +311,26 @@ public class EnemyHand extends Node2D {
 			if (compteur < enemy_field.size()) {
 				update_player_field();
 				card_attack(enemy_field.get(compteur));
+				alive();
 				timer.start();
+				//just do await.wait(1000) next time
 			}
+			if (compteur >= enemy_field.size()) {
+				getNode("../BattleManager").call("end_opponent_turn");
+			}
+
 			compteur+=1;
+	}
+
+	@RegisterFunction
+	public void alive(){
+		for (int i = 0; i < cardManager.getChildCount(); i++) {
+			if (cardManager.getChild(i).get("isalive").equals(false)) {
+				getNode("../Graveyard").addChild(cardManager.getChild(i));
+				cardManager.removeChild(cardManager.getChild(i));
+			}
+		}
+
 	}
 }
 

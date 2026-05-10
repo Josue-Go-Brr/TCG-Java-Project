@@ -12,10 +12,11 @@ import java.lang.Object;
 @RegisterClass
 public class EnemyCard extends Node2D {
 
-	@RegisterProperty @Export
 
-	public boolean in_slot = false;
+	@RegisterProperty @Export public boolean isalive = true;
+	@RegisterProperty @Export public boolean in_slot = false;
 	@RegisterProperty @Export public Node slot;
+	@RegisterProperty @Export public boolean target = false;
 
 	public Vector2 starting_pos = new Vector2();
 	public Vector2 hovered_off = new Vector2(0.6, 0.6);
@@ -110,11 +111,16 @@ public class EnemyCard extends Node2D {
 						getNode("../../SlotsEnemy").getChild(i).set("card_in_slot", false);
 					}
 				}
-				this.queueFree();
+				//this.queueFree();
+				this.getNode("Area2D/CollisionShape2D").set("disabled", true);
+				this.setPosition(new Vector2(200, 200));
+				this.visibleProperty(false);
+				atk = 0;
+				isalive = false;
 			}
 
 			incoming_atk = 0;
-			GD.INSTANCE.print("Stats updated");
+			//GD.INSTANCE.print("Stats updated");
 			updateLabel();
 		}
 

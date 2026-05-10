@@ -20,6 +20,27 @@ public class PlayerHand extends Node2D {
 	@Export
 	@RegisterProperty
 
+	//Variable used to place enemy card on the battlefield
+	public int cost;
+
+
+	//Attack
+	public Node selectedcard;
+	public Node selectedcardslot;
+
+	List<Node> enemy_field = new ArrayList<>();
+	List<Node> player_field = new ArrayList<>();
+
+	public boolean playerfieldempty = true;
+	public boolean enemyfieldempty = true;
+
+	public List<Node2D> player_slots = new ArrayList<Node2D>();
+	public List<Node2D> enemy_slots = new ArrayList<Node2D>();
+
+
+	//Timer to make attack less often
+	public Timer timer;
+
 	public int cardcompteur;
 	public Node game_deck_ref;
 	public Node cardManager;
@@ -51,6 +72,19 @@ public class PlayerHand extends Node2D {
 
 		//I'm loading the black magician
 		PackedScene instance = GD.load("res://scene/card.tscn");
+
+		enemy_slots.add((Node2D) getNode("../SlotsEnemy/EnemyCardSlot"));
+		enemy_slots.add((Node2D) getNode("../SlotsEnemy/EnemyCardSlot2"));
+		enemy_slots.add((Node2D) getNode("../SlotsEnemy/EnemyCardSlot3"));
+		enemy_slots.add((Node2D) getNode("../SlotsEnemy/EnemyCardSlot4"));
+		enemy_slots.add((Node2D) getNode("../SlotsEnemy/EnemyCardSlot5"));
+
+		player_slots.add((Node2D) getNode("../Slots/CardSlot1"));
+		player_slots.add((Node2D) getNode("../Slots/CardSlot2"));
+		player_slots.add((Node2D) getNode("../Slots/CardSlot3"));
+		player_slots.add((Node2D) getNode("../Slots/CardSlot4"));
+		player_slots.add((Node2D) getNode("../Slots/CardSlot5"));
+
 
 //		for (int i = 0; i < HAND_COUNT; i++) {
 
@@ -149,7 +183,9 @@ public class PlayerHand extends Node2D {
 
 			if (player_hand.get(i).get("in_slot").equals(true)) {
 				//GD.INSTANCE.print(player_hand.get(i).get("Starting_pos"));
+				player_field.add(player_hand.get(i));
 				player_hand.remove(i);
+
 			}
 				//GD.INSTANCE.print(player_hand);
 			}
@@ -174,4 +210,84 @@ public class PlayerHand extends Node2D {
 		add_card_to_hand(drawingcard);
 
 		}
+
+	@RegisterFunction
+	public void attack() {
+		update_enemy_field();
+
+		//GD.INSTANCE.print(enemy_field);
+
+		for (int i = 0; i < cardManager.getChildCount(); i++) {
+			// On parcourt tout les enfants de card Manager en regardant si l'un d'entre eux a la bonne position
+			if (cardManager.getChild(i).get("scale").equals(new Vector2(0.7, 0.7))) {
+				selectedcard = cardManager.getChild(i);
+			}
+		}
+			// Make the card attack, rescale normally and make it unable to attack again this turn
+			if (getNode("../BattleManager").get("player_turn").equals(true)) {
+				card_attack(selectedcard);
+				selectedcard.set("selected", false);
+				selectedcard.set("scale", new Vector2(0.6, 0.6));
+				selectedcard.set("attacked_this_turn", true);
+				cardManager.set("cardselected", false);
+			}
+		}
+
+
+
+	//This function take argument the card that will attack and select one in opposing field
+	@RegisterFunction
+	public void card_attack(Node card) {
+
+		// take a random card slot in player field a find the card there by comparing to the coordinate of the card slot
+		//GD.INSTANCE.print("enemy_field " + enemy_field);
+		//GD.INSTANCE.print("player_field " + player_field);
+
+		//Searching for the card in the right coordinates
+		for (int i = 0; i < cardManager.getChildCount(); i++) {
+			// On parcourt tout les enfants de card Manager en regardant si l'un d'entre eux a la bonne position
+			if (cardManager.getChild(i).get("target").equals(true)) {
+
+				GD.INSTANCE.print("ATTACK card: " + card + "is attacking " + cardManager.getChild(i));
+
+				//I will set an "incomingattack" variable in each card and compare it when loading the lables
+				cardManager.getChild(i).set("incoming_atk", (card.get("atk")));
+				alive();
+			}
+		}
+
 	}
+
+	@RegisterFunction
+	public void update_enemy_field() {
+
+		//Updating cards slot occupied in playerfield
+		for (int i = 0; i < enemy_slots.size(); i++) {
+			if (enemy_slots.get(i).get("card_in_slot").equals(true)) {
+				if (!enemy_field.contains(enemy_slots.get(i))) {
+					enemy_field.add(enemy_slots.get(i));
+				}
+				enemyfieldempty = false;
+			}
+		}
+
+		for (int j = 0; j < enemy_field.size(); j++) {
+			if (enemy_field.get(j).get("card_in_slot").equals(false)) {
+				enemy_field.remove(j);
+			}
+		}
+
+		if (enemy_field.isEmpty()) {
+			enemyfieldempty = true;
+		}
+	}
+
+	public void alive() {
+		for (int i = 0; i < cardManager.getChildCount(); i++) {
+			if (cardManager.getChild(i).get("isalive").equals(false)) {
+				getNode("../Graveyard").addChild(cardManager.getChild(i));
+				cardManager.removeChild(cardManager.getChild(i));
+			}
+		}
+	}
+}

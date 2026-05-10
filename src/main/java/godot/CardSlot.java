@@ -9,7 +9,6 @@ import godot.api.Node2D;
 @RegisterClass
 public class CardSlot extends Node2D {
 
-	@Export
-	@RegisterProperty
-	public boolean card_in_slot = false;
+	@RegisterProperty @Export public boolean card_in_slot = false;
+
 }

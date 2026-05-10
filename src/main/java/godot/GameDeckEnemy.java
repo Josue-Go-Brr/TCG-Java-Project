@@ -45,9 +45,9 @@ public class GameDeckEnemy extends Node2D {
 
 
 		for (int i = 0; i < 10; i++) {
-			enemy_deck.add("Dark_Blade");
+			//enemy_deck.add("Dark_Blade");
 			enemy_deck.add("Dark_Magician_Girl");
-			enemy_deck.add("Blue_Eyes_White_Dragon");
+			//enemy_deck.add("Blue_Eyes_White_Dragon");
 
 		}
 
