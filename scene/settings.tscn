@@ -1,0 +1,72 @@
+[gd_scene load_steps=8 format=3 uid="uid://ckjmkmlvv6etk"]
+
+[ext_resource type="VideoStream" uid="uid://blhbi0o3xpmjh" path="res://assets/sprites/Animation/Melee-HD-Asset-Download-Target-Test-Background-Seamless-Loop-_Super-Smash-Bros.-Melee_.ogv" id="1_uhf66"]
+[ext_resource type="Script" uid="uid://6s07m1hawdpf" path="res://src/main/java/godot/Settings.java" id="1_wyye3"]
+[ext_resource type="Texture2D" uid="uid://cm7gxjgjgcw0q" path="res://assets/sprites/Autres/Settings2Title.png" id="3_4pcrv"]
+[ext_resource type="Texture2D" uid="uid://cudlanbsfjp14" path="res://assets/sprites/Autres/MusicSound.png" id="3_wyye3"]
+[ext_resource type="Texture2D" uid="uid://7khim7brypjd" path="res://assets/sprites/Autres/SFX.png" id="4_ftovt"]
+[ext_resource type="Texture2D" uid="uid://bhvq6j8fordxy" path="res://assets/sprites/Autres/MainMenuButton.png" id="6_4pcrv"]
+[ext_resource type="Texture2D" uid="uid://8cvi2b2aoxkw" path="res://assets/sprites/Autres/MainMenuButtonHover.png" id="7_fkyj2"]
+
+[node name="Settings" type="Node2D"]
+script = ExtResource("1_wyye3")
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+custom_minimum_size = Vector2(1920, 1080)
+offset_left = -3.0
+offset_top = 3.0
+offset_right = 1917.0
+offset_bottom = 1083.0
+mouse_filter = 2
+stream = ExtResource("1_uhf66")
+volume_db = -80.0
+autoplay = true
+expand = true
+loop = true
+
+[node name="Settings" type="Sprite2D" parent="."]
+position = Vector2(958, 99)
+texture = ExtResource("3_4pcrv")
+
+[node name="MusicSound" type="Sprite2D" parent="."]
+position = Vector2(958, 418)
+scale = Vector2(0.55, 0.55)
+texture = ExtResource("3_wyye3")
+
+[node name="Sfx" type="Sprite2D" parent="."]
+position = Vector2(959, 618)
+scale = Vector2(0.55, 0.55)
+texture = ExtResource("4_ftovt")
+
+[node name="MusicSlider" type="HSlider" parent="."]
+offset_left = 757.0
+offset_top = 435.0
+offset_right = 1159.0
+offset_bottom = 561.0
+min_value = -40.0
+max_value = 0.0
+value = -20.0
+ticks_on_borders = true
+
+[node name="SFXSlider" type="HSlider" parent="."]
+offset_left = 761.0
+offset_top = 626.0
+offset_right = 1163.0
+offset_bottom = 752.0
+min_value = -40.0
+max_value = 0.0
+value = -20.0
+ticks_on_borders = true
+
+[node name="GetBackButton" type="TextureButton" parent="."]
+offset_left = 32.0
+offset_top = 24.0
+offset_right = 72.0
+offset_bottom = 64.0
+texture_normal = ExtResource("6_4pcrv")
+texture_pressed = ExtResource("6_4pcrv")
+texture_hover = ExtResource("7_fkyj2")
+
+[connection signal="value_changed" from="MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="SFXSlider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="pressed" from="GetBackButton" to="." method="_on_get_back_button_pressed"]

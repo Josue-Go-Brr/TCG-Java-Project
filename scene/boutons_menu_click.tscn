@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvgw0v6ss8w0k"]
+
+[ext_resource type="AudioStream" uid="uid://c1tdopqh35dkq" path="res://assets/Audio/MenuButtonSound.mp3" id="1_74321"]
+[ext_resource type="Script" uid="uid://di3bfqpo1hkxd" path="res://src/main/java/godot/Boutons_menu_click.java" id="1_orxfx"]
+
+[node name="BoutonsMenuClick" type="AudioStreamPlayer"]
+stream = ExtResource("1_74321")
+script = ExtResource("1_orxfx")

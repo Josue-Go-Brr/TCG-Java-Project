@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bavmrnb1od416"]
+
+[ext_resource type="Script" uid="uid://b2heixlc7mlyf" path="res://src/main/java/godot/Get_back_button_sound.java" id="1_x8otc"]
+[ext_resource type="AudioStream" uid="uid://cq6faig43t85c" path="res://assets/Audio/GetBackButton.mp3" id="1_ygnvy"]
+
+[node name="GetBackButtonSound" type="AudioStreamPlayer"]
+stream = ExtResource("1_ygnvy")
+script = ExtResource("1_x8otc")

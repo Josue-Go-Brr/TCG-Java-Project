@@ -132,17 +132,6 @@ position = Vector2(959, 191)
 scale = Vector2(0.49, 0.49)
 texture = ExtResource("18_3rrcd")
 
-[node name="MusicSlider" type="HSlider" parent="."]
-layout_mode = 0
-offset_left = 1669.0
-offset_top = -35.0
-offset_right = 1897.0
-offset_bottom = 91.0
-min_value = -40.0
-max_value = 0.0
-value = -20.0
-ticks_on_borders = true
-
 [node name="MenuButtonHover" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("17_hyh87")
 script = ExtResource("18_dn48v")
@@ -155,6 +144,5 @@ script = ExtResource("20_iqy8v")
 [connection signal="mouse_entered" from="CenterContainer/ButtonStack/LibraryButton" to="MenuButtonHover" method="_on_library_button_mouse_entered"]
 [connection signal="mouse_entered" from="CenterContainer/ButtonStack/DeckButton" to="MenuButtonHover" method="_on_deck_button_mouse_entered"]
 [connection signal="mouse_entered" from="CenterContainer/ButtonStack/SettingsButton" to="MenuButtonHover" method="_on_settings_button_mouse_entered"]
+[connection signal="pressed" from="CenterContainer/ButtonStack/SettingsButton" to="." method="onSetPressed"]
 [connection signal="mouse_entered" from="CenterContainer/ButtonStack/QuitButton" to="MenuButtonHover" method="_on_quit_button_mouse_entered"]
-[connection signal="pressed" from="CenterContainer/ButtonStack/QuitButton" to="QuitButtonSound" method="_on_quit_button_pressed"]
-[connection signal="value_changed" from="MusicSlider" to="." method="_on_music_slider_value_changed"]

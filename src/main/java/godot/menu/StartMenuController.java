@@ -1,5 +1,6 @@
 package godot.menu;
 
+import godot.Boutons_menu_click;
 import godot.Music_manager;
 import godot.annotation.RegisterClass;
 import godot.annotation.RegisterFunction;
@@ -27,10 +28,15 @@ public class StartMenuController extends Control {
 	private static final String PLAY_SCENE_PATH = "res://scene/main.tscn";
 	private static final String LIBRARY_SCENE_PATH = "res://scene/Library/library_screen.tscn";
 	private static final String DECK_SCENE_PATH = "res://scene/deck/deck_screen.tscn";
+	private static final String SET_SCENE_PATH = "res://scene/settings.tscn";
+
+	Boutons_menu_click sound;
 
 	@RegisterFunction
 	@Override
 	public void _ready() {
+
+		sound = (Boutons_menu_click) getNode("/root/BoutonsMenuClick");
 
 		Music_manager music = (Music_manager) getNode("/root/MusicManager");
 		if (!music.isPlaying()){
@@ -91,33 +97,31 @@ public class StartMenuController extends Control {
 
 	@RegisterFunction
 	public void onPlayPressed() {
+		sound.play();
 		getTree().changeSceneToFile(PLAY_SCENE_PATH);
 	}
 
 	@RegisterFunction
 	public void onLibraryPressed() {
+		sound.play();
 		getTree().changeSceneToFile(LIBRARY_SCENE_PATH);
 	}
 
 	@RegisterFunction
 	public void onDeckPressed() {
+		sound.play();
 		getTree().changeSceneToFile(DECK_SCENE_PATH);
 	}
 
 	@RegisterFunction
 	public void onTutPressed() {
+		sound.play();
+		getTree().changeSceneToFile(SET_SCENE_PATH);
 	}
 
 	@RegisterFunction
 	public void onQuitPressed() {
+		sound.play();
 		getTree().quit();
-	}
-	
-	@RegisterFunction
-	public void _on_music_slider_value_changed(double value){
-
-		Music_manager music = (Music_manager) getNode("/root/MusicManager");
-		music.setVolumeDb((float) value);
-		
 	}
 }

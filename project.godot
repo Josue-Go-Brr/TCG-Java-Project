@@ -22,6 +22,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 MusicManager="*res://scene/music_manager.tscn"
+BoutonsMenuClick="*res://scene/boutons_menu_click.tscn"
+GetBackButtonSound="*res://scene/get_back_button_sound.tscn"
 
 [display]
 
