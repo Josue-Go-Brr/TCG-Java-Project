@@ -207,7 +207,6 @@ public class CardLibrary {
 
 	public static final String QUERY_TYPE_ALL = "ALL";
 
-	/** Filters and sorts cards for Library and Deck Builder (shared with {@code LibraryQueryService} / {@code DeckBuilderQueryService}). */
 	public List<BaseCarte> queryLibrary(String searchText, String type, String monsterType, String sortField,
 			boolean isDescending) {
 		List<BaseCarte> results = new ArrayList<>(database.values());

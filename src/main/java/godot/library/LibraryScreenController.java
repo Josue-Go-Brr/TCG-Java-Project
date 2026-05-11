@@ -43,21 +43,17 @@ public class LibraryScreenController extends Control {
 	public void _ready() {
 		GD.INSTANCE.print("[Library] _ready entered");
 
-		// 1. Fetch nodes from TopBar
 		searchInputNode = (LineEdit) getNodeOrNull("RootMargin/MainColumns/LeftSide/TopBar/SearchInput");
 		typeFilterNode = (OptionButton) getNodeOrNull("RootMargin/MainColumns/LeftSide/TopBar/TypeFilter");
 		monsterTypeFilterNode = (OptionButton) getNodeOrNull("RootMargin/MainColumns/LeftSide/TopBar/MonsterTypeFilter");
 		
-		// 2. Fetch nodes from the new SortBar
 		sortFilterNode = (OptionButton) getNodeOrNull("RootMargin/MainColumns/LeftSide/SortBar/SortFilter");
 		sortOrderFilterNode = (OptionButton) getNodeOrNull("RootMargin/MainColumns/LeftSide/SortBar/SortOrderFilter");
 
-		// 3. Debugging checks (prints to Godot console if missing)
 		if (monsterTypeFilterNode == null) GD.INSTANCE.printErr("ERROR: MonsterTypeFilter NOT FOUND in TopBar!");
 		if (sortFilterNode == null) GD.INSTANCE.printErr("ERROR: SortFilter NOT FOUND in SortBar!");
 		if (sortOrderFilterNode == null) GD.INSTANCE.printErr("ERROR: SortOrderFilter NOT FOUND in SortBar!");
 
-		// 4. Fetch the rest of the UI
 		backButtonNode = (Button) getNodeOrNull("RootMargin/MainColumns/LeftSide/TopBar/BackButton");
 		cardGridScrollNode = (ScrollContainer) getNodeOrNull("RootMargin/MainColumns/LeftSide/CardGridScroll");
 		cardGridNode = (GridContainer) getNodeOrNull("RootMargin/MainColumns/LeftSide/CardGridScroll/CardArea/CardGrid");
@@ -65,11 +61,9 @@ public class LibraryScreenController extends Control {
 		detailsPanelNode = (PanelContainer) getNodeOrNull("RootMargin/MainColumns/RightSideDetails");
 		cardTileScene = (PackedScene) ResourceLoader.load(CARD_TILE_SCENE_PATH, "PackedScene", ResourceLoader.CacheMode.REUSE);
 
-		// 5. Initialize Services
 		CardDB cardDB = resolveCardDB();
 		queryService = new LibraryQueryService(cardDB);
 
-		// 6. Bind the UI exactly once
 		uiBinder = new LibraryUiBinder(searchInputNode, typeFilterNode, monsterTypeFilterNode, sortFilterNode, sortOrderFilterNode);
 		uiBinder.setupDefaultOptions();
 		uiBinder.connect(this);
@@ -110,10 +104,6 @@ public class LibraryScreenController extends Control {
 		if (selectionCoordinator != null) selectionCoordinator.sync(cards);
 	}
 
-	// ----------------------------------------------------
-	// Keep your existing input / scroll / back button methods
-	// exactly as they were! DO NOT DELETE OR MODIFY BELOW THIS LINE.
-	// ----------------------------------------------------
 
 	@RegisterFunction
 	public void _unhandled_input(InputEvent event) {

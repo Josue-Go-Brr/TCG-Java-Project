@@ -24,7 +24,6 @@ public class CardTileController extends PanelContainer {
 	private Label cardStatsNode;
 	private Label cardCostValueNode;
 	private BaseCarte cardData;
-	/** Left click: Library wires this via {@link #setLibraryScreenController}; Deck Builder via {@link #setTileClickHandler(Consumer)}. */
 	private Consumer<BaseCarte> tileClickHandler;
 
 	@RegisterFunction
@@ -148,7 +147,6 @@ public class CardTileController extends PanelContainer {
 		tileClickHandler = controller == null ? null : controller::onCardTileClicked;
 	}
 
-	/** Used when this tile is shown outside the Library (e.g. Deck Builder) with the same {@code .tscn} and {@link #setCardData} visuals. */
 	public void setTileClickHandler(Consumer<BaseCarte> handler) {
 		tileClickHandler = handler;
 	}

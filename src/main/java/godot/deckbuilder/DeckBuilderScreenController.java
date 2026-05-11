@@ -49,19 +49,16 @@ public class DeckBuilderScreenController extends Control {
     public void _ready() {
         GD.INSTANCE.print("[DeckBuilder] _ready entered");
 
-        // 1. Fetch nodes from TopBar
         searchInputNode = (LineEdit) getNodeOrNull("RootMargin/MainColumns/LeftSide/TopBar/SearchInput");
         typeFilterNode = (OptionButton) getNodeOrNull("RootMargin/MainColumns/LeftSide/TopBar/TypeFilter");
         monsterTypeFilterNode = (OptionButton) getNodeOrNull("RootMargin/MainColumns/LeftSide/TopBar/MonsterTypeFilter");
         
-        // 2. Fetch sorted buttons from the new DeckInfoBar
         sortFilterNode = (OptionButton) getNodeOrNull("RootMargin/MainColumns/LeftSide/DeckInfoBar/SortFilter");
         sortOrderFilterNode = (OptionButton) getNodeOrNull("RootMargin/MainColumns/LeftSide/DeckInfoBar/SortOrderFilter");
 
         if (sortFilterNode == null) GD.INSTANCE.printErr("ERROR: SortFilter NOT FOUND in DeckInfoBar!");
         if (sortOrderFilterNode == null) GD.INSTANCE.printErr("ERROR: SortOrderFilter NOT FOUND in DeckInfoBar!");
 
-        // 3. Fetch remaining UI
         backButtonNode = (Button) getNodeOrNull("RootMargin/MainColumns/LeftSide/TopBar/BackButton");
         cardGridScrollNode = (ScrollContainer) getNodeOrNull("RootMargin/MainColumns/LeftSide/CardGridScroll");
         cardGridNode = (GridContainer) getNodeOrNull("RootMargin/MainColumns/LeftSide/CardGridScroll/CardArea/CardGrid");
@@ -70,7 +67,6 @@ public class DeckBuilderScreenController extends Control {
         detailsPanelNode = (PanelContainer) getNodeOrNull("RootMargin/MainColumns/RightSideDetails");
         cardTileScene = (PackedScene) ResourceLoader.load(CARD_TILE_SCENE_PATH, "PackedScene", ResourceLoader.CacheMode.REUSE);
 
-        // 4. Initialize Services
         CardDB cardDB = resolveCardDB();
         DeckState.loadSavedDeckLocal(cardDB);
 
