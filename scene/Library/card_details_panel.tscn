@@ -1,10 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://mdiunpl3erlw"]
+[gd_scene load_steps=6 format=3 uid="uid://mdiunpl3erlw"]
 
 [ext_resource type="Script" uid="uid://b3x4ls8t45xg5" path="res://src/main/java/godot/library/CardDetailsPanelController.java" id="1_details_script"]
 [ext_resource type="Texture2D" uid="uid://b463wrrpekkyr" path="res://assets/sprites/CartesMonstre/Giga Chad.png" id="2_uwb3q"]
 [ext_resource type="Theme" uid="uid://7j323vsj6wsg" path="res://src/main/resources/LabelThemes/bibClassicTheme.tres" id="3_rgj4l"]
+[ext_resource type="FontFile" uid="uid://xc5qs11fov6e" path="res://assets/fonts/TCG fonts/Stone Serif Semibold.ttf" id="overlay_font_1"]
+[ext_resource type="FontFile" uid="uid://4bfo6wrbxuil" path="res://assets/fonts/TCG fonts/Yu-Gi-Oh! ITC Stone Serif Small Caps Bold.ttf" id="overlay_font_2"]
 
-[node name="CardDetailsPanel" type="PanelContainer"]
+[node name="CardDetailsPanel2" type="PanelContainer"]
 custom_minimum_size = Vector2(460, 720)
 script = ExtResource("1_details_script")
 
@@ -25,6 +27,63 @@ layout_mode = 2
 texture = ExtResource("2_uwb3q")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="Overlay" type="Control" parent="Margin/Content/CardImage"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 86.0
+offset_top = 4.0
+offset_right = 86.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CardStats" type="Label" parent="Margin/Content/CardImage/Overlay"]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 306.0
+offset_right = 183.0
+offset_bottom = 353.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("overlay_font_1")
+theme_override_font_sizes/font_size = 19
+text = "ATK: -
+DEF: -"
+
+[node name="CardNameonCard" type="Label" parent="Margin/Content/CardImage/Overlay"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 11.0
+offset_right = 211.0
+offset_bottom = 40.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("overlay_font_1")
+theme_override_font_sizes/font_size = 16
+text = "Name"
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="CardCostValue" type="Label" parent="Margin/Content/CardImage/Overlay"]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 310.0
+offset_right = 240.0
+offset_bottom = 354.0
+theme_override_colors/font_color = Color(0.619608, 0.74902, 0.952941, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("overlay_font_2")
+theme_override_font_sizes/font_size = 26
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="CardName" type="Label" parent="Margin/Content"]
 layout_mode = 2

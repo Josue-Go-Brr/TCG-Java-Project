@@ -181,18 +181,15 @@ size_flags_vertical = 3
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 
-[node name="CardArea" type="Control" parent="RootMargin/MainColumns/LeftSide/CardGridScroll"]
+[node name="CardArea" type="MarginContainer" parent="RootMargin/MainColumns/LeftSide/CardGridScroll"]
 custom_minimum_size = Vector2(0, 620)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/margin_bottom = 40
 
 [node name="CardGrid" type="GridContainer" parent="RootMargin/MainColumns/LeftSide/CardGridScroll/CardArea"]
 custom_minimum_size = Vector2(0, 900)
 layout_mode = 2
-offset_left = -8.0
-offset_top = -13.0
-offset_right = 659.0
-offset_bottom = 942.0
 size_flags_horizontal = 3
 theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10

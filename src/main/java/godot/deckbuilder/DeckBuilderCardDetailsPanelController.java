@@ -26,6 +26,10 @@ public class DeckBuilderCardDetailsPanelController extends PanelContainer {
 	private RichTextLabel cardDescriptionNode;
 	private Button addCardButtonNode;
 
+	private Label overlayStatsNode;
+	private Label overlayNameNode;
+	private Label overlayCostNode;
+
 	private BaseCarte currentDetailCard;
 	private DeckBuilderScreenController deckBuilderScreen;
 
@@ -33,6 +37,9 @@ public class DeckBuilderCardDetailsPanelController extends PanelContainer {
 	@Override
 	public void _ready() {
 		cardImageNode = (TextureRect) getNodeOrNull("Margin/Content/CardImage");
+		overlayStatsNode = (Label) getNodeOrNull("Margin/Content/CardImage/Overlay/CardStats");
+		overlayNameNode = (Label) getNodeOrNull("Margin/Content/CardImage/Overlay/CardNameonCard");
+		overlayCostNode = (Label) getNodeOrNull("Margin/Content/CardImage/Overlay/CardCostValue");
 		cardNameNode = (Label) getNodeOrNull("Margin/Content/CardName");
 		cardTypeNode = (Label) getNodeOrNull("Margin/Content/CardType");
 		cardCostNode = (Label) getNodeOrNull("Margin/Content/CardCost");
@@ -81,6 +88,15 @@ public class DeckBuilderCardDetailsPanelController extends PanelContainer {
 		if (cardDescriptionNode != null) {
 			cardDescriptionNode.setText(card.getDescription());
 		}
+		if (overlayNameNode != null) overlayNameNode.setText(card.getName());
+		if (overlayCostNode != null) overlayCostNode.setText(String.valueOf(card.getCost()));
+		if (overlayStatsNode != null) {
+			if (card instanceof godot.cards.CarteMonster monster) {
+				overlayStatsNode.setText("ATK: " + monster.getAttack() + "\nDEF: " + monster.getDefense());
+			} else {
+				overlayStatsNode.setText("ATK: -\nDEF: -");
+			}
+		}
 		applyCopiesAndAddButtonUi();
 	}
 
@@ -118,6 +134,9 @@ public class DeckBuilderCardDetailsPanelController extends PanelContainer {
 		if (addCardButtonNode != null) {
 			addCardButtonNode.setDisabled(true);
 		}
+		if (overlayNameNode != null) overlayNameNode.setText("Name");
+		if (overlayCostNode != null) overlayCostNode.setText("1");
+		if (overlayStatsNode != null) overlayStatsNode.setText("ATK: -\nDEF: -");
 	}
 
 	@RegisterFunction

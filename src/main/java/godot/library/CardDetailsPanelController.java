@@ -21,6 +21,10 @@ public class CardDetailsPanelController extends PanelContainer {
 	private Label cardMonsterTypeNode;
 	private RichTextLabel cardDescriptionNode;
 
+	private Label overlayStatsNode;
+	private Label overlayNameNode;
+	private Label overlayCostNode;
+
 	@RegisterFunction
 	@Override
 	public void _ready() {
@@ -30,6 +34,9 @@ public class CardDetailsPanelController extends PanelContainer {
 		cardCostNode = (Label) getNodeOrNull("Margin/Content/CardCost");
 		cardDescriptionNode = (RichTextLabel) getNodeOrNull("Margin/Content/CardDescription");
 		cardMonsterTypeNode = resolveOrCreateMonsterTypeLabel();
+		overlayStatsNode = (Label) getNodeOrNull("Margin/Content/CardImage/Overlay/CardStats");
+		overlayNameNode = (Label) getNodeOrNull("Margin/Content/CardImage/Overlay/CardNameonCard");
+		overlayCostNode = (Label) getNodeOrNull("Margin/Content/CardImage/Overlay/CardCostValue");
 		clearSelection();
 	}
 
@@ -60,6 +67,15 @@ public class CardDetailsPanelController extends PanelContainer {
 		if (cardDescriptionNode != null) {
 			cardDescriptionNode.setText(card.getDescription());
 		}
+		if (overlayNameNode != null) overlayNameNode.setText(card.getName());
+		if (overlayCostNode != null) overlayCostNode.setText(String.valueOf(card.getCost()));
+		if (overlayStatsNode != null) {
+			if (card instanceof godot.cards.CarteMonster monster) {
+				overlayStatsNode.setText("ATK: " + monster.getAttack() + "\nDEF: " + monster.getDefense());
+			} else {
+				overlayStatsNode.setText("ATK: -\nDEF: -");
+			}
+		}
 	}
 
 	public void clearSelection() {
@@ -81,6 +97,9 @@ public class CardDetailsPanelController extends PanelContainer {
 		if (cardDescriptionNode != null) {
 			cardDescriptionNode.setText("Description");
 		}
+		if (overlayNameNode != null) overlayNameNode.setText("Name");
+		if (overlayCostNode != null) overlayCostNode.setText("1");
+		if (overlayStatsNode != null) overlayStatsNode.setText("ATK: -\nDEF: -");
 	}
 
 	private String buildTypeText(BaseCarte card) {
