@@ -68,6 +68,8 @@ public class DeckScreenController extends Control {
 		);
 
 		CardDB cardDB = resolveCardDB();
+		DeckState.loadSavedDeckLocal(cardDB);
+
 		cardLibrary = cardDB == null ? null : new CardLibrary(cardDB);
 
 		connectSaveDeckButton();

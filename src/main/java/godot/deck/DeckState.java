@@ -1,7 +1,9 @@
 package godot.deck;
 
+import godot.CardDB;
 import godot.cards.BaseCarte;
 import godot.cards.CardLibrary;
+import godot.api.FileAccess;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -145,5 +147,54 @@ public final class DeckState {
 			}
 		}
 		return out;
+	}
+
+	/**
+	 * Generates a flat list of Card IDs representing the physical deck.
+	 * Example: If card ID 15 has 3 copies, 15 will appear 3 times in this list.
+	 * The game logic can call this and use Collections.shuffle() to randomize the draw pile.
+	 */
+	public static List<Integer> getFlatCardIds() {
+		List<Integer> flatDeck = new ArrayList<>();
+
+		// Loop through the map. (Using raw types/casting to match existing DeckState style if generics are omitted)
+		for (Object entryObj : copiesByCardId.entrySet()) {
+			Map.Entry<Integer, Integer> entry = (Map.Entry<Integer, Integer>) entryObj;
+			int cardId = entry.getKey();
+			int copies = entry.getValue() == null ? 0 : entry.getValue();
+
+			for (int i = 0; i < copies; i++) {
+				flatDeck.add(cardId);
+			}
+		}
+
+		return flatDeck;
+	}
+
+	// Safety flag so we only load from the text file once per session
+	private static boolean hasLoadedFromDisk = false;
+
+	/**
+	 * Reads the saved deck from the computer so the cards stay between sessions.
+	 * It automatically prevents loading twice to protect unsaved changes.
+	 */
+	public static void loadSavedDeckLocal(CardDB cardDB) {
+		if (hasLoadedFromDisk) return; // Already loaded this session
+		if (cardDB == null) return;
+
+		hasLoadedFromDisk = true;
+		String savePath = "user://saved_deck.txt";
+
+		if (FileAccess.fileExists(savePath)) {
+			FileAccess file = FileAccess.open(savePath, FileAccess.ModeFlags.READ);
+			if (file != null) {
+				String content = file.getAsText();
+				file.close();
+
+				CardLibrary library = new CardLibrary(cardDB);
+				List<String> lines = java.util.Arrays.asList(content.split("\\r?\\n"));
+				deserializeFromLines(lines, library);
+			}
+		}
 	}
 }

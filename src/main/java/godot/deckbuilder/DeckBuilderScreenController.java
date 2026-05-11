@@ -72,6 +72,8 @@ public class DeckBuilderScreenController extends Control {
 
         // 4. Initialize Services
         CardDB cardDB = resolveCardDB();
+        DeckState.loadSavedDeckLocal(cardDB);
+
         queryService = new DeckBuilderQueryService(cardDB);
 
         uiBinder = new DeckBuilderUiBinder(searchInputNode, typeFilterNode, monsterTypeFilterNode, sortFilterNode, sortOrderFilterNode);
